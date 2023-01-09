@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "declaration": false,
+    "paths": {
+      "tslib": ["./node_modules/tslib/tslib.d.ts"]
+    }
+  },
+  "extends": "../../tsconfig.json",
+  "include": ["./src"],
+  "exclude": ["**/demos", "node_modules/**/*"]
+}

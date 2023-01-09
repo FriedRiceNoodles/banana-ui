@@ -1,0 +1,31 @@
+{
+  "name": "@banana/banana-react",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dist/index",
+  "module": "dist/index",
+  "files": [
+    "dist/*",
+    "umd/*",
+    "README.md",
+    "package.json"
+  ],
+  "type": "module",
+  "moduleResolution": "node",
+  "scripts": {
+    "build": "rimraf umd && rimraf dist && rollup -c ../../rollup.config.mjs",
+    "dev": "rollup -c ../../rollup.config.mjs -p ../../scripts/rollup-plugin-force-render.js -w --no-watch.clearScreen"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "banana-ui": "workspace:../banana"
+  },
+  "devDependencies": {
+    "@lit-labs/react": "^1.1.1",
+    "@types/react": "^18.0.26",
+    "react": "^18.0.0",
+    "rimraf": "^3.0.2"
+  }
+}

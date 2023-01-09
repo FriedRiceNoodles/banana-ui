@@ -1,0 +1,29 @@
+{
+  "name": "banana-ui",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "main": "dist/index",
+  "module": "dist/index",
+  "moduleResolution": "node",
+  "scripts": {
+    "build": "rimraf umd && rimraf dist && rollup -c ../../rollup.config.mjs",
+    "dev": "rollup -c ../../rollup.config.mjs -w --no-watch.clearScreen"
+  },
+  "files": [
+		"dist/*",
+		"umd/*",
+		"README.md",
+		"package.json"
+	],
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "lit": "^2.5.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.26",
+    "rimraf": "^3.0.2"
+  }
+}
