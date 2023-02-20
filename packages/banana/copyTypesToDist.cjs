@@ -1,0 +1,29 @@
+const fs = require('fs');
+const path = require('path');
+
+const srcDir = path.join(__dirname, './src');
+const typesDir = path.join(__dirname, './types');
+const distDir = path.join(__dirname, './dist');
+
+const componentNames = fs
+  .readdirSync(srcDir, { withFileTypes: true })
+  .filter((item) => item.isDirectory())
+  .map((item) => item.name);
+
+// components
+for (const component of componentNames) {
+  const typePath = `${typesDir}/src/${component}/index.d.ts`;
+  const distPath = `${distDir}/${component}/index.d.ts`;
+  try {
+    fs.copyFileSync(typePath, distPath);
+  } catch (error) {
+    console.log('copy failed', error);
+  }
+}
+
+// index
+try {
+  fs.copyFileSync(`${typesDir}/src/index.d.ts`, `${distDir}/index.d.ts`);
+} catch (error) {
+  console.log('copy failed', error);
+}

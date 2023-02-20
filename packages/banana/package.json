@@ -2,28 +2,29 @@
   "name": "banana-ui",
   "version": "1.0.0",
   "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "type": "module",
   "main": "dist/index",
   "module": "dist/index",
-  "moduleResolution": "node",
-  "scripts": {
-    "build": "rimraf umd && rimraf dist && rollup -c ../../rollup.config.mjs",
-    "dev": "rollup -c ../../rollup.config.mjs -w --no-watch.clearScreen"
-  },
   "files": [
-		"dist/*",
-		"umd/*",
-		"README.md",
-		"package.json"
-	],
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+    "dist/*",
+    "umd/*",
+    "README.md",
+    "package.json"
+  ],
+  "scripts": {
+    "build": "rimraf umd && rimraf dist && rimraf themes && rollup -c ./rollup.config.js && npm run tsc",
+    "dev": "rollup -c ./rollup.config.js -p ../../scripts/rollup-plugin-copy-types.js -w --no-watch.clearScreen",
+    "tsc": "rimraf types && npx tsc --build ./tsconfig.types.json && node ./copyTypesToDist.cjs"
+  },
   "dependencies": {
     "lit": "^2.5.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
     "rimraf": "^3.0.2"
-  }
+  },
+  "moduleResolution": "node"
 }

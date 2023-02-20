@@ -6,6 +6,6 @@
     }
   },
   "extends": "../../tsconfig.json",
-  "include": ["./src"],
+  "include": ["./src", "styles"],
   "exclude": ["**/demos", "node_modules/**/*"]
 }

@@ -3,8 +3,6 @@ import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
 
-import forceRender from './scripts/rollup-plugin-force-render.js';
-
 // const __filename = fileURLToPath(import.meta.url);
 // const __dirname = path.dirname(__filename);
 // const packageSrcRoot = path.join(__dirname, './src');
@@ -18,7 +16,7 @@ const componentNames = fs
     path: `${p.name}/index`,
     name: p.name,
   }))
-  // 带上package/index.ts
+  // 带上package/src/index.ts
   .concat({ path: 'index', name: 'index' });
 
 export default [
@@ -51,10 +49,7 @@ export default [
       entryFileNames: '[name].js',
     },
     plugins: [
-      typescript({
-        declaration: true,
-        declarationDir: './dist',
-      }),
+      typescript(),
       nodeResolve({
         extensions: ['.ts', '.js'],
       }),

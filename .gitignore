@@ -5,4 +5,5 @@ dist
 .dumi/tmp-production
 .DS_Store
 umd
+types
 forceRender.md
