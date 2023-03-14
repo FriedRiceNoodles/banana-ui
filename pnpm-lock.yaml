@@ -73,9 +73,9 @@ importers:
       react: ^18.0.0
       rimraf: ^3.0.2
     dependencies:
+      '@lit-labs/react': 1.1.1
       banana-ui: link:../banana
     devDependencies:
-      '@lit-labs/react': 1.1.1
       '@types/react': 18.0.26
       react: 18.2.0
       rimraf: 3.0.2
@@ -1310,7 +1310,7 @@ packages:
 
   /@lit-labs/react/1.1.1:
     resolution: {integrity: sha512-9TC+/ZWb6BJlWCyUr14FKFlaGnyKpeEDorufXozQgke/VoVrslUQNaL7nBmrAWdNrmzx5jWgi8lFmWwrxMjnlA==}
-    dev: true
+    dev: false
 
   /@lit/reactive-element/1.5.0:
     resolution: {integrity: sha512-fQh9FDK0LPTwDk+0HhSZEtb8K0LTN1wXerwpGrWA+a8tWulYRDLI4vQDWp4GOIsewn0572KYV/oZ3+492D7osA==}
