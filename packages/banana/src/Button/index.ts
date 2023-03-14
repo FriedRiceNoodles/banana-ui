@@ -20,6 +20,7 @@ export default class BButton extends LitElement {
   render() {
     return html`
       <button
+        part="base"
         class=${classMap({
           button: true,
           'button--default': this.type === 'default',
