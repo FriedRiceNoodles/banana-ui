@@ -15,7 +15,28 @@ export default class BButton extends LitElement {
 
   @property({ type: Boolean, reflect: true }) outline = false;
 
+  @property({ type: Boolean, reflect: true }) loading = false;
+
   static styles?: CSSResultGroup = styles;
+
+  connectedCallback() {
+    super.connectedCallback();
+    this.handleHostClick = this.handleHostClick.bind(this);
+    this.addEventListener('click', this.handleHostClick);
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+    this.removeEventListener('click', this.handleHostClick);
+  }
+
+  private handleHostClick(event: MouseEvent) {
+    // Prevent the click event from being emitted when the button is disabled or loading
+    if (this.disabled || this.loading) {
+      event.preventDefault();
+      event.stopImmediatePropagation();
+    }
+  }
 
   render() {
     return html`
@@ -34,8 +55,17 @@ export default class BButton extends LitElement {
           'button--large': this.size === 'large',
           'button--pill': this.pill === true,
           'button--outline': this.outline === true,
+          'button--disabled': this.disabled === true,
+          'button--loading': this.loading === true,
         })}
       >
+        ${this.loading
+          ? html`
+              <slot name="loading" part="loading">
+                <span class="button__loading"></span>
+              </slot>
+            `
+          : ''}
         <slot part="content" class="button__content"></slot>
       </button>
     `;

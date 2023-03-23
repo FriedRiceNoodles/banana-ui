@@ -58,7 +58,7 @@ export const Colors = {
   Red7: '178, 20, 12',
   Red8: '142, 8, 5',
   Red9: '106, 1, 3',
-};
+} as const;
 
 export const Variables = {
   /* Font weights */
@@ -68,12 +68,15 @@ export const Variables = {
   FontWeightBold: '700',
 
   /* Buttons */
+  ButtonFontSizeSmall: '12px',
   ButtonPaddingSmall: '2px 12px',
   ButtonHeightSmall: '24px',
 
+  ButtonFontSizeMedium: '14px',
   ButtonPaddingMedium: '6px 12px',
   ButtonHeightMedium: '32px',
 
+  ButtonFontSizeLarge: '16px',
   ButtonPaddingLarge: '10px 16px',
   ButtonHeightLarge: '40px',
 
@@ -122,4 +125,4 @@ export const Variables = {
   BorderRadiusMedium: '6px',
   BorderRadiusLarge: '12px',
   BorderRadiusCircle: '50%',
-};
+} as const;

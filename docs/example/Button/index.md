@@ -1,3 +1,8 @@
+---
+demo:
+  cols: 2
+---
+
 # Button 按钮
 
 ## 介绍
@@ -11,3 +16,5 @@
 <code src="./demos/demo2.tsx"></code>
 <code src="./demos/demo3.tsx"></code>
 <code src="./demos/demo4.tsx"></code>
+<code src="./demos/demo5.tsx"></code>
+<code src="./demos/demo6.tsx"></code>

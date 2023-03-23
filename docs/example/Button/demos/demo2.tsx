@@ -12,6 +12,7 @@ export default function ButtonDemo1() {
       style={{
         display: 'flex',
         gap: '10px',
+        flexWrap: 'wrap',
         alignItems: 'center',
       }}
     >

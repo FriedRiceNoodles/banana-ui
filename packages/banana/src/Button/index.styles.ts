@@ -14,14 +14,14 @@ export default [
 
     .button {
       display: inline-flex;
-      align-items: stretch;
+      align-items: center;
       justify-content: center;
       width: 100%;
       border-style: solid;
       border-width: var(--banana-button-boder-width, ${unsafeCSS(Var.InputBorderWidth)});
       border-radius: var(--banana-button-border-radius, ${unsafeCSS(Var.BorderRadiusSmall)});
       font-family: var(--banana-button-font-family, ${unsafeCSS(Var.InputFontFamily)});
-      font-weight: var(--banana-button-font-weight, ${unsafeCSS(Var.FontWeightSemibold)});
+      font-weight: var(--banana-button-font-weight, ${unsafeCSS(Var.FontWeightNormal)});
       text-decoration: none;
       user-select: none;
       white-space: nowrap;
@@ -32,9 +32,16 @@ export default [
         ${unsafeCSS(Var.TransitionVeryFast)} border, ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
     }
 
+    /* Disabled */
+    .button--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
     /* Default and Dashed */
     .button--default,
     .button--dashed {
+      --button-loading-color: rgba(${unsafeCSS(Colors.Gray9)});
       background-color: #fff;
       border-color: var(--banana-button-border-color-default, rgba(${unsafeCSS(Colors.Gray4)}, 1));
     }
@@ -62,6 +69,7 @@ export default [
       background-color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
       border-color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
       color: #fff;
+      --button-loading-color: #fff;
     }
 
     .button--primary:hover:not(.button--disabled) {
@@ -79,6 +87,7 @@ export default [
       background-color: var(--banana-color-success, ${unsafeCSS(Var.ColorSuccess)});
       border-color: var(--banana-color-success, ${unsafeCSS(Var.ColorSuccess)});
       color: #fff;
+      --button-loading-color: #fff;
     }
 
     .button--success:hover:not(.button--disabled) {
@@ -96,6 +105,7 @@ export default [
       background-color: var(--banana-color-warning, ${unsafeCSS(Var.ColorWarning)});
       border-color: var(--banana-color-warning, ${unsafeCSS(Var.ColorWarning)});
       color: #fff;
+      --button-loading-color: #fff;
     }
 
     .button--warning:hover:not(.button--disabled) {
@@ -113,6 +123,7 @@ export default [
       background-color: var(--banana-color-danger, ${unsafeCSS(Var.ColorDanger)});
       border-color: var(--banana-color-danger, ${unsafeCSS(Var.ColorDanger)});
       color: #fff;
+      --button-loading-color: #fff;
     }
 
     .button--danger:hover:not(.button--disabled) {
@@ -127,18 +138,21 @@ export default [
 
     /* Small */
     .button--small {
+      font-size: var(--banana-button-fontsize-small, ${unsafeCSS(Var.ButtonFontSizeSmall)});
       height: var(--banana-button-height-small, ${unsafeCSS(Var.ButtonHeightSmall)});
       padding: var(--banana-button-padding-small, ${unsafeCSS(Var.ButtonPaddingSmall)});
     }
 
     /* Medium */
     .button--medium {
+      font-size: var(--banana-button-fontsize-medium, ${unsafeCSS(Var.ButtonFontSizeMedium)});
       height: var(--banana-button-height-medium ${unsafeCSS(Var.ButtonHeightMedium)});
       padding: var(--banana-button-padding-medium, ${unsafeCSS(Var.ButtonPaddingMedium)});
     }
 
     /* Large */
     .button--large {
+      font-size: var(--banana-button-fontsize-large, ${unsafeCSS(Var.ButtonFontSizeLarge)});
       height: var(--banana-button-height-large, ${unsafeCSS(Var.ButtonHeightLarge)});
       padding: var(--banana-button-padding-large, ${unsafeCSS(Var.ButtonPaddingLarge)});
     }
@@ -175,6 +189,35 @@ export default [
 
     .button--outline.button--danger:not(:hover):not(:active) {
       color: var(--banana-color-danger, ${unsafeCSS(Var.ColorDanger)});
+    }
+
+    /* Loading */
+    .button--loading {
+      opacity: 0.5;
+    }
+
+    .button__loading {
+      width: 1em;
+      height: 1em;
+      border: 1px solid var(--button-loading-color);
+      border-right-color: transparent;
+      border-radius: 50%;
+      margin-right: 6px;
+      animation: loading var(--button-loading-speed, 1s) linear infinite;
+    }
+
+    @keyframes loading {
+      0% {
+        transform: rotate(0deg);
+      }
+
+      50% {
+        transform: rotate(180deg);
+      }
+
+      100% {
+        transform: rotate(360deg);
+      }
     }
   `,
 ];
