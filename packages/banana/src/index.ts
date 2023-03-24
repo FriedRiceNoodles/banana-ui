@@ -1,3 +1,3 @@
-import BButton from './Button';
+import BButton from './button';
 
 export { BButton };

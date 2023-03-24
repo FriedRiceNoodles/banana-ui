@@ -30,9 +30,9 @@ export const Colors = {
   Green3: '125, 209, 130',
   Green4: '90, 194, 98',
   Green5: '59, 179, 70',
-  Green6: '48, 149, 59',
-  Green7: '37, 119, 47',
-  Green8: '27, 89, 36',
+  Green6: '42, 134, 54',
+  Green7: '37, 117, 47',
+  Green8: '31, 101, 41',
   Green9: '17, 60, 24',
 
   /* Orange */
@@ -53,11 +53,11 @@ export const Colors = {
   Red2: '253, 183, 165',
   Red3: '251, 144, 120',
   Red4: '250, 102, 76',
-  Red5: '249, 57, 32',
-  Red6: '213, 37, 21',
-  Red7: '178, 20, 12',
-  Red8: '142, 8, 5',
-  Red9: '106, 1, 3',
+  Red5: '230, 38, 5',
+  Red6: '213, 37, 5',
+  Red7: '178, 20, 2',
+  Red8: '142, 8, 2',
+  Red9: '106, 1, 2',
 } as const;
 
 export const Variables = {
@@ -103,15 +103,15 @@ export const Variables = {
   ColorPrimaryDisabled: `rgba(${Colors.Blue2}, 1)`,
 
   /* Success */
-  ColorSuccess: `rgba(${Colors.Green5}, 1)`,
-  ColorSuccessHover: `rgba(${Colors.Green6}, 1)`,
-  ColorSuccessActive: `rgba(${Colors.Green7}, 1)`,
+  ColorSuccess: `rgba(${Colors.Green6}, 1)`,
+  ColorSuccessHover: `rgba(${Colors.Green7}, 1)`,
+  ColorSuccessActive: `rgba(${Colors.Green8}, 1)`,
   ColorSuccessDisabled: `rgba(${Colors.Green2}, 1)`,
 
   /* Warning */
-  ColorWarning: `rgba(${Colors.Orange5}, 1)`,
-  ColorWarningHover: `rgba(${Colors.Orange6}, 1)`,
-  ColorWarningActive: `rgba(${Colors.Orange7}, 1)`,
+  ColorWarning: `rgba(${Colors.Orange6}, 1)`,
+  ColorWarningHover: `rgba(${Colors.Orange7}, 1)`,
+  ColorWarningActive: `rgba(${Colors.Orange8}, 1)`,
   ColorWarningDisabled: `rgba(${Colors.Orange2}, 1)`,
 
   /* Danger */
