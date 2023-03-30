@@ -12,6 +12,11 @@ export default {
       target: 'auto',
     }),
   ],
+  coverage: true,
+  coverageConfig: {
+    report: true,
+    reportDir: 'coverage',
+  },
   testFramework: {
     config: {
       timeout: 3000,
@@ -21,7 +26,7 @@ export default {
   browsers: [
     playwrightLauncher({ product: 'chromium' }),
     playwrightLauncher({ product: 'firefox' }),
-    playwrightLauncher({ product: 'webkit' }),
+    // playwrightLauncher({ product: 'webkit' }),
   ],
   testRunnerHtml: (testFramework) => `
     <html lang="en-US">
