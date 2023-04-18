@@ -1,12 +1,8 @@
+/* eslint-env node */
+
 module.exports = {
-  extends: [
-    'eslint:recommended',
-    'plugin:wc/recommended',
-    'plugin:wc/best-practice',
-    'plugin:lit/recommended',
-    'plugin:lit-a11y/recommended',
-  ],
-  plugins: ['lit-a11y', 'chai-expect', 'chai-friendly', 'wc'],
+  plugins: ['@typescript-eslint', 'wc', 'lit', 'lit-a11y', 'chai-expect', 'chai-friendly', 'import', 'sort-imports-es6-autofix'],
+  extends: ['eslint:recommended', 'plugin:wc/recommended', 'plugin:wc/best-practice', 'plugin:lit/recommended', 'plugin:lit-a11y/recommended'],
   env: {
     es2021: true,
     browser: true,
@@ -27,7 +23,7 @@ module.exports = {
         project: './tsconfig.json',
         tsconfigRootDir: __dirname,
       },
-      files: ['*.ts'],
+      files: ['*.ts', '*.tsx'],
     },
     {
       extends: ['plugin:chai-expect/recommended', 'plugin:chai-friendly/recommended'],

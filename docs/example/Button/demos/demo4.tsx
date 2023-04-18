@@ -6,7 +6,7 @@
 import { Button } from '@banana/banana-react';
 import React from 'react';
 
-export default function ButtonDemo1() {
+export default function ButtonDemo4() {
   return (
     <div
       style={{

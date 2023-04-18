@@ -1,3 +1,4 @@
 import BButton from './button';
+import BCarousel from './carousel';
 
-export { BButton };
+export { BButton, BCarousel };
