@@ -61,6 +61,8 @@
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "^10.0.1",
     "@types/react": "^18.0.26",
+    "@typescript-eslint/eslint-plugin": "^5.48.1",
+    "@typescript-eslint/parser": "^5.48.1",
     "@umijs/lint": "^4.0.0",
     "cz-conventional-changelog": "^3.3.0",
     "dumi": "^2.1.19",

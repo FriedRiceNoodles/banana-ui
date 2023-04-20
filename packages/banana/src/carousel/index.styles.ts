@@ -20,7 +20,6 @@ export default [
     }
 
     .slides-wrapper.no-transition {
-      background-color: red;
       transition-duration: 0ms;
     }
 

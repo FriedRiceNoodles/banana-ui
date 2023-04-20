@@ -1,4 +1,4 @@
-import { CSSResultGroup, html, LitElement, PropertyValues } from 'lit';
+import { CSSResultGroup, html, LitElement } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { EVENTS, EventType } from './events';

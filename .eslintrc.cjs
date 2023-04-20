@@ -24,6 +24,9 @@ module.exports = {
         tsconfigRootDir: __dirname,
       },
       files: ['*.ts', '*.tsx'],
+      rules: {
+        'wc/guard-super-call': 'off',
+      },
     },
     {
       extends: ['plugin:chai-expect/recommended', 'plugin:chai-friendly/recommended'],
