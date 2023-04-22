@@ -26,6 +26,7 @@ module.exports = {
       files: ['*.ts', '*.tsx'],
       rules: {
         'wc/guard-super-call': 'off',
+        '@typescript-eslint/unbound-method': 'off',
       },
     },
     {

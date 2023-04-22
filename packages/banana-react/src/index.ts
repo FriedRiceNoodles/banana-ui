@@ -1,3 +1,4 @@
 import { Button } from './button';
 import { Carousel } from './carousel';
-export { Button, Carousel };
+import { Collapse } from './Collapse';
+export { Button, Carousel, Collapse };
