@@ -1,4 +1,4 @@
-import { CSSResultGroup, html, LitElement } from 'lit';
+import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './index.styles';
@@ -15,6 +15,9 @@ export default class BCollapse extends LitElement {
 
   @query('.collapse__header')
   header!: HTMLElement;
+
+  @query('.collapse__body')
+  body!: HTMLElement;
 
   static styles?: CSSResultGroup = styles;
 
@@ -61,6 +64,49 @@ export default class BCollapse extends LitElement {
     if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
       event.preventDefault();
       this.show();
+    }
+  }
+
+  protected firstUpdated(): void {
+    this.body.hidden = !this.open;
+  }
+
+  protected updated(changedProperties: PropertyValueMap<this>): void {
+    if (changedProperties.has('open')) {
+      if (this.open) {
+        this.body.hidden = false;
+      }
+      const startHeight = this.body.scrollHeight;
+      const target = this.open ? startHeight : 0;
+      const duration = 150;
+
+      let start: number;
+
+      const func = (timestamp: number) => {
+        if (start === undefined) {
+          start = timestamp;
+        }
+
+        const elapsed = timestamp - start;
+
+        if (this.open) {
+          const count = Math.min((startHeight * elapsed) / duration, target);
+          this.body.style.height = `${count}px`;
+        } else {
+          const count = Math.max(startHeight - (startHeight * elapsed) / duration, target);
+          this.body.style.height = `${count}px`;
+        }
+
+        if (elapsed <= duration) {
+          window.requestAnimationFrame(func);
+        } else {
+          if (!this.open) {
+            this.body.hidden = true;
+          }
+        }
+      };
+
+      window.requestAnimationFrame(func);
     }
   }
 

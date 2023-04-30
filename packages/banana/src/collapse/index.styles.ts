@@ -11,6 +11,7 @@ export default [
       border-radius: ${unsafeCSS(Var.BorderRadiusMedium)};
       transition: all ${unsafeCSS(Var.TransitionFast)};
       overflow: hidden;
+      overflow-anchor: none;
     }
 
     .collapse__header {
@@ -21,23 +22,17 @@ export default [
     }
 
     .collapse__body {
-      opacity: 0;
       height: 0;
+      overflow-y: hidden;
     }
 
     .collapse__content {
-      display: none;
+      display: block;
       padding: var(--banana-collapse-content-padding, 16px);
     }
 
     .collapse--open .collapse__body {
-      opacity: 1;
       height: auto;
-      overflow: hidden;
-    }
-
-    .collapse--open .collapse__content {
-      display: block;
     }
 
     .default-expand-icon {
