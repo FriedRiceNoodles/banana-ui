@@ -10,6 +10,7 @@
 - overlay
 - popup
 - modal
+- Tabs
 
 ## 已有组件
 
