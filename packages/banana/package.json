@@ -27,10 +27,12 @@
     "@open-wc/testing": "3.0.0-next.5",
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.26",
+    "@types/sinon": "^10.0.14",
     "@web/dev-server-esbuild": "^0.3.4",
     "@web/test-runner": "^0.15.1",
     "@web/test-runner-playwright": "^0.9.0",
     "rimraf": "^3.0.2",
+    "sinon": "^15.0.4",
     "typescript": "^5.0.4"
   },
   "moduleResolution": "node"
