@@ -11,6 +11,7 @@
 - popup
 - modal
 - Tabs
+- Image
 
 ## 已有组件
 
@@ -43,3 +44,4 @@
 - umd 模式 d.ts 文件问题
 - SSR 支持
 - 使用 unbuild 代替现有的 rollup（可选）
+- 自动化版本管理
