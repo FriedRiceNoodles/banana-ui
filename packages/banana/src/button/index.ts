@@ -58,6 +58,7 @@ export default class BButton extends LitElement {
           'button--disabled': this.disabled === true,
           'button--loading': this.loading === true,
         })}
+        ?disabled=${this.disabled}
       >
         ${this.loading
           ? html`
