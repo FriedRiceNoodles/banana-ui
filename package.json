@@ -54,7 +54,8 @@
   "devDependencies": {
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.20.7",
-    "@banana/banana-react": "workspace:./packages/banana-react",
+    "@banana/banana-react": "workspace:*",
+    "@changesets/cli": "^2.26.1",
     "@commitlint/cli": "^17.1.2",
     "@commitlint/config-conventional": "^17.1.0",
     "@rollup/plugin-commonjs": "^24.0.0",
