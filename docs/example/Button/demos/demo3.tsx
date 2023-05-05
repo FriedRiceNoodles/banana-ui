@@ -1,5 +1,5 @@
 /**
- * title: 按钮尺寸
+ * title: 药丸形状的按钮
  * description: 使用`pill`属性，可以得到一个圆润的按钮。
  */
 
