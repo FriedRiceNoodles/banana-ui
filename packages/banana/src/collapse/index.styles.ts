@@ -42,5 +42,15 @@ export default [
     .collapse--open .default-expand-icon {
       transform: rotate(90deg);
     }
+
+    /* Disabled */
+    .collapse--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+    }
+
+    .collapse--disabled .collapse__body {
+      height: 0 !important;
+    }
   `,
 ];

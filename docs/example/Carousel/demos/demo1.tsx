@@ -6,7 +6,7 @@
 import { Carousel } from '@banana/banana-react';
 import React from 'react';
 
-export default function CarouselDemo0() {
+export default function CarouselDemo1() {
   const style = `
      .demo-slide {
        height: 300px;

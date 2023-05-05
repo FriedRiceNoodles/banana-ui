@@ -1,5 +1,5 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, queryAssignedElements } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './index.styles';
 
@@ -19,6 +19,9 @@ export default class BCollapse extends LitElement {
   @query('.collapse__body')
   body!: HTMLElement;
 
+  @queryAssignedElements({ slot: 'collapse-icon' })
+  customCollapseIcon: Array<HTMLElement> | undefined;
+
   static styles?: CSSResultGroup = styles;
 
   @property({ reflect: true })
@@ -26,6 +29,9 @@ export default class BCollapse extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   open = false;
+
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
 
   public show() {
     this.open = true;
@@ -36,6 +42,8 @@ export default class BCollapse extends LitElement {
   }
 
   private _onHeaderClick() {
+    if (this.disabled) return;
+
     this.header.focus();
 
     if (this.open) {
@@ -73,8 +81,13 @@ export default class BCollapse extends LitElement {
 
   protected updated(changedProperties: PropertyValueMap<this>): void {
     if (changedProperties.has('open')) {
+      const eventOptions = { bubbles: false, cancelable: false, composed: true };
+
       if (this.open) {
         this.body.hidden = false;
+        this.dispatchEvent(new CustomEvent('show', eventOptions));
+      } else {
+        this.dispatchEvent(new CustomEvent('hide', eventOptions));
       }
       const startHeight = this.body.scrollHeight;
       const target = this.open ? startHeight : 0;
@@ -102,6 +115,9 @@ export default class BCollapse extends LitElement {
         } else {
           if (!this.open) {
             this.body.hidden = true;
+            this.dispatchEvent(new CustomEvent('afterHide', eventOptions));
+          } else {
+            this.dispatchEvent(new CustomEvent('afterShow', eventOptions));
           }
         }
       };
@@ -111,15 +127,13 @@ export default class BCollapse extends LitElement {
   }
 
   render() {
-    // todo:
-    //   1. Add disabled attribute
-    //   2. When disabled is true, tabindex should be '-1'
     return html`
       <div
         part="base"
         class=${classMap({
           collapse: true,
-          'collapse--open': this.open,
+          'collapse--open': !this.disabled && this.open,
+          'collapse--disabled': this.disabled,
         })}
       >
         <div
@@ -128,15 +142,15 @@ export default class BCollapse extends LitElement {
           @click="${this._onHeaderClick}"
           @keydown="${this._onHeaderKeyDown}"
           role="button"
-          aria-expanded=${this.open ? 'true' : 'false'}
+          aria-expanded=${!this.disabled && this.open ? 'true' : 'false'}
           aria-controls="content"
-          tabindex="0"
+          tabindex=${this.disabled ? '-1' : '0'}
         >
           <div class="collapse__title">
             <slot name="title">${this.title}</slot>
           </div>
 
-          <slot name="expand-icon">
+          <slot name="expand-icon" ?hidden=${this.open && (this.customCollapseIcon?.length ?? 0) > 0}>
             <svg
               t="1682003769967"
               class="default-expand-icon"
@@ -154,7 +168,7 @@ export default class BCollapse extends LitElement {
               ></path>
             </svg>
           </slot>
-          <slot name="collapse-icon"></slot>
+          <slot name="collapse-icon" ?hidden=${!this.open}></slot>
         </div>
         <div class="collapse__body">
           <slot part="content" class="collapse__content"></slot>
