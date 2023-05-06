@@ -34,10 +34,12 @@ export default class BCollapse extends LitElement {
   disabled = false;
 
   public show() {
+    if (this.disabled) return;
     this.open = true;
   }
 
   public hide() {
+    if (this.disabled) return;
     this.open = false;
   }
 
@@ -76,6 +78,7 @@ export default class BCollapse extends LitElement {
   }
 
   protected firstUpdated(): void {
+    if (this.disabled) this.open = false;
     this.body.hidden = !this.open;
   }
 
