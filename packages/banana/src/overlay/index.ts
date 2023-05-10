@@ -1,7 +1,6 @@
-import { LitElement, html, PropertyValues } from 'lit';
+import { LitElement, html, PropertyValues, CSSResultGroup } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import styles from './index.styles';
-import { CSSResultGroup } from 'lit/development';
 
 @customElement('b-overlay')
 export default class BOverlay extends LitElement {
@@ -9,7 +8,7 @@ export default class BOverlay extends LitElement {
   open = false;
 
   @property({ type: Number })
-  zIndex?: number | string = 999;
+  zIndex?: number = 999;
 
   static styles?: CSSResultGroup = styles;
 
@@ -17,10 +16,12 @@ export default class BOverlay extends LitElement {
     super.updated(_changedProperties);
     if (_changedProperties.get('open') === false) {
       document.body.style.overflow = 'hidden';
-      document.addEventListener('touchstart', this._cancelTouchEvent);
+      document.addEventListener('touchstart', this._preventTouchEvent);
+      // window.addEventListener('keydown', this._escHandleMaskClose);
     } else {
       document.body.style.overflow = 'auto';
-      document.removeEventListener('touchstart', this._cancelTouchEvent);
+      document.removeEventListener('touchstart', this._preventTouchEvent);
+      // window.removeEventListener('keydown', this._escHandleMaskClose);
     }
   }
 
@@ -32,18 +33,36 @@ export default class BOverlay extends LitElement {
     super.disconnectedCallback();
   }
 
-  private _cancelTouchEvent(e: TouchEvent) {
+  private _preventTouchEvent(e: TouchEvent) {
     e.preventDefault();
   }
 
-  private _handleMaskClose() {
+  private async _handleMaskClose() {
+    await this.updateComplete;
     this.dispatchEvent(new CustomEvent('handleMaskClose'));
   }
 
+  // private _escHandleMaskClose(e: KeyboardEvent) {
+  //   if(e.key !== 'Escape') return
+  //   console.log(e.key === 'Escape');
+  //   setTimeout(() => {
+  //     this.dispatchEvent(new CustomEvent('handleMaskClose'));
+  //   }, 300)
+  // }
+
+  /** 原生使用，直接拿Overlay对象调用方法 */
+  public show() {
+    this.open = true;
+  }
+
+  public hide() {
+    this.open = false;
+  }
+
   render() {
-    return html` <div class="banana-overlay" style="z-index: ${this.zIndex}">
+    return html` <div class="overlay__container" style="z-index: ${this.zIndex}">
         <slot></slot>
       </div>
-      <div class="banana-overlay-mask" @click="${this._handleMaskClose}" @keydown="${this._handleMaskClose}"></div>`;
+      <div class="overlay__mask" @click="${this._handleMaskClose}" @keydown="${this._handleMaskClose}"></div>`;
   }
 }

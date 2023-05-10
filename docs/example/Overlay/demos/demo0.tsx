@@ -18,7 +18,7 @@ export default function ButtonDemo0() {
       </Button>
       <Overlay
         open={visiable}
-        onMaskClose={() => {
+        onClose={() => {
           setVisiable(false);
         }}
       ></Overlay>

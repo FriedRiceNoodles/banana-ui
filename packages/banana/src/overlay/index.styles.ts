@@ -1,6 +1,6 @@
 import { css, unsafeCSS } from 'lit';
 import componentStyles from '../../styles/components.styles';
-import { Colors, Variables as Var } from '../../styles/global-variables';
+import { Variables as Var } from '../../styles/global-variables';
 
 export default [
   componentStyles,
@@ -13,19 +13,19 @@ export default [
       right: 0;
       bottom: 0;
       z-index: -1;
-      background: var(--overlay-background, rgba(0, 0, 0, 0.7));
+      background: var(--banana-overlay-background, rgba(0, 0, 0, 0.7));
       visibility: hidden;
       opacity: 0;
-      transition: all 0.3s;
+      transition: all ${unsafeCSS(Var.TransitionNormal)};
     }
 
     :host([open]) {
       opacity: 1;
-      z-index: var(--overlay-z-index, 999);
+      z-index: var(--banana-overlay-z-index, 999);
       visibility: visible;
     }
 
-    :host .banana-overlay-mask {
+    :host .overlay__mask {
       position: fixed;
       left: 0;
       top: 0;
@@ -35,7 +35,7 @@ export default [
       z-index: -1;
     }
 
-    :host .banana-overlay {
+    :host .overlay__container {
       position: relative;
       margin: auto;
       display: flex;
