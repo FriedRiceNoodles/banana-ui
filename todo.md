@@ -7,7 +7,7 @@
 
 ## 新组件
 
-- overlay
+- ~~overlay（已完成）~~
 - popup
 - modal
 - Tabs
@@ -45,3 +45,7 @@
 - SSR 支持
 - 使用 unbuild 代替现有的 rollup（可选）
 - ~~自动化版本管理（已完成）~~
+
+# 其他
+
+- 自定义 commitizen 配置
