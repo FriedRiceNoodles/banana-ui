@@ -1,4 +1,4 @@
-import { createComponent, EventName } from '@lit-labs/react';
+import { createComponent } from '@lit-labs/react';
 import * as React from 'react';
 import { BOverlay } from 'banana-ui';
 
@@ -7,6 +7,6 @@ export const Overlay = createComponent({
   tagName: 'b-overlay',
   elementClass: BOverlay,
   events: {
-    onClose: 'handleMaskClose' as EventName<CustomEvent<string>>,
+    onClose: 'onClose',
   },
 });

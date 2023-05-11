@@ -39,14 +39,14 @@ export default class BOverlay extends LitElement {
 
   private async _handleMaskClose() {
     await this.updateComplete;
-    this.dispatchEvent(new CustomEvent('handleMaskClose'));
+    this.dispatchEvent(new CustomEvent('onClose'));
   }
 
   // private _escHandleMaskClose(e: KeyboardEvent) {
   //   if(e.key !== 'Escape') return
   //   console.log(e.key === 'Escape');
   //   setTimeout(() => {
-  //     this.dispatchEvent(new CustomEvent('handleMaskClose'));
+  //     this.dispatchEvent(new CustomEvent('onClose'));
   //   }, 300)
   // }
 

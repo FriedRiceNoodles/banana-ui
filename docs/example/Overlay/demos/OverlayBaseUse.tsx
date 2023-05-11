@@ -5,7 +5,7 @@
 import { Overlay, Button } from '@banana/banana-react';
 import React, { useState } from 'react';
 
-export default function ButtonDemo0() {
+export default function OverlayBaseUse() {
   const [visiable, setVisiable] = useState(false);
   return (
     <div>
