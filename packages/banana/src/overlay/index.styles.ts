@@ -12,7 +12,6 @@ export default [
       top: 0;
       right: 0;
       bottom: 0;
-      z-index: -1;
       background: var(--banana-overlay-background, rgba(0, 0, 0, 0.7));
       visibility: hidden;
       opacity: 0;
@@ -21,11 +20,10 @@ export default [
 
     :host([open]) {
       opacity: 1;
-      z-index: var(--banana-overlay-z-index, 999);
       visibility: visible;
     }
 
-    :host .overlay__mask {
+    .overlay__mask {
       position: fixed;
       left: 0;
       top: 0;
@@ -35,7 +33,7 @@ export default [
       z-index: -1;
     }
 
-    :host .overlay__container {
+    .overlay__container {
       position: relative;
       margin: auto;
       display: flex;
