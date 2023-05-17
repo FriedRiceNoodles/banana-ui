@@ -57,9 +57,8 @@ export default class BOverlay extends LitElement {
     }
   };
 
-  private async _handleMaskClose() {
-    await this.updateComplete;
-    this.dispatchEvent(new CustomEvent('onClose'));
+  private _handleMaskClose() {
+    this.dispatchEvent(new CustomEvent('close'));
   }
 
   public show() {
@@ -72,7 +71,7 @@ export default class BOverlay extends LitElement {
 
   render() {
     return html`
-      <div class="overlay__container">
+      <div class="overlay__container" part="container">
         <slot></slot>
       </div>
       <div class="overlay__mask" @click="${this._handleMaskClose}"></div>

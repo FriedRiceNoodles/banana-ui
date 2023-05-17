@@ -1,11 +1,11 @@
 import { createComponent } from '@lit-labs/react';
+import { BPopup } from 'banana-ui';
 import * as React from 'react';
-import { BOverlay } from 'banana-ui';
 
-export const Overlay = createComponent({
+export const Popup = createComponent({
+  tagName: 'b-popup',
   react: React,
-  tagName: 'b-overlay',
-  elementClass: BOverlay,
+  elementClass: BPopup,
   events: {
     onClose: 'close',
   },

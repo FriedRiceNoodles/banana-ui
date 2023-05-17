@@ -13,11 +13,11 @@
 
 ## 属性 - Attributes & Properties
 
-| 属性     | 说明           | 类型    | 默认值 |
-| -------- | -------------- | ------- | ------ |
-| title    | 折叠面板的标题 | string  | ''     |
-| open     | 是否展开       | boolean | false  |
-| disabled | 是否禁用       | boolean | false  |
+| 属性     | 说明           | 类型      | 默认值 |
+| -------- | -------------- | --------- | ------ |
+| title    | 折叠面板的标题 | `string`  | ''     |
+| open     | 是否展开       | `boolean` | false  |
+| disabled | 是否禁用       | `boolean` | false  |
 
 ## 方法 - Methods
 
