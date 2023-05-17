@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.3.0
+
+### Minor Changes
+
+- A new component: popup; updated some docs; made a few of change to overlay.
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.3.0
+
 ## 1.2.1
 
 ### Patch Changes

@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.3.0
+
+### Minor Changes
+
+- A new component: popup; updated some docs; made a few of change to overlay.
+
 ## 1.2.1
 
 ### Patch Changes
