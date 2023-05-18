@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.4.0
+
+### Minor Changes
+
+- A new component: Divider.
+
 ## 1.3.1
 
 ### Patch Changes

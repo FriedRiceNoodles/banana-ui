@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.4.0
+
+### Minor Changes
+
+- A new component: Divider.
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.4.0
+
 ## 1.3.1
 
 ### Patch Changes
