@@ -80,6 +80,11 @@ export const Variables = {
   ButtonPaddingLarge: '10px 16px',
   ButtonHeightLarge: '40px',
 
+  /* Dividers */
+  DividerWidth: '1px',
+  DividerColor: Colors.Gray1,
+  DividerSpacing: '16px',
+
   /* Inputs */
   InputBorderWidth: '1px',
   InputFontFamily:
