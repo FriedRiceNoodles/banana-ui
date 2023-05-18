@@ -12,6 +12,7 @@
 - modal
 - Tabs
 - Image
+- dropdown
 
 ## 已有组件
 
