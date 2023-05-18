@@ -24,7 +24,7 @@ export default [
     }
 
     .slides-wrapper ::slotted(*) {
-      flex-basis: 100%;
+      flex-basis: calc(100% / var(--banana-carousel-slidesPerView));
       flex-grow: 0;
       flex-shrink: 0;
     }

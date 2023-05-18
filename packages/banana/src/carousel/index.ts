@@ -17,17 +17,32 @@ export default class BCarousel extends LitElement {
 
   static styles?: CSSResultGroup = styles;
 
-  @property({ attribute: false })
-  currentIndex = 0;
-
-  @property({ type: Boolean })
+  // When the count of slides is less than (this._slidesPerView + 1), loop property will be ignored.
+  // For example, if this._slidesPerView is set to 5, then there are at least 7 slides to enable the loop mode.
+  // Do not use this property directly, use internal _loop instead.
+  @property({ type: Boolean, reflect: true })
   loop = false;
+
+  private get _loop() {
+    return this._slides.length > this._slidesPerView + 1 ? this.loop : false;
+  }
+
+  // Do not use this property directly, use internal _slidesPerView instead.
+  @property({ type: Number, reflect: true })
+  slidesPerView = 1;
+
+  private get _slidesPerView() {
+    return this._slides.length >= this.slidesPerView ? this.slidesPerView : this._slides.length;
+  }
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
 
   @queryAssignedElements({})
   _slides!: Array<HTMLElement>;
+
+  @state()
+  currentIndex = 0;
 
   @state()
   _dragDistance = 0;
@@ -39,6 +54,10 @@ export default class BCarousel extends LitElement {
     return this._externalWrapper?.getBoundingClientRect().width || 0;
   }
 
+  private get _slideWidth() {
+    return this._externalWrapperWidth / this._slidesPerView;
+  }
+
   private get MIN() {
     return 0;
   }
@@ -48,7 +67,7 @@ export default class BCarousel extends LitElement {
   }
 
   private get totalWidth() {
-    return this._externalWrapperWidth * this._slides.length;
+    return this._slideWidth * this._slides.length;
   }
 
   // Record how many cycles have been made if `loop` is true.
@@ -79,7 +98,7 @@ export default class BCarousel extends LitElement {
 
     if (index - 1 >= this.MIN) {
       target = index - 1;
-    } else if (this.loop) {
+    } else if (this._loop) {
       target = this.MAX;
     }
 
@@ -89,10 +108,10 @@ export default class BCarousel extends LitElement {
   private _computeNext(index: number) {
     let target = index;
 
-    if (index + 1 <= this.MAX) {
+    if (index + 1 <= this.MAX - this._slidesPerView + 1) {
       target = index + 1;
-    } else if (this.loop) {
-      target = this.MIN;
+    } else if (this._loop) {
+      target = index + 1 <= this.MAX ? index + 1 : this.MIN;
     }
 
     return target;
@@ -143,13 +162,21 @@ export default class BCarousel extends LitElement {
 
     this._addTrackingCoordinates(x, y);
 
-    if (this.loop) {
+    if (this._loop) {
       const prevIndex = this._computePrev(this.currentIndex);
       const nextIndex = this._computeNext(this.currentIndex);
 
       const prevSlide = this._slides[prevIndex];
       const currentSlide = this._slides[this.currentIndex];
-      const nextSlide = this._slides[nextIndex];
+
+      // Slides after current slide, from (index + 1) to (index + this._slidesPerView).
+      const subsequentIndexsArray = [];
+      const subsequentSlidesArray = [];
+      for (let i = 1; i < this._slidesPerView + 1; i++) {
+        const _index = this.currentIndex + i > this.MAX ? this.currentIndex + i - this._slides.length : this.currentIndex + i;
+        subsequentIndexsArray.push(_index);
+        subsequentSlidesArray.push(this._slides[_index]);
+      }
 
       const translateValue = this._loopCount * this.totalWidth || 0;
 
@@ -162,11 +189,13 @@ export default class BCarousel extends LitElement {
         prevSlide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
       }
 
-      if (nextIndex < this.currentIndex) {
-        const _translateValue = (this._loopCount + 1) * this.totalWidth || 0;
-        nextSlide.style.transform = `translate3d(${_translateValue}px, 0, 0)`;
-      } else {
-        nextSlide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
+      for (let i = 0; i < subsequentIndexsArray.length; i++) {
+        if (subsequentIndexsArray[i] < this.currentIndex) {
+          const _translateValue = (this._loopCount + 1) * this.totalWidth || 0;
+          subsequentSlidesArray[i].style.transform = `translate3d(${_translateValue}px, 0, 0)`;
+        } else {
+          subsequentSlidesArray[i].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        }
       }
     }
 
@@ -202,7 +231,7 @@ export default class BCarousel extends LitElement {
     this._trackingCoordinates = [];
 
     const diffX = lastTrackingCoordinate.x - firstTrackingCoordinate.x;
-    const diffY = lastTrackingCoordinate.y - firstTrackingCoordinate.y;
+    // const diffY = lastTrackingCoordinate.y - firstTrackingCoordinate.y;
     const diffTime = lastTrackingCoordinate.time - firstTrackingCoordinate.time;
 
     this._dragDistance = 0;
@@ -220,9 +249,9 @@ export default class BCarousel extends LitElement {
       const distanceFromSlidesToWrapper = this._slides.map((item) => item.getBoundingClientRect().x - wrapperX);
       const distanceOfCurrentSlidesToWrapper = distanceFromSlidesToWrapper[this.currentIndex];
 
-      if (distanceOfCurrentSlidesToWrapper < 0 && -distanceOfCurrentSlidesToWrapper > this._externalWrapperWidth / 2) {
+      if (distanceOfCurrentSlidesToWrapper < 0 && -distanceOfCurrentSlidesToWrapper > this._slideWidth / 2) {
         this.next();
-      } else if (distanceOfCurrentSlidesToWrapper > 0 && distanceOfCurrentSlidesToWrapper > this._externalWrapperWidth / 2) {
+      } else if (distanceOfCurrentSlidesToWrapper > 0 && distanceOfCurrentSlidesToWrapper > this._slideWidth / 2) {
         this.prev();
       }
     }
@@ -236,7 +265,7 @@ export default class BCarousel extends LitElement {
 
   public next() {
     // It means a loop has been finished.
-    if (this.loop && this.currentIndex > this._computeNext(this.currentIndex)) {
+    if (this._loop && this.currentIndex > this._computeNext(this.currentIndex)) {
       this._loopCount += 1;
     }
     this.currentIndex = this._computeNext(this.currentIndex);
@@ -244,18 +273,18 @@ export default class BCarousel extends LitElement {
 
   public prev() {
     // It means a loop has been finished.
-    if (this.loop && this.currentIndex < this._computePrev(this.currentIndex)) {
+    if (this._loop && this.currentIndex < this._computePrev(this.currentIndex)) {
       this._loopCount -= 1;
     }
     this.currentIndex = this._computePrev(this.currentIndex);
   }
 
   private _externalWrapperTranslate() {
-    if (this.loop) {
+    if (this._loop) {
       const loopShift = -(this.totalWidth * this._loopCount);
-      return -this.currentIndex * this._externalWrapperWidth + this._dragDistance + loopShift;
+      return -this.currentIndex * this._slideWidth + this._dragDistance + loopShift;
     } else {
-      return -this.currentIndex * this._externalWrapperWidth + this._dragDistance;
+      return -this.currentIndex * this._slideWidth + this._dragDistance;
     }
   }
 
@@ -276,9 +305,9 @@ export default class BCarousel extends LitElement {
               'slides-wrapper': true,
               'no-transition': this._isDragging,
             })}
-            style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px);"
+            style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px); --banana-carousel-slidesPerView: ${this._slidesPerView};"
           >
-            <slot part="slide"></slot>
+            <slot part="slide" @slotchange=${() => this.requestUpdate()}></slot>
           </div>
         </div>
       </div>

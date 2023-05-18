@@ -6,7 +6,7 @@
 
 ## 代码演示
 
-<code src="./demos/PopupFromBottom.tsx"></code>
+<code src="./demos/BasicUsage.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
