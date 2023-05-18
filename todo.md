@@ -8,7 +8,7 @@
 ## 新组件
 
 - ~~overlay（已完成）~~
-- popup
+- ~~popup（已完成）~~
 - modal
 - Tabs
 - Image
@@ -24,7 +24,7 @@
 
 ### Carousel
 
-- gallery 模式
+- ~~gallery 模式（已完成）~~
 - 暴露出 emit 事件
 - css part / css 变量的文档说明
 - 事件的文档说明
