@@ -14,7 +14,6 @@
 - Image
 - dropdown
 - menu
-- dropdown
 
 ## 已有组件
 
