@@ -13,7 +13,7 @@
 - Tabs
 - Image
 - dropdown
-- menu
+- ~~menu~~
 
 ## 已有组件
 
@@ -58,6 +58,16 @@
 ### Divider
 
 - 单测代码
+
+### menu
+
+- 文档
+- 单测代码
+- checkbox type
+- 事件的类型
+- suffix、prefix
+- menu label（可选）
+- menu 的键盘事件，a11y 支持
 
 # 构建流程
 

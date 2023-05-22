@@ -1,6 +1,6 @@
 import { css, unsafeCSS } from 'lit';
 import componentStyles from '../../styles/components.styles';
-import { Colors, Variables as Var } from '../../styles/global-variables';
+import { Colors, Fonts, Variables as Var } from '../../styles/global-variables';
 
 export default [
   componentStyles,
@@ -21,15 +21,15 @@ export default [
       border-width: var(--banana-button-boder-width, ${unsafeCSS(Var.InputBorderWidth)});
       border-radius: var(--banana-button-border-radius, ${unsafeCSS(Var.BorderRadiusSmall)});
       font-family: var(--banana-button-font-family, ${unsafeCSS(Var.InputFontFamily)});
-      font-weight: var(--banana-button-font-weight, ${unsafeCSS(Var.FontWeightNormal)});
+      font-weight: var(--banana-button-font-weight, ${unsafeCSS(Fonts.FontWeightNormal)});
       text-decoration: none;
       user-select: none;
       white-space: nowrap;
       vertical-align: middle;
       padding: 0;
       cursor: inherit;
-      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color,
-        ${unsafeCSS(Var.TransitionVeryFast)} border, ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
+      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color, ${unsafeCSS(Var.TransitionVeryFast)} border,
+        ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
     }
 
     /* Disabled */

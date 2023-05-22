@@ -60,30 +60,59 @@ export const Colors = {
   Red9: '106, 1, 2',
 } as const;
 
-export const Variables = {
+export const Fonts = {
+  /* Font sizes */
+  FontSize2XS: '10px',
+  FontSizeXS: '12px',
+  FontSizeSmall: '14px',
+  FontSizeMedium: '16px',
+  FontSizeLarge: '20px',
+  FontSizeXL: '24px',
+  FontSize2XL: '36px',
+  FontSize3XL: '48px',
+  FontSize4XL: '64px',
+  FontSize5XL: '72px',
+
   /* Font weights */
   FontWeightLight: '300',
   FontWeightNormal: '400',
   FontWeightSemibold: '600',
   FontWeightBold: '700',
+} as const;
 
+export const Spacings = {
+  Spacing4XS: '2px',
+  Spacing3XS: '4px',
+  Spacing2XS: '6px',
+  SpacingXS: '8px',
+  SpacingSmall: '12px',
+  SpacingMedium: '16px',
+  SpacingLarge: '20px',
+  SpacingXL: '28px',
+  Spacing2XL: '36px',
+  Spacing3XL: '48px',
+  Spacing4XL: '64px',
+  Spacing5XL: '72px',
+};
+
+export const Variables = {
   /* Buttons */
-  ButtonFontSizeSmall: '12px',
-  ButtonPaddingSmall: '2px 12px',
+  ButtonFontSizeSmall: Fonts.FontSizeXS,
+  ButtonPaddingSmall: `${Spacings.Spacing4XS} ${Spacings.SpacingSmall}`,
   ButtonHeightSmall: '24px',
 
-  ButtonFontSizeMedium: '14px',
-  ButtonPaddingMedium: '6px 12px',
+  ButtonFontSizeMedium: Fonts.FontSizeSmall,
+  ButtonPaddingMedium: `${Spacings.Spacing2XS} ${Spacings.SpacingSmall}`,
   ButtonHeightMedium: '32px',
 
-  ButtonFontSizeLarge: '16px',
-  ButtonPaddingLarge: '10px 16px',
+  ButtonFontSizeLarge: Fonts.FontSizeMedium,
+  ButtonPaddingLarge: `10px ${Spacings.SpacingSmall}`,
   ButtonHeightLarge: '40px',
 
-  /* Dividers */
-  DividerWidth: '1px',
-  DividerColor: Colors.Gray1,
-  DividerSpacing: '16px',
+  /* Panels */
+  PanelBackgroundColor: '#fff',
+  PanelBorderColor: `rgba(${Colors.Gray1}, 1)`,
+  PanelBorderWidth: '1px',
 
   /* Inputs */
   InputBorderWidth: '1px',
@@ -96,6 +125,13 @@ export const Variables = {
   TransitionNormal: '250ms',
   TransitionFast: '150ms',
   TransitionVeryFast: '50ms',
+
+  /* Line heights */
+  LineHeightDenser: '1',
+  LineHeightDense: '1.4',
+  LineHeightNormal: '1.8',
+  LineHeightLoose: '2,2',
+  LineHeightLooser: '2.6',
 
   /**
    * Tokens
