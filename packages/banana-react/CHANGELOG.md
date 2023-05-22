@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.5.0
+
+### Minor Changes
+
+- New component: menu.
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.5.0
+
 ## 1.4.0
 
 ### Minor Changes

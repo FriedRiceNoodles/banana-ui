@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.0
+
+### Minor Changes
+
+- New component: menu.
+
 ## 1.4.0
 
 ### Minor Changes
