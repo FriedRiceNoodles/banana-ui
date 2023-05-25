@@ -1,4 +1,4 @@
-import { CSSResultGroup, html, LitElement } from 'lit';
+import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { EVENTS, EventType } from './events';
@@ -9,10 +9,42 @@ import { getCoordinates } from './utils';
 export default class BCarousel extends LitElement {
   connectedCallback() {
     super.connectedCallback();
+
+    window.addEventListener('resize', this._windowResizeHandler);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+
+    window.removeEventListener('resize', this._windowResizeHandler);
+    clearTimeout(this.autoplayTimer);
+  }
+
+  private _windowResizeHandler = () => {
+    this._calcPosition();
+    this._resetAutoplayTimer();
+  };
+
+  private _setAutoplayTimer = () => {
+    if (this.autoplay) {
+      this._clearAutoplayTimer();
+      this.autoplayTimer = setInterval(() => this.next(), this.autoplayDelay);
+    }
+  };
+
+  private _clearAutoplayTimer = () => {
+    clearInterval(this.autoplayTimer);
+  };
+
+  private _resetAutoplayTimer = () => {
+    this._clearAutoplayTimer();
+    this._setAutoplayTimer();
+  };
+
+  protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
+    if (_changedProperties.has('autoplay') || _changedProperties.has('autoplayDelay')) {
+      this._resetAutoplayTimer();
+    }
   }
 
   static styles?: CSSResultGroup = styles;
@@ -35,6 +67,16 @@ export default class BCarousel extends LitElement {
     return this._slides.length >= this.slidesPerView ? this.slidesPerView : this._slides.length;
   }
 
+  @property({ type: Boolean, reflect: true })
+  autoplay = false;
+
+  // Unit: ms
+  @property({ type: Number })
+  autoplayDelay = 3000;
+
+  @property({ type: Boolean })
+  pauseOnMouseEnter = true;
+
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
 
@@ -49,6 +91,9 @@ export default class BCarousel extends LitElement {
 
   @state()
   _isDragging = false;
+
+  @state()
+  autoplayTimer: ReturnType<typeof setInterval> | undefined;
 
   private get _externalWrapperWidth() {
     return this._externalWrapper?.getBoundingClientRect().width || 0;
@@ -152,19 +197,9 @@ export default class BCarousel extends LitElement {
     }
   };
 
-  private _onDragStart(e: Event) {
-    const [x, y] = getCoordinates(e);
-
-    this._isDragging = true;
-
-    this._pointerStartX = this._pointerCurrentX = this._pointerLastX = x;
-    this._pointerStartY = this._pointerCurrentY = this._pointerLastY = y;
-
-    this._addTrackingCoordinates(x, y);
-
+  private _calcPosition() {
     if (this._loop) {
       const prevIndex = this._computePrev(this.currentIndex);
-      const nextIndex = this._computeNext(this.currentIndex);
 
       const prevSlide = this._slides[prevIndex];
       const currentSlide = this._slides[this.currentIndex];
@@ -198,6 +233,21 @@ export default class BCarousel extends LitElement {
         }
       }
     }
+  }
+
+  private _onDragStart(e: Event) {
+    const [x, y] = getCoordinates(e);
+
+    this._isDragging = true;
+
+    this._clearAutoplayTimer();
+
+    this._pointerStartX = this._pointerCurrentX = this._pointerLastX = x;
+    this._pointerStartY = this._pointerCurrentY = this._pointerLastY = y;
+
+    this._addTrackingCoordinates(x, y);
+
+    this._calcPosition();
 
     window.addEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
     window.addEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
@@ -223,7 +273,10 @@ export default class BCarousel extends LitElement {
     this._isDragging = false;
 
     const [x, y] = getCoordinates(e);
+
     this._addTrackingCoordinates(x, y);
+
+    this._setAutoplayTimer();
 
     const firstTrackingCoordinate = this._trackingCoordinates[0];
     const lastTrackingCoordinate = this._trackingCoordinates[this._trackingCoordinates.length - 1];
@@ -264,6 +317,9 @@ export default class BCarousel extends LitElement {
   }
 
   public next() {
+    this._calcPosition();
+    this._resetAutoplayTimer();
+
     // It means a loop has been finished.
     if (this._loop && this.currentIndex > this._computeNext(this.currentIndex)) {
       this._loopCount += 1;
@@ -272,6 +328,9 @@ export default class BCarousel extends LitElement {
   }
 
   public prev() {
+    this._calcPosition();
+    this._resetAutoplayTimer();
+
     // It means a loop has been finished.
     if (this._loop && this.currentIndex < this._computePrev(this.currentIndex)) {
       this._loopCount -= 1;
@@ -288,6 +347,18 @@ export default class BCarousel extends LitElement {
     }
   }
 
+  private _onWrapperMouseEnter() {
+    if (this.pauseOnMouseEnter) {
+      this._clearAutoplayTimer();
+    }
+  }
+
+  private _onWrapperMouseLeave() {
+    if (this.pauseOnMouseEnter) {
+      this._setAutoplayTimer();
+    }
+  }
+
   render() {
     return html`
       <div
@@ -296,7 +367,7 @@ export default class BCarousel extends LitElement {
           carousel: true,
         })}
       >
-        <div class="external-wrapper">
+        <div class="external-wrapper" @mouseenter=${this._onWrapperMouseEnter} @mouseleave=${this._onWrapperMouseLeave}>
           <div
             part="slides-wrapper"
             @mousedown="${this._eventHandler}"

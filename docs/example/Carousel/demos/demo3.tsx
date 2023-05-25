@@ -1,6 +1,5 @@
 /**
  * title: 一次显示多个slides，并且循环。
- * description: 使用`slidesPerView`参数，实现一次显示多个slides。
  * debug: true
  */
 
