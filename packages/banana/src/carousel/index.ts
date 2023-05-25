@@ -17,6 +17,7 @@ export default class BCarousel extends LitElement {
     super.disconnectedCallback();
 
     window.removeEventListener('resize', this._windowResizeHandler);
+    this._removeEvents();
     clearTimeout(this.autoplayTimer);
   }
 
@@ -76,6 +77,9 @@ export default class BCarousel extends LitElement {
 
   @property({ type: Boolean })
   pauseOnMouseEnter = true;
+
+  @property({ type: Boolean, reflect: true })
+  disableDrag = false;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
@@ -178,6 +182,8 @@ export default class BCarousel extends LitElement {
 
   // Use arrow function to bind 'this' on BCarousel class.
   private _eventHandler = (e: Event) => {
+    if (this.disableDrag) return;
+
     switch (e.type as EventType) {
       case EVENTS.MOUSEDOWN:
       case EVENTS.TOUCHSTART:
@@ -196,6 +202,22 @@ export default class BCarousel extends LitElement {
         break;
     }
   };
+
+  private _listenEvents() {
+    window.addEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
+    window.addEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
+    window.addEventListener(EVENTS.MOUSEUP, this._eventHandler);
+    window.addEventListener(EVENTS.TOUCHEND, this._eventHandler);
+    window.addEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+  }
+
+  private _removeEvents() {
+    window.removeEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
+    window.removeEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
+    window.removeEventListener(EVENTS.MOUSEUP, this._eventHandler);
+    window.removeEventListener(EVENTS.TOUCHEND, this._eventHandler);
+    window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+  }
 
   private _calcPosition() {
     if (this._loop) {
@@ -249,11 +271,7 @@ export default class BCarousel extends LitElement {
 
     this._calcPosition();
 
-    window.addEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
-    window.addEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
-    window.addEventListener(EVENTS.MOUSEUP, this._eventHandler);
-    window.addEventListener(EVENTS.TOUCHEND, this._eventHandler);
-    window.addEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+    this._listenEvents();
   }
 
   private _onDragging(e: Event) {
@@ -309,11 +327,7 @@ export default class BCarousel extends LitElement {
       }
     }
 
-    window.removeEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
-    window.removeEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
-    window.removeEventListener(EVENTS.MOUSEUP, this._eventHandler);
-    window.removeEventListener(EVENTS.TOUCHEND, this._eventHandler);
-    window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+    this._removeEvents();
   }
 
   public next() {

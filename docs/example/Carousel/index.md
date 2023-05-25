@@ -11,3 +11,4 @@
 <code src="./demos/demo2.tsx"></code>
 <code src="./demos/demo3.tsx"></code>
 <code src="./demos/autoplay.tsx"></code>
+<code src="./demos/disableDrag.tsx"></code>
