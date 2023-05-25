@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.5.1
+
+### Patch Changes
+
+- Added autoplay parameter to Carousel.
+- Updated dependencies
+  - banana-ui@1.5.1
+
 ## 1.5.0
 
 ### Minor Changes
