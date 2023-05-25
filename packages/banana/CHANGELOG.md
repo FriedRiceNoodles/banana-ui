@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.2
+
+### Patch Changes
+
+- Added disableDrag parameter to Carousel.
+
 ## 1.5.1
 
 ### Patch Changes
