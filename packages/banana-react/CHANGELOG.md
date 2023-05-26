@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.5.3
+
+### Patch Changes
+
+- Added navigation parameter to carousel.
+- Updated dependencies
+  - banana-ui@1.5.3
+
 ## 1.5.2
 
 ### Patch Changes

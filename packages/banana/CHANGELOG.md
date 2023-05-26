@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.3
+
+### Patch Changes
+
+- Added navigation parameter to carousel.
+
 ## 1.5.2
 
 ### Patch Changes
