@@ -22,7 +22,7 @@ export default function disableDrag() {
   return (
     <div>
       <style>{style}</style>
-      <Carousel disableDrag>
+      <Carousel disableDrag navigation>
         <div className="demo-slide">1</div>
         <div className="demo-slide">2</div>
         <div className="demo-slide">3</div>
