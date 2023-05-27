@@ -31,6 +31,7 @@
 - css part / css 变量的文档说明
 - 事件的文档说明
 - slot 的文档说明
+- 受控模式
 
 ### Collapse
 
