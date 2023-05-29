@@ -41,6 +41,7 @@ export default [
       background-color: transparent;
       cursor: pointer;
       transition: background ${unsafeCSS(Var.TransitionNormal)};
+      z-index: 1;
     }
 
     .navigation-button--disabled {

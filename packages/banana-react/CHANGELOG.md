@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.5.4
+
+### Patch Changes
+
+- Added a new part attribute(external-wrapper) to carousel, and put the navigation buttons outside of external-wrapper, then we can make navigation buttons stay away from the slides.
+- Updated dependencies
+  - banana-ui@1.5.4
+
 ## 1.5.3
 
 ### Patch Changes

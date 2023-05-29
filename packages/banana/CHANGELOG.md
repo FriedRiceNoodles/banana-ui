@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.4
+
+### Patch Changes
+
+- Added a new part attribute(external-wrapper) to carousel, and put the navigation buttons outside of external-wrapper, then we can make navigation buttons stay away from the slides.
+
 ## 1.5.3
 
 ### Patch Changes
