@@ -18,6 +18,7 @@ export default [
     .slides-wrapper {
       display: flex;
       transition: transform var(--banana-carousel-transition-duration, ${unsafeCSS(Var.TransitionNormal)});
+      gap: calc(var(--banana-carousel-gap, 0) * 1px);
     }
 
     .slides-wrapper.no-transition {
@@ -25,7 +26,7 @@ export default [
     }
 
     .slides-wrapper ::slotted(*) {
-      flex-basis: calc(100% / var(--banana-carousel-slidesPerView));
+      flex-basis: calc((100% - (var(--banana-carousel-slidesPerView) - 1) * var(--banana-carousel-gap) * 1px) / var(--banana-carousel-slidesPerView));
       flex-grow: 0;
       flex-shrink: 0;
     }

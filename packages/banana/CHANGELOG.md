@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.5
+
+### Patch Changes
+
+- Added gap parameter to carousel.
+
 ## 1.5.4
 
 ### Patch Changes

@@ -84,8 +84,14 @@ export default class BCarousel extends LitElement {
   @property({ type: Boolean, reflect: true })
   navigation = false;
 
+  @property({ type: Number, reflect: true })
+  gap = 0;
+
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
+
+  @query('.slides-wrapper')
+  _slidesWrapper: HTMLDivElement | undefined;
 
   @queryAssignedElements({})
   _slides!: Array<HTMLElement>;
@@ -107,7 +113,7 @@ export default class BCarousel extends LitElement {
   }
 
   private get _slideWidth() {
-    return this._externalWrapperWidth / this._slidesPerView;
+    return (this._externalWrapperWidth - (this.slidesPerView - 1) * this.gap) / this._slidesPerView;
   }
 
   private get MIN() {
@@ -119,7 +125,7 @@ export default class BCarousel extends LitElement {
   }
 
   private get totalWidth() {
-    return this._slideWidth * this._slides.length;
+    return this._slideWidth * this._slides.length + this._slides.length * this.gap;
   }
 
   // Record how many cycles have been made if `loop` is true.
@@ -356,11 +362,13 @@ export default class BCarousel extends LitElement {
   }
 
   private _externalWrapperTranslate() {
+    const wholeWidth = this._slideWidth + this.gap;
+
     if (this._loop) {
       const loopShift = -(this.totalWidth * this._loopCount);
-      return -this.currentIndex * this._slideWidth + this._dragDistance + loopShift;
+      return -this.currentIndex * wholeWidth + this._dragDistance + loopShift;
     } else {
-      return -this.currentIndex * this._slideWidth + this._dragDistance;
+      return -this.currentIndex * wholeWidth + this._dragDistance;
     }
   }
 
@@ -393,7 +401,8 @@ export default class BCarousel extends LitElement {
               'slides-wrapper': true,
               'no-transition': this._isDragging,
             })}
-            style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px); --banana-carousel-slidesPerView: ${this._slidesPerView};"
+            style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px); --banana-carousel-slidesPerView: ${this
+              ._slidesPerView}; --banana-carousel-gap: ${this.gap}"
           >
             <slot part="slide" @slotchange=${() => this.requestUpdate()}></slot>
           </div>
