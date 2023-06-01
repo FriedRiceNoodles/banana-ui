@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.5.6
+
+### Patch Changes
+
+- Added 'onChange' event to carousel.
+- Updated dependencies
+  - banana-ui@1.5.6
+
 ## 1.5.5
 
 ### Patch Changes

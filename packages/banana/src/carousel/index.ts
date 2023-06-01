@@ -48,6 +48,12 @@ export default class BCarousel extends LitElement {
     }
   }
 
+  protected updated(_changedProperties: PropertyValueMap<this>): void {
+    if (_changedProperties.has('currentIndex')) {
+      this.dispatchEvent(new CustomEvent('change', { detail: { currentIndex: this.currentIndex } }));
+    }
+  }
+
   static styles?: CSSResultGroup = styles;
 
   // When the count of slides is less than (this._slidesPerView + 1), loop property will be ignored.
