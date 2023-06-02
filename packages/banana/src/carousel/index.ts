@@ -391,6 +391,9 @@ export default class BCarousel extends LitElement {
   }
 
   render() {
+    const previousNavigationDisabled = this._computePrev(this.currentIndex) === this.currentIndex;
+    const nextNavigationDisabled = this._computeNext(this.currentIndex) === this.currentIndex;
+
     return html`
       <div
         part="base"
@@ -416,14 +419,14 @@ export default class BCarousel extends LitElement {
 
         <button
           @click=${this.prev}
-          part="navigation-buttons navigation-button--previous"
+          part="navigation-buttons navigation-button--previous ${previousNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
           class=${classMap({
             'navigation-buttons': true,
             'navigation-button--previous': true,
-            'navigation-button--disabled': this._computePrev(this.currentIndex) === this.currentIndex,
+            'navigation-button--disabled': previousNavigationDisabled,
           })}
           ?hidden=${!this.navigation}
-          ?disabled=${this._computePrev(this.currentIndex) === this.currentIndex}
+          ?disabled=${previousNavigationDisabled}
         >
           <slot name="prev-button">
             <div class="default-prev-icon">
@@ -439,14 +442,14 @@ export default class BCarousel extends LitElement {
         </button>
         <button
           @click=${this.next}
-          part="navigation-buttons navigation-button--next"
+          part="navigation-buttons navigation-button--next ${nextNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
           class=${classMap({
             'navigation-buttons': true,
             'navigation-button--next': true,
-            'navigation-button--disabled': this._computeNext(this.currentIndex) === this.currentIndex,
+            'navigation-button--disabled': nextNavigationDisabled,
           })}
           ?hidden=${!this.navigation}
-          ?disabled=${this._computeNext(this.currentIndex) === this.currentIndex}
+          ?disabled=${nextNavigationDisabled}
         >
           <slot name="next-button">
             <div class="default-next-icon">
