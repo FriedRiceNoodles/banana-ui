@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.5.7
+
+### Patch Changes
+
+- Added disabled attribute to carousel navigation button.
+- Updated dependencies
+  - banana-ui@1.5.7
+
 ## 1.5.6
 
 ### Patch Changes

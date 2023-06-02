@@ -423,6 +423,7 @@ export default class BCarousel extends LitElement {
             'navigation-button--disabled': this._computePrev(this.currentIndex) === this.currentIndex,
           })}
           ?hidden=${!this.navigation}
+          ?disabled=${this._computePrev(this.currentIndex) === this.currentIndex}
         >
           <slot name="prev-button">
             <div class="default-prev-icon">
@@ -445,6 +446,7 @@ export default class BCarousel extends LitElement {
             'navigation-button--disabled': this._computeNext(this.currentIndex) === this.currentIndex,
           })}
           ?hidden=${!this.navigation}
+          ?disabled=${this._computeNext(this.currentIndex) === this.currentIndex}
         >
           <slot name="next-button">
             <div class="default-next-icon">

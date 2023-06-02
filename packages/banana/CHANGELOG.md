@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.7
+
+### Patch Changes
+
+- Added disabled attribute to carousel navigation button.
+
 ## 1.5.6
 
 ### Patch Changes
