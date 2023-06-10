@@ -6,7 +6,7 @@
 import { Carousel } from '@banana/banana-react';
 import React from 'react';
 
-export default function Navigation() {
+export default function gap() {
   const style = `
       .demo-slide {
         height: 300px;

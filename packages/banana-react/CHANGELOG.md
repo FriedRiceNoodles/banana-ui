@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.5.10
+
+### Patch Changes
+
+- Added fill parameter to carousel.
+- Updated dependencies
+  - banana-ui@1.5.10
+
 ## 1.5.9
 
 ### Patch Changes

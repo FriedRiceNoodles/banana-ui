@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.10
+
+### Patch Changes
+
+- Added fill parameter to carousel.
+
 ## 1.5.9
 
 ### Patch Changes

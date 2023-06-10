@@ -72,7 +72,7 @@ export default class BCarousel extends LitElement {
   slidesPerView = 1;
 
   private get _slidesPerView() {
-    return this._slides.length >= this.slidesPerView ? this.slidesPerView : this._slides.length;
+    return this._slides.length >= this.slidesPerView || !this.fill ? this.slidesPerView : this._slides.length;
   }
 
   @property({ type: Boolean, reflect: true })
@@ -93,6 +93,10 @@ export default class BCarousel extends LitElement {
 
   @property({ type: Number, reflect: true })
   gap = 0;
+
+  // If the `fill` property is set to true, then carousel will be filled when the slide count is less than the `slidesPerView` property.
+  @property({ type: Boolean, reflect: true })
+  fill = true;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
