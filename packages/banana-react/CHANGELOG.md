@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.5.9
+
+### Patch Changes
+
+- Fix a bug that could cause carousel getting wrong offset after browser resize.
+- Updated dependencies
+  - banana-ui@1.5.9
+
 ## 1.5.8
 
 ### Patch Changes

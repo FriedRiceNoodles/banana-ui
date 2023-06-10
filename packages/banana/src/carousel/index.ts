@@ -22,6 +22,7 @@ export default class BCarousel extends LitElement {
   }
 
   private _windowResizeHandler = () => {
+    this.requestUpdate();
     this._calcPosition();
     this._resetAutoplayTimer();
   };
@@ -299,6 +300,7 @@ export default class BCarousel extends LitElement {
 
     // When start dragging, that _pointerStartX obviously won't be undefined.
     // Dragging can only occur after DragStart, and the _onDragStart function will set the _pointerStartX.
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this._dragDistance = this._pointerCurrentX - this._pointerStartX!;
   }
 

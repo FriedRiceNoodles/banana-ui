@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.9
+
+### Patch Changes
+
+- Fix a bug that could cause carousel getting wrong offset after browser resize.
+
 ## 1.5.8
 
 ### Patch Changes
