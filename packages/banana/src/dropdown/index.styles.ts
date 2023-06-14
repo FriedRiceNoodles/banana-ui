@@ -11,17 +11,29 @@ export default [
     }
 
     .dropdown__content {
-      visibility: hidden;
       position: absolute;
       opacity: 0;
       overflow-y: scroll;
       z-index: 100;
-      transition: all ${unsafeCSS(Var.TransitionNormal)};
     }
 
     .dropdown--open .dropdown__content {
-      visibility: visible;
-      opacity: 1;
+    }
+
+    [placement='bottomLeft' i] .dropdown__content,
+    [placement='topLeft' i] .dropdown__content {
+      left: 0;
+    }
+
+    [placement='bottom' i] .dropdown__content,
+    [placement='top' i] .dropdown__content {
+      left: 50%;
+      transform: translateX(-50%);
+    }
+
+    [placement='bottomRight' i] .dropdown__content,
+    [placement='topRight' i] .dropdown__content {
+      right: 0;
     }
   `,
 ];
