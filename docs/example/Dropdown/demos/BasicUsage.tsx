@@ -18,22 +18,6 @@ export default function BasicUsage() {
         <Divider />
         <MenuItem>Option A</MenuItem>
         <MenuItem>Option B</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
-        <MenuItem>Option C</MenuItem>
       </Menu>
     </Dropdown>
   );
