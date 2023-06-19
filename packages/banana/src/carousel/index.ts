@@ -43,9 +43,17 @@ export default class BCarousel extends LitElement {
     this._setAutoplayTimer();
   };
 
+  protected firstUpdated(): void {
+    this._calcPosition();
+  }
+
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
     if (_changedProperties.has('autoplay') || _changedProperties.has('autoplayDelay')) {
       this._resetAutoplayTimer();
+    }
+
+    if (_changedProperties.has('currentIndex') || _changedProperties.has('gap') || _changedProperties.has('slidesPerView')) {
+      this._calcPosition();
     }
   }
 
@@ -105,6 +113,9 @@ export default class BCarousel extends LitElement {
   _slidesWrapper: HTMLDivElement | undefined;
 
   @queryAssignedElements({})
+  _slidesWithCopys!: Array<HTMLElement>;
+
+  @queryAssignedElements({ selector: ':not([data-clone])' })
   _slides!: Array<HTMLElement>;
 
   @state()
@@ -124,7 +135,7 @@ export default class BCarousel extends LitElement {
   }
 
   private get _slideWidth() {
-    return (this._externalWrapperWidth - (this.slidesPerView - 1) * this.gap) / this._slidesPerView;
+    return (this._externalWrapperWidth - (this._slidesPerView - 1) * this.gap) / this._slidesPerView;
   }
 
   private get MIN() {
@@ -240,39 +251,58 @@ export default class BCarousel extends LitElement {
   }
 
   private _calcPosition() {
+    this._repositioningSlides();
+    this._refreshCopys();
+  }
+
+  private _repositioningSlides() {
     if (this._loop) {
-      const prevIndex = this._computePrev(this.currentIndex);
+      const translateValue = this._loopCount * this.totalWidth;
 
-      const prevSlide = this._slides[prevIndex];
-      const currentSlide = this._slides[this.currentIndex];
-
-      // Slides after current slide, from (index + 1) to (index + this._slidesPerView).
-      const subsequentIndexsArray = [];
-      const subsequentSlidesArray = [];
-      for (let i = 1; i < this._slidesPerView + 1; i++) {
-        const _index = this.currentIndex + i > this.MAX ? this.currentIndex + i - this._slides.length : this.currentIndex + i;
-        subsequentIndexsArray.push(_index);
-        subsequentSlidesArray.push(this._slides[_index]);
+      for (const slide of this._slides) {
+        slide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
       }
+    }
+  }
 
-      const translateValue = this._loopCount * this.totalWidth || 0;
-
-      currentSlide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-      if (prevIndex > this.currentIndex) {
-        const _translateValue = (this._loopCount - 1) * this.totalWidth || 0;
-        prevSlide.style.transform = `translate3d(${_translateValue}px, 0, 0)`;
-      } else {
-        prevSlide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
-      }
-
-      for (let i = 0; i < subsequentIndexsArray.length; i++) {
-        if (subsequentIndexsArray[i] < this.currentIndex) {
-          const _translateValue = (this._loopCount + 1) * this.totalWidth || 0;
-          subsequentSlidesArray[i].style.transform = `translate3d(${_translateValue}px, 0, 0)`;
-        } else {
-          subsequentSlidesArray[i].style.transform = `translate3d(${translateValue}px, 0, 0)`;
+  private _refreshCopys() {
+    if (this._loop) {
+      // clear copys before calc
+      if (!this._slidesWrapper) return;
+      for (const ele of this._slidesWithCopys) {
+        if (ele.hasAttribute('data-clone')) {
+          ele.remove();
         }
+      }
+
+      const slideWidthWithGap = this._slideWidth + this.gap;
+      const translateValue = this._loopCount * this.totalWidth - slideWidthWithGap * this._slidesPerView || 0;
+      const _translateValue = (this._loopCount - 1) * this.totalWidth - slideWidthWithGap * this._slidesPerView || 0;
+
+      // Those copys will append to the beginning of slides.
+      const CopysAtTheBeginning = [];
+      for (let i = 0; i < this._slidesPerView; i++) {
+        CopysAtTheBeginning.push(this._slides[this._slides.length - this._slidesPerView + i].cloneNode(true) as HTMLElement);
+      }
+
+      // Those copys will append to the end of slides.
+      const CopysAtTheEnd = [];
+      for (let i = 0; i < this._slidesPerView; i++) {
+        CopysAtTheEnd.push(this._slides[i].cloneNode(true) as HTMLElement);
+      }
+
+      // append copys
+      for (let i = 0; i < this._slidesPerView; i++) {
+        const copyAtTheBeginning = CopysAtTheBeginning[i];
+        copyAtTheBeginning.setAttribute('data-clone', String(this._slides.length - this._slidesPerView + i));
+        copyAtTheBeginning.style.transform = `translate3d(${_translateValue}px, 0, 0)`;
+        this.append(copyAtTheBeginning);
+      }
+      for (let i = 0; i < this._slidesPerView; i++) {
+        const copyAtTheEnd = CopysAtTheEnd[i];
+        copyAtTheEnd.setAttribute('data-clone', String(i));
+        copyAtTheEnd.style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        this.append(copyAtTheEnd);
       }
     }
   }
@@ -288,8 +318,6 @@ export default class BCarousel extends LitElement {
     this._pointerStartY = this._pointerCurrentY = this._pointerLastY = y;
 
     this._addTrackingCoordinates(x, y);
-
-    this._calcPosition();
 
     this._listenEvents();
   }
@@ -352,7 +380,6 @@ export default class BCarousel extends LitElement {
   }
 
   public next() {
-    this._calcPosition();
     this._resetAutoplayTimer();
 
     // It means a loop has been finished.
@@ -363,7 +390,6 @@ export default class BCarousel extends LitElement {
   }
 
   public prev() {
-    this._calcPosition();
     this._resetAutoplayTimer();
 
     // It means a loop has been finished.

@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.5.11
+
+### Patch Changes
+
+- Fix a bug that could cause carousel getting wrong offset when changing the currentIndex by useRef in loop mode.
+
 ## 1.5.10
 
 ### Patch Changes
