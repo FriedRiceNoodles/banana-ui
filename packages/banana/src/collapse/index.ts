@@ -98,23 +98,24 @@ export default class BCollapse extends LitElement {
 
       let start: number;
 
-      const func = (timestamp: number) => {
+      const step = (timestamp: number) => {
         if (start === undefined) {
           start = timestamp;
         }
 
+        // How much time has passed...
         const elapsed = timestamp - start;
 
         if (this.open) {
-          const count = Math.min((startHeight * elapsed) / duration, target);
-          this.body.style.height = `${count}px`;
+          const result = Math.min((startHeight * elapsed) / duration, target);
+          this.body.style.height = `${result}px`;
         } else {
-          const count = Math.max(startHeight - (startHeight * elapsed) / duration, target);
-          this.body.style.height = `${count}px`;
+          const result = Math.max(startHeight - (startHeight * elapsed) / duration, target);
+          this.body.style.height = `${result}px`;
         }
 
         if (elapsed <= duration) {
-          window.requestAnimationFrame(func);
+          window.requestAnimationFrame(step);
         } else {
           if (!this.open) {
             this.body.hidden = true;
@@ -125,7 +126,7 @@ export default class BCollapse extends LitElement {
         }
       };
 
-      window.requestAnimationFrame(func);
+      window.requestAnimationFrame(step);
     }
   }
 

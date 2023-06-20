@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.0
+
+### Minor Changes
+
+- New component: dropdown.
+
 ## 1.5.11
 
 ### Patch Changes

@@ -1,6 +1,6 @@
 {
   "name": "banana-ui",
-  "version": "1.5.11",
+  "version": "1.6.0",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -21,6 +21,7 @@
     "tsc": "rimraf types && npx tsc --build ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.4.1",
     "lit": "^2.5.0"
   },
   "devDependencies": {
