@@ -1,9 +1,18 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { ComputePositionConfig, computePosition, offset, flip } from '@floating-ui/dom';
 import styles from './index.styles';
 
 type Placement = 'bottomLeft' | 'bottom' | 'bottomRight' | 'topLeft' | 'top' | 'topRight';
+const placementMap = new Map<Placement, ComputePositionConfig['placement']>([
+  ['bottom', 'bottom'],
+  ['bottomLeft', 'bottom-start'],
+  ['bottomRight', 'bottom-end'],
+  ['top', 'top'],
+  ['topLeft', 'top-start'],
+  ['topRight', 'top-end'],
+]);
 
 @customElement('b-dropdown')
 export default class BDivider extends LitElement {
@@ -50,20 +59,27 @@ export default class BDivider extends LitElement {
 
   private _closeTimer: ReturnType<typeof setTimeout> | undefined;
 
+  private _repositioning() {
+    const middleware: ComputePositionConfig['middleware'] = [offset(this.margin), flip()];
+
+    void computePosition(this._trigger, this._content, {
+      placement: placementMap.get(this.placement),
+      middleware: middleware,
+    }).then(({ x, y }) => {
+      Object.assign(this._content.style, {
+        left: `${x}px`,
+        top: `${y}px`,
+      });
+    });
+  }
+
   private _onTriggerMouseEnter() {
     if (this.open) {
       clearTimeout(this._closeTimer);
     } else {
-      const triggerHeight = this._trigger.getBoundingClientRect().height ?? 0;
-      if (this._content) {
-        const distance = triggerHeight + this.margin;
-        const topDirections: Placement[] = ['top', 'topLeft', 'topRight'];
-        const shiftDirection = topDirections.includes(this.placement) ? 'bottom' : 'top';
-        this._content.style[shiftDirection] = `${distance}px`;
-      }
-
       this._openTimer = setTimeout(() => {
         this.open = true;
+        this._repositioning();
       }, this.mouseEnterDelay);
     }
   }

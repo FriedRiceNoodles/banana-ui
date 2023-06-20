@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.6.0
+
+### Minor Changes
+
+- New component: dropdown.
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.6.0
+
 ## 1.5.11
 
 ### Patch Changes

@@ -12,7 +12,6 @@
 - modal
 - Tabs
 - Image
-- dropdown
 - ~~menu~~
 
 ## 已有组件
@@ -70,6 +69,17 @@
 - suffix、prefix
 - menu label（可选）
 - menu 的键盘事件，a11y 支持
+
+### dropdown
+
+- 文档
+- 单测代码
+- disabled 模式
+- click 触发
+- 暴露事件
+- 支持显示箭头
+- 参数补全（floating-ui 中间件相关）
+- 移动端禁用 hover 触发
 
 # 构建流程
 
