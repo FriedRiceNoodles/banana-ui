@@ -60,7 +60,7 @@
 
 - 单测代码
 
-### menu
+### Menu
 
 - 文档
 - 单测代码
@@ -70,7 +70,7 @@
 - menu label（可选）
 - menu 的键盘事件，a11y 支持
 
-### dropdown
+### Dropdown
 
 - 文档
 - 单测代码

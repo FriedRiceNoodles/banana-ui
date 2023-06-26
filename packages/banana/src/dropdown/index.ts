@@ -35,7 +35,7 @@ export default class BDivider extends LitElement {
   _content!: HTMLElement;
 
   @property({ type: Boolean, reflect: true })
-  initialOpen = false;
+  defaultOpen = false;
 
   // The distance from the dropdown content to the trigger.
   @property({ type: Number, reflect: true })
@@ -53,7 +53,7 @@ export default class BDivider extends LitElement {
   placement: Placement = 'bottomLeft';
 
   @state()
-  open = this.initialOpen;
+  open = this.defaultOpen;
 
   private _openTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -166,11 +166,12 @@ export default class BDivider extends LitElement {
           'dropdown--open': this.open,
         })}
         placement=${this.placement}
+        part="base"
       >
-        <div class="dropdown__trigger" @mouseenter=${this._onTriggerMouseEnter} @mouseleave=${this._onTriggerMouseLeave}>
-          <slot part="trigger"></slot>
+        <div class="dropdown__trigger" @mouseenter=${this._onTriggerMouseEnter} @mouseleave=${this._onTriggerMouseLeave} part="trigger">
+          <slot></slot>
         </div>
-        <div class="dropdown__content" @mouseenter=${this._onContentMouseEnter} @mouseleave=${this._onContentMouseLeave}>
+        <div class="dropdown__content" @mouseenter=${this._onContentMouseEnter} @mouseleave=${this._onContentMouseLeave} part="drop">
           <slot name="drop"></slot>
         </div>
       </div>
