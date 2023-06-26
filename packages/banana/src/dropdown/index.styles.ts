@@ -17,5 +17,15 @@ export default [
       opacity: 0;
       z-index: 100;
     }
+
+    .dropdown--disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .dropdown--disabled .dropdown__trigger,
+    .dropdown--disabled .dropdown__content {
+      pointer-events: none;
+    }
   `,
 ];

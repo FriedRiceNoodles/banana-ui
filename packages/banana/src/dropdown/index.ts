@@ -35,7 +35,7 @@ export default class BDivider extends LitElement {
   _content!: HTMLElement;
 
   @property({ type: Boolean, reflect: true })
-  defaultOpen = false;
+  disabled = false;
 
   // The distance from the dropdown content to the trigger.
   @property({ type: Number, reflect: true })
@@ -53,7 +53,7 @@ export default class BDivider extends LitElement {
   placement: Placement = 'bottomLeft';
 
   @state()
-  open = this.defaultOpen;
+  open = false;
 
   private _openTimer: ReturnType<typeof setTimeout> | undefined;
 
@@ -164,6 +164,7 @@ export default class BDivider extends LitElement {
         class=${classMap({
           dropdown: true,
           'dropdown--open': this.open,
+          'dropdown--disabled': this.disabled,
         })}
         placement=${this.placement}
         part="base"
