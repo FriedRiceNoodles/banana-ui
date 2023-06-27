@@ -60,7 +60,7 @@
 
 - 单测代码
 
-### menu
+### Menu
 
 - 文档
 - 单测代码
@@ -70,9 +70,9 @@
 - menu label（可选）
 - menu 的键盘事件，a11y 支持
 
-### dropdown
+### Dropdown
 
-- 文档
+- ~文档~
 - 单测代码
 - disabled 模式
 - click 触发
@@ -80,6 +80,7 @@
 - 支持显示箭头
 - 参数补全（floating-ui 中间件相关）
 - 移动端禁用 hover 触发
+- autoUpdate
 
 # 构建流程
 

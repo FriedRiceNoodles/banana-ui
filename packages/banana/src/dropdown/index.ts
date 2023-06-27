@@ -15,7 +15,7 @@ const placementMap = new Map<Placement, ComputePositionConfig['placement']>([
 ]);
 
 @customElement('b-dropdown')
-export default class BDivider extends LitElement {
+export default class BDropdown extends LitElement {
   connectedCallback() {
     super.connectedCallback();
   }
@@ -29,13 +29,13 @@ export default class BDivider extends LitElement {
   static styles: CSSResultGroup = styles;
 
   @query('.dropdown__trigger')
-  _trigger!: HTMLElement;
+  _trigger: HTMLElement | undefined;
 
   @query('.dropdown__content')
-  _content!: HTMLElement;
+  _content: HTMLElement | undefined;
 
   @property({ type: Boolean, reflect: true })
-  initialOpen = false;
+  disabled = false;
 
   // The distance from the dropdown content to the trigger.
   @property({ type: Number, reflect: true })
@@ -52,21 +52,27 @@ export default class BDivider extends LitElement {
   @property({ reflect: true })
   placement: Placement = 'bottomLeft';
 
+  @property({ type: Boolean, reflect: true })
+  autoAdjustOverflow = true;
+
   @state()
-  open = this.initialOpen;
+  open = false;
 
   private _openTimer: ReturnType<typeof setTimeout> | undefined;
 
   private _closeTimer: ReturnType<typeof setTimeout> | undefined;
 
   private _repositioning() {
-    const middleware: ComputePositionConfig['middleware'] = [offset(this.margin), flip()];
+    if (!this._trigger || !this._content) return;
+
+    const middleware: ComputePositionConfig['middleware'] = [offset(this.margin)];
+    if (this.autoAdjustOverflow) middleware.push(flip());
 
     void computePosition(this._trigger, this._content, {
       placement: placementMap.get(this.placement),
       middleware: middleware,
     }).then(({ x, y }) => {
-      Object.assign(this._content.style, {
+      Object.assign((this._content as HTMLElement).style, {
         left: `${x}px`,
         top: `${y}px`,
       });
@@ -105,11 +111,16 @@ export default class BDivider extends LitElement {
   }
 
   protected firstUpdated(): void {
-    // if (this.disabled) this.open = false;
-    this._content.hidden = !this.open;
+    if (!this._trigger || !this._content) return;
+
+    // Pass an `open` attribute directly is not allowed.
+    this.open = false;
+    this._content.hidden = true;
   }
 
   protected willUpdate(changedProperties: PropertyValueMap<this>): void {
+    if (!this._trigger || !this._content) return;
+
     if (changedProperties.has('open')) {
       const eventOptions = { bubbles: false, cancelable: false, composed: true };
 
@@ -127,6 +138,9 @@ export default class BDivider extends LitElement {
       let start: number;
 
       const step = (timestamp: number) => {
+        // For eslint, do not delete this line or you will get some problems.
+        if (!this._trigger || !this._content) return;
+
         if (start === undefined) {
           start = timestamp;
         }
@@ -164,13 +178,15 @@ export default class BDivider extends LitElement {
         class=${classMap({
           dropdown: true,
           'dropdown--open': this.open,
+          'dropdown--disabled': this.disabled,
         })}
         placement=${this.placement}
+        part="base"
       >
-        <div class="dropdown__trigger" @mouseenter=${this._onTriggerMouseEnter} @mouseleave=${this._onTriggerMouseLeave}>
-          <slot part="trigger"></slot>
+        <div class="dropdown__trigger" @mouseenter=${this._onTriggerMouseEnter} @mouseleave=${this._onTriggerMouseLeave} part="trigger">
+          <slot></slot>
         </div>
-        <div class="dropdown__content" @mouseenter=${this._onContentMouseEnter} @mouseleave=${this._onContentMouseLeave}>
+        <div class="dropdown__content" @mouseenter=${this._onContentMouseEnter} @mouseleave=${this._onContentMouseLeave} part="drop">
           <slot name="drop"></slot>
         </div>
       </div>
