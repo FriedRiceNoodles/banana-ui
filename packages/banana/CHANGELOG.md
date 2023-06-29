@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.1
+
+### Patch Changes
+
+- Some new parameters and refactor for dropdown.
+
 ## 1.6.0
 
 ### Minor Changes
