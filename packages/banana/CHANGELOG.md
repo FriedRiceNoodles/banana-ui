@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.2
+
+### Patch Changes
+
+- Added arrow slot to dropdown.
+
 ## 1.6.1
 
 ### Patch Changes
