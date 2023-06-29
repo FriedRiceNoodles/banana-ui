@@ -4,16 +4,15 @@
 import fs from 'fs';
 
 export default function forceRender() {
-  const content = `---
-debug: true
----
-
-  ${String(new Date().getTime())}
-  `;
-
   return {
     name: 'force render',
     closeBundle() {
+      const content = `---
+  debug: true
+---
+  
+    ${String(new Date().getTime())}
+    `;
       fs.writeFileSync('../../docs/forceRender.md', content);
     },
   };

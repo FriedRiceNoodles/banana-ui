@@ -1,7 +1,7 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ComputePositionConfig, computePosition, offset, flip } from '@floating-ui/dom';
+import { ComputePositionConfig, computePosition, offset, flip, arrow, Side } from '@floating-ui/dom';
 import styles from './index.styles';
 
 type Placement = 'bottomLeft' | 'bottom' | 'bottomRight' | 'topLeft' | 'top' | 'topRight';
@@ -33,6 +33,9 @@ export default class BDropdown extends LitElement {
 
   @query('.dropdown__content')
   _content: HTMLElement | undefined;
+
+  @queryAssignedElements({ slot: 'arrow' })
+  _arrowElements!: Array<HTMLElement>;
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -67,15 +70,39 @@ export default class BDropdown extends LitElement {
 
     const middleware: ComputePositionConfig['middleware'] = [offset(this.margin)];
     if (this.autoAdjustOverflow) middleware.push(flip());
+    if (this._arrowElements[0] !== undefined) middleware.push(arrow({ element: this._arrowElements[0] }));
 
     void computePosition(this._trigger, this._content, {
       placement: placementMap.get(this.placement),
       middleware: middleware,
-    }).then(({ x, y }) => {
+    }).then(({ x, y, middlewareData, placement }) => {
       Object.assign((this._content as HTMLElement).style, {
         left: `${x}px`,
         top: `${y}px`,
       });
+
+      if (this._arrowElements[0] !== undefined) {
+        const side = placement.split('-')[0] as Side;
+        const staticSide = {
+          top: 'bottom',
+          right: 'left',
+          bottom: 'top',
+          left: 'right',
+        }[side];
+
+        const arrowX = middlewareData.arrow?.x ?? '';
+        const arrowY = middlewareData.arrow?.y ?? '';
+
+        console.log('side,', staticSide, middlewareData, arrowX, arrowY);
+
+        Object.assign(this._arrowElements[0].style, {
+          left: `${arrowX}px`,
+          top: `${arrowY}px`,
+          [staticSide]: `${-this._arrowElements[0].offsetWidth / 2}px`,
+          [side]: 'auto',
+          transform: 'rotate(45deg)',
+        });
+      }
     });
   }
 
@@ -188,6 +215,7 @@ export default class BDropdown extends LitElement {
         </div>
         <div class="dropdown__content" @mouseenter=${this._onContentMouseEnter} @mouseleave=${this._onContentMouseLeave} part="drop">
           <slot name="drop"></slot>
+          <slot name="arrow" ?hidden=${this._arrowElements[0] === undefined} class="arrowSlot"></slot>
         </div>
       </div>
     `;
