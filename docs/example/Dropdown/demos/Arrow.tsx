@@ -11,12 +11,9 @@ export default function Arrow() {
     <>
       <Dropdown margin={15} style={{ marginRight: '10px' }}>
         <Button>Hover me!</Button>
-        <div slot="drop" style={{ maxWidth: '200px', background: '#f5f5f5' }}>
+        <div slot="drop" style={{ width: '380px', padding: '20px', boxSizing: 'border-box', background: '#f5f5f5' }}>
           <MenuItem>Option 1</MenuItem>
           <MenuItem>Option 2</MenuItem>
-          <MenuItem>Option 3</MenuItem>
-          <MenuItem>Option 4</MenuItem>
-          <MenuItem>Option 5</MenuItem>
           <Divider />
           <MenuItem>Option A</MenuItem>
           <MenuItem>Option B</MenuItem>
@@ -34,14 +31,11 @@ export default function Arrow() {
         ></div>
       </Dropdown>
 
-      <Dropdown margin={15} placement="top">
-        <Button>Hover me!</Button>
-        <div slot="drop" style={{ maxWidth: '200px', background: '#f5f5f5' }}>
+      <Dropdown margin={15} placement="topRight">
+        <Button>topRight</Button>
+        <div slot="drop" style={{ width: '600px', background: '#f5f5f5' }}>
           <MenuItem>Option 1</MenuItem>
           <MenuItem>Option 2</MenuItem>
-          <MenuItem>Option 3</MenuItem>
-          <MenuItem>Option 4</MenuItem>
-          <MenuItem>Option 5</MenuItem>
           <Divider />
           <MenuItem>Option A</MenuItem>
           <MenuItem>Option B</MenuItem>

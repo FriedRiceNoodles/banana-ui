@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.3
+
+### Patch Changes
+
+- Remove console, updated doc and demo
+
 ## 1.6.2
 
 ### Patch Changes

@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.6.3
+
+### Patch Changes
+
+- Remove console, updated doc and demo
+- Updated dependencies
+  - banana-ui@1.6.3
+
 ## 1.6.2
 
 ### Patch Changes

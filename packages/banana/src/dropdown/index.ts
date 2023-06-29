@@ -93,8 +93,6 @@ export default class BDropdown extends LitElement {
         const arrowX = middlewareData.arrow?.x ?? '';
         const arrowY = middlewareData.arrow?.y ?? '';
 
-        console.log('side,', staticSide, middlewareData, arrowX, arrowY);
-
         Object.assign(this._arrowElements[0].style, {
           left: `${arrowX}px`,
           top: `${arrowY}px`,

@@ -50,6 +50,7 @@ demo:
 | base    | 包裹组件的容器          |
 | trigger | 下拉菜单的 trigger 区域 |
 | drop    | 下拉菜单的下拉内容区域  |
+| arrow   | 下拉菜单的箭头          |
 
 ## 样式变量
 
