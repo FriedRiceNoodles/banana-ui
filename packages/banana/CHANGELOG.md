@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.4
+
+### Patch Changes
+
+- Added htmlType parameter to button.
+
 ## 1.6.3
 
 ### Patch Changes

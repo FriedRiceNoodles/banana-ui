@@ -17,6 +17,9 @@ export default class BButton extends LitElement {
 
   @property({ type: Boolean, reflect: true }) loading = false;
 
+  // See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type
+  @property({ reflect: true }) htmlType: HTMLButtonElement['type'] = 'button';
+
   static styles?: CSSResultGroup = styles;
 
   connectedCallback() {
@@ -42,6 +45,7 @@ export default class BButton extends LitElement {
     return html`
       <button
         part="base"
+        type=${this.htmlType}
         class=${classMap({
           button: true,
           'button--default': this.type === 'default',
