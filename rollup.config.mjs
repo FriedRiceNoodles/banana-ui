@@ -67,7 +67,7 @@ export default [
       entryFileNames: '[name].js',
     },
     plugins: [
-      typescript(),
+      typescript({ declarationDir: './node' }),
       nodeResolve({
         exportConditions: ['node'],
         extensions: ['.ts', '.js'],
