@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.6.6
+
+### Patch Changes
+
+- Updated package.json.
+- Updated dependencies
+  - banana-ui@1.6.6
+
 ## 1.6.5
 
 ### Patch Changes

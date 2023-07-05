@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.6
+
+### Patch Changes
+
+- Updated package.json.
+
 ## 1.6.5
 
 ### Patch Changes
