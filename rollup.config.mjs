@@ -56,4 +56,23 @@ export default [
       commonjs(),
     ],
   },
+  {
+    input: componentNames.reduce((result, p) => {
+      result[p.path] = `./src/${p.name}`;
+      return result;
+    }, {}),
+    output: {
+      dir: 'node',
+      format: 'es',
+      entryFileNames: '[name].js',
+    },
+    plugins: [
+      typescript(),
+      nodeResolve({
+        exportConditions: ['node'],
+        extensions: ['.ts', '.js'],
+      }),
+      commonjs(),
+    ],
+  },
 ];

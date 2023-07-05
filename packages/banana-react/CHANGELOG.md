@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.6.5
+
+### Patch Changes
+
+- Now we provide the artifact built with 'node' exportConditions.
+- Updated dependencies
+  - banana-ui@1.6.5
+
 ## 1.6.4
 
 ### Patch Changes

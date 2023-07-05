@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.5
+
+### Patch Changes
+
+- Now we provide the artifact built with 'node' exportConditions.
+
 ## 1.6.4
 
 ### Patch Changes
