@@ -1,11 +1,17 @@
 {
   "name": "banana-ui",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
   "type": "module",
+  "exports": {
+    ".": {
+      "node": "./node/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "dist/index",
   "module": "dist/index",
   "files": [
@@ -16,7 +22,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "rimraf umd && rimraf dist && rimraf themes && rollup -c ./rollup.config.js && npm run tsc",
+    "build": "rimraf umd && rimraf dist && rimraf node && rimraf themes && rollup -c ./rollup.config.js && npm run tsc",
     "dev": "rollup -c ./rollup.config.js -p ../../scripts/rollup-plugin-copy-types.js -w --no-watch.clearScreen",
     "test": "web-test-runner",
     "tsc": "rimraf types && npx tsc --build ./tsconfig.types.json && node ./copyTypesToDist.cjs"

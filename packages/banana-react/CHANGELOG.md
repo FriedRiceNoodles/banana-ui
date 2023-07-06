@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.6.7
+
+### Patch Changes
+
+- Correct incorrect export field order.
+- Updated dependencies
+  - banana-ui@1.6.7
+
 ## 1.6.6
 
 ### Patch Changes

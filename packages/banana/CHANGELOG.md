@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.7
+
+### Patch Changes
+
+- Correct incorrect export field order.
+
 ## 1.6.6
 
 ### Patch Changes

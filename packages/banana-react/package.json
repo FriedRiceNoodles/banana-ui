@@ -1,11 +1,17 @@
 {
   "name": "@banana/banana-react",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
   "type": "module",
+  "exports": {
+    ".": {
+      "node": "./node/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "dist/index",
   "module": "dist/index",
   "files": [
@@ -16,7 +22,7 @@
     "package.json"
   ],
   "scripts": {
-    "build": "rimraf umd && rimraf dist && rollup -c ../../rollup.config.mjs",
+    "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs",
     "dev": "rollup -c ../../rollup.config.mjs -p ../../scripts/rollup-plugin-force-render.js -w --no-watch.clearScreen"
   },
   "dependencies": {
