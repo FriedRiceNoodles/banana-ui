@@ -25,7 +25,7 @@ export default class BPopup extends LitElement {
   @property({ reflect: true, type: Boolean })
   round = false;
 
-  @property({ type: Number })
+  @property({ reflect: true, type: Number })
   zIndex = 999;
 
   private _onClose() {
