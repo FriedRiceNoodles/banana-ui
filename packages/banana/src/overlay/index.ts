@@ -20,8 +20,8 @@ export default class BOverlay extends LitElement {
   }
 
   protected updated(_changedProperties: PropertyValues<this>): void {
-    // _changedProperties is the previous values.
-    if (_changedProperties.get('open') === false) {
+    // _changedProperties is the previous values, so we use this.open to get the current value.
+    if (_changedProperties.has('open') && this.open) {
       document.body.style.overflow = 'hidden';
       document.addEventListener('touchstart', this._preventTouchEvent);
       window.addEventListener('keydown', this._handleEscape);

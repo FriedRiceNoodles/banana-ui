@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.6.8
+
+### Patch Changes
+
+- Fixed a bug which cause overlay will not handle escape key pressed and prevent the scroll through when set the open parameter at firstUpdate.
+- Updated dependencies
+  - banana-ui@1.6.8
+
 ## 1.6.7
 
 ### Patch Changes
