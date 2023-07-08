@@ -28,6 +28,7 @@ export default class BMenu extends LitElement {
     this.dispatchEvent(new CustomEvent('select', { detail: { item } }));
   }
 
+  // todo...
   private handleKeydown(event: KeyboardEvent) {
     return event;
   }

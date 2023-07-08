@@ -1,31 +1,108 @@
-import { expect, fixture, html } from '@open-wc/testing';
-import './index';
+import { fixture, html, expect } from '@open-wc/testing';
+import BOverlay from '.';
+import sinon from 'sinon';
+import { sendKeys } from '@web/test-runner-commands';
 
-const data = {
-  open: true,
-  zIndex: 1,
-};
-let el;
-describe('B-Overlay', function () {
-  it('should render element', async () => {
-    el = await fixture(html`<b-overlay open=${data.open} zIndex=${data.zIndex}> </b-overlay>`);
-    const container = el.shadowRoot!.querySelector('.quark-overlay');
-    const mask = el.shadowRoot!.querySelector('.quark-overlay-mask');
-    expect(container).to.exist;
-    expect(mask).to.exist;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    expect(el?.open).to.equal(data.open);
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-ignore
-    expect(el.zIndex).to.equal(`${data.zIndex}`);
+describe('b-overlay', () => {
+  it('when provided no parameters', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay></b-overlay> `);
+    expect(element.open).to.equal(false);
+    expect(element.hasAttribute('open')).to.equal(false);
+    expect(element.zIndex).to.equal(999);
+    expect(getComputedStyle(element).zIndex).to.equal('999');
+    expect(getComputedStyle(element).visibility).to.equal('hidden');
+    expect(getComputedStyle(element).opacity).to.equal('0');
   });
 
-  it('should render slot content', async () => {
-    const slot = `<div>content</div>`;
-    el = await fixture(`<quark-overlay>${slot}</quark-overlay>`);
-    const searchSlot = el.shadowRoot!.querySelector('slot');
-    const slotResult = searchSlot?.assignedNodes()[0];
-    expect(slotResult?.textContent).to.equal(slot);
+  it('when provided open', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open></b-overlay> `);
+    expect(element.open).to.equal(true);
+    expect(element.hasAttribute('open')).to.equal(true);
+    expect(getComputedStyle(element).visibility).to.equal('visible');
+    expect(getComputedStyle(element).opacity).to.equal('1');
+  });
+
+  it('when provided zIndex', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay zIndex="100"></b-overlay> `);
+    expect(element.zIndex).to.equal(100);
+    expect(getComputedStyle(element).zIndex).to.equal('100');
+  });
+
+  it('should emit the close event when click on mask', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open></b-overlay> `);
+    const spy = sinon.spy();
+    element.addEventListener('close', spy);
+    element.shadowRoot?.querySelector('.overlay__mask')?.dispatchEvent(new Event('click'));
+    expect(spy.called).to.equal(true);
+  });
+
+  it('should emit the close event when press escape', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open></b-overlay> `);
+    const spy = sinon.spy();
+    element.addEventListener('close', spy);
+    await sendKeys({ down: 'Escape' });
+    expect(spy.calledOnce).to.equal(true);
+  });
+
+  it('should not emit the close event when press other key', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open></b-overlay> `);
+    const spy = sinon.spy();
+    element.addEventListener('close', spy);
+    await sendKeys({ down: 'Enter' });
+    expect(spy.called).to.equal(false);
+  });
+
+  it('should not emit the close event when press escape and overlay is closed', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay></b-overlay> `);
+    const spy = sinon.spy();
+    element.addEventListener('close', spy);
+    await sendKeys({ down: 'Escape' });
+    expect(spy.called).to.equal(false);
+  });
+
+  it('should open the overlay when call show method', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay></b-overlay> `);
+    element.show();
+    await element.updateComplete;
+    expect(element.open).to.equal(true);
+    expect(element.hasAttribute('open')).to.equal(true);
+    expect(getComputedStyle(element).visibility).to.equal('visible');
+    expect(getComputedStyle(element).opacity).to.equal('1');
+  });
+
+  it('should close the overlay when call hide method', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open></b-overlay> `);
+    element.hide();
+    await element.updateComplete;
+    expect(element.open).to.equal(false);
+    expect(element.hasAttribute('open')).to.equal(false);
+    expect(getComputedStyle(element).visibility).to.equal('hidden');
+    expect(getComputedStyle(element).opacity).to.equal('0');
+  });
+
+  it('should prevent click and scroll through the mask when overlay is open', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open></b-overlay> `);
+    expect(getComputedStyle(document.body).overflow).to.equal('hidden');
+
+    const spy = sinon.spy();
+    document.body.addEventListener('click', spy);
+    element.shadowRoot?.querySelector('.overlay__mask')?.dispatchEvent(new Event('click'));
+    expect(spy.called).to.equal(false);
+  });
+
+  it('when provided children', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open><div>banana</div></b-overlay> `);
+    expect(element.shadowRoot?.querySelector('slot')?.assignedNodes()[0]?.textContent).to.equal('banana');
+
+    const content2 = '<div>apple</div>';
+    element.innerHTML = content2;
+    await element.updateComplete;
+    expect(element.shadowRoot?.querySelector('slot')?.assignedNodes()[0]?.textContent).to.equal('apple');
+
+    // click on children should not emit close event.
+    const spy = sinon.spy();
+    element.addEventListener('close', spy);
+    element.shadowRoot?.querySelector('div')?.dispatchEvent(new Event('click'));
+    expect(spy.called).to.equal(false);
   });
 });
