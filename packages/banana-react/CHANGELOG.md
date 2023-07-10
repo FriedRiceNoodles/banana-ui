@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.6.9
+
+### Patch Changes
+
+- Changed css properties of button, height => min-height.
+- Updated dependencies
+  - banana-ui@1.6.9
+
 ## 1.6.8
 
 ### Patch Changes

@@ -139,21 +139,21 @@ export default [
     /* Small */
     .button--small {
       font-size: var(--banana-button-fontsize-small, ${unsafeCSS(Var.ButtonFontSizeSmall)});
-      height: var(--banana-button-height-small, ${unsafeCSS(Var.ButtonHeightSmall)});
+      min-height: var(--banana-button-height-small, ${unsafeCSS(Var.ButtonHeightSmall)});
       padding: var(--banana-button-padding-small, ${unsafeCSS(Var.ButtonPaddingSmall)});
     }
 
     /* Medium */
     .button--medium {
       font-size: var(--banana-button-fontsize-medium, ${unsafeCSS(Var.ButtonFontSizeMedium)});
-      height: var(--banana-button-height-medium ${unsafeCSS(Var.ButtonHeightMedium)});
+      min-height: var(--banana-button-height-medium, ${unsafeCSS(Var.ButtonHeightMedium)});
       padding: var(--banana-button-padding-medium, ${unsafeCSS(Var.ButtonPaddingMedium)});
     }
 
     /* Large */
     .button--large {
       font-size: var(--banana-button-fontsize-large, ${unsafeCSS(Var.ButtonFontSizeLarge)});
-      height: var(--banana-button-height-large, ${unsafeCSS(Var.ButtonHeightLarge)});
+      min-height: var(--banana-button-height-large, ${unsafeCSS(Var.ButtonHeightLarge)});
       padding: var(--banana-button-padding-large, ${unsafeCSS(Var.ButtonPaddingLarge)});
     }
 
