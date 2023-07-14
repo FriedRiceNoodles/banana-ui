@@ -12,6 +12,11 @@ export default [
       cursor: pointer;
     }
 
+    /* Block */
+    :host([block]) {
+      display: block;
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
