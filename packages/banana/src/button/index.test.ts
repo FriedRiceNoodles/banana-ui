@@ -70,4 +70,12 @@ describe('b-button', () => {
       expect(element.shadowRoot!.querySelector('.button__loading')).to.exist;
     });
   });
+
+  describe('when provided the block attribute', () => {
+    it('should render a block button', async () => {
+      const element = await fixture<BButton>(html` <b-button block> Banana </b-button> `);
+      expect(element.shadowRoot!.querySelector('.button--block')).to.exist;
+      expect(getComputedStyle(element).display).to.equal('block');
+    });
+  });
 });

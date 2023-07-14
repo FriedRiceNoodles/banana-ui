@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.6.10
+
+### Patch Changes
+
+- Added block parameter to button.
+- Updated dependencies
+  - banana-ui@1.6.10
+
 ## 1.6.9
 
 ### Patch Changes

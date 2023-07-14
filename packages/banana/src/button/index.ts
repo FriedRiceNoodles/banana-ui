@@ -17,6 +17,8 @@ export default class BButton extends LitElement {
 
   @property({ type: Boolean, reflect: true }) loading = false;
 
+  @property({ type: Boolean, reflect: true }) block = false;
+
   // See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type
   @property({ reflect: true }) htmlType: HTMLButtonElement['type'] = 'button';
 
@@ -61,6 +63,7 @@ export default class BButton extends LitElement {
           'button--outline': this.outline === true,
           'button--disabled': this.disabled === true,
           'button--loading': this.loading === true,
+          'button--block': this.block === true,
         })}
         ?disabled=${this.disabled}
       >

@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.6.10
+
+### Patch Changes
+
+- Added block parameter to button.
+
 ## 1.6.9
 
 ### Patch Changes
