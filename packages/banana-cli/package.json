@@ -1,0 +1,20 @@
+{
+  "name": "banana-cli",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
+  "main": "index.js",
+  "bin": {
+    "banana": "./bin/index.js"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "inquirer": "^8.0.0",
+    "prettier": "^2.7.1",
+    "yargs": "^17.7.2"
+  }
+}
