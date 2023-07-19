@@ -1,7 +1,6 @@
 {
   "compilerOptions": {
-    "declaration": true,
-    "declarationDir": "dist",
+    "declaration": false,
     "paths": {
       "tslib": ["./node_modules/tslib/tslib.d.ts"]
     }
