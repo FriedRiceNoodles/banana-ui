@@ -1,6 +1,6 @@
 {
   "name": "@banana/banana-react",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -23,8 +23,9 @@
     "package.json"
   ],
   "scripts": {
-    "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs",
-    "dev": "rollup -c ../../rollup.config.mjs -p ../../scripts/rollup-plugin-force-render.js -w --no-watch.clearScreen"
+    "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs && npm run tsc",
+    "dev": "rollup -c ../../rollup.config.mjs -p ../../scripts/rollup-plugin-copy-types.js -p ../../scripts/rollup-plugin-force-render.js -w --no-watch.clearScreen",
+    "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
   "dependencies": {
     "@lit-labs/react": "^1.1.1",

@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.7.1
+
+### Patch Changes
+
+- Give declaration files to artifacts of banana-react.
+- Updated dependencies
+  - banana-ui@1.7.1
+
 ## 1.7.0
 
 ### Minor Changes

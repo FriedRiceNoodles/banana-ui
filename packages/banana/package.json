@@ -1,6 +1,6 @@
 {
   "name": "banana-ui",
-  "version": "1.7.0",
+  "version": "1.7.1",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -26,7 +26,7 @@
     "build": "rimraf umd && rimraf dist && rimraf node && rimraf themes && rollup -c ../../rollup.config.mjs && npm run tsc",
     "dev": "rollup -c ../../rollup.config.mjs -p ../../scripts/rollup-plugin-copy-types.js -w --no-watch.clearScreen",
     "test": "web-test-runner",
-    "tsc": "rimraf types && npx tsc --build ./tsconfig.types.json && node ./copyTypesToDist.cjs"
+    "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
   "dependencies": {
     "@floating-ui/dom": "^1.4.1",
