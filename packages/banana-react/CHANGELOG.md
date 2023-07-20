@@ -1,5 +1,24 @@
 # @banana/banana-react
 
+## 1.7.1
+
+### Patch Changes
+
+- Give declaration files to artifacts of banana-react.
+- Updated dependencies
+  - banana-ui@1.7.1
+
+## 1.7.0
+
+### Minor Changes
+
+- Now we use babel and terser while building; add 'worker' in exports field.
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.7.0
+
 ## 1.6.10
 
 ### Patch Changes

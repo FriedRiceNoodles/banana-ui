@@ -15,7 +15,7 @@ const componentNames = fs
 
 // components
 for (const component of componentNames) {
-  const typePath = `${typesDir}/src/${component}/index.d.ts`;
+  const typePath = `${typesDir}/${component}/index.d.ts`;
   const distPath = `${distDir}/${component}/index.d.ts`;
   const nodePath = `${nodeDir}/${component}/index.d.ts`;
   try {
@@ -28,8 +28,8 @@ for (const component of componentNames) {
 
 // index
 try {
-  fs.copyFileSync(`${typesDir}/src/index.d.ts`, `${distDir}/index.d.ts`);
-  fs.copyFileSync(`${typesDir}/src/index.d.ts`, `${nodeDir}/index.d.ts`);
+  fs.copyFileSync(`${typesDir}/index.d.ts`, `${distDir}/index.d.ts`);
+  fs.copyFileSync(`${typesDir}/index.d.ts`, `${nodeDir}/index.d.ts`);
 } catch (error) {
   console.log('copy failed', error);
 }
