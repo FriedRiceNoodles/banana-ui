@@ -13,6 +13,9 @@ importers:
       '@babel/plugin-transform-runtime':
         specifier: ^7.22.9
         version: 7.22.9(@babel/core@7.22.5)
+      '@banana/banana-cli':
+        specifier: workspace:^
+        version: link:packages/banana-cli
       '@banana/banana-react':
         specifier: workspace:*
         version: link:packages/banana-react
