@@ -1,23 +1,27 @@
----
-debug: true
-nav:
-  title: 组件
+/* eslint-env node */
+
+const toCamelCase = require('../toCamelCase');
+
+const teamplete = (componentName, chineseName, description) => `---
+group: 组件
+demo:
+  cols: 2
 ---
 
-# Component 组件名称
+# ${toCamelCase(componentName)} ${chineseName}
 
-我是一个组件
+${description}
 
 ## 代码演示
 
-<!-- <code src="./demos/demo0.tsx"></code> -->
+<code src="./demos/basicUsage.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
 | 属性  | 说明   | 类型      | 默认值 |
 | ----- | ------ | --------- | ------ |
-| prop1 | 属性 1 | `string`  | ''     |
-| prop2 | 属性 2 | `boolean` | false  |
+| prop1 | 属性 1 | \`string\`  | ''     |
+| prop2 | 属性 2 | \`boolean\` | false  |
 
 ## 方法 - Methods
 
@@ -53,7 +57,6 @@ nav:
 | ---------------------------- | ------------------ | ------ |
 | --banana-xxx-title-padding   | 标题的 padding     | 16px   |
 | --banana-xxx-content-padding | 展开区域的 padding | 16px   |
+`;
 
-## 依赖
-
-- [Overlay 遮罩层组件](/example/overlay)
+module.exports = teamplete;

@@ -7,6 +7,7 @@ const yargs = require('yargs/yargs');
 const { hideBin } = require('yargs/helpers');
 const inquirer = require('inquirer');
 const prettier = require('prettier');
+const toCamelCase = require('../templates/toCamelCase.js');
 
 const prettierConfig = prettier.resolveConfig.sync(process.cwd());
 
@@ -20,7 +21,7 @@ const createComponent = async () => {
     }
   }
 
-  const { name, dirs } = await inquirer.prompt([
+  const { name, dirs, chineseName, description } = await inquirer.prompt([
     {
       type: 'input',
       name: 'name',
@@ -34,6 +35,24 @@ const createComponent = async () => {
       },
       filter: (input) => input.toLowerCase(),
       message: 'Component name:',
+    },
+    {
+      type: 'input',
+      name: 'chineseName',
+      validate: (input) => {
+        if (!input) return 'A chinese name of the component is required.';
+        return true;
+      },
+      message: 'Chinese name of the component:',
+    },
+    {
+      type: 'input',
+      name: 'description',
+      validate: (input) => {
+        if (!input) return 'A description of the component is required.';
+        return true;
+      },
+      message: 'Description of the component:',
     },
     {
       type: 'checkbox',
@@ -170,6 +189,33 @@ const createComponent = async () => {
     console.log('🍌 Banana-react component created successfully.');
     console.log('----------------------------------------');
   }
+
+  console.log('----------------------------------------');
+  console.log('📝 Creating docs...');
+  console.log('----------------------------------------');
+
+  fs.mkdirSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name)));
+  fs.mkdirSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'demos'));
+  const basicUsage = require('../templates/docs/basicUsage.js')(name);
+  const formattedBasicUsage = prettier.format(basicUsage, {
+    ...prettierConfig,
+    parser: 'typescript',
+  });
+  fs.writeFileSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'demos', 'basicUsage.tsx'), formattedBasicUsage);
+  console.log(`✅ Created 'docs/example/${toCamelCase(name)}/basicUsage.tsx'`);
+
+  const index = require('../templates/docs/index.js')(name, chineseName, description);
+  const formattedIndex = prettier.format(index, {
+    ...prettierConfig,
+    parser: 'markdown',
+  });
+  fs.writeFileSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'index.md'), formattedIndex);
+  console.log(`✅ Created 'docs/example/${toCamelCase(name)}/index.md'`);
+
+  console.log('----------------------------------------');
+  console.log('📝 Docs created successfully.');
+  console.log('----------------------------------------');
+
   console.log('🎉 All done!');
 };
 
