@@ -1,5 +1,5 @@
 {
-  "name": "banana-cli",
+  "name": "@banana/banana-cli",
   "version": "0.1.0",
   "description": "banana cli",
   "keywords": [],
