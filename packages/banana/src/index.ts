@@ -8,5 +8,6 @@ import BMenu from './menu';
 import BMenuItem from './menu-item';
 import BOverlay from './overlay';
 import BPopup from './popup';
+import BProgress from './progress';
 
-export { BButton, BCarousel, BCollapse, BCountdown, BDivider, BDropdown, BMenu, BMenuItem, BOverlay, BPopup };
+export { BButton, BCarousel, BCollapse, BCountdown, BDivider, BDropdown, BMenu, BMenuItem, BOverlay, BPopup, BProgress };
