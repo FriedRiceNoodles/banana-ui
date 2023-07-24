@@ -119,6 +119,11 @@ export const Variables = {
   InputFontFamily:
     'Inter, AppleSystem, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sansSerif',
 
+  /* Countdown */
+  CountdownFontSize: Fonts.FontSizeXL,
+  CountdownFontWeight: Fonts.FontWeightNormal,
+  CountdownColor: `rgba(${Colors.Gray8}, 1)`,
+
   /* Transitions */
   TransitionVerySlow: '1000ms',
   TransitionSlow: '500ms',

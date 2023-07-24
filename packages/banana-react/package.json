@@ -1,6 +1,6 @@
 {
   "name": "@banana/banana-react",
-  "version": "1.7.1",
+  "version": "1.8.0",
   "description": "",
   "keywords": [],
   "license": "ISC",
@@ -34,7 +34,8 @@
   "devDependencies": {
     "@types/react": "^18.0.26",
     "react": "^18.0.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^5.0.4"
   },
   "publishConfig": {
     "registry": "https://packages.aliyun.com/6160015009edb81ca824f556/npm/npm-registry/"
