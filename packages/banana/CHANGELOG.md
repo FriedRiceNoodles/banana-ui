@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.9.0
+
+### Minor Changes
+
+- A new component: progress
+
 ## 1.8.0
 
 ### Minor Changes

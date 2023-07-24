@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.9.0
+
+### Minor Changes
+
+- A new component: progress
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.9.0
+
 ## 1.8.0
 
 ### Minor Changes
