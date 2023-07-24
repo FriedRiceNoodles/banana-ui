@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.8.0
+
+### Minor Changes
+
+- A new component: countdown
+
 ## 1.7.1
 
 ### Patch Changes

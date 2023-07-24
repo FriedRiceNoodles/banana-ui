@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.8.0
+
+### Minor Changes
+
+- A new component: countdown
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.8.0
+
 ## 1.7.1
 
 ### Patch Changes

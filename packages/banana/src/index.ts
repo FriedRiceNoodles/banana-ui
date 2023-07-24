@@ -1,10 +1,12 @@
 import BButton from './button';
 import BCarousel from './carousel';
 import BCollapse from './collapse';
-import BOverlay from './overlay';
-import BPopup from './popup';
+import BCountdown from './countdown';
 import BDivider from './divider';
+import BDropdown from './dropdown';
 import BMenu from './menu';
 import BMenuItem from './menu-item';
-import BDropdown from './dropdown';
-export { BButton, BCarousel, BCollapse, BOverlay, BPopup, BDivider, BMenu, BMenuItem, BDropdown };
+import BOverlay from './overlay';
+import BPopup from './popup';
+
+export { BButton, BCarousel, BCollapse, BCountdown, BDivider, BDropdown, BMenu, BMenuItem, BOverlay, BPopup };
