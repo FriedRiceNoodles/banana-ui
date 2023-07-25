@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.9.1
+
+### Patch Changes
+
+- Add click trigger support for dropdowns.
+- Updated dependencies
+  - banana-ui@1.9.1
+
 ## 1.9.0
 
 ### Minor Changes

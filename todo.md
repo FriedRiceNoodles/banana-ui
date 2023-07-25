@@ -54,10 +54,7 @@
 
 ### Dropdown
 
-- disabled 模式
-- click 触发
 - 暴露事件
-- 支持显示箭头
 - 参数补全（floating-ui 中间件相关）
 - 移动端禁用 hover 触发
 - autoUpdate

@@ -16,6 +16,7 @@ demo:
 <code src="./demos/Placement.tsx"></code>
 <code src="./demos/Disabled.tsx"></code>
 <code src="./demos/Arrow.tsx"></code>
+<code src="./demos/triggerAction.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
@@ -26,6 +27,7 @@ demo:
 | mouseEnterDelay | hover 模式下，鼠标移入 trigger 多久后展示下拉菜单的内容，单位是`ms` | `number`                                                                      | 100          |
 | mouseLeaveDelay | hover 模式下，鼠标移出下拉菜单多久后隐藏下拉菜单的内容，单位是`ms`  | `number`                                                                      | 100          |
 | disabled        | 禁用下拉菜单                                                        | `boolean`                                                                     | false        |
+| triggerAction   | 触发下拉菜单的方式                                                  | `click` \| `hover`                                                            | `hover`      |
 
 ## 事件 - Events
 
@@ -51,10 +53,3 @@ demo:
 | trigger | 下拉菜单的 trigger 区域 |
 | drop    | 下拉菜单的下拉内容区域  |
 | arrow   | 下拉菜单的箭头          |
-
-## 样式变量
-
-| 变量                         | 说明               | 默认值 |
-| ---------------------------- | ------------------ | ------ |
-| --banana-xxx-title-padding   | 标题的 padding     | 16px   |
-| --banana-xxx-content-padding | 展开区域的 padding | 16px   |
