@@ -24,6 +24,7 @@ export default class BDropdown extends LitElement {
     super.disconnectedCallback();
     clearTimeout(this._openTimer);
     clearTimeout(this._closeTimer);
+    document.removeEventListener('click', this._onDocumentClick);
   }
 
   static styles: CSSResultGroup = styles;
@@ -57,6 +58,9 @@ export default class BDropdown extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   autoAdjustOverflow = true;
+
+  @property({ reflect: true })
+  triggerAction: 'hover' | 'click' = 'hover';
 
   @state()
   open = false;
@@ -104,21 +108,82 @@ export default class BDropdown extends LitElement {
     });
   }
 
+  private _open() {
+    this.open = true;
+    this._repositioning();
+  }
+
+  private _close() {
+    this.open = false;
+
+    if (this.triggerAction === 'hover') {
+      clearTimeout(this._openTimer);
+      clearTimeout(this._closeTimer);
+    }
+
+    if (this.triggerAction === 'click') {
+      document.removeEventListener('click', this._onDocumentClick);
+    }
+  }
+
+  private _onTriggerClick() {
+    if (this.triggerAction !== 'click') return;
+
+    if (this.open) {
+      this._close();
+    } else {
+      this._open();
+      // Listen click event on document to close dropdown.
+      document.addEventListener('click', this._onDocumentClick);
+    }
+  }
+
+  private _onDocumentClick = (event: MouseEvent) => {
+    if (!this._trigger || !this._content) return;
+
+    // If the click event is triggered by the trigger or the content, do nothing.
+    const path = event.composedPath();
+    if (path.includes(this._trigger) || path.includes(this._content)) return;
+
+    this._close();
+  };
+
+  private _onTriggerKeyDown(event: KeyboardEvent) {
+    if (this.triggerAction !== 'click') return;
+
+    // If the dropdown is open, press the `Esc` key or `Space` key to close the dropdown.
+    if (this.open && (event.key === 'Escape' || event.key === ' ')) {
+      event.preventDefault();
+      this._close();
+      return;
+    }
+
+    // If the dropdown is closed, press the `Enter` key or `Space` key to open the dropdown.
+    if (!this.open && (event.key === 'Enter' || event.key === ' ')) {
+      event.preventDefault();
+      this._open();
+      return;
+    }
+  }
+
   private _onTriggerMouseEnter() {
+    if (this.triggerAction !== 'hover') return;
+
     if (this.open) {
       clearTimeout(this._closeTimer);
     } else {
       this._openTimer = setTimeout(() => {
-        this.open = true;
-        this._repositioning();
+        this._open();
       }, this.mouseEnterDelay);
     }
   }
 
   private _onTriggerMouseLeave() {
+    if (this.triggerAction !== 'hover') return;
+
     if (this.open) {
       this._closeTimer = setTimeout(() => {
-        this.open = false;
+        this._close();
       }, this.mouseLeaveDelay);
     } else {
       clearTimeout(this._openTimer);
@@ -130,8 +195,10 @@ export default class BDropdown extends LitElement {
   }
 
   private _onContentMouseLeave() {
+    if (this.triggerAction !== 'hover') return;
+
     this._closeTimer = setTimeout(() => {
-      this.open = false;
+      this._close();
     }, this.mouseLeaveDelay);
   }
 
@@ -208,7 +275,15 @@ export default class BDropdown extends LitElement {
         placement=${this.placement}
         part="base"
       >
-        <div class="dropdown__trigger" @mouseenter=${this._onTriggerMouseEnter} @mouseleave=${this._onTriggerMouseLeave} part="trigger">
+        <div
+          class="dropdown__trigger"
+          @click=${this._onTriggerClick}
+          @keydown=${this._onTriggerKeyDown}
+          @mouseenter=${this._onTriggerMouseEnter}
+          @mouseleave=${this._onTriggerMouseLeave}
+          part="trigger"
+          tabindex=${this.disabled ? '-1' : '0'}
+        >
           <slot></slot>
         </div>
         <div class="dropdown__content" @mouseenter=${this._onContentMouseEnter} @mouseleave=${this._onContentMouseLeave} part="drop">

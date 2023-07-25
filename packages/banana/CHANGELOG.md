@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.9.1
+
+### Patch Changes
+
+- Add click trigger support for dropdowns.
+
 ## 1.9.0
 
 ### Minor Changes
