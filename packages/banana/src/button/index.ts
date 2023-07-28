@@ -2,9 +2,12 @@ import { CSSResultGroup, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './index.styles';
+import { FormController } from '../../controllers/form';
 
 @customElement('b-button')
 export default class BButton extends LitElement {
+  private readonly formController = new FormController(this);
+
   @property({ reflect: true }) type: 'default' | 'primary' | 'success' | 'warning' | 'danger' | 'dashed' = 'default';
 
   @property({ reflect: true }) size: 'small' | 'default' | 'large' = 'default';
@@ -22,6 +25,10 @@ export default class BButton extends LitElement {
   // See https://developer.mozilla.org/en-US/docs/Web/HTML/Element/button#attr-type
   @property({ reflect: true }) htmlType: HTMLButtonElement['type'] = 'button';
 
+  @property() name = '';
+
+  @property() value = '';
+
   static styles?: CSSResultGroup = styles;
 
   connectedCallback() {
@@ -33,6 +40,16 @@ export default class BButton extends LitElement {
   disconnectedCallback() {
     super.disconnectedCallback();
     this.removeEventListener('click', this.handleHostClick);
+  }
+
+  private handleClick() {
+    if (this.htmlType === 'submit') {
+      this.formController.submit(this);
+    }
+
+    if (this.htmlType === 'reset') {
+      this.formController.reset();
+    }
   }
 
   private handleHostClick(event: MouseEvent) {
@@ -66,6 +83,7 @@ export default class BButton extends LitElement {
           'button--block': this.block === true,
         })}
         ?disabled=${this.disabled}
+        @click=${this.handleClick}
       >
         ${this.loading
           ? html`

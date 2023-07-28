@@ -20,3 +20,4 @@ demo:
 <code src="./demos/demo5.tsx"></code>
 <code src="./demos/demo6.tsx"></code>
 <code src="./demos/demo7.tsx"></code>
+<code src="./demos/formTest.tsx"></code>
