@@ -22,6 +22,7 @@ export default [
       align-items: center;
       justify-content: center;
       width: 100%;
+      line-height: 1;
       border-style: solid;
       border-width: var(--banana-button-boder-width, ${unsafeCSS(Var.InputBorderWidth)});
       border-radius: var(--banana-button-border-radius, ${unsafeCSS(Var.BorderRadiusSmall)});
@@ -33,8 +34,8 @@ export default [
       vertical-align: middle;
       padding: 0;
       cursor: inherit;
-      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color, ${unsafeCSS(Var.TransitionVeryFast)} border,
-        ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
+      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color,
+        ${unsafeCSS(Var.TransitionVeryFast)} border, ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
     }
 
     /* Disabled */

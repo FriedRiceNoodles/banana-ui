@@ -1,13 +1,28 @@
 import type { LitElement, ReactiveController, ReactiveControllerHost } from 'lit';
 import type BButton from '../src/button';
 
+export interface BananaFormElement extends LitElement {
+  name: string;
+  value: string | number | boolean;
+  disabled?: boolean;
+  defaultValue?: string;
+
+  reportValidity: () => boolean;
+  checkValidity: () => boolean;
+}
+
 export class FormController implements ReactiveController {
-  host: ReactiveControllerHost & LitElement;
+  host: ReactiveControllerHost & BananaFormElement;
   form?: HTMLFormElement | null;
 
-  constructor(host: ReactiveControllerHost & LitElement) {
+  constructor(host: ReactiveControllerHost & BananaFormElement) {
     this.host = host;
     host.addController(this);
+
+    this._handleFormData = this._handleFormData.bind(this);
+    this._handleFormSubmit = this._handleFormSubmit.bind(this);
+    this._handleFormReset = this._handleFormReset.bind(this);
+    this._reportOrCheckFormValidity = this._reportOrCheckFormValidity.bind(this);
   }
 
   hostConnected() {
@@ -36,11 +51,12 @@ export class FormController implements ReactiveController {
         button.name = submitter.name;
         button.value = submitter.value;
 
-        // ['formaction', 'formenctype', 'formmethod', 'formnovalidate', 'formtarget'].forEach((attr) => {
-        //   if (submitter.hasAttribute(attr)) {
-        //     button.setAttribute(attr, submitter.getAttribute(attr)!);
-        //   }
-        // });
+        ['formaction', 'formenctype', 'formmethod', 'formnovalidate', 'formtarget'].forEach((attr) => {
+          if (submitter.hasAttribute(attr)) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            button.setAttribute(attr, submitter.getAttribute(attr)!);
+          }
+        });
       }
 
       this.form.appendChild(button);
@@ -81,27 +97,68 @@ export class FormController implements ReactiveController {
   private _bindForm(form: HTMLFormElement | null) {
     if (form) {
       this.form = form;
-      // this.form.addEventListener('submit', this._handleFormSubmit.bind(this));
-      // this.form.addEventListener('reset', this._handleFormReset.bind(this));
-      this.form.addEventListener('formdata', this._handleFormData.bind(this));
+      this.form.addEventListener('submit', this._handleFormSubmit);
+      this.form.addEventListener('reset', this._handleFormReset);
+      this.form.addEventListener('formdata', this._handleFormData);
+
+      this.form.reportValidity = () => this._reportOrCheckFormValidity(true);
+      this.form.checkValidity = () => this._reportOrCheckFormValidity(false);
     }
   }
 
   private _unbindForm() {
     if (this.form) {
-      // this.form.removeEventListener('submit', this._handleFormSubmit.bind(this));
-      // this.form.removeEventListener('reset', this._handleFormReset.bind(this));
-      this.form.removeEventListener('formdata', this._handleFormData.bind(this));
+      this.form.removeEventListener('submit', this._handleFormSubmit);
+      this.form.removeEventListener('reset', this._handleFormReset);
+      this.form.removeEventListener('formdata', this._handleFormData);
       this.form = undefined;
     }
   }
 
   private _handleFormData(event: FormDataEvent) {
-    // Todo: handle formdata event...
-    // console.log('formdata event fired', event);
-    // const formData = event.formData;
-    // for (const [key, value] of formData.entries()) {
-    //   console.log(`${key}: ${value}`);
-    // }
+    const name = this.host.name;
+    const value = this.host.value;
+    const disabled = this.host.disabled;
+
+    if (!disabled && typeof name === 'string' && name.length > 0 && typeof value !== 'undefined') {
+      event.formData.append(name, value.toString());
+    }
+  }
+
+  private _handleFormSubmit(event: Event) {
+    const disabled = this.host.disabled;
+    // Here is not the form's reportValidity() method, but the element's reportValidity() method.
+    const reportValidity = this.host.reportValidity.bind(this.host);
+
+    if (this.form && !this.form.noValidate && !disabled && typeof reportValidity === 'function') {
+      if (!reportValidity()) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+      }
+    }
+  }
+
+  private _handleFormReset() {
+    this.host.value = this.host.defaultValue || '';
+  }
+
+  private _reportOrCheckFormValidity(report = true) {
+    if (this.form && !this.form.noValidate) {
+      // Query all elements is necessary, because the form may contain native input elements, banana input elements, and other custom elements.
+      const elements = this.form.querySelectorAll<HTMLInputElement>('*');
+
+      for (const element of elements) {
+        const method = report ? element.reportValidity : element.checkValidity;
+
+        if (typeof method === 'function') {
+          const result = method.call(element);
+          if (!result) {
+            return false;
+          }
+        }
+      }
+    }
+
+    return true;
   }
 }

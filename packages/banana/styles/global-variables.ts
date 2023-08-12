@@ -116,8 +116,30 @@ export const Variables = {
 
   /* Inputs */
   InputBorderWidth: '1px',
+  InputBorderColor: `rgba(${Colors.Gray1}, 1)`,
+  InputBorderHoverColor: `rgba(${Colors.Gray4}, 1)`,
+  InputBackgroundColor: '#fff',
+  InputDisabledColor: `rgba(0, 0, 0, 0.25)`,
+  InputDisabledBackgroundColor: `rgba(0, 0, 0, 0.03)`,
+  InputDisabledBorderColor: `rgba(${Colors.Gray3}, 1})`,
+  InputBoxShadowFocus: `0 0 0 2px rgba(${Colors.Blue6}, 0.2)`,
   InputFontFamily:
     'Inter, AppleSystem, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sansSerif',
+
+  InputFontSizeSmall: Fonts.FontSizeSmall,
+  InputPaddingSmall: `0 ${Spacings.Spacing2XS}`,
+  InputHeightSmall: '24px',
+  InputBorerRadiusSmall: '4px',
+
+  InputFontSizeMedium: Fonts.FontSizeSmall,
+  InputPaddingMedium: `${Spacings.Spacing3XS} ${Spacings.SpacingSmall}`,
+  InputHeightMedium: '32px',
+  InputBorerRadiusMedium: '6px',
+
+  InputFontSizeLarge: Fonts.FontSizeMedium,
+  InputPaddingLarge: `${Spacings.Spacing2XS} ${Spacings.SpacingSmall}`,
+  InputHeightLarge: '40px',
+  InputBorerRadiusLarge: '8px',
 
   /* Countdown */
   CountdownFontSize: Fonts.FontSizeXL,
