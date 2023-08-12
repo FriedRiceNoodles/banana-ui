@@ -45,6 +45,7 @@ export default class BCarousel extends LitElement {
 
   protected firstUpdated(): void {
     this._calcPosition();
+    this._calcHeight();
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
@@ -54,6 +55,10 @@ export default class BCarousel extends LitElement {
 
     if (_changedProperties.has('currentIndex') || _changedProperties.has('gap') || _changedProperties.has('slidesPerView')) {
       this._calcPosition();
+    }
+
+    if (_changedProperties.has('currentIndex') && this.autoHeight) {
+      this._calcHeight();
     }
   }
 
@@ -105,6 +110,9 @@ export default class BCarousel extends LitElement {
   // If the `fill` property is set to true, then carousel will be filled when the slide count is less than the `slidesPerView` property.
   @property({ type: Boolean, reflect: true })
   fill = true;
+
+  @property({ type: Boolean, reflect: true })
+  autoHeight = false;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
@@ -248,6 +256,15 @@ export default class BCarousel extends LitElement {
     window.removeEventListener(EVENTS.MOUSEUP, this._eventHandler);
     window.removeEventListener(EVENTS.TOUCHEND, this._eventHandler);
     window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+  }
+
+  private _calcHeight() {
+    // _externalWrapper is not ready when the component is first rendered.
+    if (!this.autoHeight || !this._externalWrapper) return;
+
+    const currentSlide = this._slides[this.currentIndex];
+    const currentSlideHeight = currentSlide.getBoundingClientRect().height;
+    this._externalWrapper.style.height = `${currentSlideHeight}px`;
   }
 
   private _calcPosition() {

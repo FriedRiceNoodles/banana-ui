@@ -13,6 +13,7 @@ export default [
     .external-wrapper {
       position: relative;
       overflow: hidden;
+      transition: height var(--banana-carousel-transition-duration, ${unsafeCSS(Var.TransitionNormal)});
     }
 
     .slides-wrapper {

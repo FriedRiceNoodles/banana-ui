@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.9.2
+
+### Patch Changes
+
+- Added autoHeight parameter to carousel.
+
 ## 1.9.1
 
 ### Patch Changes
