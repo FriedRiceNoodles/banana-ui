@@ -1,6 +1,6 @@
 /* eslint-disable lit-a11y/click-events-have-key-events */
-import { LitElement, html, PropertyValues, CSSResultGroup, PropertyValueMap } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { CSSResultGroup, LitElement, PropertyValueMap, PropertyValues, html } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
 import styles from './index.styles';
 
 @customElement('b-overlay')
@@ -11,6 +11,9 @@ export default class BOverlay extends LitElement {
   @property({ type: Number })
   zIndex = 999;
 
+  @query('.overlay__container')
+  body!: HTMLElement;
+
   static styles: CSSResultGroup = styles;
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
@@ -19,10 +22,17 @@ export default class BOverlay extends LitElement {
     }
   }
 
+  protected lockBodyScrollBar() {
+    const scrollBarDiscount = window.innerWidth - document.documentElement.clientWidth;
+    document.body.style.paddingLeft = `${scrollBarDiscount}px`;
+    this.body.style.paddingLeft = `${scrollBarDiscount}px`;
+  }
+
   protected updated(_changedProperties: PropertyValues<this>): void {
     // _changedProperties is the previous values, so we use this.open to get the current value.
     if (_changedProperties.has('open') && this.open) {
       document.body.style.overflow = 'hidden';
+      this.lockBodyScrollBar();
       document.addEventListener('touchstart', this._preventTouchEvent);
       window.addEventListener('keydown', this._handleEscape);
     } else {
@@ -42,6 +52,7 @@ export default class BOverlay extends LitElement {
 
   private removeEvents() {
     document.body.style.overflow = 'auto';
+    this.lockBodyScrollBar();
     document.removeEventListener('touchstart', this._preventTouchEvent);
     window.removeEventListener('keydown', this._handleEscape);
   }
