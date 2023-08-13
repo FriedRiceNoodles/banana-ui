@@ -1,4 +1,5 @@
 ---
+group: 组件
 demo:
   cols: 2
 ---
@@ -18,3 +19,4 @@ demo:
 <code src="./demos/demo4.tsx"></code>
 <code src="./demos/demo5.tsx"></code>
 <code src="./demos/demo6.tsx"></code>
+<code src="./demos/demo7.tsx"></code>

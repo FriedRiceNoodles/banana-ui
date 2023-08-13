@@ -1,22 +1,31 @@
 {
   "name": "@banana/banana-react",
-  "version": "1.1.2",
+  "version": "1.9.2",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
   "type": "module",
+  "exports": {
+    ".": {
+      "worker": "./node/index.js",
+      "node": "./node/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "dist/index",
   "module": "dist/index",
   "files": [
     "dist/*",
     "umd/*",
+    "node/*",
     "README.md",
     "package.json"
   ],
   "scripts": {
-    "build": "rimraf umd && rimraf dist && rollup -c ../../rollup.config.mjs",
-    "dev": "rollup -c ../../rollup.config.mjs -p ../../scripts/rollup-plugin-force-render.js -w --no-watch.clearScreen"
+    "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs && npm run tsc",
+    "dev": "rollup -c ../../rollup.config.dev.mjs -p ../../scripts/rollup-plugin-copy-types.js -p ../../scripts/rollup-plugin-force-render.js -w --no-watch.clearScreen",
+    "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
   "dependencies": {
     "@lit-labs/react": "^1.1.1",
@@ -25,7 +34,8 @@
   "devDependencies": {
     "@types/react": "^18.0.26",
     "react": "^18.0.0",
-    "rimraf": "^3.0.2"
+    "rimraf": "^3.0.2",
+    "typescript": "^5.0.4"
   },
   "publishConfig": {
     "registry": "https://packages.aliyun.com/6160015009edb81ca824f556/npm/npm-registry/"

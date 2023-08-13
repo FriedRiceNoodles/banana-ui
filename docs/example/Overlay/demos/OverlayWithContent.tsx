@@ -1,5 +1,5 @@
 /**
- * title: 遮盖层带内容
+ * title: 遮罩层带内容
  */
 
 import { Overlay, Button } from '@banana/banana-react';
@@ -10,11 +10,12 @@ export default function OverlayWithContent() {
   return (
     <div>
       <Button
+        type="primary"
         onClick={() => {
           setVisiable(true);
         }}
       >
-        展开遮盖层（带内容）
+        展开遮罩层（带内容）
       </Button>
       <Overlay
         open={visiable}

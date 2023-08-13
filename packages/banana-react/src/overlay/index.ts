@@ -7,6 +7,6 @@ export const Overlay = createComponent({
   tagName: 'b-overlay',
   elementClass: BOverlay,
   events: {
-    onClose: 'onClose',
+    onClose: 'close',
   },
 });

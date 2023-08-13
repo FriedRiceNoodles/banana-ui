@@ -6,4 +6,7 @@ export const Carousel = createComponent({
   tagName: 'b-carousel',
   react: React,
   elementClass: BCarousel,
+  events: {
+    onChange: 'change',
+  },
 });

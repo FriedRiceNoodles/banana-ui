@@ -7,7 +7,13 @@ export default function forceRender() {
   return {
     name: 'force render',
     closeBundle() {
-      fs.writeFileSync('../../docs/forceRender.md', String(new Date().getTime()));
+      const content = `---
+  debug: true
+---
+  
+    ${String(new Date().getTime())}
+    `;
+      fs.writeFileSync('../../docs/forceRender.md', content);
     },
   };
 }

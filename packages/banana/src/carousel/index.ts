@@ -1,4 +1,4 @@
-import { CSSResultGroup, html, LitElement } from 'lit';
+import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { EVENTS, EventType } from './events';
@@ -9,25 +9,125 @@ import { getCoordinates } from './utils';
 export default class BCarousel extends LitElement {
   connectedCallback() {
     super.connectedCallback();
+
+    window.addEventListener('resize', this._windowResizeHandler);
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
+
+    window.removeEventListener('resize', this._windowResizeHandler);
+    this._removeEvents();
+    clearTimeout(this.autoplayTimer);
+  }
+
+  private _windowResizeHandler = () => {
+    this.requestUpdate();
+    this._calcPosition();
+    this._resetAutoplayTimer();
+  };
+
+  private _setAutoplayTimer = () => {
+    if (this.autoplay) {
+      this._clearAutoplayTimer();
+      this.autoplayTimer = setInterval(() => this.next(), this.autoplayDelay);
+    }
+  };
+
+  private _clearAutoplayTimer = () => {
+    clearInterval(this.autoplayTimer);
+  };
+
+  private _resetAutoplayTimer = () => {
+    this._clearAutoplayTimer();
+    this._setAutoplayTimer();
+  };
+
+  protected firstUpdated(): void {
+    this._calcPosition();
+    this._calcHeight();
+  }
+
+  protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
+    if (_changedProperties.has('autoplay') || _changedProperties.has('autoplayDelay')) {
+      this._resetAutoplayTimer();
+    }
+
+    if (_changedProperties.has('currentIndex') || _changedProperties.has('gap') || _changedProperties.has('slidesPerView')) {
+      this._calcPosition();
+    }
+
+    if (_changedProperties.has('currentIndex') && this.autoHeight) {
+      this._calcHeight();
+    }
+  }
+
+  protected updated(_changedProperties: PropertyValueMap<this>): void {
+    if (_changedProperties.has('currentIndex')) {
+      this.dispatchEvent(new CustomEvent('change', { detail: { currentIndex: this.currentIndex } }));
+    }
   }
 
   static styles?: CSSResultGroup = styles;
 
-  @property({ attribute: false })
-  currentIndex = 0;
+  // When the count of slides is less than (this._slidesPerView + 1), loop property will be ignored.
+  // For example, if this._slidesPerView is set to 5, then there are at least 7 slides to enable the loop mode.
+  // Do not use this property directly, use internal _loop instead.
+  @property({ type: Boolean, reflect: true })
+  loop = false;
+
+  private get _loop() {
+    return this._slides.length > this._slidesPerView + 1 ? this.loop : false;
+  }
+
+  // Do not use this property directly, use internal _slidesPerView instead.
+  @property({ type: Number, reflect: true })
+  slidesPerView = 1;
+
+  private get _slidesPerView() {
+    return this._slides.length >= this.slidesPerView || !this.fill ? this.slidesPerView : this._slides.length;
+  }
+
+  @property({ type: Boolean, reflect: true })
+  autoplay = false;
+
+  // Unit: ms
+  @property({ type: Number })
+  autoplayDelay = 3000;
 
   @property({ type: Boolean })
-  loop = false;
+  pauseOnMouseEnter = true;
+
+  @property({ type: Boolean, reflect: true })
+  disableDrag = false;
+
+  @property({ type: Boolean, reflect: true })
+  navigation = false;
+
+  @property({ type: Number, reflect: true })
+  gap = 0;
+
+  // If the `fill` property is set to true, then carousel will be filled when the slide count is less than the `slidesPerView` property.
+  @property({ type: Boolean, reflect: true })
+  fill = true;
+
+  @property({ type: Boolean, reflect: true })
+  autoHeight = false;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
 
+  @query('.slides-wrapper')
+  _slidesWrapper: HTMLDivElement | undefined;
+
   @queryAssignedElements({})
+  _slidesWithCopys!: Array<HTMLElement>;
+
+  @queryAssignedElements({ selector: ':not([data-clone])' })
   _slides!: Array<HTMLElement>;
+
+  @state()
+  currentIndex = 0;
 
   @state()
   _dragDistance = 0;
@@ -35,8 +135,15 @@ export default class BCarousel extends LitElement {
   @state()
   _isDragging = false;
 
+  @state()
+  autoplayTimer: ReturnType<typeof setInterval> | undefined;
+
   private get _externalWrapperWidth() {
     return this._externalWrapper?.getBoundingClientRect().width || 0;
+  }
+
+  private get _slideWidth() {
+    return (this._externalWrapperWidth - (this._slidesPerView - 1) * this.gap) / this._slidesPerView;
   }
 
   private get MIN() {
@@ -48,7 +155,7 @@ export default class BCarousel extends LitElement {
   }
 
   private get totalWidth() {
-    return this._externalWrapperWidth * this._slides.length;
+    return this._slideWidth * this._slides.length + this._slides.length * this.gap;
   }
 
   // Record how many cycles have been made if `loop` is true.
@@ -79,7 +186,7 @@ export default class BCarousel extends LitElement {
 
     if (index - 1 >= this.MIN) {
       target = index - 1;
-    } else if (this.loop) {
+    } else if (this._loop) {
       target = this.MAX;
     }
 
@@ -89,10 +196,10 @@ export default class BCarousel extends LitElement {
   private _computeNext(index: number) {
     let target = index;
 
-    if (index + 1 <= this.MAX) {
+    if (index + 1 <= this.MAX - this._slidesPerView + 1) {
       target = index + 1;
-    } else if (this.loop) {
-      target = this.MIN;
+    } else if (this._loop) {
+      target = index + 1 <= this.MAX ? index + 1 : this.MIN;
     }
 
     return target;
@@ -114,6 +221,8 @@ export default class BCarousel extends LitElement {
 
   // Use arrow function to bind 'this' on BCarousel class.
   private _eventHandler = (e: Event) => {
+    if (this.disableDrag) return;
+
     switch (e.type as EventType) {
       case EVENTS.MOUSEDOWN:
       case EVENTS.TOUCHSTART:
@@ -133,48 +242,101 @@ export default class BCarousel extends LitElement {
     }
   };
 
+  private _listenEvents() {
+    window.addEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
+    window.addEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
+    window.addEventListener(EVENTS.MOUSEUP, this._eventHandler);
+    window.addEventListener(EVENTS.TOUCHEND, this._eventHandler);
+    window.addEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+  }
+
+  private _removeEvents() {
+    window.removeEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
+    window.removeEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
+    window.removeEventListener(EVENTS.MOUSEUP, this._eventHandler);
+    window.removeEventListener(EVENTS.TOUCHEND, this._eventHandler);
+    window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+  }
+
+  private _calcHeight() {
+    // _externalWrapper is not ready when the component is first rendered.
+    if (!this.autoHeight || !this._externalWrapper) return;
+
+    const currentSlide = this._slides[this.currentIndex];
+    const currentSlideHeight = currentSlide.getBoundingClientRect().height;
+    this._externalWrapper.style.height = `${currentSlideHeight}px`;
+  }
+
+  private _calcPosition() {
+    this._repositioningSlides();
+    this._refreshCopys();
+  }
+
+  private _repositioningSlides() {
+    if (this._loop) {
+      const translateValue = this._loopCount * this.totalWidth;
+
+      for (const slide of this._slides) {
+        slide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
+      }
+    }
+  }
+
+  private _refreshCopys() {
+    if (this._loop) {
+      // clear copys before calc
+      if (!this._slidesWrapper) return;
+      for (const ele of this._slidesWithCopys) {
+        if (ele.hasAttribute('data-clone')) {
+          ele.remove();
+        }
+      }
+
+      const slideWidthWithGap = this._slideWidth + this.gap;
+      const translateValue = this._loopCount * this.totalWidth - slideWidthWithGap * this._slidesPerView || 0;
+      const _translateValue = (this._loopCount - 1) * this.totalWidth - slideWidthWithGap * this._slidesPerView || 0;
+
+      // Those copys will append to the beginning of slides.
+      const CopysAtTheBeginning = [];
+      for (let i = 0; i < this._slidesPerView; i++) {
+        CopysAtTheBeginning.push(this._slides[this._slides.length - this._slidesPerView + i].cloneNode(true) as HTMLElement);
+      }
+
+      // Those copys will append to the end of slides.
+      const CopysAtTheEnd = [];
+      for (let i = 0; i < this._slidesPerView; i++) {
+        CopysAtTheEnd.push(this._slides[i].cloneNode(true) as HTMLElement);
+      }
+
+      // append copys
+      for (let i = 0; i < this._slidesPerView; i++) {
+        const copyAtTheBeginning = CopysAtTheBeginning[i];
+        copyAtTheBeginning.setAttribute('data-clone', String(this._slides.length - this._slidesPerView + i));
+        copyAtTheBeginning.style.transform = `translate3d(${_translateValue}px, 0, 0)`;
+        this.append(copyAtTheBeginning);
+      }
+      for (let i = 0; i < this._slidesPerView; i++) {
+        const copyAtTheEnd = CopysAtTheEnd[i];
+        copyAtTheEnd.setAttribute('data-clone', String(i));
+        copyAtTheEnd.style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        this.append(copyAtTheEnd);
+      }
+    }
+  }
+
   private _onDragStart(e: Event) {
     const [x, y] = getCoordinates(e);
 
     this._isDragging = true;
+
+    this._clearAutoplayTimer();
 
     this._pointerStartX = this._pointerCurrentX = this._pointerLastX = x;
     this._pointerStartY = this._pointerCurrentY = this._pointerLastY = y;
 
     this._addTrackingCoordinates(x, y);
 
-    if (this.loop) {
-      const prevIndex = this._computePrev(this.currentIndex);
-      const nextIndex = this._computeNext(this.currentIndex);
-
-      const prevSlide = this._slides[prevIndex];
-      const currentSlide = this._slides[this.currentIndex];
-      const nextSlide = this._slides[nextIndex];
-
-      const translateValue = this._loopCount * this.totalWidth || 0;
-
-      currentSlide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
-
-      if (prevIndex > this.currentIndex) {
-        const _translateValue = (this._loopCount - 1) * this.totalWidth || 0;
-        prevSlide.style.transform = `translate3d(${_translateValue}px, 0, 0)`;
-      } else {
-        prevSlide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
-      }
-
-      if (nextIndex < this.currentIndex) {
-        const _translateValue = (this._loopCount + 1) * this.totalWidth || 0;
-        nextSlide.style.transform = `translate3d(${_translateValue}px, 0, 0)`;
-      } else {
-        nextSlide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
-      }
-    }
-
-    window.addEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
-    window.addEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
-    window.addEventListener(EVENTS.MOUSEUP, this._eventHandler);
-    window.addEventListener(EVENTS.TOUCHEND, this._eventHandler);
-    window.addEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+    this._listenEvents();
   }
 
   private _onDragging(e: Event) {
@@ -187,6 +349,7 @@ export default class BCarousel extends LitElement {
 
     // When start dragging, that _pointerStartX obviously won't be undefined.
     // Dragging can only occur after DragStart, and the _onDragStart function will set the _pointerStartX.
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
     this._dragDistance = this._pointerCurrentX - this._pointerStartX!;
   }
 
@@ -194,7 +357,10 @@ export default class BCarousel extends LitElement {
     this._isDragging = false;
 
     const [x, y] = getCoordinates(e);
+
     this._addTrackingCoordinates(x, y);
+
+    this._setAutoplayTimer();
 
     const firstTrackingCoordinate = this._trackingCoordinates[0];
     const lastTrackingCoordinate = this._trackingCoordinates[this._trackingCoordinates.length - 1];
@@ -202,7 +368,7 @@ export default class BCarousel extends LitElement {
     this._trackingCoordinates = [];
 
     const diffX = lastTrackingCoordinate.x - firstTrackingCoordinate.x;
-    const diffY = lastTrackingCoordinate.y - firstTrackingCoordinate.y;
+    // const diffY = lastTrackingCoordinate.y - firstTrackingCoordinate.y;
     const diffTime = lastTrackingCoordinate.time - firstTrackingCoordinate.time;
 
     this._dragDistance = 0;
@@ -220,46 +386,63 @@ export default class BCarousel extends LitElement {
       const distanceFromSlidesToWrapper = this._slides.map((item) => item.getBoundingClientRect().x - wrapperX);
       const distanceOfCurrentSlidesToWrapper = distanceFromSlidesToWrapper[this.currentIndex];
 
-      if (distanceOfCurrentSlidesToWrapper < 0 && -distanceOfCurrentSlidesToWrapper > this._externalWrapperWidth / 2) {
+      if (distanceOfCurrentSlidesToWrapper < 0 && -distanceOfCurrentSlidesToWrapper > this._slideWidth / 2) {
         this.next();
-      } else if (distanceOfCurrentSlidesToWrapper > 0 && distanceOfCurrentSlidesToWrapper > this._externalWrapperWidth / 2) {
+      } else if (distanceOfCurrentSlidesToWrapper > 0 && distanceOfCurrentSlidesToWrapper > this._slideWidth / 2) {
         this.prev();
       }
     }
 
-    window.removeEventListener(EVENTS.MOUSEMOVE, this._eventHandler);
-    window.removeEventListener(EVENTS.TOUCHMOVE, this._eventHandler);
-    window.removeEventListener(EVENTS.MOUSEUP, this._eventHandler);
-    window.removeEventListener(EVENTS.TOUCHEND, this._eventHandler);
-    window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+    this._removeEvents();
   }
 
   public next() {
+    this._resetAutoplayTimer();
+
     // It means a loop has been finished.
-    if (this.loop && this.currentIndex > this._computeNext(this.currentIndex)) {
+    if (this._loop && this.currentIndex > this._computeNext(this.currentIndex)) {
       this._loopCount += 1;
     }
     this.currentIndex = this._computeNext(this.currentIndex);
   }
 
   public prev() {
+    this._resetAutoplayTimer();
+
     // It means a loop has been finished.
-    if (this.loop && this.currentIndex < this._computePrev(this.currentIndex)) {
+    if (this._loop && this.currentIndex < this._computePrev(this.currentIndex)) {
       this._loopCount -= 1;
     }
     this.currentIndex = this._computePrev(this.currentIndex);
   }
 
   private _externalWrapperTranslate() {
-    if (this.loop) {
+    const wholeWidth = this._slideWidth + this.gap;
+
+    if (this._loop) {
       const loopShift = -(this.totalWidth * this._loopCount);
-      return -this.currentIndex * this._externalWrapperWidth + this._dragDistance + loopShift;
+      return -this.currentIndex * wholeWidth + this._dragDistance + loopShift;
     } else {
-      return -this.currentIndex * this._externalWrapperWidth + this._dragDistance;
+      return -this.currentIndex * wholeWidth + this._dragDistance;
+    }
+  }
+
+  private _onWrapperMouseEnter() {
+    if (this.pauseOnMouseEnter) {
+      this._clearAutoplayTimer();
+    }
+  }
+
+  private _onWrapperMouseLeave() {
+    if (this.pauseOnMouseEnter) {
+      this._setAutoplayTimer();
     }
   }
 
   render() {
+    const previousNavigationDisabled = this._computePrev(this.currentIndex) === this.currentIndex;
+    const nextNavigationDisabled = this._computeNext(this.currentIndex) === this.currentIndex;
+
     return html`
       <div
         part="base"
@@ -267,7 +450,7 @@ export default class BCarousel extends LitElement {
           carousel: true,
         })}
       >
-        <div class="external-wrapper">
+        <div part="external-wrapper" class="external-wrapper" @mouseenter=${this._onWrapperMouseEnter} @mouseleave=${this._onWrapperMouseLeave}>
           <div
             part="slides-wrapper"
             @mousedown="${this._eventHandler}"
@@ -276,11 +459,59 @@ export default class BCarousel extends LitElement {
               'slides-wrapper': true,
               'no-transition': this._isDragging,
             })}
-            style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px);"
+            style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px); --banana-carousel-slidesPerView: ${this
+              ._slidesPerView}; --banana-carousel-gap: ${this.gap}"
           >
-            <slot part="slide"></slot>
+            <slot part="slide" @slotchange=${() => this.requestUpdate()}></slot>
           </div>
         </div>
+
+        <button
+          @click=${this.prev}
+          part="navigation-buttons navigation-button--previous ${previousNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
+          class=${classMap({
+            'navigation-buttons': true,
+            'navigation-button--previous': true,
+            'navigation-button--disabled': previousNavigationDisabled,
+          })}
+          ?hidden=${!this.navigation}
+          ?disabled=${previousNavigationDisabled}
+        >
+          <slot name="prev-button">
+            <div class="default-prev-icon">
+              <svg t="1685007670520" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="993" width="24" height="24">
+                <path
+                  d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z"
+                  fill="#333"
+                  p-id="994"
+                ></path>
+              </svg>
+            </div>
+          </slot>
+        </button>
+        <button
+          @click=${this.next}
+          part="navigation-buttons navigation-button--next ${nextNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
+          class=${classMap({
+            'navigation-buttons': true,
+            'navigation-button--next': true,
+            'navigation-button--disabled': nextNavigationDisabled,
+          })}
+          ?hidden=${!this.navigation}
+          ?disabled=${nextNavigationDisabled}
+        >
+          <slot name="next-button">
+            <div class="default-next-icon">
+              <svg t="1685007929073" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1147" width="24" height="24">
+                <path
+                  d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
+                  fill="#333"
+                  p-id="1148"
+                ></path>
+              </svg>
+            </div>
+          </slot>
+        </button>
       </div>
     `;
   }

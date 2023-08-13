@@ -14,6 +14,7 @@ export default {
   ],
   coverage: true,
   coverageConfig: {
+    include: ['dist/**/*'],
     report: true,
     reportDir: 'coverage',
   },

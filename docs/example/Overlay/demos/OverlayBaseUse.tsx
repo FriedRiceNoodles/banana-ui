@@ -10,11 +10,12 @@ export default function OverlayBaseUse() {
   return (
     <div>
       <Button
+        type="primary"
         onClick={() => {
           setVisiable(true);
         }}
       >
-        展开遮盖层
+        展开遮罩层
       </Button>
       <Overlay
         open={visiable}

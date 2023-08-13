@@ -1,11 +1,25 @@
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
+import { babel } from '@rollup/plugin-babel';
+import terser from '@rollup/plugin-terser';
+import filesize from 'rollup-plugin-filesize';
 import fs from 'fs';
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
-// const packageSrcRoot = path.join(__dirname, './src');
+const babelConfig = {
+  babelHelpers: 'bundled',
+  presets: ['@babel/preset-env'],
+  plugins: [
+    // ['@babel/plugin-transform-runtime', { useESModules: true }],
+    ['@babel/plugin-proposal-decorators', { decoratorsBeforeExport: true }],
+    ['@babel/plugin-proposal-class-properties'],
+  ],
+  assumptions: {
+    setPublicClassFields: true,
+  },
+  exclude: 'node_modules/**',
+};
+
 const componentNames = fs
   // 获取所有文件夹及文件
   .readdirSync('./src', { withFileTypes: true })
@@ -36,6 +50,9 @@ export default [
         extensions: ['.ts', '.js'],
       }),
       commonjs(),
+      babel(babelConfig),
+      terser(),
+      filesize(),
     ],
   },
   {
@@ -54,6 +71,28 @@ export default [
         extensions: ['.ts', '.js'],
       }),
       commonjs(),
+      babel(babelConfig),
+      terser(),
+    ],
+  },
+  {
+    input: componentNames.reduce((result, p) => {
+      result[p.path] = `./src/${p.name}`;
+      return result;
+    }, {}),
+    output: {
+      dir: 'node',
+      format: 'es',
+      entryFileNames: '[name].js',
+    },
+    plugins: [
+      typescript(),
+      nodeResolve({
+        exportConditions: ['node'],
+        extensions: ['.ts', '.js'],
+      }),
+      commonjs(),
+      babel(babelConfig),
     ],
   },
 ];

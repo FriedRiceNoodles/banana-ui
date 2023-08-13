@@ -1,6 +1,6 @@
 import { css, unsafeCSS } from 'lit';
 import componentStyles from '../../styles/components.styles';
-import { Colors, Variables as Var } from '../../styles/global-variables';
+import { Colors, Fonts, Variables as Var } from '../../styles/global-variables';
 
 export default [
   componentStyles,
@@ -12,6 +12,11 @@ export default [
       cursor: pointer;
     }
 
+    /* Block */
+    :host([block]) {
+      display: block;
+    }
+
     .button {
       display: inline-flex;
       align-items: center;
@@ -21,15 +26,15 @@ export default [
       border-width: var(--banana-button-boder-width, ${unsafeCSS(Var.InputBorderWidth)});
       border-radius: var(--banana-button-border-radius, ${unsafeCSS(Var.BorderRadiusSmall)});
       font-family: var(--banana-button-font-family, ${unsafeCSS(Var.InputFontFamily)});
-      font-weight: var(--banana-button-font-weight, ${unsafeCSS(Var.FontWeightNormal)});
+      font-weight: var(--banana-button-font-weight, ${unsafeCSS(Fonts.FontWeightNormal)});
       text-decoration: none;
       user-select: none;
       white-space: nowrap;
       vertical-align: middle;
       padding: 0;
       cursor: inherit;
-      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color,
-        ${unsafeCSS(Var.TransitionVeryFast)} border, ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
+      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color, ${unsafeCSS(Var.TransitionVeryFast)} border,
+        ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
     }
 
     /* Disabled */
@@ -139,21 +144,21 @@ export default [
     /* Small */
     .button--small {
       font-size: var(--banana-button-fontsize-small, ${unsafeCSS(Var.ButtonFontSizeSmall)});
-      height: var(--banana-button-height-small, ${unsafeCSS(Var.ButtonHeightSmall)});
+      min-height: var(--banana-button-height-small, ${unsafeCSS(Var.ButtonHeightSmall)});
       padding: var(--banana-button-padding-small, ${unsafeCSS(Var.ButtonPaddingSmall)});
     }
 
     /* Medium */
     .button--medium {
       font-size: var(--banana-button-fontsize-medium, ${unsafeCSS(Var.ButtonFontSizeMedium)});
-      height: var(--banana-button-height-medium ${unsafeCSS(Var.ButtonHeightMedium)});
+      min-height: var(--banana-button-height-medium, ${unsafeCSS(Var.ButtonHeightMedium)});
       padding: var(--banana-button-padding-medium, ${unsafeCSS(Var.ButtonPaddingMedium)});
     }
 
     /* Large */
     .button--large {
       font-size: var(--banana-button-fontsize-large, ${unsafeCSS(Var.ButtonFontSizeLarge)});
-      height: var(--banana-button-height-large, ${unsafeCSS(Var.ButtonHeightLarge)});
+      min-height: var(--banana-button-height-large, ${unsafeCSS(Var.ButtonHeightLarge)});
       padding: var(--banana-button-padding-large, ${unsafeCSS(Var.ButtonPaddingLarge)});
     }
 

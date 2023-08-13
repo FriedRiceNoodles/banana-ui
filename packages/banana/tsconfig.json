@@ -7,5 +7,5 @@
   },
   "extends": "../../tsconfig.json",
   "include": ["./src", "styles"],
-  "exclude": ["**/demos", "node_modules/**/*"]
+  "exclude": ["node_modules/**/*"]
 }

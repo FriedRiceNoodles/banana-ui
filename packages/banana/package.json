@@ -1,26 +1,35 @@
 {
   "name": "banana-ui",
-  "version": "1.1.2",
+  "version": "1.9.2",
   "description": "",
   "keywords": [],
   "license": "ISC",
   "author": "",
   "type": "module",
+  "exports": {
+    ".": {
+      "worker": "./node/index.js",
+      "node": "./node/index.js",
+      "default": "./dist/index.js"
+    }
+  },
   "main": "dist/index",
   "module": "dist/index",
   "files": [
     "dist/*",
     "umd/*",
+    "node/*",
     "README.md",
     "package.json"
   ],
   "scripts": {
-    "build": "rimraf umd && rimraf dist && rimraf themes && rollup -c ./rollup.config.js && npm run tsc",
-    "dev": "rollup -c ./rollup.config.js -p ../../scripts/rollup-plugin-copy-types.js -w --no-watch.clearScreen",
+    "build": "rimraf umd && rimraf dist && rimraf node && rimraf themes && rollup -c ../../rollup.config.mjs && npm run tsc",
+    "dev": "rollup -c ../../rollup.config.dev.mjs -p ../../scripts/rollup-plugin-copy-types.js -w --no-watch.clearScreen",
     "test": "web-test-runner",
-    "tsc": "rimraf types && npx tsc --build ./tsconfig.types.json && node ./copyTypesToDist.cjs"
+    "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
   "dependencies": {
+    "@floating-ui/dom": "^1.4.1",
     "lit": "^2.5.0"
   },
   "devDependencies": {
@@ -28,8 +37,10 @@
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.26",
     "@types/sinon": "^10.0.14",
+    "@types/throttle-debounce": "^5.0.0",
     "@web/dev-server-esbuild": "^0.3.4",
     "@web/test-runner": "^0.15.1",
+    "@web/test-runner-commands": "^0.7.0",
     "@web/test-runner-playwright": "^0.9.0",
     "rimraf": "^3.0.2",
     "sinon": "^15.0.4",
