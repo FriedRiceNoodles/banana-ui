@@ -13,6 +13,14 @@ export default [
     .external-wrapper {
       position: relative;
       overflow: hidden;
+      /**
+       * It may cause a bug of the scrollbar appearing on the right side of the carousel,
+       * width of the carousel is calculated based on the width of the external wrapper.
+       * If the scrollbar showed after the width calculation, the translation of the slides-wrapper
+       * will be incorrect.
+       * 
+       * If you encounter this problem, you can remove the transition of the height of the external wrapper.
+       */
       transition: height var(--banana-carousel-transition-duration, ${unsafeCSS(Var.TransitionNormal)});
     }
 

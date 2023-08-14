@@ -45,7 +45,6 @@ export default class BCarousel extends LitElement {
 
   protected firstUpdated(): void {
     this._calcPosition();
-    this._calcHeight();
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
@@ -263,6 +262,8 @@ export default class BCarousel extends LitElement {
     if (!this.autoHeight || !this._externalWrapper) return;
 
     const currentSlide = this._slides[this.currentIndex];
+    if (!currentSlide) return;
+
     const currentSlideHeight = currentSlide.getBoundingClientRect().height;
     this._externalWrapper.style.height = `${currentSlideHeight}px`;
   }
@@ -439,6 +440,12 @@ export default class BCarousel extends LitElement {
     }
   }
 
+  private async _handleSlotChange() {
+    this.requestUpdate();
+    await this.updateComplete;
+    this._calcHeight();
+  }
+
   render() {
     const previousNavigationDisabled = this._computePrev(this.currentIndex) === this.currentIndex;
     const nextNavigationDisabled = this._computeNext(this.currentIndex) === this.currentIndex;
@@ -462,7 +469,7 @@ export default class BCarousel extends LitElement {
             style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px); --banana-carousel-slidesPerView: ${this
               ._slidesPerView}; --banana-carousel-gap: ${this.gap}"
           >
-            <slot part="slide" @slotchange=${() => this.requestUpdate()}></slot>
+            <slot part="slide" @slotchange=${this._handleSlotChange}></slot>
           </div>
         </div>
 
