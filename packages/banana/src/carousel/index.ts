@@ -55,6 +55,10 @@ export default class BCarousel extends LitElement {
     if (_changedProperties.has('currentIndex') || _changedProperties.has('gap') || _changedProperties.has('slidesPerView')) {
       this._calcPosition();
     }
+
+    if (_changedProperties.has('currentIndex') && this.autoHeight) {
+      this._calcHeight();
+    }
   }
 
   protected updated(_changedProperties: PropertyValueMap<this>): void {
@@ -105,6 +109,9 @@ export default class BCarousel extends LitElement {
   // If the `fill` property is set to true, then carousel will be filled when the slide count is less than the `slidesPerView` property.
   @property({ type: Boolean, reflect: true })
   fill = true;
+
+  @property({ type: Boolean, reflect: true })
+  autoHeight = false;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
@@ -248,6 +255,17 @@ export default class BCarousel extends LitElement {
     window.removeEventListener(EVENTS.MOUSEUP, this._eventHandler);
     window.removeEventListener(EVENTS.TOUCHEND, this._eventHandler);
     window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
+  }
+
+  private _calcHeight() {
+    // _externalWrapper is not ready when the component is first rendered.
+    if (!this.autoHeight || !this._externalWrapper) return;
+
+    const currentSlide = this._slides[this.currentIndex];
+    if (!currentSlide) return;
+
+    const currentSlideHeight = currentSlide.getBoundingClientRect().height;
+    this._externalWrapper.style.height = `${currentSlideHeight}px`;
   }
 
   private _calcPosition() {
@@ -422,6 +440,12 @@ export default class BCarousel extends LitElement {
     }
   }
 
+  private async _handleSlotChange() {
+    this.requestUpdate();
+    await this.updateComplete;
+    this._calcHeight();
+  }
+
   render() {
     const previousNavigationDisabled = this._computePrev(this.currentIndex) === this.currentIndex;
     const nextNavigationDisabled = this._computeNext(this.currentIndex) === this.currentIndex;
@@ -445,7 +469,7 @@ export default class BCarousel extends LitElement {
             style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px); --banana-carousel-slidesPerView: ${this
               ._slidesPerView}; --banana-carousel-gap: ${this.gap}"
           >
-            <slot part="slide" @slotchange=${() => this.requestUpdate()}></slot>
+            <slot part="slide" @slotchange=${this._handleSlotChange}></slot>
           </div>
         </div>
 

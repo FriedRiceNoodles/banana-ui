@@ -20,3 +20,4 @@ group: 组件
 <code src="./demos/gap.tsx"></code>
 <code src="./demos/fill.tsx"></code>
 <code src="./demos/useRef.tsx"></code>
+<code src="./demos/autoHeight.tsx"></code>

@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "beta",
+  "initialVersions": {
+    "banana-ui": "1.9.3",
+    "@banana/banana-cli": "0.1.0",
+    "@banana/banana-react": "1.9.3"
+  },
+  "changesets": ["purple-cherries-roll"]
+}

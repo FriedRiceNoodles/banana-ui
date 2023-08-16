@@ -1,5 +1,23 @@
 # banana-ui
 
+## 1.10.0-beta.0
+
+### Minor Changes
+
+- Beta version for form, input, rating.
+
+## 1.9.3
+
+### Patch Changes
+
+- Fixed a bug at autoHeight parameter of carousel component.
+
+## 1.9.2
+
+### Patch Changes
+
+- Added autoHeight parameter to carousel.
+
 ## 1.9.1
 
 ### Patch Changes
