@@ -6,5 +6,5 @@
     "@banana/banana-cli": "0.1.0",
     "@banana/banana-react": "1.9.3"
   },
-  "changesets": ["purple-cherries-roll"]
+  "changesets": ["lovely-cameras-draw", "purple-cherries-roll"]
 }

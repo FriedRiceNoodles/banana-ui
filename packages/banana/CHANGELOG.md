@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.0-beta.1
+
+### Patch Changes
+
+- Fixed a bug which cause defaultValue paramter not working on rating component.
+
 ## 1.10.0-beta.0
 
 ### Minor Changes

@@ -38,7 +38,7 @@ export default class BRating extends LitElement implements BananaFormElement {
   @property({ type: Number })
   value = 0;
 
-  @property({ type: Number })
+  @property({ type: Number, reflect: true, attribute: 'default-value' })
   defaultValue = 0;
 
   @property()
@@ -133,7 +133,10 @@ export default class BRating extends LitElement implements BananaFormElement {
   };
 
   protected firstUpdated(): void {
-    this._value = this.value = this.defaultValue;
+    if (this.defaultValue > 0) {
+      this.value = this.defaultValue;
+    }
+    this._value = this.value;
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
