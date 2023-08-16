@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.0-beta.0
+
+### Minor Changes
+
+- Beta version for form, input, rating.
+
 ## 1.9.3
 
 ### Patch Changes
