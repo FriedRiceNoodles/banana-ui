@@ -136,10 +136,14 @@ export default class BRating extends LitElement implements BananaFormElement {
     if (this.defaultValue > 0) {
       this.value = this.defaultValue;
     }
-    this._value = this.value;
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
+    // If the value is changed, update the internal value.
+    if (_changedProperties.has('value') && this.value !== this._value) {
+      this._value = this.value;
+    }
+
     if (_changedProperties.has('_hoveringIndex') || _changedProperties.has('_hoveringPercentage')) {
       if (this.readonly || this.disabled) {
         return;

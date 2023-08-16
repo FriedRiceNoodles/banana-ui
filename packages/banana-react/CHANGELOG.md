@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.10.0-beta.2
+
+### Patch Changes
+
+- Rating: Keep internal value and value property synchronized.
+- Updated dependencies
+  - banana-ui@1.10.0-beta.2
+
 ## 1.10.0-beta.1
 
 ### Patch Changes

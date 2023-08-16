@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.0-beta.2
+
+### Patch Changes
+
+- Rating: Keep internal value and value property synchronized.
+
 ## 1.10.0-beta.1
 
 ### Patch Changes
