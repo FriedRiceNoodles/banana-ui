@@ -1,5 +1,21 @@
 # @banana/banana-react
 
+## 1.9.3
+
+### Patch Changes
+
+- Fixed a bug at autoHeight parameter of carousel component.
+- Updated dependencies
+  - banana-ui@1.9.3
+
+## 1.9.2
+
+### Patch Changes
+
+- Added autoHeight parameter to carousel.
+- Updated dependencies
+  - banana-ui@1.9.2
+
 ## 1.9.1
 
 ### Patch Changes
