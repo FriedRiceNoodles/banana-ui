@@ -10,6 +10,7 @@ import BMenuItem from './menu-item';
 import BOverlay from './overlay';
 import BPopup from './popup';
 import BProgress from './progress';
+import BRating from './rating';
 
 export {
   BButton,
@@ -24,4 +25,5 @@ export {
   BOverlay,
   BPopup,
   BProgress,
+  BRating,
 };

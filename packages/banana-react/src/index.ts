@@ -10,5 +10,20 @@ import { MenuItem } from './menu-item';
 import { Overlay } from './overlay';
 import { Popup } from './popup';
 import { Progress } from './progress';
+import { Rating } from './rating';
 
-export { Button, Carousel, Collapse, Countdown, Divider, Dropdown, Input, Menu, MenuItem, Overlay, Popup, Progress };
+export {
+  Button,
+  Carousel,
+  Collapse,
+  Countdown,
+  Divider,
+  Dropdown,
+  Input,
+  Menu,
+  MenuItem,
+  Overlay,
+  Popup,
+  Progress,
+  Rating,
+};

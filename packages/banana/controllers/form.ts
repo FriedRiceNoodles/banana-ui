@@ -5,7 +5,8 @@ export interface BananaFormElement extends LitElement {
   name: string;
   value: string | number | boolean;
   disabled?: boolean;
-  defaultValue?: string;
+  defaultValue?: string | number | boolean;
+  form?: string;
 
   reportValidity: () => boolean;
   checkValidity: () => boolean;
