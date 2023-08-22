@@ -8,5 +8,7 @@ export const Popup = createComponent({
   elementClass: BPopup,
   events: {
     onClose: 'close',
+    onAfterShow: 'afterShow',
+    onAfterHide: 'afterHide',
   },
 });

@@ -1,6 +1,6 @@
 import { createComponent } from '@lit-labs/react';
-import * as React from 'react';
 import { BOverlay } from 'banana-ui';
+import * as React from 'react';
 
 export const Overlay = createComponent({
   react: React,
@@ -8,5 +8,7 @@ export const Overlay = createComponent({
   elementClass: BOverlay,
   events: {
     onClose: 'close',
+    onAfterShow: 'afterShow',
+    onAfterHide: 'afterHide',
   },
 });

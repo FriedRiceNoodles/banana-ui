@@ -150,7 +150,7 @@ export default class BCollapse extends LitElement {
           aria-controls="content"
           tabindex=${this.disabled ? '-1' : '0'}
         >
-          <div class="collapse__title">
+          <div part="headerTitle" class="collapse__title">
             <slot name="title">${this.title}</slot>
           </div>
 

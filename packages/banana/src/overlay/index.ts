@@ -30,13 +30,16 @@ export default class BOverlay extends LitElement {
 
   protected updated(_changedProperties: PropertyValues<this>): void {
     // _changedProperties is the previous values, so we use this.open to get the current value.
+    const eventOptions = { bubbles: false, cancelable: false, composed: true };
     if (_changedProperties.has('open') && this.open) {
       document.body.style.overflow = 'hidden';
       this.lockBodyScrollBar();
       document.addEventListener('touchstart', this._preventTouchEvent);
       window.addEventListener('keydown', this._handleEscape);
+      this.dispatchEvent(new CustomEvent('afterShow', eventOptions));
     } else {
       this.removeEvents();
+      this.dispatchEvent(new CustomEvent('afterHide', eventOptions));
     }
   }
 
