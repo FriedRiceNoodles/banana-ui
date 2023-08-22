@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.4
+
+### Patch Changes
+
+- Make the calcHeight method of carousel to be public.
+
 ## 1.10.3
 
 ### Patch Changes
