@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.10.4
+
+### Patch Changes
+
+- Make the calcHeight method of carousel to be public.
+- Updated dependencies
+  - banana-ui@1.10.4
+
 ## 1.10.3
 
 ### Patch Changes

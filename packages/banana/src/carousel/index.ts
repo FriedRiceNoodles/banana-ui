@@ -62,7 +62,7 @@ export default class BCarousel extends LitElement {
     }
 
     if (_changedProperties.has('currentIndex') && this.autoHeight) {
-      this._calcHeight();
+      this.calcHeight();
     }
   }
 
@@ -265,7 +265,7 @@ export default class BCarousel extends LitElement {
     window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
   }
 
-  private _calcHeight() {
+  public calcHeight() {
     // _externalWrapper is not ready when the component is first rendered.
     if (!this.autoHeight || !this._externalWrapper) return;
 
@@ -273,6 +273,7 @@ export default class BCarousel extends LitElement {
     if (!currentSlide) return;
 
     const currentSlideHeight = currentSlide.getBoundingClientRect().height;
+    if (currentSlideHeight === 0) return;
     this._externalWrapper.style.height = `${currentSlideHeight}px`;
   }
 
@@ -458,7 +459,7 @@ export default class BCarousel extends LitElement {
   private async _handleSlotChange() {
     this.requestUpdate();
     await this.updateComplete;
-    this._calcHeight();
+    this.calcHeight();
   }
 
   render() {
