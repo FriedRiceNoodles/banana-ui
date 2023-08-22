@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.3
+
+### Patch Changes
+
+- Fixed a incorrect css variable of rating, added a css variable to progress.
+
 ## 1.10.2
 
 ### Patch Changes
