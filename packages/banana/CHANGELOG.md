@@ -1,5 +1,23 @@
 # banana-ui
 
+## 1.10.0
+
+### Minor Changes
+
+- 34549ad: Beta version for form, input, rating.
+
+### Patch Changes
+
+- 37ac10a: Fixed a bug which cause defaultValue paramter not working on rating component.
+- 375f8ff: Rating: Keep internal value and value property synchronized.
+- Added controlled parameter to input component.
+
+## 1.10.0-beta.3
+
+### Patch Changes
+
+- Added controlled parameter to input component.
+
 ## 1.10.0-beta.2
 
 ### Patch Changes

@@ -44,6 +44,9 @@ export default class BInput extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   required = false;
 
+  @property({ type: Boolean, reflect: true })
+  controlled = false;
+
   // It seems like we will get a correct and specific type for autocomplete in the future(maybe TS5.2?).
   // See https://github.com/microsoft/TypeScript-DOM-lib-generator/pull/1467#issuecomment-1599747198
   // And https://github.com/microsoft/TypeScript/issues/52168
@@ -89,17 +92,21 @@ export default class BInput extends LitElement implements BananaFormElement {
     this.dispatchEvent(new CustomEvent('blur'));
   }
 
-  private _handleInput(event: InputEvent) {
-    event.stopPropagation();
-    this.value = this._input.value;
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: this.value } };
-    this.dispatchEvent(new CustomEvent('input', eventOptions));
-  }
-
   private _handleChange(event: InputEvent) {
     event.stopPropagation();
-    this.value = this._input.value;
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: this.value } };
+
+    const value = this._input.value;
+
+    // If the input element is controlled, the value will be updated by the host element.
+    // So we dispatch a change event to notify the host element to update the value.
+    if (this.controlled) {
+      this._input.value = this.value;
+    } else {
+      this.value = value;
+    }
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
+    // The change event will not be dispatched when the value is changed programmatically.
+    // Will dispatch the change event when the value is changed by user input but not native change event.
     this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
@@ -165,8 +172,7 @@ export default class BInput extends LitElement implements BananaFormElement {
           pattern="${ifDefined(this.pattern)}"
           @focus="${this._handleFocus}"
           @blur="${this._handleBlur}"
-          @input="${this._handleInput}"
-          @change="${this._handleChange}"
+          @input="${this._handleChange}"
           @keydown="${this._handleInputKeyDown}"
         />
       </div>

@@ -62,6 +62,9 @@ export default class BRating extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   precision = false;
 
+  @property({ type: Boolean, reflect: true })
+  controlled = false;
+
   connectedCallback() {
     super.connectedCallback();
   }
