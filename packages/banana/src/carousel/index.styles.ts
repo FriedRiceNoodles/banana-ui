@@ -81,5 +81,34 @@ export default [
       padding: ${unsafeCSS(Spacings.Spacing3XS)};
       box-sizing: content-box;
     }
+
+    .indicators {
+      position: absolute;
+      bottom: 16px;
+      left: 50%;
+      transform: translateX(-50%);
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--banana-carousel-indicator-gap, var(--banana-carousel-indicator-size, 8px));
+      z-index: 1;
+    }
+
+    .indicator {
+      width: var(--banana-carousel-indicator-size, 8px);
+      height: var(--banana-carousel-indicator-size, 8px);
+      border-radius: 50%;
+      background-color: var(--banana-carousel-indicator-color, rgba(${unsafeCSS(Colors.Gray8)}));
+      opacity: 0.5;
+      cursor: pointer;
+      transition: all ${unsafeCSS(Var.TransitionNormal)};
+    }
+
+    .indicator.active,
+    .indicator:hover {
+      opacity: 1;
+    }
   `,
 ];

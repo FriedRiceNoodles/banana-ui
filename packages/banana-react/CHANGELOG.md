@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.10.2
+
+### Patch Changes
+
+- Added indicator parameter to carousel.
+- Updated dependencies
+  - banana-ui@1.10.2
+
 ## 1.10.1
 
 ### Patch Changes

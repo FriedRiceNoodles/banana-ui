@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 /**
  * title: 使用useRef手动改变currentIndex
  * debug: true
@@ -37,8 +39,8 @@ export default function CarouselDemo0() {
         <div className="demo-slide">10</div>
       </Carousel>
 
-      <Button onclick={() => (carousel.current!.currentIndex = 0)}>go 1</Button>
-      <Button onclick={() => (carousel.current!.currentIndex = 9)}>go 10</Button>
+      <Button onclick={() => carousel.current?.goto(0)}>go 1</Button>
+      <Button onclick={() => carousel.current?.goto(9)}>go 10</Button>
     </div>
   );
 }

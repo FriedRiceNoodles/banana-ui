@@ -1,3 +1,4 @@
+/* eslint-disable lit-a11y/click-events-have-key-events */
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -52,7 +53,11 @@ export default class BCarousel extends LitElement {
       this._resetAutoplayTimer();
     }
 
-    if (_changedProperties.has('currentIndex') || _changedProperties.has('gap') || _changedProperties.has('slidesPerView')) {
+    if (
+      _changedProperties.has('currentIndex') ||
+      _changedProperties.has('gap') ||
+      _changedProperties.has('slidesPerView')
+    ) {
       this._calcPosition();
     }
 
@@ -112,6 +117,9 @@ export default class BCarousel extends LitElement {
 
   @property({ type: Boolean, reflect: true })
   autoHeight = false;
+
+  @property({ type: Boolean, reflect: true })
+  indicator = false;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
@@ -300,7 +308,9 @@ export default class BCarousel extends LitElement {
       // Those copys will append to the beginning of slides.
       const CopysAtTheBeginning = [];
       for (let i = 0; i < this._slidesPerView; i++) {
-        CopysAtTheBeginning.push(this._slides[this._slides.length - this._slidesPerView + i].cloneNode(true) as HTMLElement);
+        CopysAtTheBeginning.push(
+          this._slides[this._slides.length - this._slidesPerView + i].cloneNode(true) as HTMLElement,
+        );
       }
 
       // Those copys will append to the end of slides.
@@ -397,6 +407,11 @@ export default class BCarousel extends LitElement {
     this._removeEvents();
   }
 
+  public goto(index: number) {
+    this._resetAutoplayTimer();
+    this.currentIndex = index;
+  }
+
   public next() {
     this._resetAutoplayTimer();
 
@@ -457,7 +472,12 @@ export default class BCarousel extends LitElement {
           carousel: true,
         })}
       >
-        <div part="external-wrapper" class="external-wrapper" @mouseenter=${this._onWrapperMouseEnter} @mouseleave=${this._onWrapperMouseLeave}>
+        <div
+          part="external-wrapper"
+          class="external-wrapper"
+          @mouseenter=${this._onWrapperMouseEnter}
+          @mouseleave=${this._onWrapperMouseLeave}
+        >
           <div
             part="slides-wrapper"
             @mousedown="${this._eventHandler}"
@@ -473,9 +493,28 @@ export default class BCarousel extends LitElement {
           </div>
         </div>
 
+        <ul part="indicators" class="indicators" ?hidden=${!this.indicator}>
+          ${this._slides.map(
+            (_, index) => html`
+              <li
+                part="indicator"
+                class=${classMap({
+                  indicator: true,
+                  active: index === this.currentIndex,
+                })}
+                @click=${() => {
+                  this.goto(index);
+                }}
+              ></li>
+            `,
+          )}
+        </ul>
+
         <button
           @click=${this.prev}
-          part="navigation-buttons navigation-button--previous ${previousNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
+          part="navigation-buttons navigation-button--previous ${previousNavigationDisabled
+            ? 'navigation-buttons--disabled'
+            : ''}"
           class=${classMap({
             'navigation-buttons': true,
             'navigation-button--previous': true,
@@ -486,7 +525,16 @@ export default class BCarousel extends LitElement {
         >
           <slot name="prev-button">
             <div class="default-prev-icon">
-              <svg t="1685007670520" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="993" width="24" height="24">
+              <svg
+                t="1685007670520"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="993"
+                width="24"
+                height="24"
+              >
                 <path
                   d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z"
                   fill="#333"
@@ -498,7 +546,9 @@ export default class BCarousel extends LitElement {
         </button>
         <button
           @click=${this.next}
-          part="navigation-buttons navigation-button--next ${nextNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
+          part="navigation-buttons navigation-button--next ${nextNavigationDisabled
+            ? 'navigation-buttons--disabled'
+            : ''}"
           class=${classMap({
             'navigation-buttons': true,
             'navigation-button--next': true,
@@ -509,7 +559,16 @@ export default class BCarousel extends LitElement {
         >
           <slot name="next-button">
             <div class="default-next-icon">
-              <svg t="1685007929073" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1147" width="24" height="24">
+              <svg
+                t="1685007929073"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="1147"
+                width="24"
+                height="24"
+              >
                 <path
                   d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
                   fill="#333"
