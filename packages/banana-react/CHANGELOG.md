@@ -1,5 +1,57 @@
 # @banana/banana-react
 
+## 1.10.0
+
+### Minor Changes
+
+- 34549ad: Beta version for form, input, rating.
+
+### Patch Changes
+
+- 37ac10a: Fixed a bug which cause defaultValue paramter not working on rating component.
+- 375f8ff: Rating: Keep internal value and value property synchronized.
+- Added controlled parameter to input component.
+- Updated dependencies [37ac10a]
+- Updated dependencies [34549ad]
+- Updated dependencies [375f8ff]
+- Updated dependencies
+  - banana-ui@1.10.0
+
+## 1.10.0-beta.3
+
+### Patch Changes
+
+- Added controlled parameter to input component.
+- Updated dependencies
+  - banana-ui@1.10.0-beta.3
+
+## 1.10.0-beta.2
+
+### Patch Changes
+
+- Rating: Keep internal value and value property synchronized.
+- Updated dependencies
+  - banana-ui@1.10.0-beta.2
+
+## 1.10.0-beta.1
+
+### Patch Changes
+
+- Fixed a bug which cause defaultValue paramter not working on rating component.
+- Updated dependencies
+  - banana-ui@1.10.0-beta.1
+
+## 1.10.0-beta.0
+
+### Minor Changes
+
+- Beta version for form, input, rating.
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.10.0-beta.0
+
 ## 1.9.3
 
 ### Patch Changes

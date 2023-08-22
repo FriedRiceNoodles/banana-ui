@@ -27,7 +27,7 @@ describe('b-button', () => {
       const element = await fixture<BButton>(html` <b-button> Banana </b-button> `);
 
       expect(element.type).to.equal('default');
-      expect(element.size).to.equal('default');
+      expect(element.size).to.equal('medium');
       expect(element.disabled).to.equal(false);
       expect(element.pill).to.equal(false);
       expect(element.outline).to.equal(false);
