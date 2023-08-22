@@ -26,6 +26,7 @@ describe('b-input', () => {
       expect(element.maxlength).to.equal(undefined);
       expect(element.min).to.equal(undefined);
       expect(element.max).to.equal(undefined);
+      expect(element.controlled).to.equal(false);
     });
 
     it('should have validation methods', () => {
@@ -50,6 +51,7 @@ describe('b-input', () => {
         maxlength="10"
         min="1"
         max="10"
+        controlled
       ></b-input>`,
     );
 
@@ -67,6 +69,7 @@ describe('b-input', () => {
       expect(element.maxlength).to.equal(10);
       expect(element.min).to.equal('1');
       expect(element.max).to.equal('10');
+      expect(element.controlled).to.equal(true);
     });
   });
 
@@ -131,11 +134,11 @@ it('should focus the native input when click the wrapper', async () => {
 });
 
 describe('events', () => {
-  it('should emit the input event when user input', async () => {
+  it('should emit the change event when user input', async () => {
     const element = await fixture<BInput>(html`<b-input></b-input>`);
     const wrapper = element.shadowRoot!.querySelector('.input__wrapper') as HTMLElement;
     const spy = sinon.spy();
-    element.addEventListener('input', spy);
+    element.addEventListener('change', spy);
 
     wrapper.click();
     await element.updateComplete;
@@ -155,9 +158,6 @@ describe('events', () => {
     wrapper.click();
     await element.updateComplete;
     await sendKeys({ press: 'a' });
-
-    // Trigger the change event.
-    await sendKeys({ press: 'Enter' });
 
     expect(spy.calledOnce).to.equal(true);
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
@@ -331,5 +331,58 @@ describe('size', () => {
     element.size = 'large';
     await element.updateComplete;
     expect(wrapper.classList.contains('input__wrapper--large')).to.equal(true);
+  });
+});
+
+describe('controlled', () => {
+  it('should not change the value when the input is controlled', async () => {
+    const element = await fixture<BInput>(html`<b-input controlled></b-input>`);
+    const input = element.shadowRoot!.querySelector('input') as HTMLInputElement;
+    input.focus();
+    await sendKeys({ press: 'a' });
+    expect(element.value).to.equal('');
+    expect(input.value).to.equal('');
+  });
+
+  it('should emit the change event correctly when the input is controlled', async () => {
+    const element = await fixture<BInput>(html`<b-input value="b" controlled></b-input>`);
+    const input = element.shadowRoot!.querySelector('input') as HTMLInputElement;
+    const spy = sinon.spy();
+    element.addEventListener('change', spy);
+
+    input.focus();
+    await sendKeys({ press: 'a' });
+    expect(spy.calledOnce).to.equal(true);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    expect(spy.firstCall.args[0].detail.value).to.equal('ba');
+    expect(element.value).to.equal('b');
+    expect(input.value).to.equal('b');
+
+    // Then change the attribute.
+    element.setAttribute('value', 'c');
+    await element.updateComplete;
+    expect(element.value).to.equal('c');
+    expect(input.value).to.equal('c');
+  });
+
+  it('should dispatch the change event and not change the value when a form is reset', async () => {
+    const element = await fixture<HTMLFormElement>(html`
+      <form>
+        <b-input value="b" controlled></b-input>
+      </form>
+    `);
+    const input = element.querySelector('b-input') as BInput;
+    const innerInput = input.shadowRoot!.querySelector('input') as HTMLInputElement;
+    const spy = sinon.spy();
+    input.addEventListener('change', spy);
+
+    // Reset the form.
+    element.reset();
+    await element.updateComplete;
+    expect(spy.calledOnce).to.equal(true);
+    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+    expect(spy.firstCall.args[0].detail.value).to.equal('');
+    expect(input.value).to.equal('b');
+    expect(innerInput.value).to.equal('b');
   });
 });

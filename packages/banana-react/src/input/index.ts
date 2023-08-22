@@ -6,4 +6,7 @@ export const Input = createComponent({
   tagName: 'b-input',
   react: React,
   elementClass: BInput,
+  events: {
+    onChange: 'change',
+  },
 });

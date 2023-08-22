@@ -4,7 +4,10 @@ import type BButton from '../src/button';
 export interface BananaFormElement extends LitElement {
   name: string;
   value: string | number | boolean;
-  disabled?: boolean;
+  disabled: boolean;
+  required?: boolean;
+  // When an element is controlled, it means that the value of the element is controlled by the parent component.
+  controlled?: boolean;
   defaultValue?: string | number | boolean;
   form?: string;
 
@@ -140,7 +143,13 @@ export class FormController implements ReactiveController {
   }
 
   private _handleFormReset() {
-    this.host.value = this.host.defaultValue || '';
+    const value = this.host.defaultValue || '';
+    if (!this.host.controlled) {
+      this.host.value = value;
+    } else {
+      const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
+      this.host.dispatchEvent(new CustomEvent('change', eventOptions));
+    }
   }
 
   private _reportOrCheckFormValidity(report = true) {
