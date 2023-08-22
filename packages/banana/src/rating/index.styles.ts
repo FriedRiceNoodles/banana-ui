@@ -24,7 +24,7 @@ export default [
 
     .rating__symbol-container {
       cursor: pointer;
-      transition: all var(--banana-carousel-transition-duration, ${unsafeCSS(Var.TransitionFast)});
+      transition: all var(--banana-rating-transition-duration, ${unsafeCSS(Var.TransitionFast)});
       position: relative;
     }
 
