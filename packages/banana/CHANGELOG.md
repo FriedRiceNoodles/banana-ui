@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.2
+
+### Patch Changes
+
+- Added indicator parameter to carousel.
+
 ## 1.10.1
 
 ### Patch Changes

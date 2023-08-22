@@ -16,6 +16,7 @@ group: 组件
 <code src="./demos/demo3.tsx"></code>
 <code src="./demos/autoplay.tsx"></code>
 <code src="./demos/navigation.tsx"></code>
+<code src="./demos/indicator.tsx"></code>
 <code src="./demos/disableDrag.tsx"></code>
 <code src="./demos/gap.tsx"></code>
 <code src="./demos/fill.tsx"></code>
