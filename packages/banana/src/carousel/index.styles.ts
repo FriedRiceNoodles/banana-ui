@@ -8,6 +8,7 @@ export default [
     :host {
       position: relative;
       list-style: none;
+      display: block;
     }
 
     .external-wrapper {
