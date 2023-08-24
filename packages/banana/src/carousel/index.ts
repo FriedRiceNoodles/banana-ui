@@ -498,7 +498,7 @@ export default class BCarousel extends LitElement {
           ${this._slides.map(
             (_, index) => html`
               <li
-                part="indicator"
+                part="indicator${index === this.currentIndex ? ' indicator--active' : ''}"
                 class=${classMap({
                   indicator: true,
                   active: index === this.currentIndex,
