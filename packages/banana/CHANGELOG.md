@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.6
+
+### Patch Changes
+
+- Fixed a bug of carousel which cause a style problem in firefox, added a part attribute to active indicator of carousel.
+
 ## 1.10.5
 
 ### Patch Changes
