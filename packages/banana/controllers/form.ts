@@ -68,7 +68,11 @@ export class FormController implements ReactiveController {
       // Use requestSubmit() rather than submit(), because the latter does not trigger the browser's built-in form validation.
       // See https://developer.mozilla.org/en-US/docs/Web/API/HTMLFormElement/requestSubmit
       // But it seems that requestSubmit() needs to be polyfilled.
-      this.form.requestSubmit(button);
+      if (typeof this.form.requestSubmit === 'function') {
+        this.form.requestSubmit(button);
+      } else {
+        button.click();
+      }
       button.remove();
     }
   }

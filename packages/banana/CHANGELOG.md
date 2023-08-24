@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.5
+
+### Patch Changes
+
+- Added polyfill for form.requestSubmit()
+
 ## 1.10.4
 
 ### Patch Changes

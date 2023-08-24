@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.10.5
+
+### Patch Changes
+
+- Added polyfill for form.requestSubmit()
+- Updated dependencies
+  - banana-ui@1.10.5
+
 ## 1.10.4
 
 ### Patch Changes
