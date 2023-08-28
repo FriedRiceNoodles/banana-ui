@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.7
+
+### Patch Changes
+
+- Fixed some style problems of collapse.
+
 ## 1.10.6
 
 ### Patch Changes

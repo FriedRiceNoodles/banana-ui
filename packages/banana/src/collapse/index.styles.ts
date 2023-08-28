@@ -6,7 +6,6 @@ export default [
   componentStyles,
   css`
     .collapse {
-      cursor: pointer;
       border: 1px solid rgb(${unsafeCSS(Colors.Gray2)});
       border-radius: ${unsafeCSS(Var.BorderRadiusMedium)};
       transition: all ${unsafeCSS(Var.TransitionFast)};
@@ -15,6 +14,7 @@ export default [
     }
 
     .collapse__header {
+      cursor: pointer;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -33,6 +33,10 @@ export default [
 
     .collapse--open .collapse__body {
       height: auto;
+    }
+
+    .collapse__icon {
+      flex-shrink: 0;
     }
 
     .default-expand-icon {

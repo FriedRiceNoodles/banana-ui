@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.10.7
+
+### Patch Changes
+
+- Fixed some style problems of collapse.
+- Updated dependencies
+  - banana-ui@1.10.7
+
 ## 1.10.6
 
 ### Patch Changes
