@@ -154,25 +154,27 @@ export default class BCollapse extends LitElement {
             <slot name="title">${this.title}</slot>
           </div>
 
-          <slot name="expand-icon" ?hidden=${this.open && (this.customCollapseIcon?.length ?? 0) > 0}>
-            <svg
-              t="1682003769967"
-              class="default-expand-icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="933"
-              width="16"
-              height="16"
-            >
-              <path
-                d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
-                fill="#666666"
-                p-id="934"
-              ></path>
-            </svg>
-          </slot>
-          <slot name="collapse-icon" ?hidden=${!this.open}></slot>
+          <div class="collapse__icon">
+            <slot name="expand-icon" ?hidden=${this.open && (this.customCollapseIcon?.length ?? 0) > 0}>
+              <svg
+                t="1682003769967"
+                class="default-expand-icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="933"
+                width="16"
+                height="16"
+              >
+                <path
+                  d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
+                  fill="#666666"
+                  p-id="934"
+                ></path>
+              </svg>
+            </slot>
+            <slot name="collapse-icon" ?hidden=${!this.open}></slot>
+          </div>
         </div>
         <div class="collapse__body">
           <slot part="content" class="collapse__content"></slot>
