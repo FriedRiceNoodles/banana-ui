@@ -14,6 +14,7 @@ demo:
 <code src="./demos/halfAllowed.tsx"></code>
 <code src="./demos/readonly.tsx"></code>
 <code src="./demos/precision.tsx"></code>
+<code src="./demos/formTest.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
