@@ -32,14 +32,6 @@ export default class BPopup extends LitElement {
     this.dispatchEvent(new CustomEvent('close'));
   }
 
-  private _onAfterShow() {
-    this.dispatchEvent(new CustomEvent('afterShow'));
-  }
-
-  private _onAfterHide() {
-    this.dispatchEvent(new CustomEvent('afterHide'));
-  }
-
   public show() {
     this.open = true;
   }
@@ -50,14 +42,7 @@ export default class BPopup extends LitElement {
 
   render() {
     return html`
-      <b-overlay
-        ?open=${this.open}
-        @close=${this._onClose}
-        @afterShow=${this._onAfterShow}
-        @afterHide=${this._onAfterHide}
-        class="inside-overlay"
-        zIndex=${this.zIndex}
-      >
+      <b-overlay ?open=${this.open} @close=${this._onClose} class="inside-overlay" zIndex=${this.zIndex}>
         <div
           class=${classMap({
             popup__container: true,

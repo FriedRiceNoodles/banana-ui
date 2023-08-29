@@ -8,7 +8,5 @@ export const Overlay = createComponent({
   elementClass: BOverlay,
   events: {
     onClose: 'close',
-    onAfterShow: 'afterShow',
-    onAfterHide: 'afterHide',
   },
 });
