@@ -40,6 +40,7 @@ export default [
         (100% - (var(--banana-carousel-slidesPerView) - 1) * var(--banana-carousel-gap) * 1px) /
           var(--banana-carousel-slidesPerView)
       );
+      height: 100%;
       flex-grow: 0;
       flex-shrink: 0;
     }
