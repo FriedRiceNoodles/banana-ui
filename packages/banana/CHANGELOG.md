@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.8
+
+### Patch Changes
+
+- Fixed a style problem of carousel.
+
 ## 1.10.7
 
 ### Patch Changes
