@@ -12,7 +12,7 @@ export default class BOverlay extends LitElement {
   zIndex = 999;
 
   @query('.overlay__container')
-  body!: HTMLElement;
+  private _body!: HTMLElement;
 
   static styles: CSSResultGroup = styles;
 
@@ -25,7 +25,7 @@ export default class BOverlay extends LitElement {
   protected lockBodyScrollBar() {
     const scrollBarDiscount = window.innerWidth - document.documentElement.clientWidth;
     document.body.style.paddingLeft = `${scrollBarDiscount}px`;
-    this.body.style.paddingLeft = `${scrollBarDiscount}px`;
+    this._body.style.paddingLeft = `${scrollBarDiscount}px`;
   }
 
   protected updated(_changedProperties: PropertyValues<this>): void {
