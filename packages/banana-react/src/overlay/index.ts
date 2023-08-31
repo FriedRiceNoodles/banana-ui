@@ -1,6 +1,6 @@
 import { createComponent } from '@lit-labs/react';
-import * as React from 'react';
 import { BOverlay } from 'banana-ui';
+import * as React from 'react';
 
 export const Overlay = createComponent({
   react: React,
