@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.10.9
+
+### Patch Changes
+
+- Fixed a bug that cause an incorrect behavior when a collapse is default open but invisible.
+- Updated dependencies
+  - banana-ui@1.10.9
+
 ## 1.10.8
 
 ### Patch Changes
