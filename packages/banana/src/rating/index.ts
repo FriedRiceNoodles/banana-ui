@@ -11,7 +11,7 @@ export default class BRating extends LitElement implements BananaFormElement {
 
   static styles?: CSSResultGroup = styles;
 
-  private readonly defaultSymbol = html`
+  readonly defaultSymbol = html`
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
       <path
         fill-rule="evenodd"
@@ -126,13 +126,23 @@ export default class BRating extends LitElement implements BananaFormElement {
     }
 
     const width =
-      this._value > index + 1
+      this._value >= index + 1
         ? 100
         : this._value > index && this._value < index + 1
         ? Math.floor((this._value - Math.floor(this._value)) * 100) ?? 0
         : 0;
 
     return `width: ${width}%;`;
+  };
+
+  private _getAriaChecked = (index: number) => {
+    if (this.precision) {
+      return this._value > index ? 'true' : 'false';
+    } else {
+      return (this.halfAllowed && index + 0.5 <= this._value && index + 1 > this._value) || index + 1 <= this._value
+        ? 'true'
+        : 'false';
+    }
   };
 
   protected firstUpdated(): void {
@@ -173,14 +183,15 @@ export default class BRating extends LitElement implements BananaFormElement {
         part="base"
         class=${classMap({ rating: true, 'rating--readonly': this.readonly, 'rating--disabled': this.disabled })}
       >
-        <ul class="rating__symbols" @mouseleave=${() => this._handleMouseLeave()}>
+        <ul class="rating__symbols" @mouseleave=${() => this._handleMouseLeave()} role="radiogroup">
           ${Array.from({ length: 5 }).map(
             (_, index) => html`
               <li
                 class="rating__symbol-container"
                 role="radio"
-                aria-checked="true"
+                aria-checked=${this._getAriaChecked(index)}
                 tabindex="0"
+                aria-label="star"
                 aria-posinset=${index + 1}
                 data-value=${index + 1}
                 @mouseenter=${() => this._handleMouseEnter(index)}

@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.10
+
+### Patch Changes
+
+- Fixed some bugs about rating component, and added unit test codes for it.
+
 ## 1.10.9
 
 ### Patch Changes
