@@ -151,6 +151,38 @@ describe('b-rating', () => {
     });
   });
 
+  describe('when provided a value', () => {
+    it('should have correct value and styles', async () => {
+      const element = await fixture<BRating>(html`<b-rating value="0"></b-rating>`);
+      const element2 = await fixture<BRating>(html`<b-rating value="0.1"></b-rating>`);
+      const element3 = await fixture<BRating>(html`<b-rating value="0.6"></b-rating>`);
+      const element4 = await fixture<BRating>(html`<b-rating value="1"></b-rating>`);
+      const element5 = await fixture<BRating>(html`<b-rating value="5"></b-rating>`);
+
+      await shouldHaveCorrectValueAndStyles(element);
+      await shouldHaveCorrectValueAndStyles(element2);
+      await shouldHaveCorrectValueAndStyles(element3);
+      await shouldHaveCorrectValueAndStyles(element4);
+      await shouldHaveCorrectValueAndStyles(element5);
+    });
+  });
+
+  describe('when provided defaultValue', () => {
+    it('should have correct value and styles', async () => {
+      const element = await fixture<BRating>(html`<b-rating default-value="0"></b-rating>`);
+      const element2 = await fixture<BRating>(html`<b-rating default-value="0.1"></b-rating>`);
+      const element3 = await fixture<BRating>(html`<b-rating default-value="0.6"></b-rating>`);
+      const element4 = await fixture<BRating>(html`<b-rating default-value="1"></b-rating>`);
+      const element5 = await fixture<BRating>(html`<b-rating default-value="5"></b-rating>`);
+
+      await shouldHaveCorrectValueAndStyles(element);
+      await shouldHaveCorrectValueAndStyles(element2);
+      await shouldHaveCorrectValueAndStyles(element3);
+      await shouldHaveCorrectValueAndStyles(element4);
+      await shouldHaveCorrectValueAndStyles(element5);
+    });
+  });
+
   describe('when provided halfAllowed', () => {
     it('should have correct value and styles', async () => {
       const element = await fixture<BRating>(html`<b-rating half-allowed></b-rating>`);
@@ -203,5 +235,72 @@ describe('b-rating', () => {
       await shouldHaveCorrectValueAndStyles(element5);
       await shouldHaveCorrectValueAndStyles(element6);
     });
+  });
+
+  describe('when provided precision and halfAllowed', () => {
+    it('should have correct value and styles', async () => {
+      const element = await fixture<BRating>(html`<b-rating precision half-allowed></b-rating>`);
+      const element2 = await fixture<BRating>(html`<b-rating precision half-allowed value="0"></b-rating>`);
+      const element3 = await fixture<BRating>(html`<b-rating precision half-allowed value="0.1"></b-rating>`);
+      const element4 = await fixture<BRating>(html`<b-rating precision half-allowed value="0.6"></b-rating>`);
+      const element5 = await fixture<BRating>(html`<b-rating precision half-allowed value="1"></b-rating>`);
+      const element6 = await fixture<BRating>(html`<b-rating precision half-allowed value="5"></b-rating>`);
+
+      await shouldHaveCorrectValueAndStyles(element);
+      await shouldHaveCorrectValueAndStyles(element2);
+      await shouldHaveCorrectValueAndStyles(element3);
+      await shouldHaveCorrectValueAndStyles(element4);
+      await shouldHaveCorrectValueAndStyles(element5);
+      await shouldHaveCorrectValueAndStyles(element6);
+    });
+  });
+
+  describe('when provided character', () => {
+    it('should have correct value and styles', async () => {
+      const element = await fixture<BRating>(html`<b-rating character="A"></b-rating>`);
+      const element2 = await fixture<BRating>(html`<b-rating character="A" value="0"></b-rating>`);
+      const element3 = await fixture<BRating>(html`<b-rating character="A" value="0.1"></b-rating>`);
+      const element4 = await fixture<BRating>(html`<b-rating character="A" value="0.6"></b-rating>`);
+      const element5 = await fixture<BRating>(html`<b-rating character="A" value="1"></b-rating>`);
+      const element6 = await fixture<BRating>(html`<b-rating character="A" value="5"></b-rating>`);
+
+      await shouldHaveCorrectValueAndStyles(element);
+      await shouldHaveCorrectValueAndStyles(element2);
+      await shouldHaveCorrectValueAndStyles(element3);
+      await shouldHaveCorrectValueAndStyles(element4);
+      await shouldHaveCorrectValueAndStyles(element5);
+      await shouldHaveCorrectValueAndStyles(element6);
+    });
+
+    it('should render the provided character', async () => {
+      const element = await fixture<BRating>(html`<b-rating character="A"></b-rating>`);
+
+      expect(element.character).to.equal('A');
+    });
+  });
+
+  it('css variables should work', async () => {
+    const element = await fixture<BRating>(html`<b-rating
+      style="
+      --banana-rating-symbol-size: 48px;
+      --banana-rating-symbol-spacing: 16px;
+      --banana-rating-symbol-color: #ff0000;
+      --banana-rating-symbol-background-color: #0000ff;
+      --banana-rating-transition-duration: 0.1s;
+      "
+    ></b-rating>`);
+
+    const containers = element.shadowRoot?.querySelectorAll('.rating__symbol-container') as NodeListOf<HTMLElement>;
+    const symbols = element.shadowRoot?.querySelectorAll('.rating__symbols') as NodeListOf<HTMLElement>;
+    const activeSymbols = element.shadowRoot?.querySelectorAll('.rating__symbol-active') as NodeListOf<HTMLElement>;
+    const backgroundSymbols = element.shadowRoot?.querySelectorAll(
+      '.rating__symbol-background',
+    ) as NodeListOf<HTMLElement>;
+
+    expect(getComputedStyle(activeSymbols[0]).color).to.equal('rgb(255, 0, 0)');
+    expect(getComputedStyle(backgroundSymbols[0]).color).to.equal('rgb(0, 0, 255)');
+    expect(getComputedStyle(containers[0]).transition).to.equal('all 0.1s ease 0s');
+    expect(getComputedStyle(symbols[0]).fontSize).to.equal('48px');
+    expect(getComputedStyle(symbols[0]).gap).to.equal('16px');
   });
 });
