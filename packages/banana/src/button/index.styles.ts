@@ -56,10 +56,12 @@ export default [
       border-style: dashed;
     }
 
-    .button--default:hover:not(.button--disabled),
-    .button--dashed:hover:not(.button--disabled) {
-      color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
-      border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+    @media (any-hover: hover) {
+      .button--default:hover:not(.button--disabled),
+      .button--dashed:hover:not(.button--disabled) {
+        color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+        border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+      }
     }
 
     .button--default:active:not(.button--disabled),
@@ -78,9 +80,11 @@ export default [
       --button-loading-color: #fff;
     }
 
-    .button--primary:hover:not(.button--disabled) {
-      background-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
-      border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+    @media (any-hover: hover) {
+      .button--primary:hover:not(.button--disabled) {
+        background-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+        border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+      }
     }
 
     .button--primary:active:not(.button--disabled) {
@@ -96,9 +100,11 @@ export default [
       --button-loading-color: #fff;
     }
 
-    .button--success:hover:not(.button--disabled) {
-      background-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
-      border-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
+    @media (any-hover: hover) {
+      .button--success:hover:not(.button--disabled) {
+        background-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
+        border-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
+      }
     }
 
     .button--success:active:not(.button--disabled) {
@@ -113,10 +119,11 @@ export default [
       color: #fff;
       --button-loading-color: #fff;
     }
-
-    .button--warning:hover:not(.button--disabled) {
-      background-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
-      border-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
+    @media (any-hover: hover) {
+      .button--warning:hover:not(.button--disabled) {
+        background-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
+        border-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
+      }
     }
 
     .button--warning:active:not(.button--disabled) {
@@ -132,9 +139,11 @@ export default [
       --button-loading-color: #fff;
     }
 
-    .button--danger:hover:not(.button--disabled) {
-      background-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
-      border-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
+    @media (any-hover: hover) {
+      .button--danger:hover:not(.button--disabled) {
+        background-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
+        border-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
+      }
     }
 
     .button--danger:active:not(.button--disabled) {
@@ -177,24 +186,26 @@ export default [
     }
 
     /* Outline */
-    .button--outline:not(:hover):not(:active) {
-      background-color: transparent !important;
-    }
+    @media (any-hover: hover) {
+      .button--outline:not(:hover):not(:active) {
+        background-color: transparent !important;
+      }
 
-    .button--outline.button--primary:not(:hover):not(:active) {
-      color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
-    }
+      .button--outline.button--primary:not(:hover):not(:active) {
+        color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
+      }
 
-    .button--outline.button--success:not(:hover):not(:active) {
-      color: var(--banana-color-success, ${unsafeCSS(Var.ColorSuccess)});
-    }
+      .button--outline.button--success:not(:hover):not(:active) {
+        color: var(--banana-color-success, ${unsafeCSS(Var.ColorSuccess)});
+      }
 
-    .button--outline.button--warning:not(:hover):not(:active) {
-      color: var(--banana-color-warning, ${unsafeCSS(Var.ColorWarning)});
-    }
+      .button--outline.button--warning:not(:hover):not(:active) {
+        color: var(--banana-color-warning, ${unsafeCSS(Var.ColorWarning)});
+      }
 
-    .button--outline.button--danger:not(:hover):not(:active) {
-      color: var(--banana-color-danger, ${unsafeCSS(Var.ColorDanger)});
+      .button--outline.button--danger:not(:hover):not(:active) {
+        color: var(--banana-color-danger, ${unsafeCSS(Var.ColorDanger)});
+      }
     }
 
     /* Loading */
