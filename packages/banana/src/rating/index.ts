@@ -4,6 +4,7 @@ import styles from './index.styles';
 import { BananaFormElement, FormController } from 'packages/banana/controllers/form';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 @customElement('b-rating')
 export default class BRating extends LitElement implements BananaFormElement {
@@ -11,7 +12,7 @@ export default class BRating extends LitElement implements BananaFormElement {
 
   static styles?: CSSResultGroup = styles;
 
-  readonly defaultSymbol = html`
+  readonly defaultSymbol = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
       <path
         fill-rule="evenodd"
@@ -50,10 +51,10 @@ export default class BRating extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   required = false;
 
-  @property({ attribute: false })
+  @property()
   character = this.defaultSymbol;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'half-allowed' })
   halfAllowed = false;
 
   @property({ type: Boolean, reflect: true })
@@ -204,9 +205,9 @@ export default class BRating extends LitElement implements BananaFormElement {
                     class=${this._getActiveRatingSymbolClassMap(index)}
                     style=${ifDefined(this._getActiveRatingSymbolStyle(index))}
                   >
-                    ${this.character}
+                    ${unsafeHTML(this.character)}
                   </div>
-                  <div class="rating__symbol rating__symbol-background">${this.character}</div>
+                  <div class="rating__symbol rating__symbol-background">${unsafeHTML(this.character)}</div>
                 </div>
               </li>
             `,
