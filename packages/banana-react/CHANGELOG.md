@@ -1,5 +1,15 @@
 # @banana/banana-react
 
+## 1.10.11
+
+### Patch Changes
+
+- 74fb5e3: Doc and unit test for rating component.
+- 8818866: Avoid the hover on mobile of button component.
+- Updated dependencies [74fb5e3]
+- Updated dependencies [8818866]
+  - banana-ui@1.10.11
+
 ## 1.10.10
 
 ### Patch Changes
