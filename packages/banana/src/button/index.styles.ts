@@ -186,26 +186,24 @@ export default [
     }
 
     /* Outline */
-    @media (any-hover: hover) {
-      .button--outline:not(:hover):not(:active) {
-        background-color: transparent !important;
-      }
+    .button--outline:not(:hover):not(:active) {
+      background-color: transparent !important;
+    }
 
-      .button--outline.button--primary:not(:hover):not(:active) {
-        color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
-      }
+    .button--outline.button--primary:not(:hover):not(:active) {
+      color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
+    }
 
-      .button--outline.button--success:not(:hover):not(:active) {
-        color: var(--banana-color-success, ${unsafeCSS(Var.ColorSuccess)});
-      }
+    .button--outline.button--success:not(:hover):not(:active) {
+      color: var(--banana-color-success, ${unsafeCSS(Var.ColorSuccess)});
+    }
 
-      .button--outline.button--warning:not(:hover):not(:active) {
-        color: var(--banana-color-warning, ${unsafeCSS(Var.ColorWarning)});
-      }
+    .button--outline.button--warning:not(:hover):not(:active) {
+      color: var(--banana-color-warning, ${unsafeCSS(Var.ColorWarning)});
+    }
 
-      .button--outline.button--danger:not(:hover):not(:active) {
-        color: var(--banana-color-danger, ${unsafeCSS(Var.ColorDanger)});
-      }
+    .button--outline.button--danger:not(:hover):not(:active) {
+      color: var(--banana-color-danger, ${unsafeCSS(Var.ColorDanger)});
     }
 
     /* Loading */

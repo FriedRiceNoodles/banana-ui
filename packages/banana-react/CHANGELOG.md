@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.10.12
+
+### Patch Changes
+
+- Hotfix for button, a bug make the outline-button does not transparent.
+- Updated dependencies
+  - banana-ui@1.10.12
+
 ## 1.10.11
 
 ### Patch Changes
