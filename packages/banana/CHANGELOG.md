@@ -1,5 +1,42 @@
 # banana-ui
 
+## 1.10.12
+
+### Patch Changes
+
+- Hotfix for button, a bug make the outline-button does not transparent.
+
+## 1.10.11
+
+### Patch Changes
+
+- 74fb5e3: Doc and unit test for rating component.
+- 8818866: Avoid the hover on mobile of button component.
+
+## 1.10.10
+
+### Patch Changes
+
+- Fixed some bugs about rating component, and added unit test codes for it.
+
+## 1.10.9
+
+### Patch Changes
+
+- Fixed a bug that cause an incorrect behavior when a collapse is default open but invisible.
+
+## 1.10.8
+
+### Patch Changes
+
+- Fixed a style problem of carousel.
+
+## 1.10.7
+
+### Patch Changes
+
+- Fixed some style problems of collapse.
+
 ## 1.10.6
 
 ### Patch Changes

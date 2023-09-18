@@ -59,6 +59,12 @@
 - 移动端禁用 hover 触发
 - autoUpdate
 
+### Rating
+
+- 表单相关的单元测试
+- onChange 等事件
+- disabled 模式
+
 # 构建流程
 
 - umd 模式 d.ts 文件问题
