@@ -19,7 +19,7 @@ async function shouldHaveCorrectValueAndStyles(element: BRating) {
   checkStylesByValue(element, initialValue);
 
   const theValueShouldBe = (mouseHoverIndex: number, _side: 'LEFT' | 'RIGHT') => {
-    if (element.readonly) {
+    if (element.readonly || element.disabled) {
       return initialValue;
     } else if (element.precision) {
       // About 0.02:
@@ -209,6 +209,24 @@ describe('b-rating', () => {
       const element4 = await fixture<BRating>(html`<b-rating readonly value="0.6"></b-rating>`);
       const element5 = await fixture<BRating>(html`<b-rating readonly value="1"></b-rating>`);
       const element6 = await fixture<BRating>(html`<b-rating readonly value="5"></b-rating>`);
+
+      await shouldHaveCorrectValueAndStyles(element);
+      await shouldHaveCorrectValueAndStyles(element2);
+      await shouldHaveCorrectValueAndStyles(element3);
+      await shouldHaveCorrectValueAndStyles(element4);
+      await shouldHaveCorrectValueAndStyles(element5);
+      await shouldHaveCorrectValueAndStyles(element6);
+    });
+  });
+
+  describe('when provided disabled', () => {
+    it('should have correct value and styles', async () => {
+      const element = await fixture<BRating>(html`<b-rating disabled></b-rating>`);
+      const element2 = await fixture<BRating>(html`<b-rating disabled value="0"></b-rating>`);
+      const element3 = await fixture<BRating>(html`<b-rating disabled value="0.1"></b-rating>`);
+      const element4 = await fixture<BRating>(html`<b-rating disabled value="0.6"></b-rating>`);
+      const element5 = await fixture<BRating>(html`<b-rating disabled value="1"></b-rating>`);
+      const element6 = await fixture<BRating>(html`<b-rating disabled value="5"></b-rating>`);
 
       await shouldHaveCorrectValueAndStyles(element);
       await shouldHaveCorrectValueAndStyles(element2);

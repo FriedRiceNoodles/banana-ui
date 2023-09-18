@@ -27,6 +27,7 @@ demo:
 | readonly                            | 是否只读                         | `boolean` | false  |
 | precision                           | 精确模式，建议搭配`readonly`使用 | `boolean` | false  |
 | character                           | 自定义符号                       | `string`  | -      |
+| disabled                            | 是否禁用                         | `boolean` | false  |
 
 ## CSS Parts
 
