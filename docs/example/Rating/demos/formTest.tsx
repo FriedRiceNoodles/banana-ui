@@ -6,6 +6,8 @@ import { Button, Rating } from '@banana/banana-react';
 import React from 'react';
 
 export default function FormTest() {
+  const [value, setValue] = React.useState(3);
+
   return (
     <div>
       <form
@@ -18,7 +20,20 @@ export default function FormTest() {
         }}
       >
         <Rating name="rating1" required value={3} defaultValue={4}></Rating>
-        <Button name="submit" value="haha" htmlType="submit">
+        <Rating name="rating2" halfAllowed value={2.5}></Rating>
+        <Rating name="rating-readonly" readonly value={2.5}></Rating>
+        <Rating name="rating-disabled" value={2.5} disabled></Rating>
+        <Rating
+          name="rating-controlled"
+          value={value}
+          controlled
+          onChange={(e: any) => {
+            console.log(e);
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
+            setValue(e.detail.value);
+          }}
+        ></Rating>
+        <Button type="primary" htmlType="submit">
           submit
         </Button>
         <Button htmlType="reset">reset</Button>

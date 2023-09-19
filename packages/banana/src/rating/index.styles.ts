@@ -28,7 +28,6 @@ export default [
       position: relative;
     }
 
-    .rating__symbol-container:focus,
     .rating__symbol-container:hover {
       transform: scale(1.2);
     }

@@ -6,4 +6,7 @@ export const Rating = createComponent({
   tagName: 'b-rating',
   react: React,
   elementClass: BRating,
+  events: {
+    onChange: 'change',
+  },
 });
