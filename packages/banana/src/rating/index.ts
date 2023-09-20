@@ -101,14 +101,26 @@ export default class BRating extends LitElement implements BananaFormElement {
   }
 
   private _handleClick() {
-    this.value = this._value;
+    this._handleChange();
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Space' || event.key === 'Enter') {
       event.preventDefault();
-      this.value = this._value;
+      this._handleChange();
     }
+  }
+
+  private _handleChange() {
+    const value = this._value;
+    if (this.controlled) {
+      this._value = this.value;
+    } else {
+      this.value = value;
+    }
+
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
+    this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
   private _getActiveRatingSymbolClassMap = (index: number) => {
@@ -147,7 +159,7 @@ export default class BRating extends LitElement implements BananaFormElement {
   };
 
   protected firstUpdated(): void {
-    if (this.defaultValue > 0) {
+    if (this.defaultValue > 0 && !this.value) {
       this.value = this.defaultValue;
     }
   }

@@ -28,7 +28,6 @@ export default [
       position: relative;
     }
 
-    .rating__symbol-container:focus,
     .rating__symbol-container:hover {
       transform: scale(1.2);
     }
@@ -62,10 +61,14 @@ export default [
       color: var(--banana-rating-symbol-background-color);
     }
 
-    .rating--disabled .rating__symbol-container,
-    .rating--readonly .rating__symbol-container {
-      cursor: default;
+    .rating--readonly .rating__symbol-container,
+    .rating--disabled .rating__symbol-container {
       pointer-events: none;
+    }
+
+    .rating--disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
     }
   `,
 ];
