@@ -6,7 +6,7 @@ import { Button, Rating } from '@banana/banana-react';
 import React from 'react';
 
 export default function FormTest() {
-  const [value, setValue] = React.useState(3);
+  const [controlledValue, setControlledValue] = React.useState(3);
 
   return (
     <div>
@@ -23,14 +23,16 @@ export default function FormTest() {
         <Rating name="rating2" halfAllowed value={2.5}></Rating>
         <Rating name="rating-readonly" readonly value={2.5}></Rating>
         <Rating name="rating-disabled" value={2.5} disabled></Rating>
+        {/* Some thing weird when using setControlledValue...
+        https://github.com/lit/lit/issues/4205 */}
         <Rating
           name="rating-controlled"
-          value={value}
+          value={controlledValue}
           controlled
           onChange={(e: any) => {
             console.log(e);
             // eslint-disable-next-line @typescript-eslint/no-unsafe-argument, @typescript-eslint/no-unsafe-member-access
-            setValue(e.detail.value);
+            setControlledValue(e.detail.value);
           }}
         ></Rating>
         <Button type="primary" htmlType="submit">

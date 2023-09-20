@@ -159,7 +159,7 @@ export default class BRating extends LitElement implements BananaFormElement {
   };
 
   protected firstUpdated(): void {
-    if (this.defaultValue > 0) {
+    if (this.defaultValue > 0 && !this.value) {
       this.value = this.defaultValue;
     }
   }
