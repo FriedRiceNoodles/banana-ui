@@ -4,6 +4,7 @@ import styles from './index.styles';
 import { BananaFormElement, FormController } from 'packages/banana/controllers/form';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 @customElement('b-rating')
 export default class BRating extends LitElement implements BananaFormElement {
@@ -11,7 +12,7 @@ export default class BRating extends LitElement implements BananaFormElement {
 
   static styles?: CSSResultGroup = styles;
 
-  private readonly defaultSymbol = html`
+  readonly defaultSymbol = `
     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
       <path
         fill-rule="evenodd"
@@ -50,10 +51,10 @@ export default class BRating extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   required = false;
 
-  @property({ attribute: false })
+  @property()
   character = this.defaultSymbol;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'half-allowed' })
   halfAllowed = false;
 
   @property({ type: Boolean, reflect: true })
@@ -100,14 +101,26 @@ export default class BRating extends LitElement implements BananaFormElement {
   }
 
   private _handleClick() {
-    this.value = this._value;
+    this._handleChange();
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
     if (event.key === 'Space' || event.key === 'Enter') {
       event.preventDefault();
-      this.value = this._value;
+      this._handleChange();
     }
+  }
+
+  private _handleChange() {
+    const value = this._value;
+    if (this.controlled) {
+      this._value = this.value;
+    } else {
+      this.value = value;
+    }
+
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
+    this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
   private _getActiveRatingSymbolClassMap = (index: number) => {
@@ -126,7 +139,7 @@ export default class BRating extends LitElement implements BananaFormElement {
     }
 
     const width =
-      this._value > index + 1
+      this._value >= index + 1
         ? 100
         : this._value > index && this._value < index + 1
         ? Math.floor((this._value - Math.floor(this._value)) * 100) ?? 0
@@ -135,8 +148,18 @@ export default class BRating extends LitElement implements BananaFormElement {
     return `width: ${width}%;`;
   };
 
+  private _getAriaChecked = (index: number) => {
+    if (this.precision) {
+      return this._value > index ? 'true' : 'false';
+    } else {
+      return (this.halfAllowed && index + 0.5 <= this._value && index + 1 > this._value) || index + 1 <= this._value
+        ? 'true'
+        : 'false';
+    }
+  };
+
   protected firstUpdated(): void {
-    if (this.defaultValue > 0) {
+    if (this.defaultValue > 0 && !this.value) {
       this.value = this.defaultValue;
     }
   }
@@ -173,14 +196,15 @@ export default class BRating extends LitElement implements BananaFormElement {
         part="base"
         class=${classMap({ rating: true, 'rating--readonly': this.readonly, 'rating--disabled': this.disabled })}
       >
-        <ul class="rating__symbols" @mouseleave=${() => this._handleMouseLeave()}>
+        <ul class="rating__symbols" @mouseleave=${() => this._handleMouseLeave()} role="radiogroup">
           ${Array.from({ length: 5 }).map(
             (_, index) => html`
               <li
                 class="rating__symbol-container"
                 role="radio"
-                aria-checked="true"
+                aria-checked=${this._getAriaChecked(index)}
                 tabindex="0"
+                aria-label="star"
                 aria-posinset=${index + 1}
                 data-value=${index + 1}
                 @mouseenter=${() => this._handleMouseEnter(index)}
@@ -193,9 +217,9 @@ export default class BRating extends LitElement implements BananaFormElement {
                     class=${this._getActiveRatingSymbolClassMap(index)}
                     style=${ifDefined(this._getActiveRatingSymbolStyle(index))}
                   >
-                    ${this.character}
+                    ${unsafeHTML(this.character)}
                   </div>
-                  <div class="rating__symbol rating__symbol-background">${this.character}</div>
+                  <div class="rating__symbol rating__symbol-background">${unsafeHTML(this.character)}</div>
                 </div>
               </li>
             `,

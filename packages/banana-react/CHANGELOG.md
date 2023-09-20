@@ -1,5 +1,63 @@
 # @banana/banana-react
 
+## 1.10.13
+
+### Patch Changes
+
+- Some patch change of rating.
+- Updated dependencies
+  - banana-ui@1.10.13
+
+## 1.10.12
+
+### Patch Changes
+
+- Hotfix for button, a bug make the outline-button does not transparent.
+- Updated dependencies
+  - banana-ui@1.10.12
+
+## 1.10.11
+
+### Patch Changes
+
+- 74fb5e3: Doc and unit test for rating component.
+- 8818866: Avoid the hover on mobile of button component.
+- Updated dependencies [74fb5e3]
+- Updated dependencies [8818866]
+  - banana-ui@1.10.11
+
+## 1.10.10
+
+### Patch Changes
+
+- Fixed some bugs about rating component, and added unit test codes for it.
+- Updated dependencies
+  - banana-ui@1.10.10
+
+## 1.10.9
+
+### Patch Changes
+
+- Fixed a bug that cause an incorrect behavior when a collapse is default open but invisible.
+- Updated dependencies
+  - banana-ui@1.10.9
+
+## 1.10.8
+
+### Patch Changes
+
+- Fixed a style problem of carousel.
+- Updated dependencies
+  - banana-ui@1.10.8
+
+## 1.10.7
+
+### Patch Changes
+
+- Fixed some style problems of collapse.
+- Updated dependencies
+  - banana-ui@1.10.7
+
 ## 1.10.6
 
 ### Patch Changes
