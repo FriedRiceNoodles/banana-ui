@@ -1,5 +1,6 @@
 /**
  * title: 表单测试
+ * debug: true
  */
 
 import { Button, Rating } from '@banana/banana-react';
@@ -20,7 +21,7 @@ export default function FormTest() {
         }}
       >
         <Rating name="rating1" required defaultValue={4}></Rating>
-        <Rating name="rating2" halfAllowed></Rating>
+        <Rating name="rating2" halfAllowed required></Rating>
         <Rating name="rating-readonly" readonly></Rating>
         <Rating name="rating-disabled" disabled></Rating>
         <Rating
