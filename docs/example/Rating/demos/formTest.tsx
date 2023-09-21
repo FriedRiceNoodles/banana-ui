@@ -19,12 +19,10 @@ export default function FormTest() {
           }
         }}
       >
-        <Rating name="rating1" required value={3} defaultValue={4}></Rating>
-        <Rating name="rating2" halfAllowed value={2.5}></Rating>
-        <Rating name="rating-readonly" readonly value={2.5}></Rating>
-        <Rating name="rating-disabled" value={2.5} disabled></Rating>
-        {/* Some thing weird when using setControlledValue...
-        https://github.com/lit/lit/issues/4205 */}
+        <Rating name="rating1" required defaultValue={4}></Rating>
+        <Rating name="rating2" halfAllowed></Rating>
+        <Rating name="rating-readonly" readonly></Rating>
+        <Rating name="rating-disabled" disabled></Rating>
         <Rating
           name="rating-controlled"
           value={controlledValue}

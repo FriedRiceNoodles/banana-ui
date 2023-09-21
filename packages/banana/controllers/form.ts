@@ -147,7 +147,7 @@ export class FormController implements ReactiveController {
   }
 
   private _handleFormReset() {
-    const value = this.host.defaultValue || '';
+    const value = this.host.defaultValue ?? '';
     if (!this.host.controlled) {
       this.host.value = value;
     } else {
