@@ -1,5 +1,5 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, state } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import styles from './index.styles';
 import { BananaFormElement, FormController } from 'packages/banana/controllers/form';
 import { classMap } from 'lit/directives/class-map.js';
@@ -22,6 +22,9 @@ export default class BRating extends LitElement implements BananaFormElement {
       />
     </svg>
   `;
+
+  @query('input')
+  private _validationInput!: HTMLInputElement;
 
   @state()
   _hoveringIndex: number | undefined;
@@ -76,11 +79,11 @@ export default class BRating extends LitElement implements BananaFormElement {
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
-    return this.required ? this.value > 0 : true;
+    return this._validationInput.reportValidity();
   }
 
   checkValidity() {
-    return this.required ? this.value > 0 : true;
+    return this._validationInput.checkValidity();
   }
 
   private _handleMouseEnter(index: number) {
@@ -196,6 +199,11 @@ export default class BRating extends LitElement implements BananaFormElement {
         part="base"
         class=${classMap({ rating: true, 'rating--readonly': this.readonly, 'rating--disabled': this.disabled })}
       >
+        <input
+          class="rating__validation-input"
+          value=${this.value === 0 ? '' : this.value}
+          ?required=${this.required}
+        />
         <ul class="rating__symbols" @mouseleave=${() => this._handleMouseLeave()} role="radiogroup">
           ${Array.from({ length: 5 }).map(
             (_, index) => html`

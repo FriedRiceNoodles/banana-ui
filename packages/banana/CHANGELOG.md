@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.10.14
+
+### Patch Changes
+
+- Make rating able to show error message when the result of reportValidate() is false.
+
 ## 1.10.13
 
 ### Patch Changes

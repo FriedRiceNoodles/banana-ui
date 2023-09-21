@@ -6,11 +6,28 @@ export default [
   componentStyles,
   css`
     :host {
+      display: block;
       --banana-rating-symbol-color: rgb(${unsafeCSS(Colors.Orange4)});
       --banana-rating-symbol-background-color: rgb(${unsafeCSS(Colors.Gray3)});
       --banana-rating-symbol-size: 24px;
       --banana-rating-symbol-spacing: ${unsafeCSS(Spacings.SpacingXS)};
       line-height: 1;
+    }
+
+    .rating {
+      position: relative;
+      display: inline-block;
+    }
+
+    .rating__validation-input {
+      position: absolute;
+      visibility: hidden;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      width: 0;
+      height: 0;
     }
 
     .rating__symbols {

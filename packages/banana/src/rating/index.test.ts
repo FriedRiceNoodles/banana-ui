@@ -351,6 +351,7 @@ describe('b-rating', () => {
 
       // Then make it not empty then submit the form.
       rating.value = 3;
+      await rating.updateComplete;
       element.requestSubmit();
 
       // It should submit the form now.
