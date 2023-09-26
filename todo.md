@@ -9,6 +9,8 @@
 - modal
 - Tabs
 - Image
+- Radio
+- Checkbox
 
 ## 已有组件
 
@@ -61,9 +63,7 @@
 
 ### Rating
 
-- 表单相关的单元测试
-- onChange 等事件
-- disabled 模式
+- 键盘事件，a11y 支持
 
 # 构建流程
 

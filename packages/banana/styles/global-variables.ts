@@ -129,22 +129,31 @@ export const Variables = {
   InputFontSizeSmall: Fonts.FontSizeSmall,
   InputPaddingSmall: `0 ${Spacings.Spacing2XS}`,
   InputHeightSmall: '24px',
-  InputBorerRadiusSmall: '4px',
+  InputBorderRadiusSmall: '4px',
 
   InputFontSizeMedium: Fonts.FontSizeSmall,
   InputPaddingMedium: `${Spacings.Spacing3XS} ${Spacings.SpacingSmall}`,
   InputHeightMedium: '32px',
-  InputBorerRadiusMedium: '6px',
+  InputBorderRadiusMedium: '6px',
 
   InputFontSizeLarge: Fonts.FontSizeMedium,
   InputPaddingLarge: `${Spacings.Spacing2XS} ${Spacings.SpacingSmall}`,
   InputHeightLarge: '40px',
-  InputBorerRadiusLarge: '8px',
+  InputBorderRadiusLarge: '8px',
 
   /* Countdown */
   CountdownFontSize: Fonts.FontSizeXL,
   CountdownFontWeight: Fonts.FontWeightNormal,
   CountdownColor: `rgba(${Colors.Gray8}, 1)`,
+
+  /* Select */
+  SelectBorderRadius: '8px',
+  SelectListBoxShadow:
+    '0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05)',
+  SelectListPadding: Spacings.Spacing3XS,
+  SelectOptionPadding: `${Spacings.Spacing3XS} ${Spacings.SpacingSmall}`,
+  SelectOptionHoverBackgroundColor: `rgba(${Colors.Gray1}, 0.75)`,
+  SelectOptionSelectedBackgroundColor: `rgba(${Colors.Blue2}, 0.75)`,
 
   /* Transitions */
   TransitionVerySlow: '1000ms',

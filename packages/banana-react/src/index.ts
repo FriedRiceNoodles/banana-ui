@@ -11,6 +11,8 @@ import { Overlay } from './overlay';
 import { Popup } from './popup';
 import { Progress } from './progress';
 import { Rating } from './rating';
+import { Select } from './select';
+import { SelectOption } from './select-option';
 
 export {
   Button,
@@ -26,4 +28,6 @@ export {
   Popup,
   Progress,
   Rating,
+  Select,
+  SelectOption,
 };
