@@ -121,6 +121,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
   }
 
   protected firstUpdated(): void {
+    if (this.defaultValue !== undefined && !this.value) {
+      this.value = this.defaultValue;
+    }
+
     if (!this._select || !this._listbox) return;
 
     this._listbox.hidden = true;
