@@ -7,7 +7,7 @@ import React from 'react';
 
 export default function BasicUsage() {
   return (
-    <div>
+    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
       <Select>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>

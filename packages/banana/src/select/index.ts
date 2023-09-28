@@ -8,6 +8,7 @@ import { BananaFormElement, FormController } from 'packages/banana/controllers/f
 import '../button';
 import { autoUpdate, computePosition, ComputePositionConfig, flip, offset } from '@floating-ui/dom';
 import type BSelectOption from '../select-option';
+import { classMap } from 'lit/directives/class-map.js';
 
 @customElement('b-select')
 export default class BSelect extends LitElement implements BananaFormElement {
@@ -211,27 +212,35 @@ export default class BSelect extends LitElement implements BananaFormElement {
   }
 
   render() {
+    const currentOption = this._options.find((option) => option.value === this.value);
+
     return html`
       <div class="select">
-        <div class="select__selector" @click=${this.show}>
-          <b-button class="select__selector-trigger">
-            <span>${this.value}</span>
-            <svg
-              t="1682003769967"
-              class="default-expand-icon"
-              viewBox="0 0 1024 1024"
-              version="1.1"
-              xmlns="http://www.w3.org/2000/svg"
-              p-id="933"
-              width="16"
-              height="16"
-            >
-              <path
-                d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
-                fill="#666666"
-                p-id="934"
-              ></path></svg
-          ></b-button>
+        <div
+          class=${classMap({
+            select__selector: true,
+            'select__selector--disabled': this.disabled,
+            'select__selector--active': this.open,
+          })}
+          @click=${this.show}
+        >
+          <span>${currentOption?.innerHTML}</span>
+          <svg
+            t="1682003769967"
+            class="default-expand-icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="933"
+            width="16"
+            height="16"
+          >
+            <path
+              d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
+              fill="currentColor"
+              p-id="934"
+            ></path>
+          </svg>
         </div>
 
         <div class="select__listbox" part="listbox" role="listbox" @click=${this._handleListboxClick}>
