@@ -23,12 +23,11 @@ export default [
       display: flex;
       align-items: center;
       justify-content: space-between;
-
       padding: 0 12px;
       font-size: 14px;
       height: 32px;
-
       transition: all ${unsafeCSS(Var.TransitionFast)} ease;
+      user-select: none;
     }
 
     .select__selector:not(.select__selector--disabled):hover {
@@ -41,9 +40,22 @@ export default [
         inset 0px 0px 1px 0px var(--banana-color-primary-active, ${unsafeCSS(Var.ColorPrimaryActive)});
     }
 
+    .select-selector__title,
+    .select-selector__placeholder {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .select-selector__placeholder {
+      color: var(--banana-select-placeholder-color, ${unsafeCSS(Var.SelectCommonGray)});
+    }
+
     .default-expand-icon {
       margin-left: 4px;
       transform: rotate(90deg);
+      flex-shrink: 0;
+      color: var(--banana-select-expand-icon-color, ${unsafeCSS(Var.SelectCommonGray)});
     }
 
     .select__listbox {

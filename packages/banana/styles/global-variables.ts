@@ -149,7 +149,7 @@ export const Variables = {
   /* Select */
   SelectBorderRadius: '8px',
   // Used for border, expand icon, and placeholder, etc.
-  SelectCommonGray: `rgba(${Colors.Gray1}, 1)`,
+  SelectCommonGray: `rgba(${Colors.Gray4}, 1)`,
 
   SelectListBoxShadow:
     '0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05)',

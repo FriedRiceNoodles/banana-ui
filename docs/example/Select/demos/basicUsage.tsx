@@ -8,7 +8,7 @@ import React from 'react';
 export default function BasicUsage() {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-      <Select>
+      <Select placeholder="Choose a fruit" style={{ width: '150px' }}>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>
         <SelectOption value="orange">🍊 Orange</SelectOption>
@@ -19,7 +19,7 @@ export default function BasicUsage() {
         </SelectOption>
       </Select>
 
-      <Select defaultValue={'apple'}>
+      <Select defaultValue={'apple'} placeholder="Choose a fruit" style={{ width: '150px' }}>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>
         <SelectOption value="orange">🍊 Orange</SelectOption>

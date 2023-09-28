@@ -40,6 +40,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   controlled = false;
 
+  @property()
+  placeholder = '';
+
   // The distance from the selector to the listbox.
   @property({ type: Number, reflect: true })
   margin = 4;
@@ -224,7 +227,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
           })}
           @click=${this.show}
         >
-          <span>${currentOption?.innerHTML}</span>
+          ${this.value
+            ? html`<span class="select-selector__title">${currentOption?.innerHTML}</span>`
+            : html`<span class="select-selector__placeholder">${this.placeholder}</span>`}
           <svg
             t="1682003769967"
             class="default-expand-icon"
