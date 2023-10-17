@@ -12,6 +12,9 @@ export default class BSelectOption extends LitElement {
   @property({ type: Boolean, reflect: true })
   selected = false;
 
+  @property({ type: Boolean, reflect: true })
+  active = false;
+
   connectedCallback() {
     super.connectedCallback();
     this.setAttribute('role', 'option');

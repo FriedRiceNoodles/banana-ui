@@ -9,6 +9,7 @@ import '../button';
 import { autoUpdate, computePosition, ComputePositionConfig, flip, offset } from '@floating-ui/dom';
 import type BSelectOption from '../select-option';
 import { classMap } from 'lit/directives/class-map.js';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 
 @customElement('b-select')
 export default class BSelect extends LitElement implements BananaFormElement {
@@ -53,6 +54,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @state()
   open = false;
 
+  @state()
+  activeOption = '';
+
   @query('.select')
   _select: HTMLElement | undefined;
 
@@ -61,6 +65,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
   @queryAssignedElements({ selector: 'b-select-option' })
   _options!: Array<BSelectOption>;
+
+  private get _validOptions() {
+    return this._options.filter((option) => !option.disabled && option.value !== '');
+  }
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
@@ -75,10 +83,20 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
   show() {
     this.open = true;
+    // Make the selected option active.
+    this.activeOption = this.value;
+    // If there is no active option, the first option will be activated by default.
+    if (!this.activeOption) {
+      const firstOption = this._options.find((option) => !option.disabled && option.value !== '');
+      if (firstOption) {
+        this.activeOption = firstOption.value;
+      }
+    }
   }
 
   hide() {
     this.open = false;
+    this.activeOption = '';
   }
 
   private _onDocumentClick = (event: MouseEvent) => {
@@ -107,14 +125,105 @@ export default class BSelect extends LitElement implements BananaFormElement {
     });
   }
 
+  private _handleArrowUp() {
+    if (this.open) {
+      const index = this._options.findIndex((option) => option.value === this.activeOption);
+      if (index === -1) return;
+      // Allow loop and skip disabled or value-less options.
+      const findPrevOption = (index: number): BSelectOption => {
+        const prevOption = this._validOptions[index - 1];
+        if (!prevOption) {
+          return findPrevOption(this._validOptions.length);
+        }
+        return prevOption;
+      };
+      const prevOption = findPrevOption(index);
+      this.activeOption = prevOption.value;
+    } else {
+      this.show();
+    }
+  }
+
+  private _handleArrowDown() {
+    if (this.open) {
+      const index = this._options.findIndex((option) => option.value === this.activeOption);
+      if (index === -1) return;
+      // Allow loop and skip disabled or value-less options.
+      const findNextOption = (index: number): BSelectOption => {
+        const nextOption = this._validOptions[index + 1];
+        if (!nextOption) {
+          return findNextOption(0);
+        }
+        return nextOption;
+      };
+      const nextOption = findNextOption(index);
+      this.activeOption = nextOption.value;
+    } else {
+      this.show();
+    }
+  }
+
+  private _handleClick(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.open) {
+      this.hide();
+    } else {
+      this.show();
+    }
+  }
+
+  private _handleKeyDown(event: KeyboardEvent) {
+    switch (event.key) {
+      case 'Enter':
+        event.preventDefault();
+        if (this.open) {
+          const activeOption = this._options.find((option) => option.value === this.activeOption);
+          if (activeOption) {
+            this._handleChange(activeOption.value);
+          }
+          this.hide();
+        } else {
+          this.show();
+        }
+        break;
+      case 'Escape':
+        this.hide();
+        break;
+      case 'ArrowUp':
+        event.preventDefault();
+        this._handleArrowUp();
+        break;
+      case 'ArrowDown':
+        event.preventDefault();
+        this._handleArrowDown();
+        break;
+      default:
+        break;
+    }
+  }
+
   private _handleListboxClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
-    if (target.tagName.toLowerCase() !== 'b-select-option') return;
-    if ((target as BSelectOption).disabled) return;
+    const option = target.closest('b-select-option') as BSelectOption;
+    if (!option || option.disabled) return;
 
-    const value = (target as BSelectOption).value;
+    const value = option.value;
     this._handleChange(value);
     this.hide();
+  }
+
+  private _handleListboxMousemove(event: MouseEvent) {
+    const target = event.target as HTMLElement;
+    const option = target.closest('b-select-option') as BSelectOption;
+    if (!option || option.disabled) {
+      this.activeOption = '';
+    } else {
+      this.activeOption = option.value;
+    }
+  }
+
+  private _handleListboxMouseleave() {
+    this.activeOption = '';
   }
 
   private _handleChange(value: typeof this.value) {
@@ -194,10 +303,21 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
     if (changedProperties.has('value')) {
       for (const option of this._options) {
-        if (option.value === this.value && !option.disabled) {
+        // Empty value is not allowed.
+        if (option.value === this.value && !option.disabled && option.value !== '') {
           option.selected = true;
         } else {
           option.selected = false;
+        }
+      }
+    }
+
+    if (changedProperties.has('activeOption')) {
+      for (const option of this._options) {
+        if (option.value === this.activeOption && !option.disabled && option.value !== '') {
+          option.active = true;
+        } else {
+          option.active = false;
         }
       }
     }
@@ -225,10 +345,13 @@ export default class BSelect extends LitElement implements BananaFormElement {
             'select__selector--disabled': this.disabled,
             'select__selector--active': this.open,
           })}
-          @click=${this.show}
+          @click=${this._handleClick}
+          @keydown=${this._handleKeyDown}
+          @blur=${this.hide}
+          tabindex="0"
         >
           ${this.value
-            ? html`<span class="select-selector__title">${currentOption?.innerHTML}</span>`
+            ? html`<span class="select-selector__title">${unsafeHTML(currentOption?.innerHTML)}</span>`
             : html`<span class="select-selector__placeholder">${this.placeholder}</span>`}
           <svg
             t="1682003769967"
@@ -248,7 +371,14 @@ export default class BSelect extends LitElement implements BananaFormElement {
           </svg>
         </div>
 
-        <div class="select__listbox" part="listbox" role="listbox" @click=${this._handleListboxClick}>
+        <div
+          class="select__listbox"
+          part="listbox"
+          role="listbox"
+          @click=${this._handleListboxClick}
+          @mousemove=${this._handleListboxMousemove}
+          @mouseleave=${this._handleListboxMouseleave}
+        >
           <slot></slot>
         </div>
       </div>

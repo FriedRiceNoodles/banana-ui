@@ -14,7 +14,7 @@ export default [
       user-select: none;
     }
 
-    :host(:hover) {
+    :host([active]) {
       background-color: var(
         --banana-select-option-hover-background-color,
         ${unsafeCSS(Var.SelectOptionHoverBackgroundColor)}
@@ -31,10 +31,6 @@ export default [
     :host([disabled]) {
       opacity: 0.5;
       cursor: not-allowed;
-    }
-
-    :host([disabled]:hover) {
-      background-color: transparent;
     }
   `,
 ];

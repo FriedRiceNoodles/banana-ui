@@ -29,6 +29,14 @@ export default function BasicUsage() {
           🚫 Disabled
         </SelectOption>
       </Select>
+
+      <Select>
+        <SelectOption value="">我是value是空的</SelectOption>
+        <SelectOption value="">我是value也是空的</SelectOption>
+        <SelectOption value="1">
+          <h1>我包含了dom结构</h1>
+        </SelectOption>
+      </Select>
     </div>
   );
 }
