@@ -152,7 +152,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
       const findNextOption = (index: number): BSelectOption => {
         const nextOption = this._validOptions[index + 1];
         if (!nextOption) {
-          return findNextOption(0);
+          return findNextOption(-1);
         }
         return nextOption;
       };
