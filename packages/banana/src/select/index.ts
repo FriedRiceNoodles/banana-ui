@@ -51,6 +51,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   autoAdjustOverflow = true;
 
+  // Whether the width of the listbox is synchronized with the width of the selector.
+  @property({ type: Boolean, reflect: true, attribute: 'width-sync' })
+  widthSync = true;
+
   @state()
   open = false;
 
@@ -251,6 +255,12 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
       if (this.open) {
         this._listbox.hidden = false;
+
+        // Width sync.
+        if (this.widthSync) {
+          const width = this._select.getBoundingClientRect().width;
+          this._listbox.style.width = `${width}px`;
+        }
 
         this.cleanup?.();
         this.cleanup = autoUpdate(this._select, this._listbox, () => this._repositioning());

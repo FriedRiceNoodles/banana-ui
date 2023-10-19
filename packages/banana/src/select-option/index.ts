@@ -20,6 +20,7 @@ export default class BSelectOption extends LitElement {
     this.setAttribute('role', 'option');
     this.setAttribute('aria-selected', this.selected.toString());
     this.setAttribute('aria-disabled', this.disabled.toString());
+    this.setAttribute('title', this.innerText);
   }
 
   disconnectedCallback() {
@@ -30,7 +31,6 @@ export default class BSelectOption extends LitElement {
   value = '';
 
   willUpdate(changedProperties: PropertyValueMap<this>) {
-    super.willUpdate(changedProperties);
     if (changedProperties.has('selected')) {
       this.setAttribute('aria-selected', this.selected.toString());
     }
@@ -39,10 +39,15 @@ export default class BSelectOption extends LitElement {
     }
   }
 
+  private _handleSlotChange() {
+    // Set title attribute to the host element
+    this.setAttribute('title', this.innerText);
+  }
+
   render() {
     return html`
       <div class="option" part="base">
-        <slot></slot>
+        <slot @slotchange=${this._handleSlotChange}></slot>
       </div>
     `;
   }

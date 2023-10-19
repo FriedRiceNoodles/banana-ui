@@ -32,5 +32,11 @@ export default [
       opacity: 0.5;
       cursor: not-allowed;
     }
+
+    .option {
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   `,
 ];
