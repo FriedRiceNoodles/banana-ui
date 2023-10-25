@@ -5,6 +5,7 @@ import { Countdown } from './countdown';
 import { Divider } from './divider';
 import { Dropdown } from './dropdown';
 import { Input } from './input';
+import { Marquee } from './marquee';
 import { Menu } from './menu';
 import { MenuItem } from './menu-item';
 import { Overlay } from './overlay';
@@ -20,6 +21,7 @@ export {
   Divider,
   Dropdown,
   Input,
+  Marquee,
   Menu,
   MenuItem,
   Overlay,

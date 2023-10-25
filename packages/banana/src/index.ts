@@ -5,6 +5,7 @@ import BCountdown from './countdown';
 import BDivider from './divider';
 import BDropdown from './dropdown';
 import BInput from './input';
+import BMarquee from './marquee';
 import BMenu from './menu';
 import BMenuItem from './menu-item';
 import BOverlay from './overlay';
@@ -20,6 +21,7 @@ export {
   BDivider,
   BDropdown,
   BInput,
+  BMarquee,
   BMenu,
   BMenuItem,
   BOverlay,

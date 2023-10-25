@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.11.0
+
+### Minor Changes
+
+- New component——Marquee
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.11.0
+
 ## 1.10.14
 
 ### Patch Changes
