@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.11.0
+
+### Minor Changes
+
+- New component——Marquee
+
 ## 1.10.14
 
 ### Patch Changes
