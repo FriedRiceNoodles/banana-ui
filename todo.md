@@ -9,6 +9,7 @@
 - modal
 - Tabs
 - Image
+- Space
 
 ## 已有组件
 

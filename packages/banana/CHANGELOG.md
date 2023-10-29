@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.12.0
+
+### Minor Changes
+
+- New component: message
+
 ## 1.11.0
 
 ### Minor Changes
