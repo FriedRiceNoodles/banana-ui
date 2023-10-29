@@ -8,6 +8,7 @@ import { Input } from './input';
 import { Marquee } from './marquee';
 import { Menu } from './menu';
 import { MenuItem } from './menu-item';
+import { Message } from './message';
 import { Overlay } from './overlay';
 import { Popup } from './popup';
 import { Progress } from './progress';
@@ -24,6 +25,7 @@ export {
   Marquee,
   Menu,
   MenuItem,
+  Message,
   Overlay,
   Popup,
   Progress,
