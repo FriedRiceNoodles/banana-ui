@@ -11,6 +11,8 @@ export default [
       left: 50%;
       transform: translateX(-50%);
       z-index: 999;
+      width: max-content;
+      max-width: 90%;
     }
 
     .messages__box {

@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.12.2
+
+### Patch Changes
+
+- Optimize the styles of message.
+- Updated dependencies
+  - banana-ui@1.12.2
+
 ## 1.12.1
 
 ### Patch Changes

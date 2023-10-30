@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.12.2
+
+### Patch Changes
+
+- Optimize the styles of message.
+
 ## 1.12.1
 
 ### Patch Changes
