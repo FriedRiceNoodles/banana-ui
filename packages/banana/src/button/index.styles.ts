@@ -15,6 +15,7 @@ export default [
     /* Block */
     :host([block]) {
       display: block;
+      width: 100%;
     }
 
     .button {
