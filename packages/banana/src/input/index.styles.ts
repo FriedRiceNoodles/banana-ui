@@ -7,6 +7,7 @@ export default [
   css`
     :host {
       display: block;
+      width: 100%;
     }
 
     .input__wrapper {
