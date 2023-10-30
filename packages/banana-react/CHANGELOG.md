@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.12.1
+
+### Patch Changes
+
+- countdown component add new part that includes it's index in separate mode
+- Updated dependencies
+  - banana-ui@1.12.1
+
 ## 1.12.0
 
 ### Minor Changes
