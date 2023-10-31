@@ -9,6 +9,7 @@ export default [
       line-height: var(--banana-marquee-line-height, ${unsafeCSS(Var.LineHeightDense)});
       color: var(--banana-marquee-color);
       font-size: var(--banana-marquee-font-size);
+      overflow: hidden;
     }
 
     .marquee {

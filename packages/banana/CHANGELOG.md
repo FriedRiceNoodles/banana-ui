@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.12.3
+
+### Patch Changes
+
+- Fixed a bug of marquee which cause unexpected overflow in a flex box.
+
 ## 1.12.2
 
 ### Patch Changes
