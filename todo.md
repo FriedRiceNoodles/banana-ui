@@ -11,6 +11,7 @@
 - Image
 - Radio
 - Checkbox
+- Space
 
 ## 已有组件
 

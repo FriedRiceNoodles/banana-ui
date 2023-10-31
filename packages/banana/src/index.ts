@@ -5,8 +5,10 @@ import BCountdown from './countdown';
 import BDivider from './divider';
 import BDropdown from './dropdown';
 import BInput from './input';
+import BMarquee from './marquee';
 import BMenu from './menu';
 import BMenuItem from './menu-item';
+import BMessage from './message';
 import BOverlay from './overlay';
 import BPopup from './popup';
 import BProgress from './progress';
@@ -22,8 +24,10 @@ export {
   BDivider,
   BDropdown,
   BInput,
+  BMarquee,
   BMenu,
   BMenuItem,
+  BMessage,
   BOverlay,
   BPopup,
   BProgress,

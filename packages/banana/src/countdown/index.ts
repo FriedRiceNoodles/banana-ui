@@ -101,8 +101,8 @@ export default class BCountdown extends LitElement {
 
     const defaultContent = html` <span class="countdown countdown--default" part="base">${_time}</span> `;
 
-    const formattedItems = _timeDataObject.formattedTextArray.map((item) => {
-      return html`<span class="countdown__item" part="separate-item">${item}</span>`;
+    const formattedItems = _timeDataObject.formattedTextArray.map((item, index) => {
+      return html`<span class="countdown__item" part="separate-item separate-item-${index}">${item}</span>`;
     });
 
     const separateContent = html`

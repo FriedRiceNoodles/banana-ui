@@ -1,5 +1,35 @@
 # banana-ui
 
+## 1.12.3
+
+### Patch Changes
+
+- Fixed a bug of marquee which cause unexpected overflow in a flex box.
+
+## 1.12.2
+
+### Patch Changes
+
+- Optimize the styles of message.
+
+## 1.12.1
+
+### Patch Changes
+
+- countdown component add new part that includes it's index in separate mode
+
+## 1.12.0
+
+### Minor Changes
+
+- New component: message
+
+## 1.11.0
+
+### Minor Changes
+
+- New component——Marquee
+
 ## 1.10.14
 
 ### Patch Changes
