@@ -1,7 +1,7 @@
 import { CSSResultGroup, html, LitElement, type TemplateResult } from 'lit';
 import { customElement } from 'lit/decorators.js';
-import styles from './index.styles';
 import { classMap } from 'lit/directives/class-map.js';
+import styles from './index.styles';
 
 export type MessageType = 'success' | 'warning' | 'info' | 'error' | 'loading';
 
@@ -223,8 +223,8 @@ export default class BMessage extends LitElement {
 }
 
 // For CDN usage
-if (window && !window.BMessage) {
-  window.BMessage = BMessage;
+if (typeof globalThis !== 'undefined' && !('BMessage' in globalThis)) {
+  (globalThis as { [key: string]: unknown }).BMessage = BMessage;
 }
 
 declare global {
