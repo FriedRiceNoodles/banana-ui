@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.12.5
+
+### Patch Changes
+
+- change rollup build config
+
 ## 1.12.4
 
 ### Patch Changes

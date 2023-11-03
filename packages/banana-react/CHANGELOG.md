@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.12.5
+
+### Patch Changes
+
+- change rollup build config
+- Updated dependencies
+  - banana-ui@1.12.5
+
 ## 1.12.4
 
 ### Patch Changes
