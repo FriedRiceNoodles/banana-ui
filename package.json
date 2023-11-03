@@ -11,6 +11,7 @@
   ],
   "scripts": {
     "build": "father build",
+    "build:all": "cd packages/banana && pnpm run build && cd ../banana-react && pnpm run build",
     "build:watch": "father dev",
     "dev": "npm run dev:all",
     "dev:all": "cd packages/banana && npm run dev & cd packages/banana-react && npm run dev & dumi dev",
