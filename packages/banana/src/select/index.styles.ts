@@ -1,6 +1,6 @@
 import { css, unsafeCSS } from 'lit';
 import componentStyles from '../../styles/components.styles';
-import { Colors, Variables as Var } from '../../styles/global-variables';
+import { Variables as Var } from '../../styles/global-variables';
 
 export default [
   componentStyles,
@@ -57,14 +57,39 @@ export default [
       color: var(--banana-select-placeholder-color, ${unsafeCSS(Var.SelectCommonGray)});
     }
 
-    .default-expand-icon {
+    .select__selector-icon {
       position: absolute;
       right: 8px;
       top: 50%;
       margin-left: 4px;
-      transform: translateY(-50%) rotate(90deg);
       flex-shrink: 0;
+      transform: translateY(-50%);
+      transition: all ${unsafeCSS(Var.TransitionNormal)} ease;
+    }
+
+    .default-expand-icon {
+      transform: translateY(-50%) rotate(90deg);
       color: var(--banana-select-expand-icon-color, ${unsafeCSS(Var.SelectCommonGray)});
+    }
+
+    .clear-icon {
+      visibility: hidden;
+      opacity: 0;
+      color: var(--banana-select-clear-icon-color, ${unsafeCSS(Var.SelectIconColor)});
+    }
+
+    .clear-icon:hover {
+      color: var(--banana-select-clear-icon-hover-color, ${unsafeCSS(Var.SelectIconHoverColor)});
+    }
+
+    .select__selector--clearable:hover .default-expand-icon {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    .select__selector--clearable:hover .clear-icon {
+      visibility: visible;
+      opacity: 1;
     }
 
     .select__listbox {
@@ -121,12 +146,12 @@ export default [
       display: flex;
       align-items: center;
       flex-shrink: 0;
-      color: var(--banana-select-multiple-option-close-color, rgba(${unsafeCSS(Colors.Gray5)}));
+      color: var(--banana-select-multiple-option-close-color, ${unsafeCSS(Var.SelectIconColor)});
       transition: all ${unsafeCSS(Var.TransitionFast)} ease;
     }
 
     .select-selector__multiple-option-close:hover {
-      color: var(--banana-select-multiple-option-close-hover-color, rgba(${unsafeCSS(Colors.Gray9)}));
+      color: var(--banana-select-multiple-option-close-hover-color, ${unsafeCSS(Var.SelectIconHoverColor)});
     }
   `,
 ];

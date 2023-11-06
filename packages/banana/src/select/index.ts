@@ -71,6 +71,13 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   multiple = false;
 
+  @property({ type: Boolean, reflect: true })
+  clearable = false;
+
+  // Whether to hide the listbox when clearing the value(no matter the value is actually cleared or not).
+  @property({ type: Boolean, reflect: true, attribute: 'hide-on-clear' })
+  hideOnClear = true;
+
   @state()
   open = false;
 
@@ -89,6 +96,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
   private get _validOptions() {
     return this._options.filter((option) => !option.disabled && option.value !== '');
+  }
+
+  private get _isEmpty() {
+    return this.multiple ? (this.value as string[]).length === 0 : this.value === '';
   }
 
   // Pass the reportValidity() method to the form controller.
@@ -224,7 +235,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
         if (this.open) {
           const activeOption = this._options.find((option) => option.value === this.activeOption);
           if (activeOption) {
-            this._handleChange(activeOption.value);
+            this._handleOptionChoose(activeOption.value);
           }
           if (!this.multiple) {
             this.hide();
@@ -259,7 +270,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
     if (!option || option.disabled) return;
 
     const value = option.value;
-    this._handleChange(value);
+    this._handleOptionChoose(value);
     if (!this.multiple) {
       this.hide();
     }
@@ -273,30 +284,45 @@ export default class BSelect extends LitElement implements BananaFormElement {
     }
   }
 
-  private _handleMultipleOptionClose(event: MouseEvent) {
-    event.stopPropagation();
-    const target = event.target as HTMLElement;
-    const value = (target.closest('.select-selector__multiple-option-close') as HTMLElement).dataset.value;
-    if (!value) return;
-    this._handleChange(value);
-  }
-
-  private _handleChange(value: string) {
-    let newValue: typeof this.value;
+  private _handleOptionChoose(value: string) {
     if (this.multiple) {
+      let newValue: string[];
       if (this.value.includes(value)) {
         newValue = (this.value as string[]).filter((v) => v !== value);
       } else {
         newValue = [...this.value, value];
       }
+      this._handleChange(newValue);
     } else {
-      newValue = value;
+      this._handleChange(value);
     }
+  }
 
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: newValue } };
+  private _handleMultipleOptionClose(event: MouseEvent) {
+    event.stopPropagation();
+    const target = event.target as HTMLElement;
+    const value = (target.closest('.select-selector__multiple-option-close') as HTMLElement).dataset.value;
+    if (!value) return;
+    this._handleOptionChoose(value);
+  }
+
+  private _handleClearIconClick(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.multiple) {
+      this._handleChange([]);
+    } else {
+      this._handleChange('');
+    }
+    if (this.hideOnClear) {
+      this.hide();
+    }
+  }
+
+  private _handleChange(value: typeof this.value) {
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
     this.dispatchEvent(new CustomEvent('change', eventOptions));
     if (this.controlled) return;
-    this.value = newValue;
+    this.value = value;
   }
 
   protected firstUpdated(): void {
@@ -462,6 +488,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
             'select__selector--disabled': this.disabled,
             'select__selector--active': this.open,
             'select__selector--multiple': this.multiple,
+            'select__selector--clearable': this.clearable && !this._isEmpty,
           })}
           @click=${this._handleClick}
         >
@@ -472,7 +499,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
             : html`<span class="select-selector__placeholder">${this.placeholder}</span>`}
           <svg
             t="1682003769967"
-            class="default-expand-icon"
+            class="select__selector-icon default-expand-icon"
             viewBox="0 0 1024 1024"
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
@@ -484,6 +511,23 @@ export default class BSelect extends LitElement implements BananaFormElement {
               d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
               fill="currentColor"
               p-id="934"
+            ></path>
+          </svg>
+          <svg
+            t="1699238137610"
+            class="select__selector-icon clear-icon"
+            viewBox="0 0 1024 1024"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            p-id="1235"
+            width="12"
+            height="12"
+            @click=${this._handleClearIconClick}
+          >
+            <path
+              d="M512 949.333333C270.933333 949.333333 74.666667 753.066667 74.666667 512S270.933333 74.666667 512 74.666667 949.333333 270.933333 949.333333 512 753.066667 949.333333 512 949.333333z m-151.466667-292.266666c10.666667 10.666667 29.866667 12.8 42.666667 2.133333l2.133333-2.133333 104.533334-102.4 102.4 102.4 2.133333 2.133333c12.8 10.666667 32 8.533333 42.666667-2.133333 12.8-12.8 12.8-32 0-44.8L554.666667 509.866667l102.4-102.4 2.133333-2.133334c10.666667-12.8 8.533333-32-2.133333-42.666666s-29.866667-12.8-42.666667-2.133334l-2.133333 2.133334-102.4 102.4-102.4-102.4-2.133334-2.133334c-12.8-10.666667-32-8.533333-42.666666 2.133334-12.8 12.8-12.8 32 0 44.8l102.4 102.4-102.4 102.4-2.133334 2.133333c-10.666667 12.8-10.666667 32 0 42.666667z"
+              fill="currentColor"
+              p-id="1236"
             ></path>
           </svg>
         </div>

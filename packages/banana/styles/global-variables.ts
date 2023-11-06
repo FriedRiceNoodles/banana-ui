@@ -159,6 +159,8 @@ export const Variables = {
   SelectOptionSelectedBackgroundColor: `rgba(${Colors.Blue2}, 0.75)`,
   MultipleSelectOptionBackgroundColor: `rgba(${Colors.Gray1}, 0.65)`,
   MultipleSelectOptionBorderRadius: '4px',
+  SelectIconColor: `rgba(${Colors.Gray3}, 1)`,
+  SelectIconHoverColor: `rgba(${Colors.Gray8}, 1)`,
 
   /* Transitions */
   TransitionVerySlow: '1000ms',

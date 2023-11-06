@@ -12,6 +12,7 @@ demo:
 
 <code src="./demos/basicUsage.tsx"></code>
 <code src="./demos/Multiple.tsx"></code>
+<code src="./demos/Clearable.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
