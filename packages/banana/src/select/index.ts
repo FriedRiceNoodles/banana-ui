@@ -94,6 +94,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @query('.select__listbox')
   _listbox: HTMLElement | undefined;
 
+  @query('input')
+  private _validationInput!: HTMLInputElement;
+
   @queryAssignedElements({ selector: 'b-select-option' })
   _options!: Array<BSelectOption>;
 
@@ -107,11 +110,11 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
-    return this.required ? (this.value?.length || 0) > 0 : true;
+    return this._validationInput.reportValidity();
   }
 
   checkValidity() {
-    return this.required ? (this.value?.length || 0) > 0 : true;
+    return this._validationInput.checkValidity();
   }
 
   private cleanup: ReturnType<typeof autoUpdate> | undefined;
@@ -328,6 +331,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
     this.value = value;
   }
 
+  private _handleSlotChange() {
+    this.requestUpdate();
+  }
+
   protected firstUpdated(): void {
     if (this.defaultValue !== undefined && !this.value) {
       this.value = this.defaultValue;
@@ -484,7 +491,13 @@ export default class BSelect extends LitElement implements BananaFormElement {
       : nothing;
 
     return html`
-      <div class="select">
+      <div class="select" part="base">
+        <input
+          class="select__validation-input"
+          value=${this.multiple ? ((this.value || []) as string[]).join(' ') : (this.value as string)}
+          ?required=${this.required}
+        />
+
         <div
           class=${classMap({
             select__selector: true,
@@ -545,7 +558,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
           @click=${this._handleListboxClick}
           @mousemove=${this._handleListboxMousemove}
         >
-          <slot></slot>
+          <slot @slotchange=${this._handleSlotChange}></slot>
         </div>
       </div>
     `;

@@ -19,6 +19,17 @@ export default [
       position: relative;
     }
 
+    .select__validation-input {
+      position: absolute;
+      visibility: hidden;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      width: 0;
+      height: 0;
+    }
+
     .select__selector {
       border: var(--banana-select-selector-border, ${unsafeCSS(Var.SelectCommonGray)} solid 1px);
       box-sizing: border-box;

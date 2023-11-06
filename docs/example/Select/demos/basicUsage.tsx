@@ -19,7 +19,7 @@ export default function BasicUsage() {
         </SelectOption>
       </Select>
 
-      <Select defaultValue={'apple'} placeholder="Choose a fruit" style={{ width: '150px' }}>
+      <Select defaultValue={'pear'} placeholder="Choose a fruit" style={{ width: '150px' }}>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>
         <SelectOption value="orange">🍊 Orange</SelectOption>

@@ -9,7 +9,7 @@ import React from 'react';
 export default function Clearable() {
   return (
     <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-      <Select placeholder="Choose a fruit" style={{ width: '150px' }} clearable>
+      <Select placeholder="Choose a fruit" style={{ width: '100%' }} clearable>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>
         <SelectOption value="orange">🍊 Orange</SelectOption>
@@ -20,7 +20,7 @@ export default function Clearable() {
         </SelectOption>
       </Select>
 
-      <Select placeholder="Choose a fruit" style={{ width: '150px' }} multiple clearable>
+      <Select placeholder="Choose a fruit" style={{ width: '100%' }} multiple clearable>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>
         <SelectOption value="orange">🍊 Orange</SelectOption>
