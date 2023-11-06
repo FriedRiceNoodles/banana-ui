@@ -1,15 +1,13 @@
 /* eslint-disable lit-a11y/click-events-have-key-events */
-// TODO: A11y——keyboard support
 
-import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
-import styles from './index.styles';
-import { BananaFormElement, FormController } from 'packages/banana/controllers/form';
-import '../button';
 import { autoUpdate, computePosition, ComputePositionConfig, flip, offset } from '@floating-ui/dom';
-import type BSelectOption from '../select-option';
+import { CSSResultGroup, html, LitElement, nothing, PropertyValueMap } from 'lit';
+import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
+import { BananaFormElement, FormController } from 'packages/banana/controllers/form';
+import type BSelectOption from '../select-option';
+import styles from './index.styles';
 
 @customElement('b-select')
 export default class BSelect extends LitElement implements BananaFormElement {
@@ -20,10 +18,25 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property()
   name = '';
 
-  @property()
-  value = '';
+  // If multiple is true, the value will be an array.
+  // An array-type value property will be converted to a string-type attribute by joining with spaces.
+  // Otherwise we can't pass multiple values in the HTML.
+  @property({
+    converter: {
+      fromAttribute: (value: string) => value.split(' '),
+      toAttribute: (value: string[] | string) => (Array.isArray(value) ? value.join(' ') : value),
+    },
+  })
+  value: string | string[] = '';
 
-  @property({ reflect: true, attribute: 'default-value' })
+  @property({
+    reflect: true,
+    attribute: 'default-value',
+    converter: {
+      fromAttribute: (value: string) => value.split(' '),
+      toAttribute: (value: string[] | string) => (Array.isArray(value) ? value.join(' ') : value),
+    },
+  })
   defaultValue = '';
 
   @property()
@@ -55,9 +68,13 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true, attribute: 'width-sync' })
   widthSync = true;
 
+  @property({ type: Boolean, reflect: true })
+  multiple = false;
+
   @state()
   open = false;
 
+  // Only one option can be active at a time.
   @state()
   activeOption = '';
 
@@ -87,10 +104,18 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
   show() {
     this.open = true;
-    // Make the selected option active.
-    this.activeOption = this.value;
+    // Make the (first) selected option active.
+    if (this.multiple) {
+      const firstSelectedOption = this._options.find((option) => this.value.includes(option.value));
+      if (firstSelectedOption) {
+        this.activeOption = firstSelectedOption.value;
+      }
+    } else {
+      // Value will be a string if multiple is false.
+      this.activeOption = this.value as string;
+    }
     // If there is no active option, the first option will be activated by default.
-    if (!this.activeOption) {
+    if (!this.activeOption.length) {
       const firstOption = this._options.find((option) => !option.disabled && option.value !== '');
       if (firstOption) {
         this.activeOption = firstOption.value;
@@ -101,6 +126,20 @@ export default class BSelect extends LitElement implements BananaFormElement {
   hide() {
     this.open = false;
     this.activeOption = '';
+  }
+
+  // Disabled or value-less options are not allowed to be selected.
+  private _isOptionSelected(option: BSelectOption) {
+    if (this.multiple) {
+      return this.value.includes(option.value) && !option.disabled && option.value !== '';
+    } else {
+      return this.value === option.value && !option.disabled && option.value !== '';
+    }
+  }
+
+  // Disabled or value-less options are not allowed to be activated.
+  private _isActivedOption(option: BSelectOption) {
+    return this.activeOption === option.value && !option.disabled && option.value !== '';
   }
 
   private _onDocumentClick = (event: MouseEvent) => {
@@ -177,6 +216,8 @@ export default class BSelect extends LitElement implements BananaFormElement {
   }
 
   private _handleKeyDown(event: KeyboardEvent) {
+    event.stopPropagation();
+
     switch (event.key) {
       case 'Enter':
         event.preventDefault();
@@ -185,7 +226,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
           if (activeOption) {
             this._handleChange(activeOption.value);
           }
-          this.hide();
+          if (!this.multiple) {
+            this.hide();
+          }
         } else {
           this.show();
         }
@@ -206,6 +249,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
     }
   }
 
+  private _handleBlur() {
+    this.hide();
+  }
+
   private _handleListboxClick(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const option = target.closest('b-select-option') as BSelectOption;
@@ -213,28 +260,43 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
     const value = option.value;
     this._handleChange(value);
-    this.hide();
+    if (!this.multiple) {
+      this.hide();
+    }
   }
 
   private _handleListboxMousemove(event: MouseEvent) {
     const target = event.target as HTMLElement;
     const option = target.closest('b-select-option') as BSelectOption;
-    if (!option || option.disabled) {
-      this.activeOption = '';
-    } else {
+    if (option && !option.disabled) {
       this.activeOption = option.value;
     }
   }
 
-  private _handleListboxMouseleave() {
-    this.activeOption = '';
+  private _handleMultipleOptionClose(event: MouseEvent) {
+    event.stopPropagation();
+    const target = event.target as HTMLElement;
+    const value = (target.closest('.select-selector__multiple-option-close') as HTMLElement).dataset.value;
+    if (!value) return;
+    this._handleChange(value);
   }
 
-  private _handleChange(value: typeof this.value) {
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
+  private _handleChange(value: string) {
+    let newValue: typeof this.value;
+    if (this.multiple) {
+      if (this.value.includes(value)) {
+        newValue = (this.value as string[]).filter((v) => v !== value);
+      } else {
+        newValue = [...this.value, value];
+      }
+    } else {
+      newValue = value;
+    }
+
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: newValue } };
     this.dispatchEvent(new CustomEvent('change', eventOptions));
     if (this.controlled) return;
-    this.value = value;
+    this.value = newValue;
   }
 
   protected firstUpdated(): void {
@@ -314,7 +376,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
     if (changedProperties.has('value')) {
       for (const option of this._options) {
         // Empty value is not allowed.
-        if (option.value === this.value && !option.disabled && option.value !== '') {
+        if (this._isOptionSelected(option)) {
           option.selected = true;
         } else {
           option.selected = false;
@@ -324,7 +386,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
     if (changedProperties.has('activeOption')) {
       for (const option of this._options) {
-        if (option.value === this.activeOption && !option.disabled && option.value !== '') {
+        if (this._isActivedOption(option)) {
           option.active = true;
         } else {
           option.active = false;
@@ -336,16 +398,61 @@ export default class BSelect extends LitElement implements BananaFormElement {
   connectedCallback() {
     super.connectedCallback();
     document.addEventListener('click', this._onDocumentClick);
+    this.addEventListener('keydown', this._handleKeyDown);
+    this.addEventListener('blur', this._handleBlur);
+    this.setAttribute('tabindex', '0');
   }
 
   disconnectedCallback() {
     super.disconnectedCallback();
     document.removeEventListener('click', this._onDocumentClick);
+    this.removeEventListener('keydown', this._handleKeyDown);
+    this.removeEventListener('blur', this._handleBlur);
     this.cleanup?.();
   }
 
   render() {
-    const currentOption = this._options.find((option) => option.value === this.value);
+    const currentOptions = this.multiple
+      ? this._options.filter((option) => (this.value as string[]).includes(option.value))
+      : this._options.filter((option) => option.value === this.value);
+
+    const multipleOptions = this.multiple
+      ? html`
+          <div class="select-selector__multiple-options-container">
+            ${currentOptions.map(
+              (option) =>
+                html`
+                  <div class="select-selector__multiple-option">
+                    <span class="select-selector__multiple-option-text" title=${option.innerText}>
+                      ${option.innerText}
+                    </span>
+                    <span
+                      class="select-selector__multiple-option-close"
+                      data-value=${option.value}
+                      @click=${this._handleMultipleOptionClose}
+                    >
+                      <svg
+                        t="1699006460233"
+                        viewBox="0 0 1024 1024"
+                        version="1.1"
+                        xmlns="http://www.w3.org/2000/svg"
+                        p-id="1792"
+                        width="12"
+                        height="12"
+                        fill="currentColor"
+                      >
+                        <path
+                          d="M240.448 168l2.346667 2.154667 289.92 289.941333 279.253333-279.253333a42.666667 42.666667 0 0 1 62.506667 58.026666l-2.133334 2.346667-279.296 279.210667 279.274667 279.253333a42.666667 42.666667 0 0 1-58.005333 62.528l-2.346667-2.176-279.253333-279.253333-289.92 289.962666a42.666667 42.666667 0 0 1-62.506667-58.005333l2.154667-2.346667 289.941333-289.962666-289.92-289.92a42.666667 42.666667 0 0 1 57.984-62.506667z"
+                          p-id="1794"
+                        ></path>
+                      </svg>
+                    </span>
+                  </div>
+                `,
+            )}
+          </div>
+        `
+      : nothing;
 
     return html`
       <div class="select">
@@ -354,14 +461,14 @@ export default class BSelect extends LitElement implements BananaFormElement {
             select__selector: true,
             'select__selector--disabled': this.disabled,
             'select__selector--active': this.open,
+            'select__selector--multiple': this.multiple,
           })}
           @click=${this._handleClick}
-          @keydown=${this._handleKeyDown}
-          @blur=${this.hide}
-          tabindex="0"
         >
-          ${this.value
-            ? html`<span class="select-selector__title">${unsafeHTML(currentOption?.innerHTML)}</span>`
+          ${this.value.length
+            ? this.multiple
+              ? multipleOptions
+              : html`<span class="select-selector__title">${unsafeHTML(currentOptions[0]?.innerHTML)}</span>`
             : html`<span class="select-selector__placeholder">${this.placeholder}</span>`}
           <svg
             t="1682003769967"
@@ -370,8 +477,8 @@ export default class BSelect extends LitElement implements BananaFormElement {
             version="1.1"
             xmlns="http://www.w3.org/2000/svg"
             p-id="933"
-            width="16"
-            height="16"
+            width="12"
+            height="12"
           >
             <path
               d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
@@ -387,7 +494,6 @@ export default class BSelect extends LitElement implements BananaFormElement {
           role="listbox"
           @click=${this._handleListboxClick}
           @mousemove=${this._handleListboxMousemove}
-          @mouseleave=${this._handleListboxMouseleave}
         >
           <slot></slot>
         </div>

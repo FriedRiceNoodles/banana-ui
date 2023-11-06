@@ -157,6 +157,8 @@ export const Variables = {
   SelectOptionPadding: `${Spacings.Spacing3XS} ${Spacings.SpacingSmall}`,
   SelectOptionHoverBackgroundColor: `rgba(${Colors.Gray1}, 0.75)`,
   SelectOptionSelectedBackgroundColor: `rgba(${Colors.Blue2}, 0.75)`,
+  MultipleSelectOptionBackgroundColor: `rgba(${Colors.Gray1}, 0.65)`,
+  MultipleSelectOptionBorderRadius: '4px',
 
   /* Transitions */
   TransitionVerySlow: '1000ms',
