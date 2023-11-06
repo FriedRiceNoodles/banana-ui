@@ -8,7 +8,6 @@ export default [
     :host {
       cursor: pointer;
       display: block;
-      border-radius: var(--banana-select-border-radius, ${unsafeCSS(Var.SelectBorderRadius)});
       padding: var(--banana-select-option-padding, ${unsafeCSS(Var.SelectOptionPadding)});
       transition: background ${unsafeCSS(Var.TransitionNormal)} ease;
       user-select: none;

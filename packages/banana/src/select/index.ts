@@ -57,6 +57,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property()
   placeholder = '';
 
+  @property({ reflect: true })
+  size: 'small' | 'medium' | 'large' = 'medium';
+
   // The distance from the selector to the listbox.
   @property({ type: Number, reflect: true })
   margin = 4;
@@ -489,6 +492,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
             'select__selector--active': this.open,
             'select__selector--multiple': this.multiple,
             'select__selector--clearable': this.clearable && !this._isEmpty,
+            'select__selector--small': this.size === 'small',
+            'select__selector--medium': this.size === 'medium',
+            'select__selector--large': this.size === 'large',
           })}
           @click=${this._handleClick}
         >

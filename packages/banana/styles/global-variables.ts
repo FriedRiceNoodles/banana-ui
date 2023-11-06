@@ -147,10 +147,10 @@ export const Variables = {
   CountdownColor: `rgba(${Colors.Gray8}, 1)`,
 
   /* Select */
-  SelectBorderRadius: '8px',
   // Used for border, expand icon, and placeholder, etc.
   SelectCommonGray: `rgba(${Colors.Gray4}, 1)`,
 
+  SelectListBorderRadius: '6px',
   SelectListBoxShadow:
     '0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05)',
   SelectListPadding: Spacings.Spacing3XS,
@@ -161,6 +161,24 @@ export const Variables = {
   MultipleSelectOptionBorderRadius: '4px',
   SelectIconColor: `rgba(${Colors.Gray3}, 1)`,
   SelectIconHoverColor: `rgba(${Colors.Gray8}, 1)`,
+
+  SelectorFontSizeSmall: Fonts.FontSizeSmall,
+  SelectorPaddingSmall: '0 24px 0 12px',
+  SelectorHeightSmall: '24px',
+  SelectorBorderRadiusSmall: '4px',
+  MultipleSelectOptionHeightSmall: '16px',
+
+  SelectorFontSizeMedium: Fonts.FontSizeSmall,
+  SelectorPaddingMedium: '0 24px 0 12px',
+  SelectorHeightMedium: '32px',
+  SelectorBorderRadiusMedium: '6px',
+  MultipleSelectOptionHeightMedium: '24px',
+
+  SelectorFontSizeLarge: Fonts.FontSizeMedium,
+  SelectorPaddingLarge: '0 24px 0 12px',
+  SelectorHeightLarge: '40px',
+  SelectorBorderRadiusLarge: '8px',
+  MultipleSelectOptionHeightLarge: '32px',
 
   /* Transitions */
   TransitionVerySlow: '1000ms',
