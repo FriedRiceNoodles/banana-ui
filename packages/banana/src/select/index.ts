@@ -81,6 +81,9 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true, attribute: 'hide-on-clear' })
   hideOnClear = true;
 
+  @property({ type: Boolean, reflect: true, attribute: 'default-open' })
+  defaultOpen = false;
+
   @state()
   open = false;
 
@@ -336,6 +339,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
   }
 
   protected firstUpdated(): void {
+    if (this.defaultOpen) {
+      this.open = true;
+    }
+
     if (this.defaultValue !== undefined && !this.value) {
       this.value = this.defaultValue;
     }
