@@ -1,5 +1,21 @@
 # @banana/banana-react
 
+## 1.12.5
+
+### Patch Changes
+
+- change rollup build config
+- Updated dependencies
+  - banana-ui@1.12.5
+
+## 1.12.4
+
+### Patch Changes
+
+- Using globalThis instead of window.
+- Updated dependencies
+  - banana-ui@1.12.4
+
 ## 1.12.3
 
 ### Patch Changes

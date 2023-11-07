@@ -1,5 +1,17 @@
 # banana-ui
 
+## 1.12.5
+
+### Patch Changes
+
+- change rollup build config
+
+## 1.12.4
+
+### Patch Changes
+
+- Using globalThis instead of window.
+
 ## 1.12.3
 
 ### Patch Changes

@@ -223,8 +223,8 @@ export default class BMessage extends LitElement {
 }
 
 // For CDN usage
-if (window && !window.BMessage) {
-  window.BMessage = BMessage;
+if (typeof globalThis !== 'undefined' && !('BMessage' in globalThis)) {
+  (globalThis as { [key: string]: unknown }).BMessage = BMessage;
 }
 
 declare global {
