@@ -162,6 +162,10 @@ export const Variables = {
   SelectIconColor: `rgba(${Colors.Gray3}, 1)`,
   SelectIconHoverColor: `rgba(${Colors.Gray8}, 1)`,
 
+  SelectDisabledColor: `rgba(0, 0, 0, 0.25)`,
+  SelectDisabledBackgroundColor: `rgba(0, 0, 0, 0.03)`,
+  SelectDisabledBorderColor: `rgba(${Colors.Gray3}, 1})`,
+
   SelectorFontSizeSmall: Fonts.FontSizeSmall,
   SelectorPaddingSmall: '0 24px 0 12px',
   SelectorHeightSmall: '24px',

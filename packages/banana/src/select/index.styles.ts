@@ -19,6 +19,10 @@ export default [
       position: relative;
     }
 
+    .select--disabled {
+      cursor: not-allowed;
+    }
+
     .select__validation-input {
       position: absolute;
       visibility: hidden;
@@ -40,6 +44,13 @@ export default [
       transition: all ${unsafeCSS(Var.TransitionFast)} ease;
       user-select: none;
       position: relative;
+    }
+
+    .select__selector--disabled {
+      pointer-events: none;
+      color: var(--banana-select-disabled-color, ${unsafeCSS(Var.SelectDisabledColor)});
+      background-color: var(--banana-select-disabled-background-color, ${unsafeCSS(Var.SelectDisabledBackgroundColor)});
+      border-color: var(--banana-select-disabled-border-color, ${unsafeCSS(Var.SelectDisabledBorderColor)});
     }
 
     .select__selector--small {

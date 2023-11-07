@@ -348,10 +348,42 @@ export default class BSelect extends LitElement implements BananaFormElement {
   protected willUpdate(changedProperties: PropertyValueMap<this>): void {
     if (!this._select || !this._listbox) return;
 
+    // If select is disabled, hide the listbox.
+    if (changedProperties.has('disabled')) {
+      if (this.disabled) {
+        this.hide();
+      }
+    }
+
+    if (changedProperties.has('value')) {
+      for (const option of this._options) {
+        // Empty value is not allowed.
+        if (this._isOptionSelected(option)) {
+          option.selected = true;
+        } else {
+          option.selected = false;
+        }
+      }
+    }
+
+    if (changedProperties.has('activeOption')) {
+      for (const option of this._options) {
+        if (this._isActivedOption(option)) {
+          option.active = true;
+        } else {
+          option.active = false;
+        }
+      }
+    }
+  }
+
+  protected updated(changedProperties: PropertyValueMap<this>): void {
+    if (!this._select || !this._listbox) return;
+
     if (changedProperties.has('open')) {
       const eventOptions = { bubbles: false, cancelable: false, composed: true };
 
-      if (this.open) {
+      if (this.open && !this.disabled) {
         this._listbox.hidden = false;
 
         // Width sync.
@@ -407,27 +439,6 @@ export default class BSelect extends LitElement implements BananaFormElement {
       };
 
       window.requestAnimationFrame(step);
-    }
-
-    if (changedProperties.has('value')) {
-      for (const option of this._options) {
-        // Empty value is not allowed.
-        if (this._isOptionSelected(option)) {
-          option.selected = true;
-        } else {
-          option.selected = false;
-        }
-      }
-    }
-
-    if (changedProperties.has('activeOption')) {
-      for (const option of this._options) {
-        if (this._isActivedOption(option)) {
-          option.active = true;
-        } else {
-          option.active = false;
-        }
-      }
     }
   }
 
@@ -491,7 +502,13 @@ export default class BSelect extends LitElement implements BananaFormElement {
       : nothing;
 
     return html`
-      <div class="select" part="base">
+      <div
+        class=${classMap({
+          select: true,
+          'select--disabled': this.disabled,
+        })}
+        part="base"
+      >
         <input
           class="select__validation-input"
           value=${this.multiple ? ((this.value || []) as string[]).join(' ') : (this.value as string)}
