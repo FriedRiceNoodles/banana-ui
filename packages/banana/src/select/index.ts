@@ -23,7 +23,6 @@ export default class BSelect extends LitElement implements BananaFormElement {
   // Otherwise we can't pass multiple values in the HTML.
   @property({
     converter: {
-      fromAttribute: (value: string) => value.split(' '),
       toAttribute: (value: string[] | string) => (Array.isArray(value) ? value.join(' ') : value),
     },
   })
@@ -33,7 +32,6 @@ export default class BSelect extends LitElement implements BananaFormElement {
     reflect: true,
     attribute: 'default-value',
     converter: {
-      fromAttribute: (value: string) => value.split(' '),
       toAttribute: (value: string[] | string) => (Array.isArray(value) ? value.join(' ') : value),
     },
   })
@@ -64,12 +62,12 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Number, reflect: true })
   margin = 4;
 
-  @property({ type: Boolean, reflect: true })
-  autoAdjustOverflow = true;
+  @property({ type: Boolean, reflect: true, attribute: 'disable-auto-adjust-overflow' })
+  disableAutoAdjustOverflow = false;
 
   // Whether the width of the listbox is synchronized with the width of the selector.
-  @property({ type: Boolean, reflect: true, attribute: 'width-sync' })
-  widthSync = true;
+  @property({ type: Boolean, reflect: true, attribute: 'disable-width-sync' })
+  disableWidthSync = false;
 
   @property({ type: Boolean, reflect: true })
   multiple = false;
@@ -78,8 +76,8 @@ export default class BSelect extends LitElement implements BananaFormElement {
   clearable = false;
 
   // Whether to hide the listbox when clearing the value(no matter the value is actually cleared or not).
-  @property({ type: Boolean, reflect: true, attribute: 'hide-on-clear' })
-  hideOnClear = true;
+  @property({ type: Boolean, reflect: true, attribute: 'no-hide-on-clear' })
+  noHideOnClear = false;
 
   @property({ type: Boolean, reflect: true, attribute: 'default-open' })
   defaultOpen = false;
@@ -174,7 +172,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
   private _repositioning() {
     if (!this._select || !this._listbox) return;
     const middleware: ComputePositionConfig['middleware'] = [offset(this.margin)];
-    if (this.autoAdjustOverflow) middleware.push(flip());
+    if (!this.disableAutoAdjustOverflow) middleware.push(flip());
 
     void computePosition(this._select, this._listbox, {
       placement: 'bottom-start',
@@ -322,7 +320,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
     } else {
       this._handleChange('');
     }
-    if (this.hideOnClear) {
+    if (!this.noHideOnClear) {
       this.hide();
     }
   }
@@ -363,6 +361,10 @@ export default class BSelect extends LitElement implements BananaFormElement {
     }
 
     if (changedProperties.has('value')) {
+      if (this.multiple && typeof this.value === 'string') {
+        this.value = this.value.split(' ');
+      }
+
       for (const option of this._options) {
         // Empty value is not allowed.
         if (this._isOptionSelected(option)) {
@@ -394,7 +396,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
         this._listbox.hidden = false;
 
         // Width sync.
-        if (this.widthSync) {
+        if (!this.disableWidthSync) {
           const width = this._select.getBoundingClientRect().width;
           this._listbox.style.width = `${width}px`;
         }
@@ -518,7 +520,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
       >
         <input
           class="select__validation-input"
-          value=${this.multiple ? ((this.value || []) as string[]).join(' ') : (this.value as string)}
+          .value=${Array.isArray(this.value) ? this.value.join(', ') : this.value}
           ?required=${this.required}
         />
 
@@ -581,6 +583,8 @@ export default class BSelect extends LitElement implements BananaFormElement {
           role="listbox"
           @click=${this._handleListboxClick}
           @mousemove=${this._handleListboxMousemove}
+          aria-expanded=${this.open ? 'true' : 'false'}
+          aria-controls="listbox"
         >
           <slot @slotchange=${this._handleSlotChange}></slot>
         </div>
