@@ -3,12 +3,12 @@ import type BButton from '../src/button';
 
 export interface BananaFormElement extends LitElement {
   name: string;
-  value: string | number | boolean;
+  value: string | number | boolean | string[] | number[];
   disabled: boolean;
   required?: boolean;
   // When an element is controlled, it means that the value of the element is controlled by the parent component.
   controlled?: boolean;
-  defaultValue?: string | number | boolean;
+  defaultValue?: string | number | boolean | string[] | number[];
   form?: string;
 
   reportValidity: () => boolean;

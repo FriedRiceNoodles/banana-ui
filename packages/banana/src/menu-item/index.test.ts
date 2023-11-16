@@ -1,10 +1,11 @@
-import { fixture, html, expect } from '@open-wc/testing';
-import BMenuItem from '.';
+import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
+import BMenuItem from '.';
+import BMenu from '../menu';
 
 describe('b-menu-item', () => {
   it('accessibility tests', async () => {
-    const element = await fixture<BMenuItem>(html`
+    const element = await fixture<BMenu>(html`
       <b-menu>
         <b-menu-item>Option 1</b-menu-item>
         <b-menu-item>Option 2</b-menu-item>

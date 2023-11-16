@@ -13,6 +13,8 @@ import BOverlay from './overlay';
 import BPopup from './popup';
 import BProgress from './progress';
 import BRating from './rating';
+import BSelect from './select';
+import BSelectOption from './select-option';
 
 export {
   BButton,
@@ -30,4 +32,6 @@ export {
   BPopup,
   BProgress,
   BRating,
+  BSelect,
+  BSelectOption,
 };

@@ -35,21 +35,21 @@ export default [
       font-size: var(--banana-input-font-size-small, ${unsafeCSS(Var.InputFontSizeSmall)});
       min-height: var(--banana-input-height-small, ${unsafeCSS(Var.InputHeightSmall)});
       padding: var(--banana-input-padding-small, ${unsafeCSS(Var.InputPaddingSmall)});
-      border-radius: var(--banana-input-border-radius-small, ${unsafeCSS(Var.InputBorerRadiusSmall)});
+      border-radius: var(--banana-input-border-radius-small, ${unsafeCSS(Var.InputBorderRadiusSmall)});
     }
 
     .input__wrapper--medium {
       font-size: var(--banana-input-font-size-medium, ${unsafeCSS(Var.InputFontSizeMedium)});
       min-height: var(--banana-input-height-medium, ${unsafeCSS(Var.InputHeightMedium)});
       padding: var(--banana-input-padding-medium, ${unsafeCSS(Var.InputPaddingMedium)});
-      border-radius: var(--banana-input-border-radius-medium, ${unsafeCSS(Var.InputBorerRadiusMedium)});
+      border-radius: var(--banana-input-border-radius-medium, ${unsafeCSS(Var.InputBorderRadiusMedium)});
     }
 
     .input__wrapper--large {
       font-size: var(--banana-input-font-size-large, ${unsafeCSS(Var.InputFontSizeLarge)});
       min-height: var(--banana-input-height-large, ${unsafeCSS(Var.InputHeightLarge)});
       padding: var(--banana-input-padding-large, ${unsafeCSS(Var.InputPaddingLarge)});
-      border-radius: var(--banana-input-border-radius-large, ${unsafeCSS(Var.InputBorerRadiusLarge)});
+      border-radius: var(--banana-input-border-radius-large, ${unsafeCSS(Var.InputBorderRadiusLarge)});
     }
 
     .input__wrapper--disabled {

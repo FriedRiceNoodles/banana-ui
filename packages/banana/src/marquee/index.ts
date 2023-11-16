@@ -1,7 +1,7 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import styles from './index.styles';
 import { classMap } from 'lit/directives/class-map.js';
+import styles from './index.styles';
 
 @customElement('b-marquee')
 export default class BMarquee extends LitElement {

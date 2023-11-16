@@ -129,22 +129,60 @@ export const Variables = {
   InputFontSizeSmall: Fonts.FontSizeSmall,
   InputPaddingSmall: `0 ${Spacings.Spacing2XS}`,
   InputHeightSmall: '24px',
-  InputBorerRadiusSmall: '4px',
+  InputBorderRadiusSmall: '4px',
 
   InputFontSizeMedium: Fonts.FontSizeSmall,
   InputPaddingMedium: `${Spacings.Spacing3XS} ${Spacings.SpacingSmall}`,
   InputHeightMedium: '32px',
-  InputBorerRadiusMedium: '6px',
+  InputBorderRadiusMedium: '6px',
 
   InputFontSizeLarge: Fonts.FontSizeMedium,
   InputPaddingLarge: `${Spacings.Spacing2XS} ${Spacings.SpacingSmall}`,
   InputHeightLarge: '40px',
-  InputBorerRadiusLarge: '8px',
+  InputBorderRadiusLarge: '8px',
 
   /* Countdown */
   CountdownFontSize: Fonts.FontSizeXL,
   CountdownFontWeight: Fonts.FontWeightNormal,
   CountdownColor: `rgba(${Colors.Gray8}, 1)`,
+
+  /* Select */
+  // Used for border, expand icon, and placeholder, etc.
+  SelectCommonGray: `rgba(${Colors.Gray4}, 1)`,
+
+  SelectListBorderRadius: '6px',
+  SelectListBoxShadow:
+    '0 6px 16px 0 rgba(0, 0, 0, 0.08), 0 3px 6px -4px rgba(0, 0, 0, 0.12), 0 9px 28px 8px rgba(0, 0, 0, 0.05)',
+  SelectListPadding: Spacings.Spacing3XS,
+  SelectOptionPadding: `${Spacings.Spacing3XS} ${Spacings.SpacingSmall}`,
+  SelectOptionHoverBackgroundColor: `rgba(${Colors.Gray1}, 0.75)`,
+  SelectOptionSelectedBackgroundColor: `rgba(${Colors.Blue2}, 0.75)`,
+  MultipleSelectOptionBackgroundColor: `rgba(${Colors.Gray1}, 0.65)`,
+  MultipleSelectOptionBorderRadius: '4px',
+  SelectIconColor: `rgba(${Colors.Gray3}, 1)`,
+  SelectIconHoverColor: `rgba(${Colors.Gray8}, 1)`,
+
+  SelectDisabledColor: `rgba(0, 0, 0, 0.25)`,
+  SelectDisabledBackgroundColor: `rgba(0, 0, 0, 0.03)`,
+  SelectDisabledBorderColor: `rgba(${Colors.Gray3}, 1})`,
+
+  SelectorFontSizeSmall: Fonts.FontSizeSmall,
+  SelectorPaddingSmall: '0 24px 0 12px',
+  SelectorHeightSmall: '24px',
+  SelectorBorderRadiusSmall: '4px',
+  MultipleSelectOptionHeightSmall: '16px',
+
+  SelectorFontSizeMedium: Fonts.FontSizeSmall,
+  SelectorPaddingMedium: '0 24px 0 12px',
+  SelectorHeightMedium: '32px',
+  SelectorBorderRadiusMedium: '6px',
+  MultipleSelectOptionHeightMedium: '24px',
+
+  SelectorFontSizeLarge: Fonts.FontSizeMedium,
+  SelectorPaddingLarge: '0 24px 0 12px',
+  SelectorHeightLarge: '40px',
+  SelectorBorderRadiusLarge: '8px',
+  MultipleSelectOptionHeightLarge: '32px',
 
   /* Transitions */
   TransitionVerySlow: '1000ms',

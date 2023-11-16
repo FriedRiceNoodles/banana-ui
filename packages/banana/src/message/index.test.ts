@@ -1,7 +1,7 @@
 import { aTimeout, expect } from '@open-wc/testing';
+import sinon from 'sinon';
 import type BMessageElement from '.';
 import { type MessageType } from '.';
-import sinon from 'sinon';
 
 const BMessage = window.BMessage;
 
