@@ -226,6 +226,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
   private _handleClick(event: MouseEvent) {
     event.stopPropagation();
+    if (this.disabled) return;
     if (this.open) {
       this.hide();
     } else {
@@ -336,14 +337,23 @@ export default class BSelect extends LitElement implements BananaFormElement {
     this.requestUpdate();
   }
 
+  private _convertAttributeWhenMultiple() {
+    if (this.multiple && typeof this.value === 'string') {
+      this.value = this.value.length > 0 ? this.value.split(' ') : [];
+    }
+  }
+
   protected firstUpdated(): void {
-    if (this.defaultOpen) {
+    if (this.defaultOpen && !this.disabled) {
       this.open = true;
     }
 
     if (this.defaultValue !== undefined && !this.value) {
       this.value = this.defaultValue;
     }
+
+    // It should be after the default value is set.
+    this._convertAttributeWhenMultiple();
 
     if (!this._select || !this._listbox) return;
 
@@ -361,9 +371,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
     }
 
     if (changedProperties.has('value')) {
-      if (this.multiple && typeof this.value === 'string') {
-        this.value = this.value.split(' ');
-      }
+      this._convertAttributeWhenMultiple();
 
       for (const option of this._options) {
         // Empty value is not allowed.

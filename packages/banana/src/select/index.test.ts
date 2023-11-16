@@ -1,6 +1,7 @@
 import { expect, fixture, html } from '@open-wc/testing';
 import sinon from 'sinon';
 import BSelect from '.';
+import BSelectOption from '../select-option';
 
 describe('b-select', () => {
   it('accessibility tests', async () => {
@@ -60,7 +61,7 @@ describe('b-select', () => {
 
     it('should have correct values', () => {
       expect(element.name).to.equal('test');
-      expect(element.value).to.equal('test');
+      expect(element.value).to.deep.equal(['test']);
       expect(element.defaultValue).to.equal('default');
       expect(element.disabled).to.equal(true);
       expect(element.required).to.equal(true);
@@ -105,12 +106,333 @@ describe('b-select', () => {
 
       // And should close the listbox when click the selector again.
       selector.click();
-      // Wait for the animation to complete.
-      // Default animation duration is 150ms.
-      await new Promise((resolve) => setTimeout(resolve, 300));
-      expect(listbox?.hidden).to.equal(true);
+      expect(element.open).to.equal(false);
+    });
+
+    it('should close the listbox when click the outside of the select', async () => {
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+      const listbox = element.shadowRoot?.querySelector('.select__listbox') as HTMLElement;
+      expect(listbox?.hidden).to.equal(false);
+
+      // Click the outside of the select.
+      document.body.click();
+      expect(element.open).to.equal(false);
     });
   });
+
+  describe('when select is not multiple', () => {
+    it('should select the option when click it', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      // open the listbox
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+      expect(element.open).to.equal(true);
+
+      const option = element.querySelector('b-select-option') as BSelectOption;
+      option.click();
+      expect(element.value).to.equal('apple');
+      expect(element.open).to.equal(false);
+
+      // Click another option.
+      const option2 = element.querySelectorAll('b-select-option')[1] as BSelectOption;
+      option2.click();
+      expect(element.value).to.equal('banana');
+
+      // Click same option again.
+      option2.click();
+      expect(element.value).to.equal('banana');
+    });
+
+    it('should not change the value when click a disabled option', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana" disabled>Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      const availableOption = element.querySelector('b-select-option') as BSelectOption;
+      const disabledOption = element.querySelectorAll('b-select-option')[1] as BSelectOption;
+
+      availableOption.click();
+      expect(element.value).to.equal('apple');
+
+      // open the listbox
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+      expect(element.open).to.equal(true);
+
+      disabledOption.click();
+      expect(element.value).to.equal('apple');
+      expect(element.open).to.equal(true);
+    });
+  });
+
+  describe('when select is multiple', () => {
+    it('should correctly convert the value to array', async () => {
+      const element = await fixture<BSelect>(html` <b-select multiple value="test test2"></b-select> `);
+      // string attribute will be converted to array at _willUpdate().
+      await element.updateComplete;
+
+      expect(element.value).to.deep.equal(['test', 'test2']);
+
+      // default value
+      const element2 = await fixture<BSelect>(html` <b-select multiple default-value="test test2"></b-select> `);
+      await element2.updateComplete;
+
+      expect(element2.value).to.deep.equal(['test', 'test2']);
+    });
+
+    it('should select the option when click it', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select multiple>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      // open the listbox
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+      expect(element.open).to.equal(true);
+
+      const option = element.querySelector('b-select-option') as BSelectOption;
+      option.click();
+      expect(element.value).to.deep.equal(['apple']);
+      expect(element.open).to.equal(true);
+
+      // Click another option.
+      const option2 = element.querySelectorAll('b-select-option')[1] as BSelectOption;
+      option2.click();
+      expect(element.value).to.deep.equal(['apple', 'banana']);
+
+      // Click same option again.
+      option2.click();
+      expect(element.value).to.deep.equal(['apple']);
+    });
+
+    it('should not change the value when click a disabled option', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select multiple>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana" disabled>Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      const availableOption = element.querySelector('b-select-option') as BSelectOption;
+      const disabledOption = element.querySelectorAll('b-select-option')[1] as BSelectOption;
+
+      availableOption.click();
+      expect(element.value).to.deep.equal(['apple']);
+
+      // open the listbox
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+      expect(element.open).to.equal(true);
+
+      disabledOption.click();
+      expect(element.value).to.deep.equal(['apple']);
+      expect(element.open).to.equal(true);
+    });
+
+    it('should correctly render the selected options', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select multiple value="apple banana">
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+
+      // Open the listbox.
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+
+      const multipleOptionsContainer = element.shadowRoot?.querySelector(
+        '.select-selector__multiple-options-container',
+      ) as HTMLElement;
+      expect(multipleOptionsContainer?.children.length).to.equal(2);
+
+      // Should remove the option when click the close icon on multiple option.
+      const closeIconOnMultipleOption1 = multipleOptionsContainer?.children[0].querySelector(
+        '.select-selector__multiple-option-close',
+      ) as HTMLElement;
+      closeIconOnMultipleOption1.click();
+      await element.updateComplete;
+      expect(element.value).to.deep.equal(['banana']);
+      expect(multipleOptionsContainer?.children.length).to.equal(1);
+
+      // Listbox should still be open.
+      expect(element.open).to.equal(true);
+
+      // Click the selector again, then the listbox should be closed.
+      selector.click();
+      expect(element.open).to.equal(false);
+    });
+  });
+
+  describe('when select is disabled', () => {
+    it('should not open the listbox when click the selector', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select disabled>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+      expect(element.open).to.equal(false);
+    });
+
+    it('should close the listbox when disabled the select', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+      await element.updateComplete;
+      expect(element.open).to.equal(true);
+
+      element.disabled = true;
+      await element.updateComplete;
+      expect(element.open).to.equal(false);
+    });
+  });
+
+  it('should render the correct placeholder', async () => {
+    const element = await fixture<BSelect>(html`
+      <b-select placeholder="placeholder">
+        <b-select-option value="apple">Apple</b-select-option>
+        <b-select-option value="banana">Banana</b-select-option>
+        <b-select-option value="orange">Orange</b-select-option>
+      </b-select>
+    `);
+    const placeholder = element.shadowRoot?.querySelector('.select-selector__placeholder') as HTMLElement;
+    expect(placeholder).to.exist;
+    expect(placeholder.textContent).to.equal('placeholder');
+  });
+
+  it('should render the correct size', async () => {
+    const element = await fixture<BSelect>(html`
+      <b-select size="small">
+        <b-select-option value="apple">Apple</b-select-option>
+        <b-select-option value="banana">Banana</b-select-option>
+        <b-select-option value="orange">Orange</b-select-option>
+      </b-select>
+    `);
+    const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+    expect(selector).to.exist;
+    expect(selector.classList.contains('select__selector--small')).to.equal(true);
+
+    element.size = 'medium';
+    await element.updateComplete;
+    expect(selector.classList.contains('select__selector--medium')).to.equal(true);
+  });
+
+  describe('when select is clearable', () => {
+    it('should render the clear icon', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select clearable>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      const clearIcon = element.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      expect(clearIcon).to.exist;
+    });
+
+    it('should clear the value when click the clear icon', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select clearable value="apple">
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      element.open = true;
+      const clearIcon = element.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      // mouse event
+      clearIcon.dispatchEvent(new MouseEvent('click'));
+      expect(element.value).to.equal('');
+      // should close the listbox.
+      expect(element.open).to.equal(false);
+
+      // Multiple select.
+      const multipleElement = await fixture<BSelect>(html`
+        <b-select clearable multiple value="apple banana">
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      multipleElement.open = true;
+      const multipleClearIcon = multipleElement.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      multipleClearIcon.dispatchEvent(new MouseEvent('click'));
+      expect(multipleElement.value).to.deep.equal([]);
+      // should close the listbox.
+      expect(multipleElement.open).to.equal(false);
+    });
+
+    it('should not hide the listbox when click the clear icon if no-hide-on-clear is true', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select clearable no-hide-on-clear value="apple">
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      element.open = true;
+      const clearIcon = element.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      clearIcon.dispatchEvent(new MouseEvent('click'));
+      expect(element.open).to.equal(true);
+    });
+  });
+
+  describe('when select is default open', () => {
+    it('should open the listbox when rendered', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select default-open>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      expect(element.open).to.equal(true);
+    });
+
+    it('should not open the listbox when rendered if disabled', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select default-open disabled>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      expect(element.open).to.equal(false);
+    });
+  });
+
+  // todo: keyboard event tests
 
   describe('form', () => {
     it('a native form should be able to get the value of select', async () => {
