@@ -1,6 +1,6 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import BMarquee from '.';
 import { sendMouse } from '@web/test-runner-commands';
+import BMarquee from '.';
 
 describe('b-marquee', () => {
   it('accessibility tests', async () => {
