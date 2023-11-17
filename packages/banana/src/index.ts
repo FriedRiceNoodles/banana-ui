@@ -1,5 +1,6 @@
 import BButton from './button';
 import BCarousel from './carousel';
+import BCheckbox from './checkbox';
 import BCollapse from './collapse';
 import BCountdown from './countdown';
 import BDivider from './divider';
@@ -19,6 +20,7 @@ import BSelectOption from './select-option';
 export {
   BButton,
   BCarousel,
+  BCheckbox,
   BCollapse,
   BCountdown,
   BDivider,

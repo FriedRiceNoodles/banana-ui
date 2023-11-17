@@ -1,5 +1,6 @@
 import { Button } from './button';
 import { Carousel } from './carousel';
+import { Checkbox } from './checkbox';
 import { Collapse } from './collapse';
 import { Countdown } from './countdown';
 import { Divider } from './divider';
@@ -19,6 +20,7 @@ import { SelectOption } from './select-option';
 export {
   Button,
   Carousel,
+  Checkbox,
   Collapse,
   Countdown,
   Divider,
