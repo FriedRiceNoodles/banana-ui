@@ -15,6 +15,7 @@ import { Progress } from './progress';
 import { Rating } from './rating';
 import { Select } from './select';
 import { SelectOption } from './select-option';
+import { Stepper } from './stepper';
 
 export {
   Button,
@@ -34,4 +35,5 @@ export {
   Rating,
   Select,
   SelectOption,
+  Stepper,
 };
