@@ -184,6 +184,12 @@ export const Variables = {
   SelectorBorderRadiusLarge: '8px',
   MultipleSelectOptionHeightLarge: '32px',
 
+  /* Tooltip */
+  TooltipPadding: `${Spacings.Spacing3XS} ${Spacings.Spacing2XS}`,
+  TooltipBackgroundColor: `rgba(${Colors.Gray8}, 1)`,
+  TooltipFontSize: Fonts.FontSizeSmall,
+  TooltipBorderRadius: '4px',
+
   /* Transitions */
   TransitionVerySlow: '1000ms',
   TransitionSlow: '500ms',
