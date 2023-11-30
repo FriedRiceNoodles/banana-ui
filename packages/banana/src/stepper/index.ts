@@ -48,7 +48,7 @@ export default class BStepper extends LitElement implements BananaFormElement {
 
   @state() minusDisabled = false;
 
-  @state() addDisabled = false;
+  @state() plusDisabled = false;
 
   @state() preInputVal = this.value;
 
@@ -86,7 +86,7 @@ export default class BStepper extends LitElement implements BananaFormElement {
       }
 
       if (this.max) {
-        this.addDisabled = this.value >= this.max ? true : false;
+        this.plusDisabled = this.value >= this.max ? true : false;
       }
     }
   }
@@ -116,8 +116,8 @@ export default class BStepper extends LitElement implements BananaFormElement {
     this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
-  add() {
-    if (this.disabled || this.addDisabled) return;
+  plus() {
+    if (this.disabled || this.plusDisabled) return;
     const result = MathUtils.add(this.value, this.step);
     if (!this.max || (this.max && this.value < this.max && result <= this.max)) {
       this.value = result;
@@ -235,16 +235,16 @@ export default class BStepper extends LitElement implements BananaFormElement {
           />
         </div>
         <button
-          part="add_btn"
-          id="add_btn"
+          part="plus_btn"
+          id="plus_btn"
           class=${classMap({
             stepper__btn: true,
-            disabled: this.disabled || this.addDisabled,
+            disabled: this.disabled || this.plusDisabled,
           })}
-          @click=${this.add}
+          @click=${this.plus}
           role="none"
         >
-          <slot name="add">
+          <slot name="plus">
             <svg width="13" height="12" viewBox="0 0 13 12" fill="none" xmlns="http://www.w3.org/2000/svg">
               <mask
                 id="mask0_1476_10794"

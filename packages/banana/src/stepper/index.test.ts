@@ -106,10 +106,10 @@ describe('when set different input range', () => {
     const maxVal = '5';
     const element = await fixture<BStepper>(html`<b-stepper min="1" max=${maxVal} value=${currentVal}></b-stepper>`);
 
-    const addBtn = element.shadowRoot?.querySelector('#add_btn');
+    const addBtn = element.shadowRoot?.querySelector('#plus_btn');
     expect(addBtn?.className.includes('disabled')).to.be.true;
 
-    element.add();
+    element.plus();
     expect(element.value.toString()).equal(maxVal);
   });
 });
@@ -119,7 +119,7 @@ describe('when set other step in stepper element', () => {
     const defaultVal = '5';
     const step = '2';
     const element = await fixture<BStepper>(html`<b-stepper value=${defaultVal} step=${step}></b-stepper>`);
-    const addBtn = element.shadowRoot?.querySelector('#add_btn') as HTMLElement;
+    const addBtn = element.shadowRoot?.querySelector('#plus_btn') as HTMLElement;
 
     addBtn.click();
 
@@ -131,7 +131,7 @@ describe('when set other step in stepper element', () => {
     const defaultVal = '0.1';
     const step = '0.2';
     const element = await fixture<BStepper>(html`<b-stepper value=${defaultVal} step=${step}></b-stepper>`);
-    const addBtn = element.shadowRoot?.querySelector('#add_btn') as HTMLElement;
+    const addBtn = element.shadowRoot?.querySelector('#plus_btn') as HTMLElement;
 
     addBtn.click();
 
@@ -146,7 +146,7 @@ describe('when set other step in stepper element', () => {
     const element = await fixture<BStepper>(
       html`<b-stepper value=${defaultVal} step=${step} max=${maxVal}></b-stepper>`,
     );
-    const addBtn = element.shadowRoot?.querySelector('#add_btn') as HTMLElement;
+    const addBtn = element.shadowRoot?.querySelector('#plus_btn') as HTMLElement;
 
     addBtn.click();
 
@@ -158,7 +158,7 @@ describe('trigger change events', async () => {
   const element = await fixture<BStepper>(html`<b-stepper></b-stepper>`);
 
   it('should emit the change event when click add button', () => {
-    const addBtn = element.shadowRoot!.querySelector('#add_btn') as HTMLElement;
+    const addBtn = element.shadowRoot!.querySelector('#plus_btn') as HTMLElement;
     const spy = sinon.spy();
     element.addEventListener('change', spy);
 
