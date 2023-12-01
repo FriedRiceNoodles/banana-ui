@@ -86,5 +86,21 @@ export default [
       opacity: 0.4;
       pointer-events: none;
     }
+
+    .stepper__input::part(base) {
+      padding: 0;
+      border-width: 0;
+      box-shadow: none;
+    }
+
+    .stepper__input::part(input) {
+      width: 38px;
+      text-align: center;
+    }
+
+    .stepper__input::part(input)::-webkit-outer-spin-button,
+    .stepper__input::part(input)::-webkit-inner-spin-button {
+      -webkit-appearance: none;
+    }
   `,
 ];

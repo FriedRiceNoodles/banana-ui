@@ -50,8 +50,6 @@ export default class BStepper extends LitElement implements BananaFormElement {
 
   @state() plusDisabled = false;
 
-  @state() preInputVal = this.value;
-
   @state() _focusing = false;
 
   // Pass the reportValidity() method to the form controller.
@@ -72,15 +70,11 @@ export default class BStepper extends LitElement implements BananaFormElement {
   }
 
   protected firstUpdated(): void {
-    this.checkFallbackValue(this.input.value);
+    this.value = this.checkFallbackValue(this.input.value);
   }
 
   protected willUpdate(changedProperties: PropertyValueMap<this>): void {
     if (changedProperties.has('value')) {
-      if (changedProperties.get('value')) {
-        this.preInputVal = this.value;
-      }
-
       if (this.min) {
         this.minusDisabled = this.value <= this.min ? true : false;
       }
@@ -105,89 +99,89 @@ export default class BStepper extends LitElement implements BananaFormElement {
 
   minus() {
     if (this.disabled || this.minusDisabled) return;
-    const result = MathUtils.minus(this.value, this.step);
-    if (!this.min || (this.min && this.value > this.min && result >= this.min)) {
-      this.value = result;
+    const minusResult = MathUtils.minus(this.value, this.step);
+    let result;
+    if (!this.min || (this.min && this.value > this.min && minusResult >= this.min)) {
+      result = minusResult;
     } else {
-      this.value = this.min;
+      result = this.min;
     }
 
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: this.value } };
+    if (!this.controlled) {
+      this.value = result;
+    }
+
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: result } };
     this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
   plus() {
     if (this.disabled || this.plusDisabled) return;
-    const result = MathUtils.add(this.value, this.step);
-    if (!this.max || (this.max && this.value < this.max && result <= this.max)) {
-      this.value = result;
+    const plusResult = MathUtils.add(this.value, this.step);
+    let result;
+    if (!this.max || (this.max && this.value < this.max && plusResult <= this.max)) {
+      result = plusResult;
     } else {
-      this.value = this.max;
+      result = this.max;
     }
-
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: this.value } };
-    this.dispatchEvent(new CustomEvent('change', eventOptions));
-  }
-
-  private _inputChange(event: InputEventInit) {
-    const currentInputValue = event.data;
-    const value = this.input.value;
 
     if (!this.controlled) {
-      this.updateInputContent(value, currentInputValue);
-    }
-  }
-
-  private _inputBlur() {
-    const inputElValue = this.input.value;
-
-    if (!inputElValue || isNaN(Number(inputElValue))) {
-      this.value = this.min ? this.min : 0;
-
-      const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: this.value } };
-      this.dispatchEvent(new CustomEvent('change', eventOptions));
-      this.requestUpdate();
-      return;
+      this.value = result;
     }
 
-    this.checkFallbackValue(inputElValue);
-    this.requestUpdate();
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: this.value } };
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: result } };
     this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
-  private updateInputContent(inputElVal: string, currentInputValue?: string | null) {
-    const matchFormatRegex = /^(-|\+)?\d+(\.\d+)?$/g;
+  private _inputBlur(e: FocusEvent) {
+    const inputElValue = this.input.value;
 
-    const isInputValid = this.integer
-      ? !inputElVal || inputElVal === '-'
-      : !inputElVal ||
-        inputElVal === '-' ||
-        ((currentInputValue === '.' || currentInputValue === null) && inputElVal.split('.').length - 1 <= 1);
+    this._handleBlur(e);
 
-    if (isInputValid) {
+    if (!inputElValue || isNaN(Number(inputElValue))) {
+      const result = this.min ? this.min : 0;
+
+      if (this.value === result) {
+        return;
+      }
+
+      if (!this.controlled) {
+        this.value = result;
+      }
+
+      const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: result } };
+      this.dispatchEvent(new CustomEvent('change', eventOptions));
       return;
-    } else if (!matchFormatRegex.test(inputElVal)) {
-      this.value = this.preInputVal;
-      this.requestUpdate();
-      return;
-    } else {
-      this.checkFallbackValue(inputElVal);
     }
+
+    const result = this.checkFallbackValue(inputElValue);
+
+    if (this.value === result) {
+      return;
+    }
+
+    if (!this.controlled) {
+      this.value = result;
+    }
+
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: result } };
+    this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
   checkFallbackValue(inputElVal: string) {
+    let result;
     if (this.min && !this.max && Number(inputElVal) <= this.min) {
-      this.value = this.min;
+      result = this.min;
     } else if (this.max && !this.min && Number(inputElVal) >= this.max) {
-      this.value = this.max;
+      result = this.max;
     } else if (this.max && this.min) {
-      this.value =
+      result =
         Number(inputElVal) >= this.max ? this.max : Number(inputElVal) <= this.min ? this.min : Number(inputElVal);
     } else {
-      this.value = Number(inputElVal);
+      result = Number(inputElVal);
     }
-    this.requestUpdate();
+
+    return result;
   }
 
   render() {
@@ -222,17 +216,15 @@ export default class BStepper extends LitElement implements BananaFormElement {
             input__disabled: this.disabled,
           })}
         >
-          <input
+          <b-input
             part="stepper_input"
-            type="text"
+            type="number"
             .value=${live(this.value.toString())}
             class="stepper__input"
             ?disabled=${this.disabled}
             @focus=${this._handleFocus}
-            @blur=${this._handleBlur}
-            @input=${this._inputChange}
-            @change=${this._inputBlur}
-          />
+            @blur=${this._inputBlur}
+          ></b-input>
         </div>
         <button
           part="plus_btn"

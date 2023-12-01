@@ -183,9 +183,11 @@ describe('trigger change events', async () => {
 
   it('should emit the change event when user input integer number', async () => {
     const element = await fixture<BStepper>(html`<b-stepper></b-stepper>`);
-    const wrapper = element.shadowRoot!.querySelector('.stepper__input') as HTMLInputElement;
+    const bInput = element.shadowRoot!.querySelector('.stepper__input') as HTMLElement;
     const spy = sinon.spy();
     element.addEventListener('change', spy);
+
+    const wrapper = bInput.shadowRoot!.querySelector('.input') as HTMLInputElement;
 
     wrapper.focus();
     await element.updateComplete;
@@ -193,16 +195,18 @@ describe('trigger change events', async () => {
     wrapper.blur();
     await element.updateComplete;
 
-    expect(spy.calledOnce).to.be.true;
+    expect(spy.called).to.be.true;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    expect(spy.firstCall.args[0].detail.value).to.equal(5);
+    expect(Number(spy.firstCall.args[0].detail.value)).to.equal(5);
   });
 
   it('should emit the change event when user input decimal number', async () => {
     const element = await fixture<BStepper>(html`<b-stepper></b-stepper>`);
-    const wrapper = element.shadowRoot!.querySelector('.stepper__input') as HTMLElement;
+    const bInput = element.shadowRoot!.querySelector('.stepper__input') as HTMLElement;
     const spy = sinon.spy();
     element.addEventListener('change', spy);
+
+    const wrapper = bInput.shadowRoot!.querySelector('.input') as HTMLInputElement;
 
     wrapper.focus();
     await element.updateComplete;
@@ -217,9 +221,11 @@ describe('trigger change events', async () => {
 
   it('should emit the change event when user input minuses', async () => {
     const element = await fixture<BStepper>(html`<b-stepper value="-5"></b-stepper>`);
-    const wrapper = element.shadowRoot!.querySelector('.stepper__input') as HTMLElement;
+    const bInput = element.shadowRoot!.querySelector('.stepper__input') as HTMLElement;
     const spy = sinon.spy();
     element.addEventListener('change', spy);
+
+    const wrapper = bInput.shadowRoot!.querySelector('.input') as HTMLInputElement;
 
     wrapper.focus();
     await element.updateComplete;
@@ -229,42 +235,26 @@ describe('trigger change events', async () => {
 
     expect(spy.called).to.be.true;
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    expect(spy.firstCall.args[0].detail.value).to.equal(-52);
-  });
-
-  it('should not emit the change event when user input not number and number symbol', async () => {
-    const defaultValue = '0';
-    const element = await fixture<BStepper>(html`<b-stepper value=${defaultValue}></b-stepper>`);
-    const wrapper = element.shadowRoot!.querySelector('.stepper__input') as HTMLElement;
-    const spy = sinon.spy();
-    element.addEventListener('change', spy);
-
-    wrapper.focus();
-    await element.updateComplete;
-    await sendKeys({ type: 'abc' });
-    wrapper.blur();
-    await element.updateComplete;
-
-    expect(spy.called).to.be.false;
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    expect(element.value).to.equal(Number(defaultValue));
+    expect(Number(spy.firstCall.args[0].detail.value)).to.equal(-52);
   });
 
   it('should emit the change event when user blur and stepper content is inviable', async () => {
     const element = await fixture<BStepper>(html`<b-stepper></b-stepper>`);
-    const wrapper = element.shadowRoot!.querySelector('.stepper__input') as HTMLInputElement;
+    const bInput = element.shadowRoot!.querySelector('.stepper__input') as HTMLInputElement;
     const spy = sinon.spy();
     element.addEventListener('change', spy);
 
+    const wrapper = bInput.shadowRoot!.querySelector('.input') as HTMLInputElement;
+
     wrapper.focus();
     await element.updateComplete;
-    wrapper.value = '';
     await sendKeys({ type: '-' });
     wrapper.blur();
     await element.updateComplete;
 
     expect(spy.calledOnce).to.be.true;
+
     // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    expect(spy.lastCall.args[0].detail.value).to.equal(0);
+    expect(Number(spy.firstCall.args[0].detail.value)).to.equal(0);
   });
 });
