@@ -3,7 +3,7 @@
  * description: 使用`arrow`插槽给下拉菜单添加箭头。
  */
 
-import { Dropdown, Button, Divider, MenuItem } from '@banana/banana-react';
+import { Button, Divider, Dropdown, MenuItem } from '@banana/banana-react';
 import React from 'react';
 
 export default function Arrow() {
@@ -11,7 +11,7 @@ export default function Arrow() {
     <>
       <Dropdown margin={15} style={{ marginRight: '10px' }}>
         <Button>Hover me!</Button>
-        <div slot="drop" style={{ width: '380px', padding: '20px', boxSizing: 'border-box', background: '#f5f5f5' }}>
+        <div slot="drop" style={{ width: '380px', padding: '10px', boxSizing: 'border-box', background: '#ccc' }}>
           <MenuItem>Option 1</MenuItem>
           <MenuItem>Option 2</MenuItem>
           <Divider />
@@ -23,7 +23,7 @@ export default function Arrow() {
             position: 'absolute',
             width: '12px',
             height: '12px',
-            backgroundColor: '#f5f5f5',
+            backgroundColor: '#ccc',
             zIndex: '-1',
           }}
           className="arrow"
@@ -33,7 +33,7 @@ export default function Arrow() {
 
       <Dropdown margin={15} placement="topRight">
         <Button>topRight</Button>
-        <div slot="drop" style={{ width: '600px', background: '#f5f5f5' }}>
+        <div slot="drop" style={{ width: '600px', background: '#ccc' }}>
           <MenuItem>Option 1</MenuItem>
           <MenuItem>Option 2</MenuItem>
           <Divider />
@@ -45,7 +45,7 @@ export default function Arrow() {
             position: 'absolute',
             width: '12px',
             height: '12px',
-            backgroundColor: '#f5f5f5',
+            backgroundColor: '#ccc',
             zIndex: '-1',
           }}
           className="arrow"

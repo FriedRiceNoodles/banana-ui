@@ -16,6 +16,7 @@ import BRating from './rating';
 import BSelect from './select';
 import BSelectOption from './select-option';
 import BStepper from './stepper';
+import BTooltip from './tooltip';
 
 export {
   BButton,
@@ -36,4 +37,5 @@ export {
   BSelect,
   BSelectOption,
   BStepper,
+  BTooltip,
 };

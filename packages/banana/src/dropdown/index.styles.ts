@@ -1,12 +1,15 @@
-import { css, unsafeCSS } from 'lit';
+import { css } from 'lit';
 import componentStyles from '../../styles/components.styles';
-import { Variables as Var } from '../../styles/global-variables';
 
 export default [
   componentStyles,
   css`
     :host {
-      display: inline-block;
+      display: contents;
+    }
+
+    .dropdown {
+      display: contents;
     }
 
     .dropdown__content {
@@ -16,16 +19,6 @@ export default [
       left: 0;
       opacity: 0;
       z-index: 100;
-    }
-
-    .dropdown--disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .dropdown--disabled .dropdown__trigger,
-    .dropdown--disabled .dropdown__content {
-      pointer-events: none;
     }
   `,
 ];
