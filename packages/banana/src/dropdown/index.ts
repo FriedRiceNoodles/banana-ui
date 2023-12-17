@@ -211,7 +211,7 @@ export default class BDropdown extends LitElement {
   }
 
   protected firstUpdated(): void {
-    if (!this._trigger || !this._content) return;
+    if (!this._content) return;
 
     // Pass an `open` attribute directly is not allowed.
     this.open = false;

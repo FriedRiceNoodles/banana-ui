@@ -30,6 +30,7 @@
   },
   "dependencies": {
     "@floating-ui/dom": "^1.4.1",
+    "composed-offset-position": "^0.0.4",
     "lit": "^2.5.0"
   },
   "devDependencies": {

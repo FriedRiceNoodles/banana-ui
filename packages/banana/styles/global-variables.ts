@@ -189,6 +189,7 @@ export const Variables = {
   TooltipBackgroundColor: `rgba(${Colors.Gray8}, 1)`,
   TooltipFontSize: Fonts.FontSizeSmall,
   TooltipBorderRadius: '4px',
+  TooltipMaxWidth: '300px',
 
   /* Transitions */
   TransitionVerySlow: '1000ms',

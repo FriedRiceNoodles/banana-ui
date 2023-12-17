@@ -28,6 +28,16 @@ export default [
       color: var(--banana-tooltip-color, #fff);
       font-size: var(--banana-tooltip-font-size, ${unsafeCSS(Var.TooltipFontSize)});
       border-radius: var(--banana-tooltip-border-radius, ${unsafeCSS(Var.TooltipBorderRadius)});
+      width: max-content;
+      max-width: var(--banana-tooltip-max-width, ${unsafeCSS(Var.TooltipMaxWidth)});
+    }
+
+    .tooltip__default-arrow {
+      position: absolute;
+      width: 0;
+      height: 0;
+      border: 4px solid var(--banana-tooltip-background-color, ${unsafeCSS(Var.TooltipBackgroundColor)});
+      rotate: 45deg;
     }
   `,
 ];
