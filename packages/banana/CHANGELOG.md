@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.13.0
+
+### Minor Changes
+
+- New component——tooltip
+
 ## 1.12.5
 
 ### Patch Changes

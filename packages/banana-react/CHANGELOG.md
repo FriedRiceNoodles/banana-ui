@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.13.0
+
+### Minor Changes
+
+- New component——tooltip
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.13.0
+
 ## 1.12.5
 
 ### Patch Changes

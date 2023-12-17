@@ -14,7 +14,6 @@ demo:
 
 <code src="./demos/BasicUsage.tsx"></code>
 <code src="./demos/Placement.tsx"></code>
-<code src="./demos/Disabled.tsx"></code>
 <code src="./demos/Arrow.tsx"></code>
 <code src="./demos/triggerAction.tsx"></code>
 
@@ -26,7 +25,6 @@ demo:
 | margin          | trigger 与下拉内容的间距，单位是`px`                                | `number`                                                                      | 4            |
 | mouseEnterDelay | hover 模式下，鼠标移入 trigger 多久后展示下拉菜单的内容，单位是`ms` | `number`                                                                      | 100          |
 | mouseLeaveDelay | hover 模式下，鼠标移出下拉菜单多久后隐藏下拉菜单的内容，单位是`ms`  | `number`                                                                      | 100          |
-| disabled        | 禁用下拉菜单                                                        | `boolean`                                                                     | false        |
 | triggerAction   | 触发下拉菜单的方式                                                  | `click` \| `hover`                                                            | `hover`      |
 
 ## 事件 - Events

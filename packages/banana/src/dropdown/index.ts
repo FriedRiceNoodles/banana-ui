@@ -1,7 +1,7 @@
+import { arrow, computePosition, ComputePositionConfig, flip, offset, Side } from '@floating-ui/dom';
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
-import { ComputePositionConfig, computePosition, offset, flip, arrow, Side } from '@floating-ui/dom';
 import styles from './index.styles';
 
 type Placement = 'bottomLeft' | 'bottom' | 'bottomRight' | 'topLeft' | 'top' | 'topRight';
@@ -29,17 +29,16 @@ export default class BDropdown extends LitElement {
 
   static styles: CSSResultGroup = styles;
 
+  private _trigger: HTMLElement | undefined;
+
   @query('.dropdown__trigger')
-  _trigger: HTMLElement | undefined;
+  _triggerSlot: HTMLSlotElement | undefined;
 
   @query('.dropdown__content')
   _content: HTMLElement | undefined;
 
   @queryAssignedElements({ slot: 'arrow' })
   _arrowElements!: Array<HTMLElement>;
-
-  @property({ type: Boolean, reflect: true })
-  disabled = false;
 
   // The distance from the dropdown content to the trigger.
   @property({ type: Number, reflect: true })
@@ -111,6 +110,11 @@ export default class BDropdown extends LitElement {
   private _open() {
     this.open = true;
     this._repositioning();
+
+    if (this.triggerAction === 'click') {
+      // Listen click event on document to close dropdown.
+      document.addEventListener('click', this._onDocumentClick);
+    }
   }
 
   private _close() {
@@ -133,8 +137,6 @@ export default class BDropdown extends LitElement {
       this._close();
     } else {
       this._open();
-      // Listen click event on document to close dropdown.
-      document.addEventListener('click', this._onDocumentClick);
     }
   }
 
@@ -202,8 +204,14 @@ export default class BDropdown extends LitElement {
     }, this.mouseLeaveDelay);
   }
 
+  private _handleTriggerSlotChange() {
+    if (!this._triggerSlot) return;
+    this._trigger = this._triggerSlot?.assignedElements()[0] as HTMLElement;
+    this._trigger.setAttribute('tabindex', '0');
+  }
+
   protected firstUpdated(): void {
-    if (!this._trigger || !this._content) return;
+    if (!this._content) return;
 
     // Pass an `open` attribute directly is not allowed.
     this.open = false;
@@ -270,23 +278,24 @@ export default class BDropdown extends LitElement {
         class=${classMap({
           dropdown: true,
           'dropdown--open': this.open,
-          'dropdown--disabled': this.disabled,
         })}
-        placement=${this.placement}
         part="base"
       >
-        <div
+        <slot
           class="dropdown__trigger"
           @click=${this._onTriggerClick}
           @keydown=${this._onTriggerKeyDown}
           @mouseenter=${this._onTriggerMouseEnter}
           @mouseleave=${this._onTriggerMouseLeave}
           part="trigger"
-          tabindex=${this.disabled ? '-1' : '0'}
+          @slotchange=${this._handleTriggerSlotChange}
+        ></slot>
+        <div
+          class="dropdown__content"
+          @mouseenter=${this._onContentMouseEnter}
+          @mouseleave=${this._onContentMouseLeave}
+          part="drop"
         >
-          <slot></slot>
-        </div>
-        <div class="dropdown__content" @mouseenter=${this._onContentMouseEnter} @mouseleave=${this._onContentMouseLeave} part="drop">
           <slot name="drop"></slot>
           <slot name="arrow" ?hidden=${this._arrowElements[0] === undefined} class="arrowSlot"></slot>
         </div>
