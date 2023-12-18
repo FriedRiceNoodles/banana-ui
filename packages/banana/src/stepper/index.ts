@@ -154,7 +154,9 @@ export default class BStepper extends LitElement implements BananaFormElement {
       return;
     }
 
-    const result = this.checkFallbackValue(inputElValue);
+    const result = this.integer
+      ? Math.floor(this.checkFallbackValue(inputElValue))
+      : this.checkFallbackValue(inputElValue);
 
     if (this.value === result) {
       return;
