@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.13.1
+
+### Patch Changes
+
+- Change the fill parameter of carousel to disableFill.
+- Updated dependencies
+  - banana-ui@1.13.1
+
 ## 1.13.0
 
 ### Minor Changes
