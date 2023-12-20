@@ -89,5 +89,10 @@ export default [
       box-shadow: 0 0 0 var(--banana-input-height-large, ${unsafeCSS(Var.InputHeightLarge)})
         var(--banana-input-background-color, ${unsafeCSS(Var.InputBackgroundColor)}) inset !important;
     }
+
+    .input[type='number']::-webkit-outer-spin-button,
+    .input[type='number']::-webkit-inner-spin-button {
+      -webkit-appearance: var(--banana-input-number-spin-button, auto);
+    }
   `,
 ];
