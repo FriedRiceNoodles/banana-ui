@@ -87,6 +87,11 @@ export default [
       pointer-events: none;
     }
 
+    .stepper__input {
+      --banana-input-disabled-color: var(--banana-stepper-content-color, #212224);
+      --banana-input-number-spin-button: none;
+    }
+
     .stepper__input::part(base) {
       padding: 0;
       border-width: 0;
