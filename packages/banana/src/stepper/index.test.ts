@@ -14,6 +14,106 @@ describe('b-stepper', () => {
   });
 });
 
+describe('form', () => {
+  it('a native form should be able to get the value of b-stepper', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form>
+      <b-stepper name="test" value="1"></b-stepper>
+    </form>`);
+
+    // Should get correct form data.
+    const formData = new FormData(element);
+
+    expect(formData.get('test')).to.equal('1');
+  });
+
+  it('should not submit the form when a required b-stepper is empty', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form
+      @submit=${(event: Event) => {
+        event.preventDefault();
+      }}
+    >
+      <b-stepper name="test" required></b-stepper>
+    </form>`);
+    const BStepper = element.querySelector('b-stepper') as HTMLInputElement;
+    const spy = sinon.spy();
+    element.addEventListener('submit', spy);
+
+    console.log(BStepper.reportValidity());
+
+    element.requestSubmit();
+    expect(spy.called).to.equal(true);
+
+    // pass through change stepper value make it empty by js
+    BStepper.value = '';
+    element.requestSubmit();
+
+    // It should submit the form now.
+    expect(spy.calledOnce).to.equal(false);
+  });
+
+  it('a disabled b-stepper should not be a part of the form data, even if it has a name', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form
+      @submit=${(event: Event) => {
+        event.preventDefault();
+      }}
+    >
+      <b-stepper name="test" disabled value="0"></b-stepper>
+    </form>`);
+
+    // Should get correct form data.
+    const formData = new FormData(element);
+
+    expect(formData.get('test')).to.equal(null);
+  });
+
+  it('should be valid and submit the form when a empty required b-stepper is disabled', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form
+      @submit=${(event: Event) => {
+        event.preventDefault();
+      }}
+    >
+      <b-stepper name="test" required disabled></b-stepper>
+    </form>`);
+    const spy = sinon.spy();
+    element.addEventListener('submit', spy);
+
+    element.requestSubmit();
+    expect(spy.calledOnce).to.equal(true);
+  });
+
+  it('should be valid and submit the form when a required b-stepper is empty and the form is novaalidate', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form
+      novalidate
+      @submit=${(event: Event) => {
+        event.preventDefault();
+      }}
+    >
+      <b-stepper name="test" required></b-stepper>
+    </form>`);
+
+    const BStepper = element.querySelector('b-stepper') as HTMLInputElement;
+    BStepper.value = '';
+
+    const spy = sinon.spy();
+    element.addEventListener('submit', spy);
+
+    element.requestSubmit();
+    expect(spy.calledOnce).to.equal(true);
+  });
+
+  it('should become the default value when the form is reset', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form>
+      <b-stepper name="test" value="1" default-value="0"></b-stepper>
+    </form>`);
+    const BStepper = element.querySelector('b-stepper') as BStepper;
+
+    expect(BStepper.value).to.equal(1);
+
+    element.reset();
+    expect(BStepper.value).to.equal(0);
+  });
+});
+
 describe('when provided no parameters', async () => {
   const element = await fixture<BStepper>(html`<b-stepper></b-stepper>`);
 
