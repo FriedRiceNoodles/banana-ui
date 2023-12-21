@@ -46,11 +46,11 @@ export default class BStepper extends LitElement implements BananaFormElement {
 
   @query('.stepper__input') private input!: HTMLInputElement;
 
-  @state() minusDisabled = false;
+  @state() private minusDisabled = false;
 
-  @state() plusDisabled = false;
+  @state() private plusDisabled = false;
 
-  @state() _focusing = false;
+  @state() private _focusing = false;
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
