@@ -54,11 +54,11 @@ export default class BStepper extends LitElement implements BananaFormElement {
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
-    return this.required ? isNaN(Number(this.value)) : true;
+    return this.required ? !isNaN(Number(this.value)) : true;
   }
 
   checkValidity() {
-    return this.required ? isNaN(Number(this.value)) : true;
+    return this.required ? !isNaN(Number(this.value)) : true;
   }
 
   connectedCallback() {
@@ -70,7 +70,13 @@ export default class BStepper extends LitElement implements BananaFormElement {
   }
 
   protected firstUpdated(): void {
-    this.value = this.checkFallbackValue(this.input.value);
+    if (!this.value && this.defaultValue) {
+      const availableValue = this.checkFallbackValue(this.defaultValue.toString());
+      this.value = availableValue;
+      this.defaultValue = availableValue;
+    } else {
+      this.value = this.checkFallbackValue(this.input.value);
+    }
   }
 
   protected willUpdate(changedProperties: PropertyValueMap<this>): void {
