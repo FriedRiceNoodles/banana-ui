@@ -80,16 +80,13 @@ export default class BStepper extends LitElement implements BananaFormElement {
   }
 
   protected willUpdate(changedProperties: PropertyValueMap<this>): void {
-    // if (changedProperties.has('value')) {
     if (this.min) {
       this.minusDisabled = this.value <= this.min ? true : false;
     }
 
     if (this.max) {
       this.plusDisabled = this.value >= this.max ? true : false;
-      console.log('debug', this.value, this.value >= this.max ? true : false);
     }
-    // }
   }
 
   private _handleFocus(event: FocusEvent) {
