@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.13.2
+
+### Patch Changes
+
+- Prevent scrolling when overlay is opened in a better way.
+
 ## 1.13.1
 
 ### Patch Changes

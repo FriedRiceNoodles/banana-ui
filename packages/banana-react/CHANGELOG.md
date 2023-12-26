@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.13.2
+
+### Patch Changes
+
+- Prevent scrolling when overlay is opened in a better way.
+- Updated dependencies
+  - banana-ui@1.13.2
+
 ## 1.13.1
 
 ### Patch Changes
