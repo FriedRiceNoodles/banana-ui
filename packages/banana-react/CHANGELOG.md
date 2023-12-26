@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.13.3
+
+### Patch Changes
+
+- Version updated.
+- Updated dependencies
+  - banana-ui@1.13.3
+
 ## 1.13.2
 
 ### Patch Changes
