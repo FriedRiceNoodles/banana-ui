@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.14.0
+
+### Minor Changes
+
+- add stepper component
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.14.0
+
 ## 1.13.3
 
 ### Patch Changes

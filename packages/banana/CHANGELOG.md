@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.14.0
+
+### Minor Changes
+
+- add stepper component
+
 ## 1.13.3
 
 ### Patch Changes
