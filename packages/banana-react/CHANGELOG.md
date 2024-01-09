@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.14.1
+
+### Patch Changes
+
+- Updated babel config.
+- Updated dependencies
+  - banana-ui@1.14.1
+
 ## 1.14.0
 
 ### Minor Changes

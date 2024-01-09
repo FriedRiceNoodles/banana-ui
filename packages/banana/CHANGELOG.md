@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.14.1
+
+### Patch Changes
+
+- Updated babel config.
+
 ## 1.14.0
 
 ### Minor Changes
