@@ -38,8 +38,6 @@ describe('form', () => {
     const spy = sinon.spy();
     element.addEventListener('submit', spy);
 
-    console.log(BStepper.reportValidity());
-
     element.requestSubmit();
     expect(spy.called).to.equal(true);
 

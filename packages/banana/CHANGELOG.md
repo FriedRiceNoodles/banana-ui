@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.14.2
+
+### Patch Changes
+
+- Fix a Countdown bug causing an exception when the time is set to 0 in separate mode, resulting in missing separators.
+
 ## 1.14.1
 
 ### Patch Changes
