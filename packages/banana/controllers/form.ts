@@ -1,7 +1,7 @@
 import type { LitElement, ReactiveController, ReactiveControllerHost } from 'lit';
 import type BButton from '../src/button';
 
-export interface BananaFormElement extends LitElement {
+export interface BananaFormProperties {
   name: string;
   value: string | number | boolean | string[] | number[];
   disabled: boolean;
@@ -15,18 +15,70 @@ export interface BananaFormElement extends LitElement {
   checkValidity: () => boolean;
 }
 
-export class FormController implements ReactiveController {
-  host: ReactiveControllerHost & BananaFormElement;
-  form?: HTMLFormElement | null;
+export type BananaFormElement = LitElement & BananaFormProperties;
 
-  constructor(host: ReactiveControllerHost & BananaFormElement) {
+/**
+ * Example:
+ * ```ts
+ * const overriddenProperties = [
+ *  ['value', 'checked'],
+ *  ['defaultValue', 'defaultChecked'],
+ * ] as const;
+ * ```
+ *
+ * Tips: This is a TypeScript feature called "const assertions". Without it, the type of the array will be `readonly [string, string][]`.
+ * See https://www.typescriptlang.org/docs/handbook/release-notes/typescript-3-4.html#const-assertions
+ */
+export type OverriddenPropertiesType = ReadonlyArray<readonly [keyof BananaFormProperties, string]>;
+
+/**
+ * If the element overrides some properties, the type of the element should be `BananaFormElementWithOverriddenProperties`.
+ * Otherwise, the type of the element should be `BananaFormElement`.
+ * BananaFormElementWithOverriddenProperties should be passed a generic parameter, which is the type of the `overriddenProperties` variable,
+ * and it should be a readonly array of readonly tuples.
+ * You can see the example above(type `OverriddenPropertiesType`).
+ */
+export type BananaFormElementWithOverriddenProperties<OverriddenProperties extends OverriddenPropertiesType = []> =
+  Omit<BananaFormProperties, OverriddenProperties[number][0]> & {
+    [K in OverriddenProperties[number][1]]: BananaFormElement[OverriddenProperties[number][0]];
+  } & LitElement;
+
+export class FormController<T extends OverriddenPropertiesType> implements ReactiveController {
+  host: ReactiveControllerHost & (BananaFormElement | BananaFormElementWithOverriddenProperties<T>);
+  form?: HTMLFormElement | null;
+  overrideProperties: OverriddenPropertiesType;
+
+  constructor(
+    host: ReactiveControllerHost & (BananaFormElement | BananaFormElementWithOverriddenProperties<T>),
+    overriddenProperties: OverriddenPropertiesType = [],
+  ) {
     this.host = host;
     host.addController(this);
+    this.overrideProperties = overriddenProperties;
 
     this._handleFormData = this._handleFormData.bind(this);
     this._handleFormSubmit = this._handleFormSubmit.bind(this);
     this._handleFormReset = this._handleFormReset.bind(this);
     this._reportOrCheckFormValidity = this._reportOrCheckFormValidity.bind(this);
+  }
+
+  getProperty<Name extends keyof BananaFormProperties>(name: Name) {
+    const overriddenPropertyName = this.overrideProperties.find((item) => item[0] === name)?.[1];
+    return {
+      isOverridden: typeof overriddenPropertyName === 'string',
+      key: overriddenPropertyName ?? name,
+      value: this.host[name],
+    };
+  }
+
+  setProperty<Name extends keyof BananaFormProperties>(name: Name, value: BananaFormProperties[Name]) {
+    const overriddenPropertyName = this.overrideProperties.find((item) => item[0] === name)?.[1];
+    if (typeof overriddenPropertyName === 'string') {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      (this.host as BananaFormElementWithOverriddenProperties<any>)[overriddenPropertyName] = value;
+    } else {
+      (this.host as BananaFormProperties)[name] = value;
+    }
   }
 
   hostConnected() {
@@ -85,15 +137,13 @@ export class FormController implements ReactiveController {
 
   private _findForm() {
     const formItem = this.host;
+    const formId = this.getProperty('form').value;
     // If the form attribute is set, go find the form by ID.
-    if (formItem.hasAttribute('form') && formItem.getAttribute('form') !== '') {
+    if (formId) {
       const root = this.host.getRootNode() as ShadowRoot | Document;
-      const formId = formItem.getAttribute('form');
 
-      if (formId) {
-        const form = root.querySelector(`#${formId}`) as HTMLFormElement;
-        this._bindForm(form);
-      }
+      const form = root.querySelector(`#${formId}`) as HTMLFormElement;
+      this._bindForm(form);
     }
 
     // If the form attribute is not set, find the closest form.
@@ -124,9 +174,9 @@ export class FormController implements ReactiveController {
   }
 
   private _handleFormData(event: FormDataEvent) {
-    const name = this.host.name;
-    const value = this.host.value;
-    const disabled = this.host.disabled;
+    const name = this.getProperty('name').value;
+    const value = this.getProperty('value').value;
+    const disabled = this.getProperty('disabled').value;
 
     if (!disabled && typeof name === 'string' && name.length > 0 && typeof value !== 'undefined') {
       event.formData.append(name, value.toString());
@@ -134,9 +184,9 @@ export class FormController implements ReactiveController {
   }
 
   private _handleFormSubmit(event: Event) {
-    const disabled = this.host.disabled;
+    const disabled = this.getProperty('disabled').value;
     // Here is not the form's reportValidity() method, but the element's reportValidity() method.
-    const reportValidity = this.host.reportValidity.bind(this.host);
+    const reportValidity = this.getProperty('reportValidity').value.bind(this.host);
 
     if (this.form && !this.form.noValidate && !disabled && typeof reportValidity === 'function') {
       if (!reportValidity()) {
@@ -147,9 +197,9 @@ export class FormController implements ReactiveController {
   }
 
   private _handleFormReset() {
-    const value = this.host.defaultValue ?? '';
-    if (!this.host.controlled) {
-      this.host.value = value;
+    const value = this.getProperty('defaultValue').value ?? '';
+    if (!this.getProperty('controlled').value) {
+      this.setProperty('value', value);
     } else {
       const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
       this.host.dispatchEvent(new CustomEvent('change', eventOptions));

@@ -1,11 +1,19 @@
 import { CSSResultGroup, html, LitElement } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
-import { BananaFormElement, FormController } from 'packages/banana/controllers/form';
+import { BananaFormElementWithOverriddenProperties, FormController } from 'packages/banana/controllers/form';
 import styles from './index.styles';
 
+const overriddenProperties = [
+  ['value', 'checked'],
+  ['defaultValue', 'defaultChecked'],
+] as const;
+
 @customElement('b-checkbox')
-export default class BCheckbox extends LitElement implements BananaFormElement {
-  private readonly formController = new FormController(this);
+export default class BCheckbox
+  extends LitElement
+  implements BananaFormElementWithOverriddenProperties<typeof overriddenProperties>
+{
+  private readonly formController = new FormController<typeof overriddenProperties>(this, overriddenProperties);
 
   static styles?: CSSResultGroup = styles;
 
@@ -13,10 +21,10 @@ export default class BCheckbox extends LitElement implements BananaFormElement {
   name = '';
 
   @property()
-  value = '';
+  checked = '';
 
-  @property({ reflect: true, attribute: 'default-value' })
-  defaultValue = '';
+  @property({ reflect: true, attribute: 'default-checked' })
+  defaultChecked = '';
 
   @property()
   form: string | undefined;
@@ -35,11 +43,15 @@ export default class BCheckbox extends LitElement implements BananaFormElement {
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
-    return this.required ? (this.value?.length || 0) > 0 : true;
+    // return this.required ? (this.value?.length || 0) > 0 : true;
+    // todo: implement this
+    return true;
   }
 
   checkValidity() {
-    return this.required ? (this.value?.length || 0) > 0 : true;
+    // return this.required ? (this.value?.length || 0) > 0 : true;
+    // todo: implement this
+    return true;
   }
 
   private _handleChange() {
