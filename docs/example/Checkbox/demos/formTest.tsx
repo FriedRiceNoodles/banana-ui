@@ -20,7 +20,7 @@ export default function FormTest() {
           }
         }}
       >
-        <Checkbox name="rating1" required defaultChecked>
+        <Checkbox name="checkbox1" required defaultChecked>
           required
         </Checkbox>
         <Checkbox name="checkbox-readonly" readonly>
@@ -30,7 +30,7 @@ export default function FormTest() {
           disabled
         </Checkbox>
         <Checkbox
-          name="rating-controlled"
+          name="checkbox-controlled"
           checked={controlledValue}
           controlled
           onChange={(e: any) => {
