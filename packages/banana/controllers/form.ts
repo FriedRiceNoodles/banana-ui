@@ -63,11 +63,13 @@ export class FormController<T extends OverriddenPropertiesType> implements React
   }
 
   getProperty<Name extends keyof BananaFormProperties>(name: Name) {
-    const overriddenPropertyName = this.overrideProperties.find((item) => item[0] === name)?.[1];
+    const overriddenPropertyName = this.overrideProperties.find((item) => item[0] === name)?.[1] as Name;
     return {
       isOverridden: typeof overriddenPropertyName === 'string',
       key: overriddenPropertyName ?? name,
-      value: this.host[name],
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
+      value: this.host[overriddenPropertyName ?? name],
     };
   }
 

@@ -15,6 +15,7 @@ demo:
 <code src="./demos/disabled.tsx"></code>
 <code src="./demos/readonly.tsx"></code>
 <code src="./demos/indeterminate.tsx"></code>
+<code src="./demos/formTest.tsx"></code>
 
 ## 属性 - Attributes & Properties
 

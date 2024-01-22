@@ -50,15 +50,11 @@ export default class BCheckbox
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
-    // return this.required ? (this.value?.length || 0) > 0 : true;
-    // todo: implement this
-    return true;
+    return this.required ? this.checked : true;
   }
 
   checkValidity() {
-    // return this.required ? (this.value?.length || 0) > 0 : true;
-    // todo: implement this
-    return true;
+    return this.required ? this.checked : true;
   }
 
   private _handleChange() {
