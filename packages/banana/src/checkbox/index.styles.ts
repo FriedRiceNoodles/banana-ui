@@ -18,6 +18,17 @@ export default [
       position: relative;
     }
 
+    .checkbox__validation-input {
+      position: absolute;
+      visibility: hidden;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      z-index: -1;
+      width: 0;
+      height: 0;
+    }
+
     .checkbox__control {
       position: relative;
       display: inline-flex;

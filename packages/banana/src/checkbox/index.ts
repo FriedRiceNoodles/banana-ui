@@ -1,5 +1,5 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { BananaFormElementWithOverriddenProperties, FormController } from 'packages/banana/controllers/form';
 import styles from './index.styles';
@@ -17,6 +17,9 @@ export default class BCheckbox
   private readonly formController = new FormController<typeof overriddenProperties>(this, overriddenProperties);
 
   static styles?: CSSResultGroup = styles;
+
+  @query('input')
+  private _validationInput!: HTMLInputElement;
 
   @property()
   name = '';
@@ -50,11 +53,11 @@ export default class BCheckbox
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
-    return this.required ? this.checked : true;
+    return this._validationInput.reportValidity();
   }
 
   checkValidity() {
-    return this.required ? this.checked : true;
+    return this._validationInput.checkValidity();
   }
 
   private _handleChange() {
@@ -103,6 +106,7 @@ export default class BCheckbox
           // todo: implement this
         }}
       >
+        <input class="checkbox__validation-input" value=${this.checked ? '1' : ''} ?required=${this.required} />
         <span
           class=${classMap({
             checkbox__control: true,
