@@ -1,5 +1,6 @@
-import { CSSResultGroup, html, LitElement } from 'lit';
+import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { BananaFormElementWithOverriddenProperties, FormController } from 'packages/banana/controllers/form';
 import styles from './index.styles';
 
@@ -20,11 +21,11 @@ export default class BCheckbox
   @property()
   name = '';
 
-  @property()
-  checked = '';
+  @property({ reflect: true, type: Boolean })
+  checked = false;
 
-  @property({ reflect: true, attribute: 'default-checked' })
-  defaultChecked = '';
+  @property({ reflect: true, attribute: 'default-checked', type: Boolean })
+  defaultChecked = false;
 
   @property()
   form: string | undefined;
@@ -41,6 +42,12 @@ export default class BCheckbox
   @property({ type: Boolean, reflect: true })
   controlled = false;
 
+  @property({ reflect: true })
+  size: 'small' | 'medium' | 'large' = 'medium';
+
+  @property({ type: Boolean, reflect: true })
+  indeterminate = false;
+
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
     // return this.required ? (this.value?.length || 0) > 0 : true;
@@ -55,11 +62,18 @@ export default class BCheckbox
   }
 
   private _handleChange() {
-    const value = 'a value should be passed here';
-    // do something with the value...
+    if (this.disabled || this.readonly) return;
+    const checked = !this.checked;
+    if (!this.controlled) {
+      this.checked = checked;
+    }
 
-    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { checked } };
     this.dispatchEvent(new CustomEvent('change', eventOptions));
+  }
+
+  private _handleClick() {
+    this._handleChange();
   }
 
   connectedCallback() {
@@ -70,10 +84,41 @@ export default class BCheckbox
     super.disconnectedCallback();
   }
 
+  protected firstUpdated(_changedProperties: PropertyValueMap<this>): void {
+    if (!this.checked) {
+      this.checked = this.defaultChecked;
+    }
+  }
+
   render() {
     return html`
-      <div>
-        <slot></slot>
+      <div
+        class=${classMap({
+          checkbox: true,
+          'checkbox--checked': this.checked,
+          'checkbox--disabled': this.disabled,
+          'checkbox--readonly': this.readonly,
+          'checkbox--indeterminate': this.indeterminate,
+          [`checkbox--${this.size}`]: true,
+        })}
+        part="base"
+        @click=${this._handleClick}
+        @keydown=${() => {
+          // todo: implement this
+        }}
+      >
+        <span
+          class=${classMap({
+            checkbox__control: true,
+            'checkbox__control--checked': this.checked,
+            'checkbox__control--disabled': this.disabled,
+            'checkbox__control--readonly': this.readonly,
+            'checkbox__control--indeterminate': this.indeterminate,
+          })}
+        ></span>
+        <div class="checkbox__label">
+          <slot></slot>
+        </div>
       </div>
     `;
   }

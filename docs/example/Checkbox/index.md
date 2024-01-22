@@ -11,6 +11,10 @@ demo:
 ## 代码演示
 
 <code src="./demos/basicUsage.tsx"></code>
+<code src="./demos/sizes.tsx"></code>
+<code src="./demos/disabled.tsx"></code>
+<code src="./demos/readonly.tsx"></code>
+<code src="./demos/indeterminate.tsx"></code>
 
 ## 属性 - Attributes & Properties
 

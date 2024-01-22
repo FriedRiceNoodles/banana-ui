@@ -8,7 +8,7 @@ import React from 'react';
 export default function BasicUsage() {
   return (
     <div>
-      <Checkbox>New Component!</Checkbox>
+      <Checkbox>Checkbox</Checkbox>
     </div>
   );
 }

@@ -184,6 +184,15 @@ export const Variables = {
   SelectorBorderRadiusLarge: '8px',
   MultipleSelectOptionHeightLarge: '32px',
 
+  /* Checkbox */
+  CheckboxControlBorderColor: `rgba(${Colors.Gray4}, 1)`,
+  CheckboxSizeSmall: '12px',
+  CheckboxSizeMedium: '16px',
+  CheckboxSizeLarge: '20px',
+  CheckboxFontSizeSmall: Fonts.FontSizeSmall,
+  CheckboxFontSizeMedium: Fonts.FontSizeMedium,
+  CheckboxFontSizeLarge: Fonts.FontSizeLarge,
+
   /* Transitions */
   TransitionVerySlow: '1000ms',
   TransitionSlow: '500ms',
