@@ -19,6 +19,7 @@ const babelConfig = {
     setPublicClassFields: true,
   },
   exclude: 'node_modules/**',
+  extensions: ['.ts', '.js'],
 };
 
 const componentNames = fs

@@ -49,10 +49,6 @@ export default class BCountdown extends LitElement {
       // Clear previous timer
       this._timer && clearInterval(this._timer);
 
-      if (this.time === 0) {
-        return;
-      }
-
       this._startTime = Date.now();
       this._timeLeft = this.time;
 

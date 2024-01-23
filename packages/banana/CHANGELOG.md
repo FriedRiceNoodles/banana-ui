@@ -1,5 +1,47 @@
 # banana-ui
 
+## 1.14.2
+
+### Patch Changes
+
+- Fix a Countdown bug causing an exception when the time is set to 0 in separate mode, resulting in missing separators.
+
+## 1.14.1
+
+### Patch Changes
+
+- Updated babel config.
+
+## 1.14.0
+
+### Minor Changes
+
+- add stepper component
+
+## 1.13.3
+
+### Patch Changes
+
+- Version updated.
+
+## 1.13.2
+
+### Patch Changes
+
+- Prevent scrolling when overlay is opened in a better way.
+
+## 1.13.1
+
+### Patch Changes
+
+- Change the fill parameter of carousel to disableFill.
+
+## 1.13.0
+
+### Minor Changes
+
+- New component——tooltip
+
 ## 1.12.5
 
 ### Patch Changes
