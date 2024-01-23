@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.15.0
+
+### Minor Changes
+
+- New component--Checkbox
+
 ## 1.14.2
 
 ### Patch Changes

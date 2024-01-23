@@ -35,7 +35,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
       toAttribute: (value: string[] | string) => (Array.isArray(value) ? value.join(' ') : value),
     },
   })
-  defaultValue = '';
+  defaultValue: string | string[] = '';
 
   @property()
   form: string | undefined;
@@ -46,6 +46,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true })
   required = false;
 
+  // todo
   @property({ type: Boolean, reflect: true })
   readonly = false;
 

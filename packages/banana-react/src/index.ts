@@ -1,5 +1,6 @@
 import { Button } from './button';
 import { Carousel } from './carousel';
+import { Checkbox } from './checkbox';
 import { Collapse } from './collapse';
 import { Countdown } from './countdown';
 import { Divider } from './divider';
@@ -21,6 +22,7 @@ import { Tooltip } from './tooltip';
 export {
   Button,
   Carousel,
+  Checkbox,
   Collapse,
   Countdown,
   Divider,
