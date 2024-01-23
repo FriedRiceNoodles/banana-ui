@@ -1,5 +1,6 @@
 /**
  * title: 实现全选效果
+ * description: 如果你需要实现全选效果，`indeterminate` 属性应该可以帮到你。该属性唯一的作用是改变 Checkbox 的样式，不会影响 Checkbox 的选中(`checked`)状态。
  */
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */

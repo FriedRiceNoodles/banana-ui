@@ -43,7 +43,7 @@ export default [
       content: '';
       position: absolute;
       display: block;
-      border: 2px solid #fff;
+      border: 2px solid var(--banana-checkbox-control-checkmark-color, #fff);
       border-top: 0;
       border-left: 0;
       transform: rotate(45deg) scale(0) translate(-50%, -50%);

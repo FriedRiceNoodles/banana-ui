@@ -115,8 +115,9 @@ export default class BCheckbox
             'checkbox__control--readonly': this.readonly,
             'checkbox__control--indeterminate': this.indeterminate,
           })}
+          part="control"
         ></span>
-        <div class="checkbox__label">
+        <div class="checkbox__label" part="label">
           <slot></slot>
         </div>
       </div>
