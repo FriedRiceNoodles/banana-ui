@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.15.0
+
+### Minor Changes
+
+- New component--Checkbox
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.15.0
+
 ## 1.14.2
 
 ### Patch Changes
