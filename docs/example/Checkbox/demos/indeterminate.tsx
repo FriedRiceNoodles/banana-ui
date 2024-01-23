@@ -1,7 +1,8 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 /**
  * title: 实现全选效果
  */
+
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { Checkbox, Divider } from '@banana/banana-react';
 import React, { useState } from 'react';
