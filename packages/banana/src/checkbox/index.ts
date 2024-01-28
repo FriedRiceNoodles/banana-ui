@@ -75,6 +75,13 @@ export default class BCheckbox
     this._handleChange();
   }
 
+  private _handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._handleChange();
+    }
+  }
+
   connectedCallback() {
     super.connectedCallback();
   }
@@ -102,9 +109,8 @@ export default class BCheckbox
         })}
         part="base"
         @click=${this._handleClick}
-        @keydown=${() => {
-          // todo: implement this
-        }}
+        @keydown=${this._handleKeyDown}
+        tabindex=${this.disabled || this.readonly ? '-1' : '0'}
       >
         <input class="checkbox__validation-input" value=${this.checked ? '1' : ''} ?required=${this.required} />
         <span

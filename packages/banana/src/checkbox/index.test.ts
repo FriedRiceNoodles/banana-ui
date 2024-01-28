@@ -1,4 +1,5 @@
 import { expect, fixture, html } from '@open-wc/testing';
+import { sendKeys } from '@web/test-runner-commands';
 import sinon from 'sinon';
 import BCheckbox from '.';
 
@@ -123,6 +124,80 @@ describe('b-checkbox', () => {
       await element.updateComplete;
       expect(element.checked).to.equal(false);
       expect(spy.calledTwice).to.equal(true);
+    });
+  });
+
+  describe('when keydown', () => {
+    it('should toggle the checked state when press Enter', async () => {
+      const element = await fixture<BCheckbox>(html`<b-checkbox>Checkbox</b-checkbox>`);
+      const clickElement = element.shadowRoot?.querySelector('.checkbox') as HTMLLabelElement;
+
+      // Change event should be fired.
+      const spy = sinon.spy();
+      element.addEventListener('change', spy);
+
+      // Focus the checkbox.
+      clickElement.focus();
+      await sendKeys({ press: 'Enter' });
+      expect(element.checked).to.equal(true);
+      expect(spy.calledOnce).to.equal(true);
+      await sendKeys({ press: 'Enter' });
+      expect(element.checked).to.equal(false);
+      expect(spy.calledTwice).to.equal(true);
+    });
+
+    it('should toggle the checked state when press Space', async () => {
+      const element = await fixture<BCheckbox>(html`<b-checkbox>Checkbox</b-checkbox>`);
+      const clickElement = element.shadowRoot?.querySelector('.checkbox') as HTMLLabelElement;
+
+      // Change event should be fired.
+      const spy = sinon.spy();
+      element.addEventListener('change', spy);
+
+      // Focus the checkbox.
+      clickElement.focus();
+      await sendKeys({ press: 'Space' });
+      expect(element.checked).to.equal(true);
+      expect(spy.calledOnce).to.equal(true);
+      await sendKeys({ press: 'Space' });
+      expect(element.checked).to.equal(false);
+      expect(spy.calledTwice).to.equal(true);
+    });
+
+    it('should not toggle the checked state when the checkbox is disabled', async () => {
+      const element = await fixture<BCheckbox>(html`<b-checkbox disabled>Checkbox</b-checkbox>`);
+      const clickElement = element.shadowRoot?.querySelector('.checkbox') as HTMLLabelElement;
+
+      // Change event should not be fired.
+      const spy = sinon.spy();
+      element.addEventListener('change', spy);
+
+      // Focus the checkbox.
+      clickElement.focus();
+      await sendKeys({ press: 'Enter' });
+      expect(element.checked).to.equal(false);
+      expect(spy.called).to.equal(false);
+      await sendKeys({ press: 'Space' });
+      expect(element.checked).to.equal(false);
+      expect(spy.called).to.equal(false);
+    });
+
+    it('should not toggle the checked state when the checkbox is readonly', async () => {
+      const element = await fixture<BCheckbox>(html`<b-checkbox readonly> Checkbox </b-checkbox>`);
+      const clickElement = element.shadowRoot?.querySelector('.checkbox') as HTMLLabelElement;
+
+      // Change event should not be fired.
+      const spy = sinon.spy();
+      element.addEventListener('change', spy);
+
+      // Focus the checkbox.
+      clickElement.focus();
+      await sendKeys({ press: 'Enter' });
+      expect(element.checked).to.equal(false);
+      expect(spy.called).to.equal(false);
+      await sendKeys({ press: 'Space' });
+      expect(element.checked).to.equal(false);
+      expect(spy.called).to.equal(false);
     });
   });
 
