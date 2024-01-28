@@ -51,6 +51,18 @@ export default [
       transition: all ${unsafeCSS(Var.TransitionNormal)};
     }
 
+    .checkbox:focus-visible .checkbox__control:not(.checkbox__control--disabled, .checkbox__control--readonly)::before {
+      content: '';
+      position: absolute;
+      display: block;
+      border: 2px solid var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
+      border-radius: 4px;
+      top: -3px;
+      right: -3px;
+      bottom: -3px;
+      left: -3px;
+    }
+
     .checkbox--checked .checkbox__control::after {
       transform: rotate(45deg) scale(1) translate(-50%, -50%);
     }
