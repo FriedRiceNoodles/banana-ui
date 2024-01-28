@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.15.1
+
+### Patch Changes
+
+- Added keyboard event to checkbox.
+- Updated dependencies
+  - banana-ui@1.15.1
+
 ## 1.15.0
 
 ### Minor Changes
