@@ -13,6 +13,7 @@ export default [
       font-size: var(--banana-modal-font-size, ${unsafeCSS(Fonts.FontSizeSmall)});
       position: relative;
       max-height: calc(100vh - ${unsafeCSS(Spacings.Spacing3XL)});
+      max-width: calc(100vw - ${unsafeCSS(Spacings.Spacing2XL)});
       box-sizing: border-box;
       display: flex;
       flex-direction: column;
