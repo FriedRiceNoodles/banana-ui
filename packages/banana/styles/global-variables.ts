@@ -200,6 +200,12 @@ export const Variables = {
   CheckboxFontSizeMedium: Fonts.FontSizeMedium,
   CheckboxFontSizeLarge: Fonts.FontSizeLarge,
 
+  /* Modal */
+  ModalWidth: '500px',
+  ModalPadding: `${Spacings.SpacingLarge} ${Spacings.SpacingXL}`,
+  ModalTitleFontSize: Fonts.FontSizeMedium,
+  ModalTitleFontWeight: Fonts.FontWeightSemibold,
+
   /* Transitions */
   TransitionVerySlow: '1000ms',
   TransitionSlow: '500ms',

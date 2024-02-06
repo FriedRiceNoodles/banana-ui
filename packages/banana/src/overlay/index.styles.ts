@@ -12,7 +12,7 @@ export default [
       top: 0;
       right: 0;
       bottom: 0;
-      background: var(--banana-overlay-background, rgba(0, 0, 0, 0.7));
+      background: var(--banana-overlay-background, rgba(0, 0, 0, 0.5));
       visibility: hidden;
       opacity: 0;
       transition: all ${unsafeCSS(Var.TransitionNormal)};
