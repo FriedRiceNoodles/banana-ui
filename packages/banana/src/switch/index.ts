@@ -1,0 +1,103 @@
+import { CSSResultGroup, html, LitElement } from 'lit';
+import { customElement, property, query } from 'lit/decorators.js';
+import { BananaFormElementWithOverriddenProperties, FormController } from 'packages/banana/controllers/form';
+import styles from './index.styles';
+
+const overriddenProperties = [
+  ['value', 'checked'],
+  ['defaultValue', 'defaultChecked'],
+] as const;
+
+@customElement('b-switch')
+export default class BSwitch
+  extends LitElement
+  implements BananaFormElementWithOverriddenProperties<typeof overriddenProperties>
+{
+  private readonly formController = new FormController<typeof overriddenProperties>(this, overriddenProperties);
+
+  static styles?: CSSResultGroup = styles;
+
+  @query('input')
+  private _validationInput!: HTMLInputElement;
+
+  @property()
+  name = '';
+
+  @property({ reflect: true, type: Boolean })
+  checked = false;
+
+  @property({ reflect: true, attribute: 'default-checked', type: Boolean })
+  defaultChecked = false;
+
+  @property()
+  form: string | undefined;
+
+  @property({ type: Boolean, reflect: true })
+  disabled = false;
+
+  @property({ type: Boolean, reflect: true })
+  required = false;
+
+  @property({ type: Boolean, reflect: true })
+  readonly = false;
+
+  @property({ type: Boolean, reflect: true })
+  controlled = false;
+
+  // Pass the reportValidity() method to the form controller.
+  reportValidity() {
+    return this._validationInput.reportValidity();
+  }
+
+  checkValidity() {
+    return this._validationInput.checkValidity();
+  }
+
+  private _handleChange() {
+    if (this.disabled || this.readonly) return;
+    const checked = !this.checked;
+    if (!this.controlled) {
+      this.checked = checked;
+    }
+
+    const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { checked } };
+    this.dispatchEvent(new CustomEvent('change', eventOptions));
+  }
+
+  protected firstUpdated(): void {
+    if (!this.checked) {
+      this.checked = this.defaultChecked;
+    }
+  }
+
+  connectedCallback() {
+    super.connectedCallback();
+  }
+
+  disconnectedCallback() {
+    super.disconnectedCallback();
+  }
+
+  render() {
+    // eslint-disable-next-line lit-a11y/click-events-have-key-events
+    return html`<div part="base" class="banana-switch" @click=${this._handleChange} aria-label="Name">
+      <input
+        part="input"
+        aria-label="checkbox"
+        ?checked=${this.checked}
+        type="checkbox"
+        class="switch__input"
+        role="switch"
+        aria-checked=${this.checked}
+      />
+      <div part="control" class="switch__control"></div>
+
+      <div part="inner" class="switch__inner">
+        <span>open</span>
+        <span>noOpen</span>
+        <slot class="switch__inner-checked" name="checked_content"></slot>
+        <slot class="switch__inner-unchecked" name="unchecked_content"></slot>
+      </div>
+    </div>`;
+  }
+}

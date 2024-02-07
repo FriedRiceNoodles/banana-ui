@@ -17,6 +17,7 @@ import { Rating } from './rating';
 import { Select } from './select';
 import { SelectOption } from './select-option';
 import { Stepper } from './stepper';
+import { Switch } from './switch';
 import { Tooltip } from './tooltip';
 
 export {
@@ -39,5 +40,6 @@ export {
   Select,
   SelectOption,
   Stepper,
+  Switch,
   Tooltip,
 };
