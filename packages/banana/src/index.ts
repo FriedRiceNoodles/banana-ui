@@ -10,9 +10,12 @@ import BMarquee from './marquee';
 import BMenu from './menu';
 import BMenuItem from './menu-item';
 import BMessage from './message';
+import BModal from './modal';
 import BOverlay from './overlay';
 import BPopup from './popup';
 import BProgress from './progress';
+import BRadio from './radio';
+import BRadioGroup from './radio-group';
 import BRating from './rating';
 import BSelect from './select';
 import BSelectOption from './select-option';
@@ -32,9 +35,12 @@ export {
   BMenu,
   BMenuItem,
   BMessage,
+  BModal,
   BOverlay,
   BPopup,
   BProgress,
+  BRadio,
+  BRadioGroup,
   BRating,
   BSelect,
   BSelectOption,

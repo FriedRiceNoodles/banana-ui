@@ -200,6 +200,24 @@ export const Variables = {
   CheckboxFontSizeMedium: Fonts.FontSizeMedium,
   CheckboxFontSizeLarge: Fonts.FontSizeLarge,
 
+  /* Modal */
+  ModalWidth: '500px',
+  ModalPadding: `${Spacings.SpacingLarge} ${Spacings.SpacingXL}`,
+  ModalTitleFontSize: Fonts.FontSizeMedium,
+  ModalTitleFontWeight: Fonts.FontWeightSemibold,
+
+  /* Radio */
+  RadioMarginRight: Spacings.SpacingXS,
+  RadioLabelPadding: `0 ${Spacings.SpacingXS}`,
+  RadioControlBorderColor: `rgba(${Colors.Gray4}, 1)`,
+  RadioSizeSmall: '12px',
+  RadioSizeMedium: '16px',
+  RadioSizeLarge: '20px',
+  RadioFontSizeSmall: Fonts.FontSizeSmall,
+  RadioFontSizeMedium: Fonts.FontSizeMedium,
+  RadioFontSizeLarge: Fonts.FontSizeLarge,
+  RadioGroupVerticalGap: Spacings.SpacingXS,
+
   /* Transitions */
   TransitionVerySlow: '1000ms',
   TransitionSlow: '500ms',

@@ -3,6 +3,8 @@
 const toCamelCase = require('../toCamelCase');
 
 const formTest = (componentName) => {
+  const camelCaseComponentName = toCamelCase(componentName);
+
   return `
     describe('form', () => {
       it('a native form should be able to get the value of ${componentName}', async () => {
@@ -23,7 +25,7 @@ const formTest = (componentName) => {
         >
           <b-${componentName} name="test" required></b-${componentName}>
         </form>\`);
-        const ${componentName} = element.querySelector('b-${componentName}') as B${toCamelCase(componentName)};
+        const ${camelCaseComponentName} = element.querySelector('b-${componentName}') as B${camelCaseComponentName};
         const spy = sinon.spy();
         element.addEventListener('submit', spy);
 
@@ -31,7 +33,7 @@ const formTest = (componentName) => {
         expect(spy.called).to.equal(false);
 
         // Then make it not empty then submit the form.
-        ${componentName}.value = 'test';
+        ${camelCaseComponentName}.value = 'test';
         element.requestSubmit();
 
         // It should submit the form now.
@@ -87,12 +89,12 @@ const formTest = (componentName) => {
         const element = await fixture<HTMLFormElement>(html\`<form>
           <b-${componentName} name="test" value="test" default-value="default"></b-${componentName}>
         </form>\`);
-        const ${componentName} = element.querySelector('b-${componentName}') as B${toCamelCase(componentName)};
+        const ${camelCaseComponentName} = element.querySelector('b-${componentName}') as B${camelCaseComponentName};
 
-        expect(${componentName}.value).to.equal('test');
+        expect(${camelCaseComponentName}.value).to.equal('test');
 
         element.reset();
-        expect(${componentName}.value).to.equal('default');
+        expect(${camelCaseComponentName}.value).to.equal('default');
       });
     });
   `;

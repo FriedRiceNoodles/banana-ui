@@ -1,5 +1,17 @@
 # banana-ui
 
+## 1.17.0
+
+### Minor Changes
+
+- 6691772: New component: Radio
+
+## 1.16.0
+
+### Minor Changes
+
+- New version for modal.
+
 ## 1.15.1
 
 ### Patch Changes
