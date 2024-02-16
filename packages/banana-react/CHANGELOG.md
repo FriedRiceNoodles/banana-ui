@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.17.0
+
+### Minor Changes
+
+- 6691772: New component: Radio
+
+### Patch Changes
+
+- Updated dependencies [6691772]
+  - banana-ui@1.17.0
+
 ## 1.16.0
 
 ### Minor Changes
