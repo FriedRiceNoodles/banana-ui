@@ -49,7 +49,7 @@ group: 组件
 
 | 变量                        | 说明           | 默认值             |
 | --------------------------- | -------------- | ------------------ |
-| --banana-overlay-background | 弹层的背景颜色 | rgba(0, 0, 0, 0.7) |
+| --banana-overlay-background | 弹层的背景颜色 | rgba(0, 0, 0, 0.5) |
 
 :::info{title=Tips}
 弹层组件依赖于[Overlay 遮罩层组件](/example/overlay)，因此使用遮罩层组件的样式变量。

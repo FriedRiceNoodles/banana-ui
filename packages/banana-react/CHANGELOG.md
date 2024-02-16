@@ -1,5 +1,24 @@
 # @banana/banana-react
 
+## 1.16.0
+
+### Minor Changes
+
+- New version for modal.
+
+### Patch Changes
+
+- Updated dependencies
+  - banana-ui@1.16.0
+
+## 1.15.1
+
+### Patch Changes
+
+- Added keyboard event to checkbox.
+- Updated dependencies
+  - banana-ui@1.15.1
+
 ## 1.15.0
 
 ### Minor Changes

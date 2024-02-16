@@ -1,5 +1,17 @@
 # banana-ui
 
+## 1.16.0
+
+### Minor Changes
+
+- New version for modal.
+
+## 1.15.1
+
+### Patch Changes
+
+- Added keyboard event to checkbox.
+
 ## 1.15.0
 
 ### Minor Changes
