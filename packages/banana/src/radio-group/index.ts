@@ -75,6 +75,17 @@ export default class BRadioGroup extends LitElement implements BananaFormElement
     return event;
   }
 
+  private _updateRadioCheckedState() {
+    for (const radio of this._radios) {
+      // Empty value is not allowed.
+      if (this.value === radio.value && this.value !== '') {
+        radio.checked = true;
+      } else {
+        radio.checked = false;
+      }
+    }
+  }
+
   connectedCallback() {
     super.connectedCallback();
   }
@@ -87,18 +98,13 @@ export default class BRadioGroup extends LitElement implements BananaFormElement
     if (this.defaultValue !== '' && this.value === '') {
       this.value = this.defaultValue;
     }
+
+    this._updateRadioCheckedState();
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
     if (_changedProperties.has('value')) {
-      for (const radio of this._radios) {
-        // Empty value is not allowed.
-        if (this.value === radio.value) {
-          radio.checked = true;
-        } else {
-          radio.checked = false;
-        }
-      }
+      this._updateRadioCheckedState();
     }
   }
 
