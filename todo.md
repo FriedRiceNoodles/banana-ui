@@ -6,11 +6,8 @@
 
 ## 新组件
 
-- modal
 - Tabs
 - Image
-- Radio
-- Checkbox
 - Space
 
 ## 已有组件
