@@ -6,6 +6,14 @@ demo:
 
 # Button 按钮
 
+:::info
+
+```
+<b-button> | Button
+```
+
+:::
+
 ## 介绍
 
 不难看出，这是一个按钮

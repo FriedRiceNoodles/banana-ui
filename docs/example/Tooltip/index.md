@@ -6,6 +6,14 @@ demo:
 
 # Tooltip 文字提示
 
+:::info
+
+```
+<b-tooltip> | Tooltip
+```
+
+:::
+
 简单的文字提示气泡框。
 
 ## 代码演示

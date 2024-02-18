@@ -6,6 +6,14 @@ demo:
 
 # Checkbox 复选框
 
+:::info
+
+```
+<b-checkbox> | Checkbox
+```
+
+:::
+
 复选框。又称多选框。
 
 ## 代码演示

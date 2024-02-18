@@ -4,6 +4,14 @@ group: 组件
 
 # Collapse 折叠面板
 
+:::info
+
+```
+<b-collapse> | Collapse
+```
+
+:::
+
 ## 介绍
 
 将复杂的内容放入折叠面板中，可保持页面的整洁。

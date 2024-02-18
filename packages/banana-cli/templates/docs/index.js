@@ -10,6 +10,17 @@ demo:
 
 # ${toCamelCase(componentName)} ${chineseName}
 
+:::info
+
+\`\`\`
+<b-${componentName}> | ${toCamelCase(componentName)}
+\`\`\`
+
+:::
+
+
+
+
 ${description}
 
 ## 代码演示

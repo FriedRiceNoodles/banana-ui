@@ -6,6 +6,14 @@ demo:
 
 # Divider 分割线
 
+:::info
+
+```
+<b-divider> | Divider
+```
+
+:::
+
 ## 介绍
 
 区隔内容的分割线。

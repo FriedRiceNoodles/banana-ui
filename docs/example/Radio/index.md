@@ -9,6 +9,11 @@ demo:
 单选框。
 
 :::info
+
+```
+<b-radio> | Radio
+```
+
 Radio 必须配合 RadioGroup 使用。
 :::
 
