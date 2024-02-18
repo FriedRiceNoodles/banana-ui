@@ -1,5 +1,5 @@
 import { CSSResultGroup, html, LitElement } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { BananaFormElementWithOverriddenProperties, FormController } from 'packages/banana/controllers/form';
 import styles from './index.styles';
 
@@ -19,6 +19,12 @@ export default class BSwitch
 
   @query('input')
   private _validationInput!: HTMLInputElement;
+
+  @queryAssignedElements({ slot: 'checked' })
+  _checkedSlotEl!: Array<HTMLElement>;
+
+  @queryAssignedElements({ slot: 'unchecked' })
+  _uncheckedSlotEl!: Array<HTMLElement>;
 
   @property()
   name = '';
@@ -44,6 +50,9 @@ export default class BSwitch
   @property({ type: Boolean, reflect: true })
   controlled = false;
 
+  @state()
+  private _innerWidth?: number;
+
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
     return this._validationInput.reportValidity();
@@ -68,6 +77,11 @@ export default class BSwitch
     if (!this.checked) {
       this.checked = this.defaultChecked;
     }
+
+    this._innerWidth =
+      this._checkedSlotEl[0]?.offsetWidth > this._uncheckedSlotEl[0]?.offsetWidth
+        ? this._checkedSlotEl[0]?.offsetWidth
+        : this._uncheckedSlotEl[0]?.offsetWidth;
   }
 
   connectedCallback() {
@@ -92,11 +106,13 @@ export default class BSwitch
       />
       <div part="control" class="switch__control"></div>
 
-      <div part="inner" class="switch__inner">
-        <span>open</span>
-        <span>noOpen</span>
-        <slot class="switch__inner-checked" name="checked_content"></slot>
-        <slot class="switch__inner-unchecked" name="unchecked_content"></slot>
+      <div part="inner" class="switch__inner" style="--banana-inner-width:${this._innerWidth}px">
+        <div class="switch__inner-wrapper switch__checked-offset">
+          <slot name="checked"></slot>
+        </div>
+        <div class="switch__inner-wrapper switch__unchecked-offset">
+          <slot name="unchecked"></slot>
+        </div>
       </div>
     </div>`;
   }

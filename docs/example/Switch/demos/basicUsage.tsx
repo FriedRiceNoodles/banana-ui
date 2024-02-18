@@ -8,7 +8,10 @@ import { Switch } from '@banana/banana-react';
 export default function BasicUsage() {
   return (
     <div>
-      <Switch></Switch>
+      <Switch>
+        <span slot="checked">open</span>
+        <span slot="unchecked">unOpen</span>
+      </Switch>
     </div>
   );
 }

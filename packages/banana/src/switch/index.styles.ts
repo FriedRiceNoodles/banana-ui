@@ -15,9 +15,10 @@ export default [
       --banana-switch-width: 44px;
       --banana-switch-height: 22px;
       --banana-switch-background-no-checked: rgba(0, 0, 0, 0.25);
-      --banana-switch-background-checked: #4096ff;
+      --banana-switch-background-no-checked-hover: rgba(0, 0, 0, 0.45);
+      --banana-switch-background-checked: #1677ff;
       --banana-switch-control-size: 18px;
-      --banana-inner-gap: 6px;
+      --banana-inner-gap: 4px;
     }
     :host([checked]) > .banana-switch {
       background-color: var(--banana-switch-background-checked);
@@ -28,12 +29,11 @@ export default [
     }
 
     :host(:not([disabled], [checked])) > .banana-switch:hover {
-      background-color: rgba(0, 0, 0, 0.45);
+      background-color: var(--banana-switch-background-no-checked-hover);
     }
 
-    // :host(:not([disabled])) > .banana-switch:active .switch__control {
-    //   inset-inline-start: 0;
-    //   inset-inline-end: -30%;
+    // :host([checked]) > .banana-switch:hover {
+    //   background-color: #4096ff;
     // }
 
     .banana-switch {
@@ -68,11 +68,10 @@ export default [
 
     .switch__inner {
       position: relative;
-      display: flex;
-      align-items: center;
-      gap: var(--banana-switch-control-size);
       overflow: hidden;
       height: 100%;
+      width: calc(var(--banana-inner-width) + var(--banana-switch-control-size) + var(--banana-inner-gap) * 2);
+      white-space: nowrap;
     }
 
     :host([checked]) .switch__inner {
@@ -100,20 +99,26 @@ export default [
       inset-inline-start: calc(100% - calc(var(--banana-switch-control-size) + var(--banana-switch-gap)));
     }
 
-    :host([checked]) .switch__inner-checked {
-      display: block;
+    .switch__inner-wrapper {
+      display: inline-block;
+      width: 100%;
+      text-align: center;
+      transition: all ${unsafeCSS(Var.TransitionNormal)};
     }
 
-    :host(:not([checked])) .switch__inner-checked {
-      display: none;
+    :host(:not([checked])) .switch__checked-offset {
+      translate: calc(-100% - var(--banana-inner-gap) - var(--banana-switch-control-size));
+    }
+    :host([checked]) .switch__checked-offset {
+      translate: 0;
     }
 
-    :host([checked]) .switch__inner-unchecked {
-      display: none;
+    :host(:not([checked])) .switch__unchecked-offset {
+      translate: calc(-100% - var(--banana-inner-gap));
     }
 
-    :host(:not([checked])) .switch__inner-unchecked {
-      display: block;
+    :host([checked]) .switch__unchecked-offset {
+      translate: var(--banana-switch-control-size);
     }
   `,
 ];
