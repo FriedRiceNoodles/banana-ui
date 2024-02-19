@@ -1,22 +1,12 @@
 ---
 hero:
-  title: library
-  description: 
+  title: Banana
+  description: 一套可<strong>跨框架</strong>使用的、支持SSR的组件库
   actions:
-    - text: Hello
-      link: /
-    - text: World
-      link: /
-features:
-  - title: Hello
-    emoji: 💎
-    description: Put hello description here
-  - title: World
-    emoji: 🌈
-    description: Put world description here
-  - title: '!'
-    emoji: 🚀
-    description: Put ! description here
+    - text: 快速上手
+      link: /guide/introduction
+    - text: 组件
+      link: /example/button
 ---
 
-banana-ui
+<code src="./doc-components/features.tsx"></code>
