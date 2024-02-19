@@ -9,6 +9,10 @@
     "UI library"
   ],
   "homepage": "https://github.com/FriedRiceNoodles/banana-ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FriedRiceNoodles/banana-ui.git"
+  },
   "license": "MIT",
   "author": "炒米粉",
   "type": "module",
