@@ -1,10 +1,14 @@
+import { Message, Tooltip } from '@banana/banana-react';
 import React from 'react';
-import { Tooltip } from '../../../packages/banana-react/dist';
 
 const PreviewerActionsExtra = (props) => {
-  console.log('props?', props);
   return (
-    <Tooltip content="展开代码(HTML)">
+    <Tooltip
+      content="展开代码(HTML)"
+      onClick={() => {
+        Message.warning({ content: '🚧正在施工中……' });
+      }}
+    >
       <svg
         viewBox="0 0 1024 1024"
         version="1.1"
