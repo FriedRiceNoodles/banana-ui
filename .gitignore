@@ -9,3 +9,4 @@ types
 coverage
 .idea
 node
+docs-dist
