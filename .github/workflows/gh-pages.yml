@@ -18,12 +18,12 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8.7.0
-      # 组件库打包
-      - name: Build packages
-        run: pnpm build
       # 安装依赖
       - name: Install dependencies
         run: pnpm install
+      # 组件库打包
+      - name: Build packages
+        run: pnpm build
       # 构建文档
       - name: Build with dumi
         run: pnpm docs:build
