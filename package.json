@@ -10,19 +10,16 @@
     "dist"
   ],
   "scripts": {
-    "build": "father build",
+    "build": "pnpm build:all",
     "build:all": "cd packages/banana && pnpm run build && cd ../banana-react && pnpm run build",
-    "build:watch": "father dev",
     "dev": "npm run dev:all",
     "dev:all": "cd packages/banana && npm run dev & cd packages/banana-react && npm run dev & dumi dev",
     "dev:dumi": "dumi dev",
     "docs:build": "dumi build",
-    "doctor": "father doctor",
     "lint": "npm run lint:es && npm run lint:css",
     "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
     "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
-    "prepublishOnly": "father doctor && npm run build",
     "start": "npm run dev"
   },
   "commitlint": {
@@ -81,7 +78,6 @@
     "eslint-plugin-lit-a11y": "1.1.0-next.1",
     "eslint-plugin-sort-imports-es6-autofix": "^0.6.0",
     "eslint-plugin-wc": "^1.4.0",
-    "father": "^4.1.0",
     "husky": "^8.0.1",
     "lint-staged": "^13.0.3",
     "prettier": "^2.7.1",
