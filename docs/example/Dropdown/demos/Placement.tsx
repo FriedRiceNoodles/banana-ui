@@ -3,7 +3,7 @@
  * description: 通过`placement`参数使下拉菜单从不同的位置弹出
  */
 
-import { Dropdown, Button, Divider, Menu, MenuItem } from '@banana/banana-react';
+import { Button, Divider, Dropdown, Menu, MenuItem } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

@@ -3,7 +3,7 @@
  * description: 使用`gap`参数来控制轮播图内部的间距。
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function gap() {

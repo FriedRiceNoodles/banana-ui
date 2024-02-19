@@ -3,7 +3,7 @@
  * description: 使用`indicator`参数控制指示器的显示。你可以通过`css变量`来改变指示器的样式。
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function Indicator() {

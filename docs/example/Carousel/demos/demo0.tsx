@@ -2,7 +2,7 @@
  * title: 基本使用
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function CarouselDemo0() {

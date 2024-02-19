@@ -3,7 +3,7 @@
  * description: 通过 `duration` 属性可以自定义滚动时长，从而控制滚动速度。
  */
 
-import { Marquee } from '@banana/banana-react';
+import { Marquee } from '@banana-ui/react';
 import React from 'react';
 
 export default function Duration() {

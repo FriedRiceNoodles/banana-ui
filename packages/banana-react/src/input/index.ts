@@ -1,5 +1,5 @@
+import { BInput } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BInput } from 'banana-ui';
 import * as React from 'react';
 
 export const Input = createComponent({

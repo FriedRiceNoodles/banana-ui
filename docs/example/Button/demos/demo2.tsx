@@ -3,7 +3,7 @@
  * description: 使用`size`属性，按钮有小、中（默认）、大三个尺寸。
  */
 
-import { Button } from '@banana/banana-react';
+import { Button } from '@banana-ui/react';
 import React from 'react';
 
 export default function ButtonDemo2() {

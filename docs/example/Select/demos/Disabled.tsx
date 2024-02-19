@@ -3,7 +3,7 @@
  * description: 设置 `disabled` 属性可以让选择器禁用。
  */
 
-import { Select, SelectOption } from '@banana/banana-react';
+import { Select, SelectOption } from '@banana-ui/react';
 import React from 'react';
 
 export default function Disabled() {

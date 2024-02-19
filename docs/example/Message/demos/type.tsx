@@ -2,7 +2,7 @@
  * title: 不同的提示类型
  */
 
-import { Button, Message } from '@banana/banana-react';
+import { Button, Message } from '@banana-ui/react';
 import React from 'react';
 
 export default function Type() {

@@ -3,7 +3,7 @@
  * description: 使用`outline`属性，可以得到一个背景透明的轮廓按钮。
  */
 
-import { Button } from '@banana/banana-react';
+import { Button } from '@banana-ui/react';
 import React from 'react';
 
 export default function ButtonDemo4() {

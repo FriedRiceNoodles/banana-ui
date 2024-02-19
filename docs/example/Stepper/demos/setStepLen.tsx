@@ -1,7 +1,7 @@
 /**
  * title: 设置不同步长
  */
-import { Button, Stepper } from '@banana/banana-react';
+import { Button, Stepper } from '@banana-ui/react';
 import React from 'react';
 
 export default function setStepLen() {

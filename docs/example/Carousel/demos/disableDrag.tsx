@@ -3,7 +3,7 @@
  * description: 使用`disableDrag`参数禁用拖拽滑动。
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function disableDrag() {

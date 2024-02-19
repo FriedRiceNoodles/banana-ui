@@ -3,7 +3,7 @@
  * description: 使用`type`属性，按钮支持不同的类型：`primary`、`success`、`warning`、`danger`和默认类型。
  */
 
-import { Button } from '@banana/banana-react';
+import { Button } from '@banana-ui/react';
 import React from 'react';
 
 export default function ButtonDemo1() {

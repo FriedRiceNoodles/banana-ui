@@ -3,7 +3,7 @@
  * description: 使用 `noArrow` 参数可隐藏箭头。
  */
 
-import { Tooltip } from '@banana/banana-react';
+import { Tooltip } from '@banana-ui/react';
 import React from 'react';
 
 export default function NoArrow() {

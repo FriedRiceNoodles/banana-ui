@@ -3,7 +3,7 @@
  * description: 使用`navigation`参数控制箭头按钮的显示，点击箭头按钮可以使轮播图跳到上一张或下一张。
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function Navigation() {

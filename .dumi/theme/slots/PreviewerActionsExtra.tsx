@@ -1,4 +1,4 @@
-import { Message, Tooltip } from '@banana/banana-react';
+import { Message, Tooltip } from '@banana-ui/react';
 import React from 'react';
 
 const PreviewerActionsExtra = (props) => {

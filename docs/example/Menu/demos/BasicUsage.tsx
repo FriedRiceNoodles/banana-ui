@@ -3,7 +3,7 @@
  * description: 用`Menu`组件包裹住`MenuItem`和`Divider`，可以创建出用于收纳一系列选项/操作的菜单。
  */
 
-import { Divider, Menu, MenuItem } from '@banana/banana-react';
+import { Divider, Menu, MenuItem } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

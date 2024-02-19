@@ -2,8 +2,8 @@
  * title: 自定义颜色
  */
 
+import { Divider } from '@banana-ui/react';
 import React from 'react';
-import { Divider } from '@banana/banana-react';
 
 export default function customWidth() {
   return (

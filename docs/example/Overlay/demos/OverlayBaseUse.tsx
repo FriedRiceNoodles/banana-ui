@@ -2,7 +2,7 @@
  * title: 基本使用
  */
 
-import { Overlay, Button } from '@banana/banana-react';
+import { Button, Overlay } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function OverlayBaseUse() {

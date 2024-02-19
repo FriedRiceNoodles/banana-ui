@@ -3,7 +3,7 @@
  * description: 通过配置参数中的 `duration` 属性，可以自定义提示的展示时长，单位为秒。
  */
 
-import { Button, Message } from '@banana/banana-react';
+import { Button, Message } from '@banana-ui/react';
 import React from 'react';
 
 export default function Duration() {

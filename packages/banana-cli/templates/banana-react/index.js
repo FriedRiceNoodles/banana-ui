@@ -3,7 +3,7 @@
 const toCamelCase = require('../toCamelCase');
 
 const teamplete = (componentName, formField) => `import { createComponent } from '@lit-labs/react';
-import { B${toCamelCase(componentName)} } from 'banana-ui';
+import { B${toCamelCase(componentName)} } from '@banana-ui/banana';
 import * as React from 'react';
 
 export const ${toCamelCase(componentName)} = createComponent({

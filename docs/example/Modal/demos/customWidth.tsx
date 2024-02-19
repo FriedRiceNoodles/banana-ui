@@ -3,7 +3,7 @@
  * description: 通过 `width` 属性可以自定义弹窗/对话框的宽度。
  */
 
-import { Button, Message, Modal } from '@banana/banana-react';
+import { Button, Message, Modal } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function CustomWidth() {

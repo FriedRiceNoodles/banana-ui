@@ -3,7 +3,7 @@
  * debug: true
  */
 
-import { Button } from '@banana/banana-react';
+import { Button } from '@banana-ui/react';
 import React from 'react';
 
 export default function ButtonDemo0() {

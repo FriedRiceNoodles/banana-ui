@@ -3,7 +3,7 @@
  * debug: true
  */
 
-import { Button, Checkbox } from '@banana/banana-react';
+import { Button, Checkbox } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function FormTest() {

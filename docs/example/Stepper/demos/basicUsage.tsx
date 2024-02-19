@@ -1,7 +1,7 @@
 /**
  * title: 基本使用
  */
-import { Stepper } from '@banana/banana-react';
+import { Stepper } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

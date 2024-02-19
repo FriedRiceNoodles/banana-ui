@@ -1,5 +1,5 @@
+import { BCollapse } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BCollapse } from 'banana-ui';
 import * as React from 'react';
 
 export const Collapse = createComponent({

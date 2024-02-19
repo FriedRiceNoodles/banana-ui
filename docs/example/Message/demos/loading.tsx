@@ -3,7 +3,7 @@
  * description: 将 `duration` 配置为0，提示将不会自动关闭，需要自行调用 `closeMessage` 方法关闭。
  */
 
-import { Button, Message } from '@banana/banana-react';
+import { Button, Message } from '@banana-ui/react';
 import React from 'react';
 
 export default function Loading() {

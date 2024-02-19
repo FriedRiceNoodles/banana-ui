@@ -1,5 +1,5 @@
+import { BSelectOption } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BSelectOption } from 'banana-ui';
 import * as React from 'react';
 
 export const SelectOption = createComponent({

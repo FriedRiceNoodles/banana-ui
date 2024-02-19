@@ -3,7 +3,7 @@
  * description: 使用`pill`属性，可以得到一个圆润的按钮。
  */
 
-import { Button } from '@banana/banana-react';
+import { Button } from '@banana-ui/react';
 import React from 'react';
 
 export default function ButtonDemo3() {

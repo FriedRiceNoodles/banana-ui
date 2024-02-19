@@ -2,7 +2,7 @@
  * title: 基本使用
  */
 
-import { Progress } from '@banana/banana-react';
+import { Progress } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

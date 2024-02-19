@@ -2,7 +2,7 @@
  * title: 最大宽度
  */
 
-import { Button, Tooltip } from '@banana/banana-react';
+import { Button, Tooltip } from '@banana-ui/react';
 import React from 'react';
 
 export default function MaxWidth() {

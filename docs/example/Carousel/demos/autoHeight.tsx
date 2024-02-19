@@ -3,7 +3,7 @@
  * description: 使用`autoHeight`参数开启自动调整高度。
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function autoHeight() {

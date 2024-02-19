@@ -1,5 +1,5 @@
+import { BStepper } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BStepper } from 'banana-ui';
 import * as React from 'react';
 
 export const Stepper = createComponent({

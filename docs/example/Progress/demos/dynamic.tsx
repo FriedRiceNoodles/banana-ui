@@ -2,7 +2,7 @@
  * title: 你可以试着让这个进度条动起来
  */
 
-import { Button, Progress } from '@banana/banana-react';
+import { Button, Progress } from '@banana-ui/react';
 import React from 'react';
 
 export default function Dynamic() {

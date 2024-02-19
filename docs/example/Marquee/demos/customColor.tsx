@@ -3,7 +3,7 @@
  * description: 通过 `color` 属性可以自定义内容的文字颜色。
  */
 
-import { Marquee } from '@banana/banana-react';
+import { Marquee } from '@banana-ui/react';
 import React from 'react';
 
 export default function CustomColor() {

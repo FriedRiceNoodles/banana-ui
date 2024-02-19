@@ -1,10 +1,17 @@
 {
-  "name": "@banana/banana-react",
+  "name": "@banana-ui/react",
   "version": "1.17.0",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
+  "description": "React components for Banana UI",
+  "keywords": [
+    "web components",
+    "custom elements",
+    "components",
+    "UI library",
+    "react"
+  ],
+  "homepage": "https://github.com/FriedRiceNoodles/banana-ui",
+  "license": "MIT",
+  "author": "炒米粉",
   "type": "module",
   "exports": {
     ".": {
@@ -28,8 +35,8 @@
     "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
   "dependencies": {
-    "@lit-labs/react": "^1.1.1",
-    "banana-ui": "workspace:*"
+    "@banana-ui/banana": "workspace:*",
+    "@lit-labs/react": "^1.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
@@ -38,7 +45,7 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
-    "registry": "https://packages.aliyun.com/6160015009edb81ca824f556/npm/npm-registry/"
+    "registry": "https://www.npmjs.com/package/@banana-ui/react"
   },
   "moduleResolution": "node"
 }

@@ -3,7 +3,7 @@
  * description: 设置 `multiple` 属性可以开启多选模式。
  */
 
-import { Select, SelectOption } from '@banana/banana-react';
+import { Select, SelectOption } from '@banana-ui/react';
 import React from 'react';
 
 export default function Multiple() {

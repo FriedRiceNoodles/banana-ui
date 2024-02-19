@@ -1,5 +1,5 @@
+import { BTooltip } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BTooltip } from 'banana-ui';
 import * as React from 'react';
 
 export const Tooltip = createComponent({
