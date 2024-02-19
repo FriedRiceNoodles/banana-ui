@@ -4,13 +4,9 @@ group: 组件
 
 # Collapse 折叠面板
 
-:::info
-
 ```
 <b-collapse> | Collapse
 ```
-
-:::
 
 ## 介绍
 

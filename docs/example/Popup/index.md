@@ -4,13 +4,9 @@ group: 组件
 
 # Popup 弹层
 
-:::info
-
 ```
 <b-popup> | Popup
 ```
-
-:::
 
 ## 介绍
 

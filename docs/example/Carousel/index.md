@@ -4,13 +4,9 @@ group: 组件
 
 # Carousel 轮播图
 
-:::info
-
 ```
 <b-carousel> | Carousel
 ```
-
-:::
 
 ## 介绍
 

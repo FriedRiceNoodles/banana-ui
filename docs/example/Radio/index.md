@@ -6,16 +6,16 @@ demo:
 
 # Radio 单选框
 
-单选框。
-
-:::info
-
 ```
 <b-radio> | Radio
 ```
 
+:::info
+
 Radio 必须配合 RadioGroup 使用。
 :::
+
+单选框。
 
 ## 代码演示
 

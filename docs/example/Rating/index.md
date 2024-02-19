@@ -6,13 +6,9 @@ demo:
 
 # Rating 评分
 
-:::info
-
 ```
 <b-rating> | Rating
 ```
-
-:::
 
 评分组件。
 

@@ -4,13 +4,9 @@ group: 组件
 
 # Overlay 遮罩层组件
 
-:::info
-
 ```
 <b-overlay> | Overlay
 ```
-
-:::
 
 ## 介绍
 

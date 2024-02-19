@@ -6,13 +6,9 @@ demo:
 
 # Divider 分割线
 
-:::info
-
 ```
 <b-divider> | Divider
 ```
-
-:::
 
 ## 介绍
 

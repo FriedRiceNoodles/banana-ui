@@ -6,13 +6,9 @@ demo:
 
 # Message 提示
 
-:::info
-
 ```
 <b-message> | Message
 ```
-
-:::
 
 全局的消息提示,常用于向用户反馈操作的结果或状态的变更.
 

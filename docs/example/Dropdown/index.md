@@ -6,13 +6,9 @@ demo:
 
 # Dropdown 下拉菜单
 
-:::info
-
 ```
 <b-dropdown> | Dropdown
 ```
-
-:::
 
 ## 介绍
 
