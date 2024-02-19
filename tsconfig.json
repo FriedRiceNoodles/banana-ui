@@ -10,8 +10,15 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
-      "@@/*": [".dumi/tmp/*"]
+      "@@/*": [
+        ".dumi/tmp/*"
+      ]
     }
   },
-  "include": [".dumi/**/*", ".dumirc.ts", "packages/**/*", "rollup.config.mjs", "docs/**/*"]
+  "include": [
+    ".dumirc.ts",
+    "packages/**/*",
+    "rollup.config.mjs",
+    "docs/**/*"
+  ]
 }
