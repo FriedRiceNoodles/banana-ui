@@ -5,7 +5,7 @@
 
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
-import { Checkbox, Divider } from '@banana/banana-react';
+import { Checkbox, Divider } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function Indeterminate() {

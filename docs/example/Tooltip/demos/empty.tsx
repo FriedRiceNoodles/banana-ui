@@ -3,7 +3,7 @@
  * description: 当 `content` 为空时，Tooltip 不会展示。基于这一特性，可以通过将 `content` 设置为 `''` 来隐藏 Tooltip。
  */
 
-import { Button, Tooltip } from '@banana/banana-react';
+import { Button, Tooltip } from '@banana-ui/react';
 import React from 'react';
 
 export default function Empty() {

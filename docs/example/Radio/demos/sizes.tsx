@@ -3,7 +3,7 @@
  * description: Radio 组件提供了三种尺寸，分别为 `small`、`medium`、`large`，默认为 `medium`。
  */
 
-import { Radio, RadioGroup } from '@banana/banana-react';
+import { Radio, RadioGroup } from '@banana-ui/react';
 import React from 'react';
 
 export default function sizes() {

@@ -3,7 +3,7 @@
  * description: 当轮播图中内容的数量比`slidesPerView`参数所设置的还要少，会默认使用已有的内容充满整个轮播图。使用`disableFill`参数可以禁用这种行为。
  */
 
-import { Carousel, Divider } from '@banana/banana-react';
+import { Carousel, Divider } from '@banana-ui/react';
 import React from 'react';
 
 export default function disableFill() {

@@ -3,7 +3,7 @@
  * desc: 通过 `placement` 属性设置弹出位置，默认为 `top`。
  */
 
-import { Button, Tooltip } from '@banana/banana-react';
+import { Button, Tooltip } from '@banana-ui/react';
 import React from 'react';
 
 export default function Placement() {

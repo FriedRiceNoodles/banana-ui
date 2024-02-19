@@ -3,7 +3,7 @@
  * description: 可以设置默认的Footer按钮为Loading或者Disabled状态。
  */
 
-import { Button, Message, Modal } from '@banana/banana-react';
+import { Button, Message, Modal } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function ButtonStatus() {

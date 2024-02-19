@@ -1,5 +1,5 @@
+import { BOverlay } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BOverlay } from 'banana-ui';
 import * as React from 'react';
 
 export const Overlay = createComponent({

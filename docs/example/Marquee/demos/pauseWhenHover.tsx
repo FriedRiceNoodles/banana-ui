@@ -3,7 +3,7 @@
  * description: 通过 `pauseWhenHover` 属性可以控制鼠标悬停时是否暂停滚动。
  */
 
-import { Marquee } from '@banana/banana-react';
+import { Marquee } from '@banana-ui/react';
 import React from 'react';
 
 export default function PauseWhenHover() {

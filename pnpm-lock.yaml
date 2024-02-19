@@ -17,12 +17,12 @@ importers:
       '@babel/plugin-transform-runtime':
         specifier: ^7.22.9
         version: registry.npmmirror.com/@babel/plugin-transform-runtime@7.22.10(@babel/core@7.22.10)
+      '@banana-ui/react':
+        specifier: workspace:*
+        version: link:packages/banana-react
       '@banana/banana-cli':
         specifier: workspace:^
         version: link:packages/banana-cli
-      '@banana/banana-react':
-        specifier: workspace:*
-        version: link:packages/banana-react
       '@changesets/cli':
         specifier: ^2.26.1
         version: registry.npmmirror.com/@changesets/cli@2.26.2
@@ -195,12 +195,12 @@ importers:
 
   packages/banana-react:
     dependencies:
+      '@banana-ui/banana':
+        specifier: workspace:*
+        version: link:../banana
       '@lit-labs/react':
         specifier: ^1.1.1
         version: registry.npmmirror.com/@lit-labs/react@1.2.1
-      banana-ui:
-        specifier: workspace:*
-        version: link:../banana
     devDependencies:
       '@types/react':
         specifier: ^18.0.26
@@ -4344,7 +4344,7 @@ packages:
   /regenerator-transform@0.15.2:
     resolution: {integrity: sha512-hfMp2BoF0qOk3uc5V20ALGDS2ddjQaLrdl7xrGXvAIow7qeWRM2VA2HuCHkUKk9slq3VwEwLNK3DFBqDfPGYtg==}
     dependencies:
-      '@babel/runtime': 7.22.10
+      '@babel/runtime': 7.23.9
     dev: true
 
   /regexpu-core@5.3.2:
@@ -4518,7 +4518,7 @@ packages:
       '@emotion/unitless': 0.8.1
       '@types/stylis': 4.2.0
       css-to-react-native: 3.2.0
-      csstype: 3.1.2
+      csstype: 3.1.3
       postcss: 8.4.28
       react: registry.npmmirror.com/react@18.2.0
       react-dom: registry.npmmirror.com/react-dom@18.2.0(react@18.2.0)

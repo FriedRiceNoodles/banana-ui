@@ -1,5 +1,5 @@
+import { BRadio } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BRadio } from 'banana-ui';
 import * as React from 'react';
 
 export const Radio = createComponent({

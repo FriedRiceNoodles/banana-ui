@@ -3,7 +3,7 @@
  * description: 通过设置 `size` 属性可以控制选择框的大小，可选值为 `small`、`medium`、`large`，默认为 `medium`。
  */
 
-import { Select, SelectOption } from '@banana/banana-react';
+import { Select, SelectOption } from '@banana-ui/react';
 import React from 'react';
 
 export default function Size() {

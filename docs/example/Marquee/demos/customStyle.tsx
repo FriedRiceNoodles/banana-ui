@@ -3,7 +3,7 @@
  * description: 你可以使用组件暴露出来的`CSS变量`和`part`属性来实现更细粒度的自定义样式。
  */
 
-import { Marquee } from '@banana/banana-react';
+import { Marquee } from '@banana-ui/react';
 import React from 'react';
 
 export default function CustomStyle() {

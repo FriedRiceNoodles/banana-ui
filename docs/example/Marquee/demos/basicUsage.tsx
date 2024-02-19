@@ -2,7 +2,7 @@
  * title: 基本使用
  */
 
-import { Marquee } from '@banana/banana-react';
+import { Marquee } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

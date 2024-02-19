@@ -3,7 +3,7 @@
  * description: 禁用状态下无法进行交互，同时会有不同的样式，且**不会参与表单提交**。
  */
 
-import { Checkbox } from '@banana/banana-react';
+import { Checkbox } from '@banana-ui/react';
 import React from 'react';
 
 export default function Disabled() {

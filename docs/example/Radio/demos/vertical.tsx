@@ -3,7 +3,7 @@
  * description: RadioGroup 组件默认为水平布局，可以设置 `vertical` 属性使其变为垂直布局。
  */
 
-import { Radio, RadioGroup } from '@banana/banana-react';
+import { Radio, RadioGroup } from '@banana-ui/react';
 import React from 'react';
 
 export default function Vertical() {

@@ -1,3 +1,3 @@
-import { BMessage } from 'banana-ui';
+import { BMessage } from '@banana-ui/banana';
 
 export const Message = BMessage;

@@ -1,7 +1,7 @@
 /**
  * title: onChange回调事件
  */
-import { Message, Stepper } from '@banana/banana-react';
+import { Message, Stepper } from '@banana-ui/react';
 import React, { useRef, useState } from 'react';
 
 export default function StepChange() {

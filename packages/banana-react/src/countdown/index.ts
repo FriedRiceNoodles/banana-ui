@@ -1,5 +1,5 @@
+import { BCountdown } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BCountdown } from 'banana-ui';
 import * as React from 'react';
 
 export const Countdown = createComponent({

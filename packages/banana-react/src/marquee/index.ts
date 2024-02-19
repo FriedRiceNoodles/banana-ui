@@ -1,5 +1,5 @@
+import { BMarquee } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BMarquee } from 'banana-ui';
 import * as React from 'react';
 
 export const Marquee = createComponent({

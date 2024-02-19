@@ -1,5 +1,5 @@
+import { BSelect } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BSelect } from 'banana-ui';
 import * as React from 'react';
 
 export const Select = createComponent({

@@ -3,7 +3,7 @@
  * description: 使用`autoplay`参数开启自动轮播，使用`autoplayDelay`参数可以修改自动轮播的事件间隔。
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function autoplay() {

@@ -2,7 +2,7 @@
  * title: 基本使用
  */
 
-import { Dropdown, Button, Divider, Menu, MenuItem } from '@banana/banana-react';
+import { Button, Divider, Dropdown, Menu, MenuItem } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

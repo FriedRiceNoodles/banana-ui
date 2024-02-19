@@ -3,7 +3,7 @@
  * description: 通过 `character` 属性自定义符号。
  */
 
-import { Rating } from '@banana/banana-react';
+import { Rating } from '@banana-ui/react';
 import React, { CSSProperties } from 'react';
 
 export default function Character() {

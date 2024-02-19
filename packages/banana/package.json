@@ -1,10 +1,16 @@
 {
-  "name": "banana-ui",
+  "name": "@banana-ui/banana",
   "version": "1.17.0",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
+  "description": "An UI library of web components can be used in any framework",
+  "keywords": [
+    "web components",
+    "custom elements",
+    "components",
+    "UI library"
+  ],
+  "homepage": "https://github.com/FriedRiceNoodles/banana-ui",
+  "license": "MIT",
+  "author": "炒米粉",
   "type": "module",
   "exports": {
     ".": {
@@ -48,7 +54,7 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
-    "registry": "https://packages.aliyun.com/6160015009edb81ca824f556/npm/npm-registry/"
+    "registry": "https://www.npmjs.com/package/@banana-ui/banana"
   },
   "moduleResolution": "node"
 }

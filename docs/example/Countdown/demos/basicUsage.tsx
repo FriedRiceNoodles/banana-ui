@@ -3,7 +3,7 @@
  * description: 通过`time`属性设定倒计时的总时长，单位为毫秒；使用format属性可以自定义倒计时的格式，具体格式参考下方的API。
  */
 
-import { Countdown } from '@banana/banana-react';
+import { Countdown } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

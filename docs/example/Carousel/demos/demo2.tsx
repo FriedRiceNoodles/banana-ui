@@ -3,7 +3,7 @@
  * description: 使用`slidesPerView`参数，实现一次显示多个slides。
  */
 
-import { Carousel } from '@banana/banana-react';
+import { Carousel } from '@banana-ui/react';
 import React from 'react';
 
 export default function CarouselDemo2() {

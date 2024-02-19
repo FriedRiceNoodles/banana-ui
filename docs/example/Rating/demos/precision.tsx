@@ -3,7 +3,7 @@
  * description: 设置 `precision` 参数即可精确显示, 建议在`只读状态`下使用。
  */
 
-import { Rating } from '@banana/banana-react';
+import { Rating } from '@banana-ui/react';
 import React from 'react';
 
 export default function Precision() {

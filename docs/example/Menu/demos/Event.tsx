@@ -3,7 +3,7 @@
  * description: 你可以使用`value`参数作为一个菜单项的唯一标识，当菜单项被选中时，会触发`select`事件。通过监听这个事件，可以响应用户对菜单项的操作。
  */
 
-import { Divider, Menu, MenuItem } from '@banana/banana-react';
+import { Divider, Menu, MenuItem } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

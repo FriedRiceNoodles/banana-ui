@@ -3,7 +3,7 @@
  * description: 使用`arrow`插槽给下拉菜单添加箭头。
  */
 
-import { Button, Divider, Dropdown, MenuItem } from '@banana/banana-react';
+import { Button, Divider, Dropdown, MenuItem } from '@banana-ui/react';
 import React from 'react';
 
 export default function Arrow() {

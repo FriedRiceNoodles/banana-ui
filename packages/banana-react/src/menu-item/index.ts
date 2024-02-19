@@ -1,5 +1,5 @@
+import { BMenuItem } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BMenuItem } from 'banana-ui';
 import * as React from 'react';
 
 export const MenuItem = createComponent({

@@ -3,7 +3,7 @@
  * description: 为了保证Modal的Header和Footer能始终显示在视窗内，当Modal内容过多时，Modal会自动出现滚动条。
  */
 
-import { Button, Message, Modal } from '@banana/banana-react';
+import { Button, Message, Modal } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function Overflow() {

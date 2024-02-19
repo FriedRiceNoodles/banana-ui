@@ -1,9 +1,7 @@
-# banana-ui
+# Banana UI
 
-[![NPM version](https://img.shields.io/npm/v/banana-ui.svg?style=flat)](https://npmjs.org/package/banana-ui)
-[![NPM downloads](http://img.shields.io/npm/dm/banana-ui.svg?style=flat)](https://npmjs.org/package/banana-ui)
-
-
+[![NPM version](https://img.shields.io/npm/v/banana-ui.svg?style=flat)](https://www.npmjs.com/package/@banana-ui/banana)
+[![NPM downloads](http://img.shields.io/npm/dm/banana-ui.svg?style=flat)](https://www.npmjs.com/package/@banana-ui/banana)
 
 ## Usage
 

@@ -4,7 +4,7 @@
  * description: 只读状态下无法进行交互，但**会参与表单提交**。
  */
 
-import { Checkbox } from '@banana/banana-react';
+import { Checkbox } from '@banana-ui/react';
 import React from 'react';
 
 export default function Readonly() {

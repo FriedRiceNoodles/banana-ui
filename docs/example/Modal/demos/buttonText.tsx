@@ -3,7 +3,7 @@
  * description: 通过`okText`和`cancelText`属性可以自定义弹窗/对话框的按钮文本。
  */
 
-import { Button, Message, Modal } from '@banana/banana-react';
+import { Button, Message, Modal } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function ButtonText() {

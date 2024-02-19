@@ -3,7 +3,7 @@
  * debug: true
  */
 
-import { Button, Rating } from '@banana/banana-react';
+import { Button, Rating } from '@banana-ui/react';
 import React from 'react';
 
 export default function FormTest() {

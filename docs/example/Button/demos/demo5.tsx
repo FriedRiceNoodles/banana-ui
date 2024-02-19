@@ -3,7 +3,7 @@
  * description: 使用`disabled`属性，使按钮变成禁用状态。
  */
 
-import { Button } from '@banana/banana-react';
+import { Button } from '@banana-ui/react';
 import React from 'react';
 
 export default function ButtonDemo5() {

@@ -3,7 +3,7 @@
  * debug: true
  */
 
-import { Button, Select, SelectOption } from '@banana/banana-react';
+import { Button, Select, SelectOption } from '@banana-ui/react';
 import React from 'react';
 
 export default function FormTest() {

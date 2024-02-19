@@ -2,7 +2,7 @@
  * title: 基本使用
  */
 
-import { Radio, RadioGroup } from '@banana/banana-react';
+import { Radio, RadioGroup } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

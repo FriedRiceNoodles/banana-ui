@@ -5,7 +5,7 @@
  * debug: true
  */
 
-import { Button, Carousel } from '@banana/banana-react';
+import { Button, Carousel } from '@banana-ui/react';
 import React, { useRef } from 'react';
 
 export default function CarouselDemo0() {

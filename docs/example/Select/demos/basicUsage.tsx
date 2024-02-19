@@ -2,7 +2,7 @@
  * title: 基本使用
  */
 
-import { Select, SelectOption } from '@banana/banana-react';
+import { Select, SelectOption } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {

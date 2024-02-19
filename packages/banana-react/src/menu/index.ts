@@ -1,5 +1,5 @@
+import { BMenu } from '@banana-ui/banana';
 import { createComponent } from '@lit-labs/react';
-import { BMenu } from 'banana-ui';
 import * as React from 'react';
 
 export const Menu = createComponent({

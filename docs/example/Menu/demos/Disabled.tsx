@@ -3,7 +3,7 @@
  * description: 使用`disabled`参数可以将菜单项设置为禁用状态。
  */
 
-import { Divider, Menu, MenuItem } from '@banana/banana-react';
+import { Divider, Menu, MenuItem } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {
