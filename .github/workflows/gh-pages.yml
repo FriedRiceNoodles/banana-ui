@@ -14,14 +14,20 @@ jobs:
         with:
           # 如果配置 themeConfig.lastUpdated 为 false，则不需要添加该参数以加快检出速度
           fetch-depth: 0
+      # 安装 pnpm
       - uses: pnpm/action-setup@v2
         with:
           version: 8.7.0
+      # 组件库打包
+      - name: Build packages
+        run: pnpm build
+      # 安装依赖
       - name: Install dependencies
         run: pnpm install
+      # 构建文档
       - name: Build with dumi
-        # 文档编译命令，如果是 react 模板需要修改为 npm run docs:build
         run: pnpm docs:build
+      # 部署文档
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
