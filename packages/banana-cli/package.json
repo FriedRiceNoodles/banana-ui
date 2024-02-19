@@ -16,8 +16,5 @@
     "inquirer": "^8.0.0",
     "prettier": "^2.7.1",
     "yargs": "^17.7.2"
-  },
-  "publishConfig": {
-    "registry": "https://packages.aliyun.com/6160015009edb81ca824f556/npm/npm-registry/"
   }
 }

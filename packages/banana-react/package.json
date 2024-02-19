@@ -45,7 +45,7 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
-    "registry": "https://www.npmjs.com/package/@banana-ui/react"
+    "registry": "https://registry.npmjs.org/"
   },
   "moduleResolution": "node"
 }
