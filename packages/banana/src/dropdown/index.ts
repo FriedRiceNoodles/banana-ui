@@ -45,20 +45,20 @@ export default class BDropdown extends LitElement {
   margin = 4;
 
   // The time delay before dropdown content appears after mouse enter the trigger. Unit: ms.
-  @property({ type: Number, reflect: true })
+  @property({ type: Number, reflect: true, attribute: 'mouse-enter-delay' })
   mouseEnterDelay = 100;
 
   // The time delay before dropdown content disappears after mouse leave the dropdown content. Unit: ms.
-  @property({ type: Number, reflect: true })
+  @property({ type: Number, reflect: true, attribute: 'mouse-leave-delay' })
   mouseLeaveDelay = 100;
 
   @property({ reflect: true })
   placement: Placement = 'bottomLeft';
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'auto-adjust-overflow' })
   autoAdjustOverflow = true;
 
-  @property({ reflect: true })
+  @property({ reflect: true, attribute: 'trigger-action' })
   triggerAction: 'hover' | 'click' = 'hover';
 
   @state()
