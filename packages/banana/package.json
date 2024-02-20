@@ -24,6 +24,7 @@
     }
   },
   "main": "dist/index",
+  "jsdelivr": "umd/index.js",
   "module": "dist/index",
   "files": [
     "dist/*",
