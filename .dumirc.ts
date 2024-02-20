@@ -6,4 +6,5 @@ export default defineConfig({
     name: 'Banana UI',
   },
   publicPath: '/banana-ui/',
+  base: '/banana-ui/',
 });
