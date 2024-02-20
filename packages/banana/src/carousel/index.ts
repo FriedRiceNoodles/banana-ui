@@ -99,8 +99,9 @@ export default class BCarousel extends LitElement {
   @property({ type: Number, reflect: true, attribute: 'autoplay-delay' })
   autoplayDelay = 3000;
 
-  @property({ type: Boolean, reflect: true, attribute: 'pause-on-mouse-enter' })
-  pauseOnMouseEnter = true;
+  // Caraousel will pause when mouse enter by default.
+  @property({ type: Boolean, reflect: true, attribute: 'no-pause-on-mouse-enter' })
+  noPauseOnMouseEnter = false;
 
   @property({ type: Boolean, reflect: true, attribute: 'disable-drag' })
   disableDrag = false;
@@ -445,13 +446,13 @@ export default class BCarousel extends LitElement {
   }
 
   private _onWrapperMouseEnter() {
-    if (this.pauseOnMouseEnter) {
+    if (!this.noPauseOnMouseEnter) {
       this._clearAutoplayTimer();
     }
   }
 
   private _onWrapperMouseLeave() {
-    if (this.pauseOnMouseEnter) {
+    if (!this.noPauseOnMouseEnter) {
       this._setAutoplayTimer();
     }
   }
