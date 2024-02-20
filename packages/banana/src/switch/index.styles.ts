@@ -58,6 +58,11 @@ export default [
       background-color: var(--banana-switch-background-no-checked);
     }
 
+    .banana-switch-sm {
+      min-width: var(--banana-switch-width-sm, 28px);
+      height: var(--banana-switch-height-sm, 16px);
+    }
+
     .switch__input {
       position: absolute;
       opacity: 0;
@@ -95,8 +100,17 @@ export default [
       inset-inline-start: var(--banana-switch-gap);
     }
 
-    :host([checked]) .switch__control {
+    .switch__control-sm {
+      width: var(--banana-switch-control-size-sm, 12px);
+      height: var(--banana-switch-control-size-sm, 12px);
+    }
+
+    :host([checked][size='default']) .switch__control {
       inset-inline-start: calc(100% - calc(var(--banana-switch-control-size) + var(--banana-switch-gap)));
+    }
+
+    :host([checked][size='small']) .switch__control {
+      inset-inline-start: calc(100% - calc(var(--banana-switch-control-size-sm, 12px) + var(--banana-switch-gap)));
     }
 
     .switch__inner-wrapper {

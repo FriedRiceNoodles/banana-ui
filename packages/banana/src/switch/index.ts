@@ -1,5 +1,6 @@
 import { CSSResultGroup, html, LitElement } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
+import { classMap } from 'lit/directives/class-map.js';
 import { BananaFormElementWithOverriddenProperties, FormController } from 'packages/banana/controllers/form';
 import styles from './index.styles';
 
@@ -28,6 +29,9 @@ export default class BSwitch
 
   @property()
   name = '';
+
+  @property({ reflect: true })
+  size: 'small' | 'default' = 'default';
 
   @property({ reflect: true, type: Boolean })
   checked = false;
@@ -94,7 +98,15 @@ export default class BSwitch
 
   render() {
     // eslint-disable-next-line lit-a11y/click-events-have-key-events
-    return html`<div part="base" class="banana-switch" @click=${this._handleChange} aria-label="Name">
+    return html`<div
+      part="base"
+      class=${classMap({
+        'banana-switch': true,
+        'banana-switch-sm': this.size === 'small',
+      })}
+      @click=${this._handleChange}
+      aria-label="Name"
+    >
       <input
         part="input"
         aria-label="checkbox"
@@ -104,7 +116,13 @@ export default class BSwitch
         role="switch"
         aria-checked=${this.checked}
       />
-      <div part="control" class="switch__control"></div>
+      <div
+        part="control"
+        class=${classMap({
+          switch__control: true,
+          'switch__control-sm': this.size === 'small',
+        })}
+      ></div>
 
       <div part="inner" class="switch__inner" style="--banana-inner-width:${this._innerWidth}px">
         <div class="switch__inner-wrapper switch__checked-offset">

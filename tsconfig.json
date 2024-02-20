@@ -13,5 +13,5 @@
       "@@/*": [".dumi/tmp/*"]
     }
   },
-  "include": [".dumi/**/*", ".dumirc.ts", "packages/**/*", "rollup.config.mjs", "docs/**/*"]
+  "include": [".dumirc.ts", "packages/**/*", "rollup.config.mjs", "docs/**/*"]
 }
