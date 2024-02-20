@@ -1,0 +1,5 @@
+.markdown ul > li {
+  margin-left: 20px;
+  padding-left: 4px;
+  list-style-type: circle;
+}
