@@ -85,7 +85,7 @@ export default class BCarousel extends LitElement {
   }
 
   // Do not use this property directly, use internal _slidesPerView instead.
-  @property({ type: Number, reflect: true })
+  @property({ type: Number, reflect: true, attribute: 'slides-per-view' })
   slidesPerView = 1;
 
   private get _slidesPerView() {
@@ -96,13 +96,13 @@ export default class BCarousel extends LitElement {
   autoplay = false;
 
   // Unit: ms
-  @property({ type: Number })
+  @property({ type: Number, reflect: true, attribute: 'autoplay-delay' })
   autoplayDelay = 3000;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true, attribute: 'pause-on-mouse-enter' })
   pauseOnMouseEnter = true;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'disable-drag' })
   disableDrag = false;
 
   @property({ type: Boolean, reflect: true })
@@ -115,7 +115,7 @@ export default class BCarousel extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'disable-fill' })
   disableFill = false;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'auto-height' })
   autoHeight = false;
 
   @property({ type: Boolean, reflect: true })
