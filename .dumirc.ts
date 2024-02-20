@@ -5,4 +5,5 @@ export default defineConfig({
   themeConfig: {
     name: 'Banana UI',
   },
+  base: '/banana-ui/',
 });
