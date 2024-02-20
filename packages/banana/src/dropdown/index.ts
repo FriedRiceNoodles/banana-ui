@@ -55,8 +55,8 @@ export default class BDropdown extends LitElement {
   @property({ reflect: true })
   placement: Placement = 'bottomLeft';
 
-  @property({ type: Boolean, reflect: true, attribute: 'auto-adjust-overflow' })
-  autoAdjustOverflow = true;
+  @property({ type: Boolean, reflect: true, attribute: 'no-auto-adjust-overflow' })
+  noAutoAdjustOverflow = false;
 
   @property({ reflect: true, attribute: 'trigger-action' })
   triggerAction: 'hover' | 'click' = 'hover';
@@ -72,7 +72,7 @@ export default class BDropdown extends LitElement {
     if (!this._trigger || !this._content) return;
 
     const middleware: ComputePositionConfig['middleware'] = [offset(this.margin)];
-    if (this.autoAdjustOverflow) middleware.push(flip());
+    if (!this.noAutoAdjustOverflow) middleware.push(flip());
     if (this._arrowElements[0] !== undefined) middleware.push(arrow({ element: this._arrowElements[0] }));
 
     void computePosition(this._trigger, this._content, {
