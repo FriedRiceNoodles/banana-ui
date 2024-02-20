@@ -6,6 +6,7 @@ dist
 .DS_Store
 umd
 types
+forceRender.md
 coverage
 .idea
 node
