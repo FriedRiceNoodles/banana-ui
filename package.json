@@ -17,9 +17,8 @@
     "dev:dumi": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
-    "lint": "npm run lint:es && npm run lint:css",
-    "lint:css": "stylelint \"{src,test}/**/*.{css,less}\"",
-    "lint:es": "eslint \"{src,test}/**/*.{js,jsx,ts,tsx}\"",
+    "lint": "npm run lint:es",
+    "lint:es": "eslint \"packages/**/{src,styles,bin}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
     "start": "npm run dev"
   },
