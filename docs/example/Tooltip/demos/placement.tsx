@@ -12,6 +12,7 @@ export default function Placement() {
       display: inline-flex;
       flex-direction: column;
       gap: 8px;
+      --banana-tooltip-max-width: 80px;
     }
 
     .placement-row {
