@@ -6,6 +6,10 @@ demo:
 
 # Marquee 跑马灯
 
+```
+<b-marquee> | Marquee
+```
+
 适合用于展示公告、中奖信息之类的长文本。
 
 ## 代码演示

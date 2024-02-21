@@ -4,6 +4,10 @@ group: 组件
 
 # Carousel 轮播图
 
+```
+<b-carousel> | Carousel
+```
+
 ## 介绍
 
 可以用它来展示多张图片，或者其他内容。

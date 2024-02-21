@@ -6,6 +6,10 @@ demo:
 
 # Dropdown 下拉菜单
 
+```
+<b-dropdown> | Dropdown
+```
+
 ## 介绍
 
 一个用于收纳操作命令的容器。

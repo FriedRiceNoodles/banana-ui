@@ -6,6 +6,10 @@ demo:
 
 # Progress 进度条
 
+```
+<b-progress> | Progress
+```
+
 可用于展示操作的进度，或用于电商的活动场景。
 
 ## 代码演示

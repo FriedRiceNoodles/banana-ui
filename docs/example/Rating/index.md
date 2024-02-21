@@ -6,6 +6,10 @@ demo:
 
 # Rating 评分
 
+```
+<b-rating> | Rating
+```
+
 评分组件。
 
 ## 代码演示

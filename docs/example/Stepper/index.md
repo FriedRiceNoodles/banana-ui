@@ -5,11 +5,11 @@ demo:
   cols: 2
 ---
 
-# Stepper 数量选择器<Badge type="warning">dev only</Badge>
+# Stepper 数量选择器
 
-:::warning
-未完成的组件
-:::
+```
+<b-stepper> | Stepper
+```
 
 以设定步数对数据进行加减
 
