@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.1
+
+### Patch Changes
+
+- a7460ab: Added custom elements manifest.
+
 ## 1.17.0
 
 ### Minor Changes
