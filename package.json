@@ -20,7 +20,7 @@
     "lint": "pnpm run lint:es",
     "lint:es": "eslint \"packages/**/{src,styles,bin}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
-    "publish:all": "cd packages/banana && pnpm publish && cd ../banana-react && pnpm publish",
+    "publish:all": "cd packages/banana && pnpm publish && cd ../banana-react && pnpm publish && cd ../../ && pnpm changeset tag",
     "start": "pnpm run dev",
     "test": "cd packages/banana && pnpm run test"
   },
