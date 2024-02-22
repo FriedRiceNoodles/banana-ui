@@ -12,15 +12,16 @@
   "scripts": {
     "build": "pnpm build:all",
     "build:all": "cd packages/banana && pnpm run build && cd ../banana-react && pnpm run build",
-    "dev": "npm run dev:all",
-    "dev:all": "cd packages/banana && npm run dev & cd packages/banana-react && npm run dev & dumi dev",
+    "dev": "pnpm run dev:all",
+    "dev:all": "cd packages/banana && pnpm run dev & cd packages/banana-react && pnpm run dev & dumi dev",
     "dev:dumi": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
-    "lint": "npm run lint:es",
+    "lint": "pnpm run lint:es",
     "lint:es": "eslint \"packages/**/{src,styles,bin}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
-    "start": "npm run dev"
+    "start": "pnpm run dev",
+    "test": "cd packages/banana && pnpm run test"
   },
   "commitlint": {
     "extends": [
