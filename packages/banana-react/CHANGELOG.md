@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.2
+
+### Patch Changes
+
+- c5549a4: Try auto release by github action
+- Updated dependencies [c5549a4]
+  - @banana-ui/banana@1.17.2
+
 ## 1.17.1
 
 ### Patch Changes
