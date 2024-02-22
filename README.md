@@ -1,7 +1,10 @@
 # Banana UI
 
-[![NPM version](https://img.shields.io/npm/v/banana-ui.svg?style=flat)](https://www.npmjs.com/package/@banana-ui/banana)
-[![NPM downloads](http://img.shields.io/npm/dm/banana-ui.svg?style=flat)](https://www.npmjs.com/package/@banana-ui/banana)
+[![NPM version](https://img.shields.io/npm/v/@banana-ui/banana.svg?style=flat)](https://www.npmjs.com/package/@banana-ui/banana)
+[![NPM downloads](http://img.shields.io/npm/dm/@banana-ui/banana.svg?style=flat)](https://www.npmjs.com/package/@banana-ui/banana)
+[![Jsdelivr](https://data.jsdelivr.com/v1/package/npm/@banana-ui/banana/badge)](https://www.npmjs.com/package/@banana-ui/banana)
+[![Bundle size](https://img.shields.io/bundlephobia/minzip/@banana-ui/banana)](https://www.npmjs.com/package/@banana-ui/banana?activeTab=code)
+![License](https://img.shields.io/github/license/FriedRiceNoodles/banana-ui)
 
 `Banana UI` 是一套底层基于 `Web Components` 的组件库，它提供了一套常用的组件。
 
