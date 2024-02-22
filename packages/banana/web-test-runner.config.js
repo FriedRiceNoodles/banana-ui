@@ -22,6 +22,7 @@ export default {
     include: ['dist/**/*'],
     report: true,
     reportDir: 'coverage',
+    reporters: ['cobertura', 'lcov'],
   },
   testFramework: {
     config: {
