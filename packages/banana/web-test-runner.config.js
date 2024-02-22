@@ -1,5 +1,6 @@
 import { esbuildPlugin } from '@web/dev-server-esbuild';
 import { playwrightLauncher } from '@web/test-runner-playwright';
+import process from 'node:process';
 
 export default {
   rootDir: '.',
@@ -26,7 +27,8 @@ export default {
   },
   browsers: [
     playwrightLauncher({ product: 'chromium' }),
-    playwrightLauncher({ product: 'firefox' }),
+    // No firefox if CI
+    process.env.CI ? undefined : playwrightLauncher({ product: 'firefox' }),
     // playwrightLauncher({ product: 'webkit' }),
   ],
   testRunnerHtml: (testFramework) => `
