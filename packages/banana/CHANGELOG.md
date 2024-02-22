@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.3
+
+### Patch Changes
+
+- 48c856f: Try auto github releases note, https://github.com/changesets/action/pull/345
+
 ## 1.17.2
 
 ### Patch Changes
