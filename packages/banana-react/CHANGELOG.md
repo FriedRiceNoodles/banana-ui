@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.1
+
+### Patch Changes
+
+- a7460ab: Added custom elements manifest.
+- Updated dependencies [a7460ab]
+  - @banana-ui/banana@1.17.1
+
 ## 1.17.0
 
 ### Minor Changes

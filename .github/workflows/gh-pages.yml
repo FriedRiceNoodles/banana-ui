@@ -24,6 +24,18 @@ jobs:
       # 组件库打包
       - name: Build packages
         run: pnpm build
+      # 测试
+      - name: Test
+        run: pnpm test
+
+      # 生成覆盖率报告
+      - name: Upload coverage reports to Codecov
+        uses: codecov/codecov-action@v4.0.1
+        with:
+          file: ./packages/banana/coverage/cobertura-coverage.xml
+          token: ${{ secrets.CODECOV_TOKEN }}
+          slug: FriedRiceNoodles/banana-ui
+
       # 构建文档
       - name: Build with dumi
         run: pnpm docs:build

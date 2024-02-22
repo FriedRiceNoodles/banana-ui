@@ -28,6 +28,14 @@ jobs:
       - name: Install dependencies
         run: pnpm installF
 
+      # 构建
+      - name: Build
+        run: pnpm build
+
+      # 测试
+      - name: Test
+        run: pnpm test
+
       # 版本变更，创建 PR 或发版
       - name: Create Release Pull Request
         uses: changesets/action@v1
