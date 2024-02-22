@@ -24,6 +24,7 @@ jobs:
       - uses: pnpm/action-setup@v2
         with:
           version: 8.7.0
+
       # 安装依赖
       - name: Install dependencies
         run: pnpm install
@@ -36,9 +37,12 @@ jobs:
       - name: Test
         run: pnpm test
 
+      # 版本变更，创建 PR 或发版
       - name: Create Release Pull Request
         uses: changesets/action@v1
         with:
           commit: 'chore(release): release by changesets'
+          publish: cd packages/banana && pnpm publish and cd ../banana-react && pnpm publish
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
