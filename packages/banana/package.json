@@ -37,6 +37,7 @@
     "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs && pnpm run tsc && pnpm run cem",
     "cem": "custom-elements-manifest analyze --config \"custom-elements-manifest.config.js\"",
     "dev": "rollup -c ../../rollup.config.dev.mjs -p ../../scripts/rollup-plugin-copy-types.js -w --no-watch.clearScreen",
+    "publish:all": "cd packages/banana && pnpm publish && cd ../banana-react && pnpm publish",
     "test": "web-test-runner",
     "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
