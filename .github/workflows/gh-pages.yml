@@ -24,6 +24,9 @@ jobs:
       # 组件库打包
       - name: Build packages
         run: pnpm build
+      # 测试
+      - name: Test
+        run: pnpm test
       # 构建文档
       - name: Build with dumi
         run: pnpm docs:build
