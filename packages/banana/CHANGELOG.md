@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.2
+
+### Patch Changes
+
+- c5549a4: Try auto release by github action
+
 ## 1.17.1
 
 ### Patch Changes
