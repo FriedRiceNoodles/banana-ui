@@ -1,6 +1,7 @@
 {
   "name": "@banana/banana-cli",
   "version": "0.2.0",
+  "private": true,
   "description": "banana cli",
   "keywords": [],
   "license": "ISC",
