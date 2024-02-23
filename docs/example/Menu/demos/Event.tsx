@@ -9,10 +9,12 @@ import React from 'react';
 export default function BasicUsage() {
   const onSelect = (
     event: CustomEvent<{
-      item: string;
+      item: {
+        value: string;
+      };
     }>,
   ) => {
-    console.log(event.detail.item);
+    console.log(event.detail.item.value);
   };
 
   return (

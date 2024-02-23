@@ -5,7 +5,9 @@ import * as React from 'react';
 const events = {
   onSelect: 'select' as EventName<
     CustomEvent<{
-      item: string;
+      item: {
+        value: string;
+      };
     }>
   >,
 };
