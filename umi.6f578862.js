@@ -2342,8 +2342,13 @@ export default function BasicUsage() {
 import React from 'react';
 
 export default function BasicUsage() {
-  const onSelect = (event: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+  const onSelect = (
+    event: CustomEvent<{
+      item: {
+        value: string;
+      };
+    }>,
+  ) => {
     console.log(event.detail.item.value);
   };
 
@@ -3443,7 +3448,7 @@ export default function StepChange() {
         controlled
         onChange={(e) => {
           if (e.composedPath()[0] === stepper.current) {
-            const event = e as CustomEvent<{ value: string }>;
+            const event = e;
 
             Message.info({ content: \`current stepper value\uFF1A\${event.detail.value}\` });
             setValue(Number(event.detail.value));
