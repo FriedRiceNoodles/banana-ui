@@ -7,9 +7,12 @@ import { Divider, Menu, MenuItem } from '@banana-ui/react';
 import React from 'react';
 
 export default function BasicUsage() {
-  const onSelect = (event: any) => {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-    console.log(event.detail.item.value);
+  const onSelect = (
+    event: CustomEvent<{
+      item: string;
+    }>,
+  ) => {
+    console.log(event.detail.item);
   };
 
   return (

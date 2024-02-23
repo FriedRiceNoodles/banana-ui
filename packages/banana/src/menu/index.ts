@@ -25,7 +25,7 @@ export default class BMenu extends LitElement {
       return;
     }
 
-    this.dispatchEvent(new CustomEvent('select', { detail: { item } }));
+    this.dispatchEvent(new CustomEvent('select', { detail: { item: item.value } }));
   }
 
   // todo...
