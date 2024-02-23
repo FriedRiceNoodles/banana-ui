@@ -15,7 +15,7 @@ export default function StepChange() {
         controlled
         onChange={(e) => {
           if (e.composedPath()[0] === stepper.current) {
-            const event = e as CustomEvent<{ value: string }>;
+            const event = e;
 
             Message.info({ content: `current stepper value：${event.detail.value}` });
             setValue(Number(event.detail.value));
