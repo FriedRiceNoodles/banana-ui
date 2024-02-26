@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.4
+
+### Patch Changes
+
+- b1a770e: Fixed a styling issue in the Radio component.
+
 ## 1.17.3
 
 ### Patch Changes
