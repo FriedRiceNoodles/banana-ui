@@ -17,7 +17,7 @@ export default function Disabled() {
         </Radio>
       </RadioGroup>
 
-      <RadioGroup disabled>
+      <RadioGroup disabled value="banana">
         <Radio value="banana">Banana🍌</Radio>
         <Radio value="apple">Apple🍎</Radio>
         <Radio value="cherry">Cherry🍒</Radio>
