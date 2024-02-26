@@ -61,6 +61,7 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "customElements": "custom-elements.json",
