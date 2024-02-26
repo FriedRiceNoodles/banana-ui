@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.4
+
+### Patch Changes
+
+- b1a770e: Fixed a styling issue in the Radio component.
+- Updated dependencies [b1a770e]
+  - @banana-ui/banana@1.17.4
+
 ## 1.17.3
 
 ### Patch Changes
