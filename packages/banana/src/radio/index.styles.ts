@@ -40,7 +40,7 @@ export default [
 
     .radio--checked:not(.radio--disabled) .radio__control {
       background-color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
-      border-color: var(--banana-color-primary, ${unsafeCSS(Var.ColorPrimary)});
+      border: none;
     }
 
     .radio--checked:not(.radio--disabled) .radio__control::after {
