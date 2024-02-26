@@ -1,5 +1,4 @@
 ---
-debug: true
 group: 组件
 demo:
   cols: 2

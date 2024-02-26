@@ -9,7 +9,7 @@ order: 1
 
 ## ⭐️ 特性
 
-- 🧩 **可用于任何 Web 框架（React、Vue、以及其他...）**
+- 🧩 **可用于几乎任何 Web 框架（React、Vue、以及其他...）**
 - 🌐 **可用于原生环境（无框架）**
 - 🚀 **支持 SSR（甚至能用于 worker 环境）**
 - 🛡 良好的 TypeScript 支持
@@ -59,3 +59,7 @@ export default function App() {
 ## 服务端渲染（SSR）支持
 
 详情请查看 [服务端渲染（SSR）支持](/guide/SSR)。
+
+## 组件列表
+
+<a href="/example/button"><b-button type="primary">组件列表</b-button></a>
