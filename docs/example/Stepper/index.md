@@ -4,7 +4,7 @@ demo:
   cols: 2
 ---
 
-# Stepper 数量选择器
+# Stepper 数量选择器 <Badge>表单组件</Badge>
 
 ```
 <b-stepper> | Stepper

@@ -4,7 +4,7 @@ demo:
   cols: 2
 ---
 
-# Input 输入框
+# Input 输入框 <Badge>表单组件</Badge>
 
 ```
 <b-input> | Input
