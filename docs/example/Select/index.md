@@ -4,7 +4,7 @@ demo:
   cols: 2
 ---
 
-# Select 选择器
+# Select 选择器 <Badge>表单组件</Badge>
 
 ```
 <b-select> | Select

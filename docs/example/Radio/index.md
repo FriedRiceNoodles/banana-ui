@@ -4,7 +4,7 @@ demo:
   cols: 2
 ---
 
-# Radio 单选框
+# Radio 单选框 <Badge>表单组件</Badge>
 
 ```
 <b-radio> | Radio
