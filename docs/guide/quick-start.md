@@ -46,6 +46,8 @@ export default function App() {
 }
 ```
 
+[关于`@banana-ui/react`](/guide/react)
+
 然后你就得到了一个按钮。
 
 ```jsx

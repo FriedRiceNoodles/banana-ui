@@ -42,11 +42,11 @@ Banana 最大的特点是它是一个基于 Web Components 的组件库，这意
 
 可以。Banana UI 已经在一些项目中使用。但是请注意，它仍然处于早期阶段，可能会有一些问题。如果你在使用过程中遇到了问题，欢迎在 [Issues 区](https://github.com/FriedRiceNoodles/banana-ui/issues) 上提出问题或寻求帮助。
 
+> 作者注：我目前在一个跨境电商公司工作，公司最大的 C 端项目以及它的一些内部系统都在使用 Banana UI。
+
 ### Banana UI 使用了什么技术？
 
 Banana UI 底层基于 [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)，并使用 [Lit](https://lit.dev/)进行开发。
-
-> 作者注：我目前在一个跨境电商公司工作，公司最大的 C 端项目以及它的一些内部系统都在使用 Banana UI。
 
 <br />
 <a href="/guide/quick-start" style="margin-right: 16px"><b-button type="primary">现在就试试</b-button></a>
