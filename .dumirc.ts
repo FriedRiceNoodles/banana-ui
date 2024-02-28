@@ -5,6 +5,9 @@ export default defineConfig({
   themeConfig: {
     name: 'Banana UI',
     footer: false,
+    hero: {
+      showCustomContent: true,
+    },
     socialLinks: {
       github: 'https://github.com/FriedRiceNoodles/banana-ui',
     },
