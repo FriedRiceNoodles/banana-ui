@@ -1,0 +1,1 @@
+"use strict";(self.webpackChunkbanana=self.webpackChunkbanana||[]).push([[252],{81724:function(r,u,n){n.r(u),n.d(u,{default:function(){return s}});var t=n(6299),a=n(99506),o=n(11527),s=function(){var d=(0,t.pC)();return(0,o.jsx)(a.Z,{children:d})}}}]);
