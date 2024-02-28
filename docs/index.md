@@ -8,5 +8,3 @@ hero:
     - text: 组件
       link: /example/button
 ---
-
-<code src="./doc-components/features.tsx"></code>
