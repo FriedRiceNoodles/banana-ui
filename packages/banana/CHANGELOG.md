@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.5
+
+### Patch Changes
+
+- 76f54ac: fix separate not re-render when sparate slot changed
+
 ## 1.17.4
 
 ### Patch Changes

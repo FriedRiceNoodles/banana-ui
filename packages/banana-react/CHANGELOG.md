@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.5
+
+### Patch Changes
+
+- 76f54ac: fix separate not re-render when sparate slot changed
+- Updated dependencies [76f54ac]
+  - @banana-ui/banana@1.17.5
+
 ## 1.17.4
 
 ### Patch Changes
