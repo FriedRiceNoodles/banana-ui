@@ -46,3 +46,4 @@ jobs:
           deploy_key: ${{ secrets.ACTIONS_DEPLOY_KEY_0219 }}
           # 文档目录，如果是 react 模板需要修改为 docs-dist
           publish_dir: ./docs-dist
+          cname: banana-ui.com
