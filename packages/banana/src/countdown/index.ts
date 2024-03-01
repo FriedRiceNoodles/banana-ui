@@ -49,7 +49,6 @@ export default class BCountdown extends LitElement {
     // Don't deal replace separator operation when separator isn't changed
     if (this._prevSeparator?.textContent === this._separator?.[0]?.textContent) return;
     // Remove and record old separator when separator alive
-
     if (this.separate) {
       if (this._aliveSeparator?.length) {
         this._prevSeparator = this._aliveSeparator[0];
@@ -71,6 +70,8 @@ export default class BCountdown extends LitElement {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
           item.insertAdjacentElement('beforebegin', separatorContent[0].cloneNode(true) as HTMLElement);
         });
+      } else {
+        this._prevSeparator = undefined;
       }
     }
   }
