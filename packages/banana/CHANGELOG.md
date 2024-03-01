@@ -1,5 +1,13 @@
 # banana-ui
 
+## 1.17.5
+
+### Patch Changes
+
+- bdf40c9: fix the separator re-render error when the separator appears
+- 20d28ea: fix question of separate render abnormal when the separate visiable status changed
+- 76f54ac: fix separate not re-render when sparate slot changed
+
 ## 1.17.4
 
 ### Patch Changes
