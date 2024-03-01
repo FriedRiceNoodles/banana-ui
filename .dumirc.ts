@@ -127,6 +127,4 @@ export default defineConfig({
       ],
     },
   },
-  publicPath: '/banana-ui/',
-  base: '/banana-ui/',
 });
