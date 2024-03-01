@@ -45,28 +45,33 @@ export default class BCountdown extends LitElement {
   @queryAll('[part="separator"]')
   private _aliveSeparator: HTMLElement[] | undefined;
 
-  private replaceSeparator() {
+  private _replaceSeparator() {
     // Don't deal replace separator operation when separator isn't changed
     if (this._prevSeparator?.textContent === this._separator?.[0]?.textContent) return;
     // Remove and record old separator when separator alive
-    if (this.separate && this._separator && this._separator.length > 0) {
+
+    if (this.separate) {
       if (this._aliveSeparator?.length) {
         this._prevSeparator = this._aliveSeparator[0];
         for (const separatorItem of this._aliveSeparator) {
           this._countdownSeparate?.removeChild(separatorItem);
         }
       }
-      const separatorContent = this._separator;
-      // Set part attribute for separator
-      separatorContent[0].setAttribute('part', 'separator');
-      const countdownItems = this._countdownSeparate?.querySelectorAll('.countdown__item');
-      countdownItems?.forEach((item, index) => {
-        if (index === 0) {
-          return;
-        }
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        item.insertAdjacentElement('beforebegin', separatorContent[0].cloneNode(true) as HTMLElement);
-      });
+
+      // Adapt to the scene where the separator appears or not
+      if (this._separator && this._separator.length > 0) {
+        const separatorContent = this._separator;
+        // Set part attribute for separator
+        separatorContent[0].setAttribute('part', 'separator');
+        const countdownItems = this._countdownSeparate?.querySelectorAll('.countdown__item');
+        countdownItems?.forEach((item, index) => {
+          if (index === 0) {
+            return;
+          }
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          item.insertAdjacentElement('beforebegin', separatorContent[0].cloneNode(true) as HTMLElement);
+        });
+      }
     }
   }
 
@@ -109,7 +114,7 @@ export default class BCountdown extends LitElement {
 
   render() {
     // If separate is true, insert separator between countdown items
-    this.replaceSeparator();
+    this._replaceSeparator();
 
     const _timeDataObject = formatTimeStr(this._timeLeft, this.format);
     const _time = _timeDataObject.text;
