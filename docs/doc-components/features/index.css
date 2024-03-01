@@ -30,3 +30,18 @@
   font-size: 14px;
   color: #666;
 }
+
+@media (max-width: 575px) {
+  .features-wrapper {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .feature-item {
+    padding: 10px 20px;
+  }
+
+  .feature-title {
+    margin: 10px 0;
+  }
+}
