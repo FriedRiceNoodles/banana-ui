@@ -25,7 +25,7 @@ export default [
       width: 100%;
       line-height: 1;
       border-style: solid;
-      border-width: var(--banana-button-boder-width, ${unsafeCSS(Var.InputBorderWidth)});
+      border-width: var(--banana-button-border-width, ${unsafeCSS(Var.InputBorderWidth)});
       border-radius: var(--banana-button-border-radius, ${unsafeCSS(Var.BorderRadiusSmall)});
       font-family: var(--banana-button-font-family, ${unsafeCSS(Var.InputFontFamily)});
       font-weight: var(--banana-button-font-weight, ${unsafeCSS(Fonts.FontWeightNormal)});

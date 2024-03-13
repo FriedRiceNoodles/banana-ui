@@ -7,7 +7,7 @@ import SourceCode from 'dumi/theme-default/builtins/SourceCode';
 import 'dumi/theme-default/slots/PreviewerActions/index.less';
 import PreviewerActionsExtra from 'dumi/theme-default/slots/PreviewerActionsExtra';
 import Tabs from 'rc-tabs';
-import { useEffect, useRef, useState, type FC, type ReactNode } from 'react';
+import { useEffect, useState, type FC, type ReactNode } from 'react';
 export interface IPreviewerActionsProps extends IPreviewerProps {
   /**
    * disabled actions
@@ -59,8 +59,6 @@ const PreviewerActions: FC<IPreviewerActionsProps> = (props) => {
   const [showReactCode, setShowReactCode] = useState(false);
   const [showHTMLCode, setShowHTMLCode] = useState(props.forceShowCode || props.defaultShowCode);
   const [htmlCode, setHtmlCode] = useState('');
-  const copyTimer = useRef<number>();
-  const [isCopied, setIsCopied] = useState(false);
   const isSingleFile = files.length === 1;
   const lang = (files[activeKey][0].match(/\.([^.]+)$/)?.[1] || 'text') as any;
 

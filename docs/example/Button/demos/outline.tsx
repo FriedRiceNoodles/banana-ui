@@ -4,9 +4,8 @@
  */
 
 import { Button } from '@banana-ui/react';
-import React from 'react';
 
-export default function ButtonDemo4() {
+export default function Outline() {
   return (
     <div
       style={{
