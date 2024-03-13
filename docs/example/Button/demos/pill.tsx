@@ -4,9 +4,8 @@
  */
 
 import { Button } from '@banana-ui/react';
-import React from 'react';
 
-export default function ButtonDemo3() {
+export default function Pill() {
   return (
     <div
       style={{

@@ -4,9 +4,8 @@
  */
 
 import { Button } from '@banana-ui/react';
-import React from 'react';
 
-export default function ButtonDemo7() {
+export default function Block() {
   return (
     <div>
       <Button block type="primary">

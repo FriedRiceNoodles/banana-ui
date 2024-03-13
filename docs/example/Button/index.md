@@ -16,14 +16,14 @@ demo:
 
 ## 代码演示
 
-<code src="./demos/demo0.tsx"></code>
-<code src="./demos/demo1.tsx"></code>
-<code src="./demos/demo2.tsx"></code>
-<code src="./demos/demo3.tsx"></code>
-<code src="./demos/demo4.tsx"></code>
-<code src="./demos/demo5.tsx"></code>
-<code src="./demos/demo6.tsx"></code>
-<code src="./demos/demo7.tsx"></code>
+<code src="./demos/basicUsage.tsx"></code>
+<code src="./demos/type.tsx"></code>
+<code src="./demos/size.tsx"></code>
+<code src="./demos/pill.tsx"></code>
+<code src="./demos/outline.tsx"></code>
+<code src="./demos/disabled.tsx"></code>
+<code src="./demos/loading.tsx"></code>
+<code src="./demos/block.tsx"></code>
 <code src="./demos/formTest.tsx"></code>
 
 ## 属性 - Attributes & Properties

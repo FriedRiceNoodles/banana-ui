@@ -3,9 +3,8 @@
  */
 
 import { Button } from '@banana-ui/react';
-import React from 'react';
 
-export default function ButtonDemo0() {
+export default function BasicUsage() {
   return (
     <div>
       <Button>我是一个按钮</Button>
