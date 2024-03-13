@@ -46,7 +46,7 @@ Banana 最大的特点是它是一个基于 Web Components 的组件库，这意
 
 ### Banana UI 使用了什么技术？
 
-Banana UI 底层基于 [Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)，并使用 [Lit](https://lit.dev/)进行开发。
+Banana UI 底层基于[Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)，并使用[Lit](https://lit.dev/)进行开发。
 
 <br />
 <a href="/guide/quick-start" style="margin-right: 16px"><b-button type="primary">现在就试试</b-button></a>
