@@ -1,0 +1,26 @@
+<div>
+  <b-select multiple style="width: 100%;" default-value="grape orange">
+    <b-select-option value="apple">🍎
+      AppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleApple</b-select-option>
+    <b-select-option value="banana">🍌 Banana</b-select-option>
+    <b-select-option value="orange">🍊 Orange</b-select-option>
+    <b-select-option value="pear">🍐 Pear</b-select-option>
+    <b-select-option value="grape">🍇 Grape</b-select-option>
+    <b-select-option value="strawberry">🍓 Strawberry</b-select-option>
+    <b-select-option value="pineapple">🍍 Pineapple</b-select-option>
+    <b-select-option value="cherry">🍒 Cherry</b-select-option>
+    <b-select-option value="disabled" disabled>🚫 Disabled</b-select-option>
+  </b-select>
+</div>
+<script>
+  window.onload = () => {
+    const select = document.querySelector('b-select');
+
+    function handleChange(event) {
+      console.log(event.detail.value);
+    }
+
+    select.addEventListener('change', handleChange)
+  }
+
+</script>
