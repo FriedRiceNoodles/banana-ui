@@ -1,0 +1,17 @@
+<style>
+  .countdown::part(separate-item) {
+    color: #fff;
+    background: red;
+    padding: 0 8px;
+    border-radius: 4px;
+  }
+
+  .countdown::part(separator) {
+    margin: 0 4px;
+    color: red;
+  }
+</style>
+
+<b-countdown class="countdown" format="HHmmssSSS" time="7200000" separate>
+  <span class="separator" slot="separator">:</span>
+</b-countdown>
