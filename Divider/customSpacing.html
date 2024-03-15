@@ -1,0 +1,27 @@
+<style>
+  .surrounding {
+    text-align: center;
+    color: gray;
+    font-size: 12px;
+  }
+</style>
+
+<p>
+  你可以使用<code>spacing</code>参数自定义分割线的间距：
+</p>
+<div class="surrounding">上面的元素</div>
+<b-divider spacing="8"></b-divider>
+<div class="surrounding">下面的元素</div>
+<br>
+<div class="surrounding">上面的元素</div>
+<b-divider spacing="8px"></b-divider>
+<div class="surrounding">下面的元素</div>
+<br>
+<div class="surrounding">上面的元素</div>
+<b-divider spacing="0.5rem"></b-divider>
+<div class="surrounding">下面的元素</div>
+<br>
+<p>也可以通过css变量的方式自定义分割线的粗细：</p>
+<div class="surrounding">上面的元素</div>
+<b-divider style="--banana-divider-spacing: 8px;"></b-divider>
+<div class="surrounding">下面的元素</div>
