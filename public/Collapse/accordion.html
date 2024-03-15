@@ -1,0 +1,28 @@
+<div>
+  <b-collapse title="折叠面板1">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </b-collapse>
+  <b-collapse title="折叠面板2">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </b-collapse>
+  <b-collapse title="折叠面板3">
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna
+    aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+  </b-collapse>
+</div>
+
+<script>
+  const collapses = document.querySelectorAll('b-collapse');
+
+  const handleShow = (index) => {
+    collapses.forEach((collapse, i) => {
+      collapse.open = i === index;
+    });
+  };
+
+  collapses.forEach((collapse, index) => {
+    collapse.addEventListener('show', () => handleShow(index));
+  });
+</script>
