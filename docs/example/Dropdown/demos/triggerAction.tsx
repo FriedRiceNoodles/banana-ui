@@ -4,7 +4,6 @@
  */
 
 import { Button, Divider, Dropdown, Menu, MenuItem } from '@banana-ui/react';
-import React from 'react';
 
 export default function TriggerAction() {
   return (
