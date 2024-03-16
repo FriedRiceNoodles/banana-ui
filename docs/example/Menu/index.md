@@ -10,22 +10,15 @@ demo:
 <b-menu> | Menu
 ```
 
-:::info
-Menu 组件搭配 MenuItem 组件使用
-
-```
-<b-menu-item> | MenuItem
-```
-
-:::
+## 介绍
 
 菜单提供了一个选项/操作列表供用户选择。
 
 ## 代码演示
 
-<code src="./demos/BasicUsage.tsx"></code>
-<code src="./demos/Disabled.tsx"></code>
-<code src="./demos/Event.tsx"></code>
+<code src="./demos/basicUsage.tsx"></code>
+<code src="./demos/disabled.tsx"></code>
+<code src="./demos/event.tsx"></code>
 
 ## 属性 (MenuItem 菜单子项) - Attributes & Properties
 
@@ -36,9 +29,9 @@ Menu 组件搭配 MenuItem 组件使用
 
 ## 事件 - Events
 
-| 事件   | 说明       | Event Detail     |
-| ------ | ---------- | ---------------- |
-| select | 选中时触发 | `{item: string}` |
+| 事件   | 说明       | Event Detail              |
+| ------ | ---------- | ------------------------- |
+| select | 选中时触发 | `{item: {value: string}}` |
 
 ## 插槽 - Slots
 
