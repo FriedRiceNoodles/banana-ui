@@ -1,0 +1,14 @@
+<style>
+  .foo::part(base) {
+    background-color: rgba(255, 0, 0, 0.8);
+    padding: 10px 0;
+    color: #fff;
+    font-family: "Gill Sans", sans-serif;
+  }
+</style>
+
+<b-marquee
+  style="--banana-marquee-color: orange; --banana-marquee-font-size: 12px; --banana-marquee-line-height: 2; --banana-marquee-background-color: rgba(0,0,0,.5);"
+  content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."></b-marquee>
+<b-marquee class="foo"
+  content="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua."></b-marquee>
