@@ -121,7 +121,7 @@ export const Variables = {
   InputBackgroundColor: '#fff',
   InputDisabledColor: `rgba(0, 0, 0, 0.25)`,
   InputDisabledBackgroundColor: `rgba(0, 0, 0, 0.03)`,
-  InputDisabledBorderColor: `rgba(${Colors.Gray3}, 1})`,
+  InputDisabledBorderColor: `rgba(${Colors.Gray3}, 1)`,
   InputBoxShadowFocus: `0 0 0 2px rgba(${Colors.Blue6}, 0.2)`,
   InputFontFamily:
     'Inter, AppleSystem, BlinkMacSystemFont, Segoe UI, PingFang SC, Hiragino Sans GB, Microsoft YaHei, Helvetica Neue, Helvetica, Arial, sansSerif',

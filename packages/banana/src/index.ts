@@ -20,6 +20,7 @@ import BRating from './rating';
 import BSelect from './select';
 import BSelectOption from './select-option';
 import BStepper from './stepper';
+import BTextarea from './textarea';
 import BTooltip from './tooltip';
 
 export {
@@ -45,5 +46,6 @@ export {
   BSelect,
   BSelectOption,
   BStepper,
+  BTextarea,
   BTooltip,
 };
