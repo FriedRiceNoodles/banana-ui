@@ -4,7 +4,6 @@
  */
 
 import { Carousel, Divider } from '@banana-ui/react';
-import React from 'react';
 
 export default function disableFill() {
   const style = `
@@ -20,7 +19,7 @@ export default function disableFill() {
      `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <Carousel slidesPerView={3} gap={50}>
         <div className="demo-slide">1</div>
@@ -33,6 +32,6 @@ export default function disableFill() {
         <div className="demo-slide">1</div>
         <div className="demo-slide">2</div>
       </Carousel>
-    </div>
+    </>
   );
 }

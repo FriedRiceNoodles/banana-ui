@@ -1,9 +1,10 @@
-/* eslint-disable @typescript-eslint/no-unsafe-return */
-/* eslint-disable @typescript-eslint/no-unsafe-call */
 /**
  * title: 使用useRef手动改变currentIndex
  * debug: true
  */
+
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 
 import { Button, Carousel } from '@banana-ui/react';
 import { useRef } from 'react';
