@@ -6,7 +6,7 @@
  */
 
 import { Button, Carousel } from '@banana-ui/react';
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 
 export default function CarouselDemo0() {
   const carousel = useRef(null);
@@ -24,7 +24,7 @@ export default function CarouselDemo0() {
    `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <Carousel ref={carousel} slidesPerView={5} loop gap={20}>
         <div className="demo-slide">1</div>
@@ -41,6 +41,6 @@ export default function CarouselDemo0() {
 
       <Button onclick={() => carousel.current?.goto(0)}>go 1</Button>
       <Button onclick={() => carousel.current?.goto(9)}>go 10</Button>
-    </div>
+    </>
   );
 }
