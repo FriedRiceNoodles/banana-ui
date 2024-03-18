@@ -1,0 +1,18 @@
+<b-countdown id="countdown" time="10000"></b-countdown>
+
+<script>
+  const countdown = document.getElementById('countdown');
+  let flag = false;
+
+  countdown.addEventListener('change', (e) => {
+    const timeLeft = e.detail.timeLeft;
+    if (timeLeft <= 5000 && !flag) {
+      flag = true;
+      console.log('倒计时将在5秒内结束。');
+    }
+  });
+
+  countdown.addEventListener('finish', () => {
+    console.log('倒计时结束。');
+  });
+</script>

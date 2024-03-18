@@ -24,9 +24,5 @@ export default function Events() {
     console.log('倒计时结束。');
   };
 
-  return (
-    <div>
-      <Countdown time={time} onChange={onChange} onFinish={onFinish} />
-    </div>
-  );
+  return <Countdown time={time} onChange={onChange} onFinish={onFinish} />;
 }

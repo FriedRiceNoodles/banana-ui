@@ -4,7 +4,7 @@
  */
 
 import { Collapse } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function CollapseDemo3() {
   const [status, setStatus] = useState([false, false, false]);

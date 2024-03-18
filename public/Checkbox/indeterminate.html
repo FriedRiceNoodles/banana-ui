@@ -1,0 +1,44 @@
+<div>
+  <b-checkbox id="check-all">
+    Check All
+  </b-checkbox>
+</div>
+<hr>
+<div style="display: flex; gap: 20px;">
+  <b-checkbox class="checkbox">
+    Apple🍎
+  </b-checkbox>
+  <b-checkbox class="checkbox">
+    Banana🍌
+  </b-checkbox>
+  <b-checkbox class="checkbox">
+    Cherry🍒
+  </b-checkbox>
+</div>
+
+<script>
+  const checkAll = document.getElementById('check-all');
+  const checkboxes = document.querySelectorAll('.checkbox');
+
+  checkAll.addEventListener('change', handleCheckAll);
+  checkboxes.forEach((checkbox) => {
+    checkbox.addEventListener('change', handleCheckboxChange);
+  });
+
+  function handleCheckAll(event) {
+    checkboxes.forEach((checkbox) => {
+      checkbox.checked = event.detail.checked;
+    });
+    checkAll.indeterminate = false;
+  }
+
+  function handleCheckboxChange() {
+    // 更新全选状态
+    const isAllChecked = [...checkboxes].every((checkbox) => checkbox.checked);
+    checkAll.checked = isAllChecked;
+
+    // 是否部分选中
+    const isPartChecked = [...checkboxes].some((checkbox) => checkbox.checked);
+    checkAll.indeterminate = !isAllChecked && isPartChecked;
+  }
+</script>

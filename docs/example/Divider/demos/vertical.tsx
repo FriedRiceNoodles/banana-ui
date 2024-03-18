@@ -4,7 +4,6 @@
  */
 
 import { Button, Divider } from '@banana-ui/react';
-import React from 'react';
 
 export default function vertical() {
   return (
