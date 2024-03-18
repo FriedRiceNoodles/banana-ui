@@ -3,9 +3,8 @@
  */
 
 import { Carousel } from '@banana-ui/react';
-import React from 'react';
 
-export default function CarouselDemo0() {
+export default function BasicUsage() {
   const style = `
     .demo-slide {
       height: 300px;
@@ -19,7 +18,7 @@ export default function CarouselDemo0() {
   `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <Carousel>
         <div className="demo-slide">1</div>
@@ -28,6 +27,6 @@ export default function CarouselDemo0() {
         <div className="demo-slide">4</div>
         <div className="demo-slide">5</div>
       </Carousel>
-    </div>
+    </>
   );
 }

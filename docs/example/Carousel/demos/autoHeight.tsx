@@ -4,7 +4,6 @@
  */
 
 import { Carousel } from '@banana-ui/react';
-import React from 'react';
 
 export default function autoHeight() {
   const style = `
