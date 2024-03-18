@@ -28,6 +28,8 @@ export default [
     .slides-wrapper {
       display: flex;
       transition: transform var(--banana-carousel-transition-duration, ${unsafeCSS(Var.TransitionNormal)});
+      /* This variable should not be used directly, use the gap property instead */
+      /* DO NOT PUT IT IN THE DOCUMENTATION */
       gap: calc(var(--banana-carousel-gap, 0) * 1px);
     }
 
@@ -36,6 +38,8 @@ export default [
     }
 
     .slides-wrapper ::slotted(*) {
+      /* This variable should not be used directly, use the slidesPerView property instead */
+      /* DO NOT PUT IT IN THE DOCUMENTATION */
       width: calc(
         (100% - (var(--banana-carousel-slidesPerView) - 1) * var(--banana-carousel-gap) * 1px) /
           var(--banana-carousel-slidesPerView)
