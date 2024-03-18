@@ -13,14 +13,12 @@
   </b-select>
 </div>
 <script>
-  window.onload = () => {
-    const select = document.querySelector('b-select');
+  const select = document.querySelector('b-select');
 
-    function handleChange(event) {
-      console.log(event.detail.value);
-    }
-
-    select.addEventListener('change', handleChange)
+  function handleChange(event) {
+    console.log(event.detail.value);
   }
+
+  select.addEventListener('change', handleChange)
 
 </script>

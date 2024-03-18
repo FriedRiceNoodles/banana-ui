@@ -1,21 +1,19 @@
 <div>
-  <b-button></b-button>
+  <b-button>click</b-button>
   <b-tooltip>
     <span>Hover me!</span>
   </b-tooltip>
 </div>
 
 <script>
-  window.onload = () => {
-    let visible = false;
-    const btn = document.querySelector('b-button');
-    const tooltip = document.querySelector('b-tooltip');
+  let visible = false;
+  const btn = document.querySelector('b-button');
+  const tooltip = document.querySelector('b-tooltip');
 
-    btn.addEventListener('click', () => {
-      visible = !visible;
-      tooltip.setAttribute('content', visible ? 'This is a tooltip.' : '');
-      btn.textContent = visible ? 'Hide' : 'Show';
-    });
-  }
+  btn.addEventListener('click', () => {
+    visible = !visible;
+    tooltip.setAttribute('content', visible ? 'This is a tooltip.' : '');
+    btn.textContent = visible ? 'Hide' : 'Show';
+  });
 
 </script>

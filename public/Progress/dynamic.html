@@ -9,20 +9,18 @@
 </div>
 
 <script>
-  window.onload = () => {
-    let percent = 0;
-    const resetBtn = document.querySelector('.reset');
-    const plusBtn = document.querySelector('.plus');
-    const progress = document.querySelector('b-progress');
+  let percent = 0;
+  const resetBtn = document.querySelector('.reset');
+  const plusBtn = document.querySelector('.plus');
+  const progress = document.querySelector('b-progress');
 
-    plusBtn.addEventListener('click', () => {
-      percent += 10;
-      progress.setAttribute('percent', percent)
-    })
+  plusBtn.addEventListener('click', () => {
+    percent += 10;
+    progress.setAttribute('percent', percent)
+  })
 
-    resetBtn.addEventListener('click', () => {
-      percent = 0;
-      progress.setAttribute('percent', percent)
-    })
-  }
+  resetBtn.addEventListener('click', () => {
+    percent = 0;
+    progress.setAttribute('percent', percent)
+  })
 </script>

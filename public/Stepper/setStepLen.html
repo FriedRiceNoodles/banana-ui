@@ -8,23 +8,21 @@
 </div>
 
 <script>
-  window.onload = () => {
-    let currentStep = 1;
-    const displayStepEl = document.getElementById('displayStep')
-    const stepper = document.querySelector('b-stepper')
-    const plusStepBtn = document.getElementById('plus')
-    const minusStepBtn = document.getElementById('minus')
+  let currentStep = 1;
+  const displayStepEl = document.getElementById('displayStep')
+  const stepper = document.querySelector('b-stepper')
+  const plusStepBtn = document.getElementById('plus')
+  const minusStepBtn = document.getElementById('minus')
 
-    plusStepBtn.addEventListener('click', () => {
-      currentStep += 1;
-      displayStepEl.textContent = `当前步长: ${currentStep}`
-      stepper.setAttribute('step', currentStep)
-    });
-    minusStepBtn.addEventListener('click', () => {
-      currentStep -= 1;
-      displayStepEl.textContent = `当前步长: ${currentStep}`
-      stepper.setAttribute('step', currentStep)
-    });
+  plusStepBtn.addEventListener('click', () => {
+    currentStep += 1;
+    displayStepEl.textContent = `当前步长: ${currentStep}`
+    stepper.setAttribute('step', currentStep)
+  });
+  minusStepBtn.addEventListener('click', () => {
+    currentStep -= 1;
+    displayStepEl.textContent = `当前步长: ${currentStep}`
+    stepper.setAttribute('step', currentStep)
+  });
 
-  }
 </script>
