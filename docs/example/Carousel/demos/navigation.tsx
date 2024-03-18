@@ -4,7 +4,6 @@
  */
 
 import { Carousel } from '@banana-ui/react';
-import React from 'react';
 
 export default function Navigation() {
   const style = `
@@ -20,7 +19,7 @@ export default function Navigation() {
    `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <Carousel navigation>
         <div className="demo-slide">1</div>
@@ -29,6 +28,6 @@ export default function Navigation() {
         <div className="demo-slide">4</div>
         <div className="demo-slide">5</div>
       </Carousel>
-    </div>
+    </>
   );
 }

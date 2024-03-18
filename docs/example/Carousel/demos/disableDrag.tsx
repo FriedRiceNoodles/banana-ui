@@ -4,7 +4,6 @@
  */
 
 import { Carousel } from '@banana-ui/react';
-import React from 'react';
 
 export default function disableDrag() {
   const style = `
@@ -20,7 +19,7 @@ export default function disableDrag() {
      `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <Carousel disableDrag navigation>
         <div className="demo-slide">1</div>
@@ -29,6 +28,6 @@ export default function disableDrag() {
         <div className="demo-slide">4</div>
         <div className="demo-slide">5</div>
       </Carousel>
-    </div>
+    </>
   );
 }

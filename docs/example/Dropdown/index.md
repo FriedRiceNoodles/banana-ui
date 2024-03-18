@@ -16,9 +16,9 @@ demo:
 
 ## 代码演示
 
-<code src="./demos/BasicUsage.tsx"></code>
-<code src="./demos/Placement.tsx"></code>
-<code src="./demos/Arrow.tsx"></code>
+<code src="./demos/basicUsage.tsx"></code>
+<code src="./demos/placement.tsx"></code>
+<code src="./demos/arrow.tsx"></code>
 <code src="./demos/triggerAction.tsx"></code>
 
 ## 属性 - Attributes & Properties

@@ -1,0 +1,14 @@
+<b-menu style="max-width: 200px;">
+  <b-menu-item value="opt-1">Option 1</b-menu-item>
+  <b-menu-item value="opt-2">Option 2</b-menu-item>
+  <b-menu-item value="opt-3">Option 3</b-menu-item>
+  <b-divider></b-divider>
+  <b-menu-item value="disabled" disabled>Disabled</b-menu-item>
+</b-menu>
+
+<script>
+  const menu = document.querySelector('b-menu');
+  menu.addEventListener('select', (event) => {
+    console.log(event.detail.item.value);
+  });
+</script>

@@ -4,9 +4,8 @@
  */
 
 import { Carousel } from '@banana-ui/react';
-import React from 'react';
 
-export default function CarouselDemo2() {
+export default function SlidesPerView() {
   const style = `
       .demo-slide {
         height: 300px;
