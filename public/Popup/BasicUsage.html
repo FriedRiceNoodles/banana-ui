@@ -71,30 +71,38 @@
 
 <script>
   const topBtn = document.querySelector('.top');
+  const topPopup = document.querySelector('b-popup[position="top"]');
   topBtn.addEventListener('click', () => {
-    popup.setAttribute('open', true)
-    popup.setAttribute('position', 'top')
+    topPopup.setAttribute('open', true)
+  })
+  topPopup.addEventListener('close', () => {
+    topPopup.removeAttribute('open')
   })
 
   const rightBtn = document.querySelector('.right');
+  const rightPopup = document.querySelector('b-popup[position="right"]');
   rightBtn.addEventListener('click', () => {
-    popup.setAttribute('open', true)
+    rightPopup.setAttribute('open', true)
+  })
+  rightPopup.addEventListener('close', () => {
+    rightPopup.removeAttribute('open')
   })
 
   const bottomBtn = document.querySelector('.bottom');
+  const bottomPopup = document.querySelector('b-popup[position="bottom"]');
   bottomBtn.addEventListener('click', () => {
-    popup.setAttribute('open', true)
-    popup.setAttribute('position', 'bottom')
+    bottomPopup.setAttribute('open', true)
+  })
+  bottomPopup.addEventListener('close', () => {
+    bottomPopup.removeAttribute('open')
   })
 
   const leftBtn = document.querySelector('.left');
+  const leftPopup = document.querySelector('b-popup[position="left"]');
   leftBtn.addEventListener('click', () => {
-    popup.setAttribute('open', true)
-    popup.setAttribute('position', 'left')
+    leftPopup.setAttribute('open', true)
   })
-
-  const popup = document.querySelector('b-popup');
-  popup.addEventListener('close', () => {
-    popup.setAttribute('open', false)
+  leftPopup.addEventListener('close', () => {
+    leftPopup.removeAttribute('open')
   })
 </script>
