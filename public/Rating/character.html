@@ -1,10 +1,9 @@
 <b-rating defaultvalue="3" character="好"></b-rating>
 <!-- 如果你使用了外部的svg图标，需要把fill属性设置为currentColor，以保证组件能根据状态调整图标颜色。 -->
-<b-rating id="customIcon" defaultvalue="3" style="--banana-rating-symbol-color: #bb4430;"></b-rating>
+<b-rating id="customIcon" defaultvalue="3" style="--banana-rating-symbol-color: #bb4430"></b-rating>
 
 <script>
-  const icon =
-    `<svg
+  const icon = `<svg
       t="1693913309010"
       class="icon"
       viewBox="0 0 1024 1024"
@@ -19,8 +18,8 @@
         fill="currentColor"
         p-id="4055"
       ></path>
-    </svg>`
+    </svg>`;
 
   const customRating = document.getElementById('customIcon');
-  customRating.setAttribute('character', icon)
+  customRating.character = icon;
 </script>

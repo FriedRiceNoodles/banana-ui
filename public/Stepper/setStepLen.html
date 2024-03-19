@@ -1,5 +1,5 @@
-<div style="display: flex; flex-direction: column; gap: 10px;">
-  <div style="display: flex; gap: 5px;">
+<div style="display: flex; flex-direction: column; gap: 10px">
+  <div style="display: flex; gap: 5px">
     <b-button id="plus">增加步长</b-button>
     <b-button id="minus">减少步长</b-button>
   </div>
@@ -9,19 +9,17 @@
 
 <script>
   let currentStep = 1;
-  const displayStepEl = document.getElementById('displayStep')
-  const stepper = document.querySelector('b-stepper')
-  const plusStepBtn = document.getElementById('plus')
-  const minusStepBtn = document.getElementById('minus')
+  const displayStepEl = document.getElementById('displayStep');
+  const stepper = document.querySelector('b-stepper');
+  const plusStepBtn = document.getElementById('plus');
+  const minusStepBtn = document.getElementById('minus');
 
   plusStepBtn.addEventListener('click', () => {
-    currentStep += 1;
-    displayStepEl.textContent = `当前步长: ${currentStep}`
-    stepper.step = currentStep
+    stepper.step += 1;
+    displayStepEl.textContent = `当前步长: ${stepper.step}`;
   });
   minusStepBtn.addEventListener('click', () => {
-    currentStep -= 1;
-    displayStepEl.textContent = `当前步长: ${currentStep}`
-    stepper.step = currentStep
+    stepper.step -= 1;
+    displayStepEl.textContent = `当前步长: ${stepper.step}`;
   });
 </script>

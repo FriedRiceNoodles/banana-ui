@@ -1,6 +1,7 @@
-<b-select multiple style="width: 100%;" default-value="grape orange">
-  <b-select-option value="apple">🍎
-    AppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleApple</b-select-option>
+<b-select multiple style="width: 100%" default-value="grape orange">
+  <b-select-option value="apple"
+    >🍎 AppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleAppleApple</b-select-option
+  >
   <b-select-option value="banana">🍌 Banana</b-select-option>
   <b-select-option value="orange">🍊 Orange</b-select-option>
   <b-select-option value="pear">🍐 Pear</b-select-option>
@@ -17,6 +18,5 @@
     console.log(event.detail.value);
   }
 
-  select.addEventListener('change', handleChange)
-
+  select.addEventListener('change', handleChange);
 </script>

@@ -1,15 +1,13 @@
 你可以通过<code>maxWidth</code>参数设置最大宽度。
-<p style="display: flex; gap: 8px;">
-  <b-tooltip content='This is a long long long long long long tooltip.' maxwidth="100">
+<p style="display: flex; gap: 8px">
+  <b-tooltip content="This is a long long long long long long tooltip." maxwidth="100">
     <b-button>Hover me!</b-button>
   </b-tooltip>
-  <b-tooltip content='This is a long long long long long long tooltip.' maxwidth='10em'>
+  <b-tooltip content="This is a long long long long long long tooltip." maxwidth="10em">
     <b-button>Hover me!</b-button>
   </b-tooltip>
 </p>
 也可以通过<code>css变量</code>来实现这一点
-<p>
-  <b-tooltip content='This is a long long long long long long tooltip.' style="--banana-tooltip-max-width: 100px;">
-    <b-button>Hover me!</b-button>
-  </b-tooltip>
-</p>
+<b-tooltip content="This is a long long long long long long tooltip." style="--banana-tooltip-max-width: 100px">
+  <b-button>Hover me!</b-button>
+</b-tooltip>

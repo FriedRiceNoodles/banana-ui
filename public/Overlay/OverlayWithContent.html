@@ -1,17 +1,17 @@
 <b-button>展开遮罩层（带内容）</b-button>
 <b-overlay>
-  <div style="border-radius: 4px; width: 200px; height: 200px; background-color: white;"></div>
+  <div style="border-radius: 4px; width: 200px; height: 200px; background-color: white"></div>
 </b-overlay>
 
 <script>
   const btn = document.querySelector('b-button');
-  const overlay = document.querySelector('b-overlay')
+  const overlay = document.querySelector('b-overlay');
 
   btn.addEventListener('click', () => {
-    overlay.setAttribute('open', true)
-  })
+    overlay.open = true;
+  });
 
   overlay.addEventListener('close', () => {
-    overlay.removeAttribute('open')
-  })
+    overlay.open = false;
+  });
 </script>

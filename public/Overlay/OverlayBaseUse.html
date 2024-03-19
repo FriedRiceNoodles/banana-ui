@@ -3,13 +3,13 @@
 
 <script>
   const btn = document.querySelector('b-button');
-  const overlay = document.querySelector('b-overlay')
+  const overlay = document.querySelector('b-overlay');
 
   btn.addEventListener('click', () => {
-    overlay.setAttribute('open', true)
-  })
+    overlay.open = true;
+  });
 
   overlay.addEventListener('close', () => {
-    overlay.removeAttribute('open')
-  })
+    overlay.open = false;
+  });
 </script>
