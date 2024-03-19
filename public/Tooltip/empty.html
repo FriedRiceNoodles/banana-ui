@@ -1,9 +1,7 @@
-<div>
-  <b-button>click</b-button>
-  <b-tooltip>
-    <span>Hover me!</span>
-  </b-tooltip>
-</div>
+<b-button>click</b-button>
+<b-tooltip>
+  <span>Hover me!</span>
+</b-tooltip>
 
 <script>
   let visible = false;
@@ -12,8 +10,7 @@
 
   btn.addEventListener('click', () => {
     visible = !visible;
-    tooltip.setAttribute('content', visible ? 'This is a tooltip.' : '');
+    tooltip.content = visible ? 'This is a tooltip.' : '';
     btn.textContent = visible ? 'Hide' : 'Show';
   });
-
 </script>
