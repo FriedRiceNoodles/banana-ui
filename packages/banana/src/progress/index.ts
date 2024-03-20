@@ -20,7 +20,7 @@ export default class BProgress extends LitElement {
   @property({ reflect: true })
   color: string | undefined;
 
-  @property({ reflect: true })
+  @property({ reflect: true, attribute: 'background-color' })
   backgroundColor: string | undefined;
 
   @property({ reflect: true, type: Number })
