@@ -116,7 +116,7 @@ export default class BStepper extends LitElement implements BananaFormElement {
     }
 
     const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value: result } };
-    this.dispatchEvent(new CustomEvent('change', eventOptions));
+    this.dispatchEvent(new CustomEvent<{ value: number }>('change', eventOptions));
   }
 
   plus() {

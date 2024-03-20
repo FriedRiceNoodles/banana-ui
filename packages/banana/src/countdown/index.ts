@@ -1,5 +1,5 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
+import { customElement, property, query, queryAll, queryAssignedElements, state } from 'lit/decorators.js';
 import styles from './index.styles';
 import { formatTimeStr } from './util';
 
@@ -33,11 +33,48 @@ export default class BCountdown extends LitElement {
   @state()
   private _startTime: number | undefined;
 
+  @state()
+  private _prevSeparator: HTMLElement | undefined;
+
   @queryAssignedElements({ slot: 'separator' })
   private _separator: HTMLElement[] | undefined;
 
   @query('.countdown--separate')
   private _countdownSeparate: HTMLElement | undefined;
+
+  @queryAll('[part="separator"]')
+  private _aliveSeparator: HTMLElement[] | undefined;
+
+  private _replaceSeparator() {
+    // Don't deal replace separator operation when separator isn't changed
+    if (this._prevSeparator?.textContent === this._separator?.[0]?.textContent) return;
+    // Remove and record old separator when separator alive
+    if (this.separate) {
+      if (this._aliveSeparator?.length) {
+        this._prevSeparator = this._aliveSeparator[0];
+        for (const separatorItem of this._aliveSeparator) {
+          this._countdownSeparate?.removeChild(separatorItem);
+        }
+      }
+
+      // Adapt to the scene where the separator appears or not
+      if (this._separator && this._separator.length > 0) {
+        const separatorContent = this._separator;
+        // Set part attribute for separator
+        separatorContent[0].setAttribute('part', 'separator');
+        const countdownItems = this._countdownSeparate?.querySelectorAll('.countdown__item');
+        countdownItems?.forEach((item, index) => {
+          if (index === 0) {
+            return;
+          }
+          // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+          item.insertAdjacentElement('beforebegin', separatorContent[0].cloneNode(true) as HTMLElement);
+        });
+      } else {
+        this._prevSeparator = undefined;
+      }
+    }
+  }
 
   updated(_changedProperties: PropertyValueMap<this>) {
     if (this.time < 0) {
@@ -74,24 +111,12 @@ export default class BCountdown extends LitElement {
         }
       }, interval);
     }
-
-    // If separate is true, insert separator between countdown items
-    if (_changedProperties.has('separate') && this.separate && this._separator && this._separator.length > 0) {
-      const separatorContent = this._separator;
-      // Set part attribute for separator
-      separatorContent[0].setAttribute('part', 'separator');
-      const countdownItems = this._countdownSeparate?.querySelectorAll('.countdown__item');
-      countdownItems?.forEach((item, index) => {
-        if (index === 0) {
-          return;
-        }
-        // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-        item.insertAdjacentElement('beforebegin', separatorContent[0].cloneNode(true) as HTMLElement);
-      });
-    }
   }
 
   render() {
+    // If separate is true, insert separator between countdown items
+    this._replaceSeparator();
+
     const _timeDataObject = formatTimeStr(this._timeLeft, this.format);
     const _time = _timeDataObject.text;
 

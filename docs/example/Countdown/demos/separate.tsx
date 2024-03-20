@@ -4,7 +4,6 @@
  */
 
 import { Countdown } from '@banana-ui/react';
-import React from 'react';
 
 export default function Separate() {
   // 2 小时
@@ -28,13 +27,11 @@ export default function Separate() {
     <>
       <style>{style}</style>
 
-      <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
-        <Countdown className="countdown" format="HHmmssSSS" time={time} separate>
-          <span className="separator" slot="separator">
-            :
-          </span>
-        </Countdown>
-      </div>
+      <Countdown className="countdown" format="HHmmssSSS" time={time} separate>
+        <span className="separator" slot="separator">
+          :
+        </span>
+      </Countdown>
     </>
   );
 }

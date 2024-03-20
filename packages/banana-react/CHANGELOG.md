@@ -1,5 +1,49 @@
 # @banana/banana-react
 
+## 1.17.5
+
+### Patch Changes
+
+- bdf40c9: fix the separator re-render error when the separator appears
+- 20d28ea: fix question of separate render abnormal when the separate visiable status changed
+- 76f54ac: fix separate not re-render when sparate slot changed
+- Updated dependencies [bdf40c9]
+- Updated dependencies [20d28ea]
+- Updated dependencies [76f54ac]
+  - @banana-ui/banana@1.17.5
+
+## 1.17.4
+
+### Patch Changes
+
+- b1a770e: Fixed a styling issue in the Radio component.
+- Updated dependencies [b1a770e]
+  - @banana-ui/banana@1.17.4
+
+## 1.17.3
+
+### Patch Changes
+
+- 48c856f: Try auto github releases note, https://github.com/changesets/action/pull/345
+- Updated dependencies [48c856f]
+  - @banana-ui/banana@1.17.3
+
+## 1.17.2
+
+### Patch Changes
+
+- c5549a4: Try auto release by github action
+- Updated dependencies [c5549a4]
+  - @banana-ui/banana@1.17.2
+
+## 1.17.1
+
+### Patch Changes
+
+- a7460ab: Added custom elements manifest.
+- Updated dependencies [a7460ab]
+  - @banana-ui/banana@1.17.1
+
 ## 1.17.0
 
 ### Minor Changes

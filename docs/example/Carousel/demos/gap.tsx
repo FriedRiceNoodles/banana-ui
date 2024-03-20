@@ -4,7 +4,6 @@
  */
 
 import { Carousel } from '@banana-ui/react';
-import React from 'react';
 
 export default function gap() {
   const style = `
@@ -20,7 +19,7 @@ export default function gap() {
     `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <Carousel gap={50} slidesPerView={3} loop>
         <div className="demo-slide">1</div>
@@ -29,6 +28,6 @@ export default function gap() {
         <div className="demo-slide">4</div>
         <div className="demo-slide">5</div>
       </Carousel>
-    </div>
+    </>
   );
 }

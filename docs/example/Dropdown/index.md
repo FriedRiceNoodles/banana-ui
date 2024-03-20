@@ -6,26 +6,30 @@ demo:
 
 # Dropdown 下拉菜单
 
+```
+<b-dropdown> | Dropdown
+```
+
 ## 介绍
 
 一个用于收纳操作命令的容器。
 
 ## 代码演示
 
-<code src="./demos/BasicUsage.tsx"></code>
-<code src="./demos/Placement.tsx"></code>
-<code src="./demos/Arrow.tsx"></code>
+<code src="./demos/basicUsage.tsx"></code>
+<code src="./demos/placement.tsx"></code>
+<code src="./demos/arrow.tsx"></code>
 <code src="./demos/triggerAction.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
-| 属性            | 说明                                                                | 类型                                                                          | 默认值       |
-| --------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------ |
-| placement       | 弹出方向                                                            | `bottomLeft` \| `bottom` \| `bottomRight` \| `topLeft` \| `top` \| `topRight` | `bottomLeft` |
-| margin          | trigger 与下拉内容的间距，单位是`px`                                | `number`                                                                      | 4            |
-| mouseEnterDelay | hover 模式下，鼠标移入 trigger 多久后展示下拉菜单的内容，单位是`ms` | `number`                                                                      | 100          |
-| mouseLeaveDelay | hover 模式下，鼠标移出下拉菜单多久后隐藏下拉菜单的内容，单位是`ms`  | `number`                                                                      | 100          |
-| triggerAction   | 触发下拉菜单的方式                                                  | `click` \| `hover`                                                            | `hover`      |
+| 属性                                      | 说明                                                                | 类型                                                                          | 默认值       |
+| ----------------------------------------- | ------------------------------------------------------------------- | ----------------------------------------------------------------------------- | ------------ |
+| placement                                 | 弹出方向                                                            | `bottomLeft` \| `bottom` \| `bottomRight` \| `topLeft` \| `top` \| `topRight` | `bottomLeft` |
+| margin                                    | trigger 与下拉内容的间距，单位是`px`                                | `number`                                                                      | 4            |
+| mouseEnterDelay <br/> (mouse-enter-delay) | hover 模式下，鼠标移入 trigger 多久后展示下拉菜单的内容，单位是`ms` | `number`                                                                      | 100          |
+| mouseLeaveDelay <br/> (mouse-leave-delay) | hover 模式下，鼠标移出下拉菜单多久后隐藏下拉菜单的内容，单位是`ms`  | `number`                                                                      | 100          |
+| triggerAction <br/> (trigger-action)      | 触发下拉菜单的方式                                                  | `click` \| `hover`                                                            | `hover`      |
 
 ## 事件 - Events
 

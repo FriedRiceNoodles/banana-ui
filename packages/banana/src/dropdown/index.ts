@@ -45,20 +45,20 @@ export default class BDropdown extends LitElement {
   margin = 4;
 
   // The time delay before dropdown content appears after mouse enter the trigger. Unit: ms.
-  @property({ type: Number, reflect: true })
+  @property({ type: Number, reflect: true, attribute: 'mouse-enter-delay' })
   mouseEnterDelay = 100;
 
   // The time delay before dropdown content disappears after mouse leave the dropdown content. Unit: ms.
-  @property({ type: Number, reflect: true })
+  @property({ type: Number, reflect: true, attribute: 'mouse-leave-delay' })
   mouseLeaveDelay = 100;
 
   @property({ reflect: true })
   placement: Placement = 'bottomLeft';
 
-  @property({ type: Boolean, reflect: true })
-  autoAdjustOverflow = true;
+  @property({ type: Boolean, reflect: true, attribute: 'no-auto-adjust-overflow' })
+  noAutoAdjustOverflow = false;
 
-  @property({ reflect: true })
+  @property({ reflect: true, attribute: 'trigger-action' })
   triggerAction: 'hover' | 'click' = 'hover';
 
   @state()
@@ -72,7 +72,7 @@ export default class BDropdown extends LitElement {
     if (!this._trigger || !this._content) return;
 
     const middleware: ComputePositionConfig['middleware'] = [offset(this.margin)];
-    if (this.autoAdjustOverflow) middleware.push(flip());
+    if (!this.noAutoAdjustOverflow) middleware.push(flip());
     if (this._arrowElements[0] !== undefined) middleware.push(arrow({ element: this._arrowElements[0] }));
 
     void computePosition(this._trigger, this._content, {

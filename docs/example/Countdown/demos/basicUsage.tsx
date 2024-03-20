@@ -4,7 +4,6 @@
  */
 
 import { Countdown } from '@banana-ui/react';
-import React from 'react';
 
 export default function BasicUsage() {
   // 2 小时

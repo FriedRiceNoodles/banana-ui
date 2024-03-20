@@ -21,7 +21,7 @@ describe('b-dropdown', () => {
 
   it('should open the dropdown when mouse enter the trigger after mouseEnterDelay', async () => {
     const element = await fixture<BDropdown>(html`
-      <b-dropdown mouseEnterDelay="200">
+      <b-dropdown mouse-enter-delay="200">
         <b-button>Banana</b-button>
         <b-menu slot="drop">
           <b-menu-item>Option 1</b-menu-item>
@@ -47,7 +47,7 @@ describe('b-dropdown', () => {
 
   it('should close the dropdown when mouse leave the dropdown content after mouseLeaveDelay', async () => {
     const element = await fixture<BDropdown>(html`
-      <b-dropdown mouseLeaveDelay="200">
+      <b-dropdown mouse-leave-delay="200">
         <b-button>Banana</b-button>
         <b-menu slot="drop">
           <b-menu-item>Option 1</b-menu-item>
@@ -78,7 +78,7 @@ describe('b-dropdown', () => {
   describe('when triggerAction is click', () => {
     it('should open the dropdown when click the trigger', async () => {
       const element = await fixture<BDropdown>(html`
-        <b-dropdown triggerAction="click">
+        <b-dropdown trigger-action="click">
           <b-button>Banana</b-button>
           <b-menu slot="drop">
             <b-menu-item>Option 1</b-menu-item>
@@ -116,7 +116,7 @@ describe('b-dropdown', () => {
 
     it('should doing nothing when mouse enter the trigger', async () => {
       const element = await fixture<BDropdown>(html`
-        <b-dropdown triggerAction="click">
+        <b-dropdown trigger-action="click">
           <b-button>Banana</b-button>
           <b-menu slot="drop">
             <b-menu-item>Option 1</b-menu-item>
@@ -149,7 +149,7 @@ describe('b-dropdown', () => {
   describe('when keydown', () => {
     it('should open the dropdown when press Enter', async () => {
       const element = await fixture<BDropdown>(html`
-        <b-dropdown triggerAction="click">
+        <b-dropdown trigger-action="click">
           <b-button>Banana</b-button>
           <b-menu slot="drop">
             <b-menu-item>Option 1</b-menu-item>
@@ -175,7 +175,7 @@ describe('b-dropdown', () => {
 
     it('should close the dropdown when press Escape', async () => {
       const element = await fixture<BDropdown>(html`
-        <b-dropdown triggerAction="click">
+        <b-dropdown trigger-action="click">
           <b-button>Banana</b-button>
           <b-menu slot="drop">
             <b-menu-item>Option 1</b-menu-item>
@@ -204,7 +204,7 @@ describe('b-dropdown', () => {
 
     it('should open or close the dropdown when press Space', async () => {
       const element = await fixture<BDropdown>(html`
-        <b-dropdown triggerAction="click">
+        <b-dropdown trigger-action="click">
           <b-button>Banana</b-button>
           <b-menu slot="drop">
             <b-menu-item>Option 1</b-menu-item>

@@ -6,6 +6,10 @@ demo:
 
 # Tooltip 文字提示
 
+```
+<b-tooltip> | Tooltip
+```
+
 简单的文字提示气泡框。
 
 ## 代码演示
@@ -20,18 +24,18 @@ demo:
 
 ## 属性 - Attributes & Properties
 
-| 属性                                                            | 说明                            | 类型                 | 默认值  |
-| --------------------------------------------------------------- | ------------------------------- | -------------------- | ------- |
-| content                                                         | 提示内容                        | `boolean`            | ''      |
-| placement                                                       | 弹出位置                        | `Placement`          | 'top'   |
-| disableAutoAdjustOverflow <br /> (disable-auto-adjust-overflow) | 禁用自动调整弹出位置            | `boolean`            | false   |
-| maxWidth <br /> (max-width)                                     | 气泡的最大宽度                  | `number \| string `  | -       |
-| backgroundColor <br /> (background-color)                       | 气泡的背景颜色                  | `string`             | -       |
-| margin                                                          | 气泡与触发元素（trigger）的距离 | `number`             | 8       |
-| mouseEnterDelay <br /> (mouse-enter-delay)                      | 鼠标移入后延时多少才显示        | `number`             | 100     |
-| mouseLeaveDelay <br /> (mouse-leave-delay)                      | 鼠标移出后延时多少才隐藏        | `number`             | 100     |
-| triggerAction <br /> (trigger-action)                           | 触发行为                        | `'hover' \| 'click'` | 'hover' |
-| noArrow                                                         | 是否隐藏箭头                    | `boolean`            | false   |
+| 属性                                                            | 说明                            | 类型                 | 默认值                |
+| --------------------------------------------------------------- | ------------------------------- | -------------------- | --------------------- |
+| content                                                         | 提示内容                        | `boolean`            | ''                    |
+| placement                                                       | 弹出位置                        | `Placement`          | 'top'                 |
+| disableAutoAdjustOverflow <br /> (disable-auto-adjust-overflow) | 禁用自动调整弹出位置            | `boolean`            | false                 |
+| maxWidth <br /> (max-width)                                     | 气泡的最大宽度                  | `number \| string `  | '300px'               |
+| backgroundColor <br /> (background-color)                       | 气泡的背景颜色                  | `string`             | 'rgba(46, 50 ,56, 1)' |
+| margin                                                          | 气泡与触发元素（trigger）的距离 | `number`             | 8                     |
+| mouseEnterDelay <br /> (mouse-enter-delay)                      | 鼠标移入后延时多少才显示        | `number`             | 100                   |
+| mouseLeaveDelay <br /> (mouse-leave-delay)                      | 鼠标移出后延时多少才隐藏        | `number`             | 100                   |
+| triggerAction <br /> (trigger-action)                           | 触发行为                        | `'hover' \| 'click'` | 'hover'               |
+| noArrow                                                         | 是否隐藏箭头                    | `boolean`            | false                 |
 
 ```typescript
 export type Placement =

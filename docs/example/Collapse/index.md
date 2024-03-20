@@ -4,16 +4,20 @@ group: 组件
 
 # Collapse 折叠面板
 
+```
+<b-collapse> | Collapse
+```
+
 ## 介绍
 
 将复杂的内容放入折叠面板中，可保持页面的整洁。
 
 ## 代码演示
 
-<code src="./demos/demo0.tsx"></code>
-<code src="./demos/demo1.tsx"></code>
-<code src="./demos/demo2.tsx"></code>
-<code src="./demos/demo3.tsx"></code>
+<code src="./demos/basicUsage.tsx"></code>
+<code src="./demos/disabled.tsx"></code>
+<code src="./demos/customIcon.tsx"></code>
+<code src="./demos/accordion.tsx"></code>
 
 ## 属性 - Attributes & Properties
 

@@ -1,0 +1,16 @@
+<div>
+  <b-stepper value="0" controlled></b-stepper>
+</div>
+<script>
+  const stepper = document.querySelector('b-stepper')
+
+  function handleChange(event) {
+    if (event.composedPath()[0] === stepper) {
+      const eventDetail = event.detail;
+      window.BMessage.info({ content: 'current stepper value：' + eventDetail.value });
+      stepper.setAttribute('value', eventDetail.value);
+    }
+  }
+
+  stepper.addEventListener('change', handleChange);
+</script>

@@ -1,6 +1,6 @@
 {
   "name": "@banana-ui/react",
-  "version": "1.17.0",
+  "version": "1.17.5",
   "description": "React components for Banana UI",
   "keywords": [
     "web components",
@@ -50,6 +50,7 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
   "moduleResolution": "node"

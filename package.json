@@ -12,15 +12,16 @@
   "scripts": {
     "build": "pnpm build:all",
     "build:all": "cd packages/banana && pnpm run build && cd ../banana-react && pnpm run build",
-    "dev": "npm run dev:all",
-    "dev:all": "cd packages/banana && npm run dev & cd packages/banana-react && npm run dev & dumi dev",
+    "dev": "pnpm run dev:all",
+    "dev:all": "cd packages/banana && pnpm run dev & cd packages/banana-react && pnpm run dev & dumi dev",
     "dev:dumi": "dumi dev",
     "docs:build": "dumi build",
     "docs:deploy": "gh-pages -d docs-dist",
-    "lint": "npm run lint:es",
+    "lint": "pnpm run lint:es",
     "lint:es": "eslint \"packages/**/{src,styles,bin}/**/*.{js,jsx,ts,tsx}\"",
     "prepare": "husky install && dumi setup",
-    "start": "npm run dev"
+    "start": "pnpm run dev",
+    "test": "cd packages/banana && pnpm run test"
   },
   "commitlint": {
     "extends": [
@@ -50,6 +51,7 @@
     }
   },
   "devDependencies": {
+    "@ant-design/icons-svg": "^4.4.2",
     "@babel/plugin-proposal-class-properties": "^7.18.6",
     "@babel/plugin-proposal-decorators": "^7.20.7",
     "@babel/plugin-transform-runtime": "^7.22.9",
@@ -67,9 +69,10 @@
     "@typescript-eslint/eslint-plugin": "^5.48.1",
     "@typescript-eslint/parser": "^5.48.1",
     "@umijs/lint": "^4.0.0",
+    "copy-to-clipboard": "^3.3.3",
     "cz-conventional-changelog": "^3.3.0",
     "dumi": "^2.1.19",
-    "dumi-theme-antd-style": "^0.29.7",
+    "dumi-theme-antd-style": "^0.30.0",
     "eslint": "^8.23.0",
     "eslint-plugin-chai-expect": "^3.0.0",
     "eslint-plugin-chai-friendly": "^0.7.2",
@@ -84,6 +87,7 @@
     "prettier": "^2.7.1",
     "prettier-plugin-organize-imports": "^3.0.0",
     "prettier-plugin-packagejson": "^2.2.18",
+    "rc-tabs": "^14.1.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "rollup": "^3.9.1",

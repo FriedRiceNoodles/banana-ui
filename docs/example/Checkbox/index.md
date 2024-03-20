@@ -4,7 +4,11 @@ demo:
   cols: 2
 ---
 
-# Checkbox 复选框
+# Checkbox 复选框 <Badge>表单组件</Badge>
+
+```
+<b-checkbox> | Checkbox
+```
 
 复选框。又称多选框。
 

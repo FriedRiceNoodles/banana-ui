@@ -6,6 +6,10 @@ demo:
 
 # Marquee 跑马灯
 
+```
+<b-marquee> | Marquee
+```
+
 适合用于展示公告、中奖信息之类的长文本。
 
 ## 代码演示
@@ -18,12 +22,12 @@ demo:
 
 ## 属性 - Attributes & Properties
 
-| 属性           | 说明                | 类型      | 默认值 |
-| -------------- | ------------------- | --------- | ------ |
-| content        | 跑马灯的文本内容    | `string`  | ''     |
-| color          | 跑马灯的文本颜色    | `string`  | ''     |
-| duration       | 滚动时长（单位：s） | `number`  | 20     |
-| pauseWhenHover | 鼠标悬停时是否暂停  | `boolean` | false  |
+| 属性                                     | 说明                | 类型      | 默认值 |
+| ---------------------------------------- | ------------------- | --------- | ------ |
+| content                                  | 跑马灯的文本内容    | `string`  | ''     |
+| color                                    | 跑马灯的文本颜色    | `string`  | ''     |
+| duration                                 | 滚动时长（单位：s） | `number`  | 20     |
+| pauseWhenHover <br /> (pause-when-hover) | 鼠标悬停时是否暂停  | `boolean` | false  |
 
 ## CSS Parts
 

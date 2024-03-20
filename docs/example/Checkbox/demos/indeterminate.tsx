@@ -6,7 +6,7 @@
 /* eslint-disable @typescript-eslint/no-unsafe-assignment */
 
 import { Checkbox, Divider } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function Indeterminate() {
   const [options, setOptions] = useState({
@@ -24,9 +24,9 @@ export default function Indeterminate() {
           indeterminate={!isAllChecked && Object.values(options).some(Boolean)}
           onChange={(e) => {
             setOptions({
-              apple: e.target.checked,
-              banana: e.target.checked,
-              cherry: e.target.checked,
+              apple: e.detail.checked,
+              banana: e.detail.checked,
+              cherry: e.detail.checked,
             });
           }}
           checked={isAllChecked}
@@ -46,7 +46,7 @@ export default function Indeterminate() {
           onChange={(e) => {
             setOptions({
               ...options,
-              apple: e.target.checked,
+              apple: e.detail.checked,
             });
           }}
         >
@@ -58,7 +58,7 @@ export default function Indeterminate() {
           onChange={(e) => {
             setOptions({
               ...options,
-              banana: e.target.checked,
+              banana: e.detail.checked,
             });
           }}
         >
@@ -70,7 +70,7 @@ export default function Indeterminate() {
           onChange={(e) => {
             setOptions({
               ...options,
-              cherry: e.target.checked,
+              cherry: e.detail.checked,
             });
           }}
         >

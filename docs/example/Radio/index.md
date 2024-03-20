@@ -4,13 +4,18 @@ demo:
   cols: 2
 ---
 
-# Radio 单选框
+# Radio 单选框 <Badge>表单组件</Badge>
 
-单选框。
+```
+<b-radio> | Radio
+```
 
 :::info
+
 Radio 必须配合 RadioGroup 使用。
 :::
+
+单选框。
 
 ## 代码演示
 

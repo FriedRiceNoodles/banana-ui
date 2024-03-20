@@ -4,7 +4,11 @@ demo:
   cols: 2
 ---
 
-# Select 选择器
+# Select 选择器 <Badge>表单组件</Badge>
+
+```
+<b-select> | Select
+```
 
 下拉选择框，可以从预定的选项中选择一个或多个选项。
 
@@ -57,21 +61,50 @@ demo:
 
 ## 插槽 - Slots
 
-| 插槽      | 说明           |
-| --------- | -------------- |
-| (default) | 默认插槽的说明 |
-| title     | 标题区域       |
+| 插槽      | 说明       |
+| --------- | ---------- |
+| (default) | 选择器内容 |
 
 ## CSS Parts
 
-| Part   | 说明               |
-| ------ | ------------------ |
-| base   | 包裹组件的容器     |
-| header | 组件的 header 区域 |
+| Part    | 说明           |
+| ------- | -------------- |
+| base    | 包裹组件的容器 |
+| listbox | 选择器展开部分 |
 
 ## 样式变量
 
-| 变量                         | 说明               | 默认值 |
-| ---------------------------- | ------------------ | ------ |
-| --banana-xxx-title-padding   | 标题的 padding     | 16px   |
-| --banana-xxx-content-padding | 展开区域的 padding | 16px   |
+| 变量                                              | 说明                                      | 默认值                       |
+| ------------------------------------------------- | ----------------------------------------- | ---------------------------- |
+| --banana-select-selector-border                   | 边框样式                                  | 1px solid rgb(151, 154, 154) |
+| --banana-select-disabled-color                    | 禁用状态字体颜色                          | rgba(0, 0, 0, 0.25)          |
+| --banana-select-disabled-background-color         | 禁用状态背景颜色                          | rgba(0, 0, 0, 0.03)          |
+| --banana-select-disabled-border-color             | 禁用状态边框颜色                          | rgba(179, 182, 183)          |
+| --banana-select-selector-font-size-small          | small 尺寸选择器字体大小                  | 14px                         |
+| --banana-select-selector-height-small             | small 尺寸选择器最小高度                  | 24px                         |
+| --banana-select-selector-padding-small            | small 尺寸选择器内边距                    | 0 24px 0 12px                |
+| --banana-select-selector-border-radius-small      | small 尺寸选择器圆角大小                  | 4px                          |
+| --banana-select-selector-font-size-medium         | medium 尺寸选择器字体大小                 | 14px                         |
+| --banana-select-selector-height-medium            | medium 尺寸选择器最小高度                 | 32px                         |
+| --banana-select-selector-padding-medium           | medium 尺寸选择器内边距                   | 0 24px 0 12px                |
+| --banana-select-selector-border-radius-medium     | medium 尺寸选择器圆角大小                 | 6px                          |
+| --banana-select-selector-font-size-large          | large 尺寸选择器字体大小                  | 16px                         |
+| --banana-select-selector-height-large             | large 尺寸选择器最小高度                  | 40px                         |
+| --banana-select-selector-padding-large            | large 尺寸选择器内边距                    | 0 24px 0 12px                |
+| --banana-select-selector-border-radius-large      | large 尺寸选择器圆角大小                  | 8px                          |
+| --banana-color-primary-hover                      | hover 颜色                                | rgba(0, 79, 179)             |
+| --banana-color-primary-active                     | active 颜色                               | rgba(0, 61, 133)             |
+| --banana-select-placeholder-color                 | placeholder 文字颜色                      | rgba(151, 154, 154)          |
+| --banana-select-expand-icon-color                 | 选择器展开 icon 颜色                      | rgba(151, 154, 154)          |
+| --banana-select-clear-icon-color                  | 清空 icon 颜色                            | rgba(179, 182, 183)          |
+| --banana-select-clear-icon-hover-color            | 清空 icon hover 时颜色                    | rgba(46, 50, 56)             |
+| --banana-select-border-radius                     | 展开面板圆角大小                          | 6px                          |
+| --banana-select-list-padding                      | 展开面板内边距                            | 4px                          |
+| --banana-select-list-max-height                   | 展开面板最大高度                          | 260px                        |
+| --banana-select-multiple-option-background-color  | 多选情况下，每个选项的背景色              | rgba(229, 231, 233, 0.65)    |
+| --banana-select-multiple-option-border-radius     | 多选情况下，每个选项的圆角大小            | 4px                          |
+| --banana-select-multiple-option-height-small      | 多选情况下且尺寸为 small，每个选项的高度  | 16px                         |
+| --banana-select-multiple-option-height-medium     | 多选情况下且尺寸为 medium，每个选项的高度 | 24px                         |
+| --banana-select-multiple-option-height-large      | 多选情况下且尺寸为 large，每个选项的高度  | 32px                         |
+| --banana-select-multiple-option-close-color       | 多选情况下，删除选项 icon 颜色            | rgba(179, 182, 183)          |
+| --banana-select-multiple-option-close-hover-color | 多选情况下，删除选项 icon hover 时的颜色  | rgba(46, 50, 56)             |

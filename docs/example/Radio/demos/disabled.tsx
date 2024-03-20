@@ -4,7 +4,6 @@
  */
 
 import { Radio, RadioGroup } from '@banana-ui/react';
-import React from 'react';
 
 export default function Disabled() {
   return (
@@ -17,7 +16,7 @@ export default function Disabled() {
         </Radio>
       </RadioGroup>
 
-      <RadioGroup disabled>
+      <RadioGroup disabled value="banana">
         <Radio value="banana">Banana🍌</Radio>
         <Radio value="apple">Apple🍎</Radio>
         <Radio value="cherry">Cherry🍒</Radio>

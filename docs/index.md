@@ -9,4 +9,4 @@ hero:
       link: /example/button
 ---
 
-<code src="./doc-components/features.tsx"></code>
+<code inline src="./doc-components/features/index.tsx"></code>

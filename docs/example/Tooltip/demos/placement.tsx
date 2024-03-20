@@ -4,7 +4,6 @@
  */
 
 import { Button, Tooltip } from '@banana-ui/react';
-import React from 'react';
 
 export default function Placement() {
   const styles = `
@@ -12,6 +11,7 @@ export default function Placement() {
       display: inline-flex;
       flex-direction: column;
       gap: 8px;
+      --banana-tooltip-max-width: 80px;
     }
 
     .placement-row {

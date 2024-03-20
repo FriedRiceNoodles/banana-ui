@@ -4,7 +4,11 @@ demo:
   cols: 2
 ---
 
-# Rating 评分
+# Rating 评分 <Badge>表单组件</Badge>
+
+```
+<b-rating> | Rating
+```
 
 评分组件。
 

@@ -10,3 +10,4 @@ coverage
 .idea
 node
 docs-dist
+custom-elements.json

@@ -9,7 +9,7 @@ order: 0
 
 ## ⭐️ 特性
 
-- 🧩 **可用于任何 Web 框架（React、Vue、以及其他...）**
+- 🧩 **可用于几乎任何 Web 框架（React、Vue、以及其他...）**
 - 🌐 **可用于原生环境（无框架）**
 - 🚀 **支持 SSR（甚至能用于 worker 环境）**
 - 🛡 良好的 TypeScript 支持
@@ -44,5 +44,10 @@ Banana 最大的特点是它是一个基于 Web Components 的组件库，这意
 
 > 作者注：我目前在一个跨境电商公司工作，公司最大的 C 端项目以及它的一些内部系统都在使用 Banana UI。
 
+### Banana UI 使用了什么技术？
+
+Banana UI 底层基于[Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)，并使用[Lit](https://lit.dev/)进行开发。
+
 <br />
-<a href="/guide/quick-start"><b-button type="primary">现在就试试</b-button></a>
+<a href="/guide/quick-start" style="margin-right: 16px"><b-button type="primary">现在就试试</b-button></a>
+<a href="/example/button"><b-button>组件列表</b-button></a>

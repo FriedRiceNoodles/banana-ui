@@ -1,6 +1,6 @@
 {
   "name": "@banana-ui/banana",
-  "version": "1.17.0",
+  "version": "1.17.5",
   "description": "An UI library of web components can be used in any framework",
   "keywords": [
     "web components",
@@ -34,7 +34,8 @@
     "package.json"
   ],
   "scripts": {
-    "build": "rimraf umd && rimraf dist && rimraf node && rimraf themes && rollup -c ../../rollup.config.mjs && npm run tsc",
+    "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs && pnpm run tsc && pnpm run cem",
+    "cem": "custom-elements-manifest analyze --config \"custom-elements-manifest.config.js\"",
     "dev": "rollup -c ../../rollup.config.dev.mjs -p ../../scripts/rollup-plugin-copy-types.js -w --no-watch.clearScreen",
     "test": "web-test-runner",
     "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
@@ -45,6 +46,7 @@
     "lit": "^2.5.0"
   },
   "devDependencies": {
+    "@custom-elements-manifest/analyzer": "^0.9.2",
     "@open-wc/testing": "3.0.0-next.5",
     "@types/jest": "^29.5.0",
     "@types/react": "^18.0.26",
@@ -59,7 +61,9 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
+    "access": "public",
     "registry": "https://registry.npmjs.org/"
   },
+  "customElements": "custom-elements.json",
   "moduleResolution": "node"
 }

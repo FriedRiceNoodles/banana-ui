@@ -4,7 +4,11 @@ demo:
   cols: 2
 ---
 
-# Input 输入框
+# Input 输入框 <Badge>表单组件</Badge>
+
+```
+<b-input> | Input
+```
 
 最基本的接收用户输入的组件,通常被用在表单中,当然也可以单独使用.
 

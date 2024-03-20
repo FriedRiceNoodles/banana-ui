@@ -85,7 +85,7 @@ export default class BCarousel extends LitElement {
   }
 
   // Do not use this property directly, use internal _slidesPerView instead.
-  @property({ type: Number, reflect: true })
+  @property({ type: Number, reflect: true, attribute: 'slides-per-view' })
   slidesPerView = 1;
 
   private get _slidesPerView() {
@@ -96,13 +96,14 @@ export default class BCarousel extends LitElement {
   autoplay = false;
 
   // Unit: ms
-  @property({ type: Number })
+  @property({ type: Number, reflect: true, attribute: 'autoplay-delay' })
   autoplayDelay = 3000;
 
-  @property({ type: Boolean })
-  pauseOnMouseEnter = true;
+  // Caraousel will pause when mouse enter by default.
+  @property({ type: Boolean, reflect: true, attribute: 'no-pause-on-mouse-enter' })
+  noPauseOnMouseEnter = false;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'disable-drag' })
   disableDrag = false;
 
   @property({ type: Boolean, reflect: true })
@@ -115,7 +116,7 @@ export default class BCarousel extends LitElement {
   @property({ type: Boolean, reflect: true, attribute: 'disable-fill' })
   disableFill = false;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'auto-height' })
   autoHeight = false;
 
   @property({ type: Boolean, reflect: true })
@@ -445,13 +446,13 @@ export default class BCarousel extends LitElement {
   }
 
   private _onWrapperMouseEnter() {
-    if (this.pauseOnMouseEnter) {
+    if (!this.noPauseOnMouseEnter) {
       this._clearAutoplayTimer();
     }
   }
 
   private _onWrapperMouseLeave() {
-    if (this.pauseOnMouseEnter) {
+    if (!this.noPauseOnMouseEnter) {
       this._setAutoplayTimer();
     }
   }
