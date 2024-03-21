@@ -31,10 +31,7 @@ export default class BTextarea extends LitElement implements BananaFormElement {
   @property({ reflect: true }) size: 'small' | 'medium' | 'large' = 'medium';
 
   /** Placeholder text to show as a hint when the input is empty. */
-  @property() placeholder = '';
-
-  @property({ reflect: true, attribute: 'default-value' })
-  defaultValue = '';
+  @property({ reflect: true }) placeholder: string | undefined;
 
   /** The number of rows to display by default. */
   @property({ type: Number }) rows = 4;
@@ -70,9 +67,6 @@ export default class BTextarea extends LitElement implements BananaFormElement {
 
   /** Indicates that the input should receive focus on page load. */
   @property({ type: Boolean }) autofocus = false;
-
-  @property()
-  form: string | undefined;
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -120,8 +114,6 @@ export default class BTextarea extends LitElement implements BananaFormElement {
       this.value = value;
     }
 
-    console.log('value', value);
-
     const eventOptions = { bubbles: false, cancelable: false, composed: true, detail: { value } };
     // The change event will not be dispatched when the value is changed programmatically.
     // Will dispatch the change event when the value is changed by user input but not native change event.
@@ -134,13 +126,13 @@ export default class BTextarea extends LitElement implements BananaFormElement {
     }
   }
 
-  private _handleInputKeyDown(event: KeyboardEvent) {
-    const isKeyCombination = event.metaKey || event.ctrlKey || event.altKey || event.shiftKey;
+  // private _handleInputKeyDown(event: KeyboardEvent) {
+  //   const isKeyCombination = event.metaKey || event.ctrlKey || event.altKey || event.shiftKey;
 
-    if (event.key === 'Enter' && !isKeyCombination && !event.isComposing) {
-      this.formController.submit();
-    }
-  }
+  //   if (event.key === 'Enter' && !isKeyCombination && !event.isComposing) {
+  //     this.formController.submit();
+  //   }
+  // }
 
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
@@ -189,9 +181,9 @@ export default class BTextarea extends LitElement implements BananaFormElement {
           spellcheck=${ifDefined(this.spellcheck)}
           inputmode=${ifDefined(this.inputmode)}
           @change="${this._handleChange}"
+          @input="${this._handleChange}"
           @focus="${this._handleFocus}"
           @blur="${this._handleBlur}"
-          @keydown="${this._handleInputKeyDown}"
         ></textarea>
       </div>
     `;
