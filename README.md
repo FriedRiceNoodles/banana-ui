@@ -8,7 +8,7 @@
 
 `Banana UI` 是一套底层基于 `Web Components` 的组件库，它提供了一套常用的组件。
 
-<img height="160" src="./public/logos/main-logo-800.png">
+<img height="160" src="https://s6.imgcdn.dev/WIoV0.png" />
 
 官方文档: https://banana-ui.com/
 
