@@ -10,7 +10,7 @@ export default defineConfig({
   ],
   logo: '/logos/nav-logo-375.png',
   themeConfig: {
-    name: 'Banana UI',
+    name: '',
     footer: false,
     hero: {
       showCustomContent: true,
