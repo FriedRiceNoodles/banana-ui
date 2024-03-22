@@ -1,0 +1,19 @@
+<div style="display: flex; gap: 10px">
+  <b-progress percent="0"></b-progress>
+  <b-button class="b-button b-primary b-small plus"> +10% </b-button>
+  <b-button class="b-button b-warning b-small reset"> Reset </b-button>
+</div>
+
+<script>
+  const resetBtn = document.querySelector('.reset');
+  const plusBtn = document.querySelector('.plus');
+  const progress = document.querySelector('b-progress');
+
+  plusBtn.addEventListener('click', () => {
+    progress.percent += 10;
+  });
+
+  resetBtn.addEventListener('click', () => {
+    progress.percent = 0;
+  });
+</script>

@@ -1,0 +1,24 @@
+你可以通过 <code>background-color</code> 参数设置背景色。
+<p style="display: flex; gap: 8px">
+  <b-tooltip content="This is a tooltip." background-color="maroon">
+    <b-button>maroon</b-button>
+  </b-tooltip>
+  <b-tooltip content="This is a tooltip." background-color="#015AE0">
+    <b-button>#015AE0</b-button>
+  </b-tooltip>
+  <b-tooltip content="This is a tooltip." background-color="rgb(16, 145, 11)">
+    <b-button>rgb(16, 145, 11)</b-button>
+  </b-tooltip>
+</p>
+也可以通过<code>css变量</code>来实现这一点
+<p style="display: flex; gap: 8px">
+  <b-tooltip content="This is a tooltip;" style="--banana-tooltip-background-color: maroon">
+    <b-button>marron</b-button>
+  </b-tooltip>
+  <b-tooltip content="This is a tooltip;" style="--banana-tooltip-background-color: #015ae0">
+    <b-button>#015AE0</b-button>
+  </b-tooltip>
+  <b-tooltip content="This is a tooltip;" style="--banana-tooltip-background-color: rgb(16, 145, 11)">
+    <b-button>rgb(16, 145, 11)</b-button>
+  </b-tooltip>
+</p>
