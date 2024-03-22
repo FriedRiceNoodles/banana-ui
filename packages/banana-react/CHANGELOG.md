@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.6
+
+### Patch Changes
+
+- 4a9d6ee: progress backgroundColor attributes named to background-color
+- Updated dependencies [4a9d6ee]
+  - @banana-ui/banana@1.17.6
+
 ## 1.17.5
 
 ### Patch Changes
