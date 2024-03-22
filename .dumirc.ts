@@ -11,6 +11,7 @@ export default defineConfig({
   logo: '/logos/nav-logo-375.png',
   themeConfig: {
     name: 'Banana UI',
+    hideNameOnHeader: true,
     footer: false,
     hero: {
       showCustomContent: true,
@@ -133,5 +134,6 @@ export default defineConfig({
         },
       ],
     },
+    prefersColor: { default: 'light', switch: false },
   },
 });
