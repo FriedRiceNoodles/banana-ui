@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.6
+
+### Patch Changes
+
+- 4a9d6ee: progress backgroundColor attributes named to background-color
+
 ## 1.17.5
 
 ### Patch Changes
