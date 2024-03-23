@@ -5,6 +5,8 @@ order: 0
 
 # 介绍
 
+<img width="300" src="/logos/nav-logo-375.png" />
+
 `Banana UI` 是一套底层基于 `Web Components` 的组件库，它提供了一套常用的组件。
 
 ## ⭐️ 特性
@@ -49,5 +51,20 @@ Banana 最大的特点是它是一个基于 Web Components 的组件库，这意
 Banana UI 底层基于[Web Components](https://developer.mozilla.org/en-US/docs/Web/API/Web_components)，并使用[Lit](https://lit.dev/)进行开发。
 
 <br />
-<a href="/guide/quick-start" style="margin-right: 16px"><b-button type="primary">现在就试试</b-button></a>
-<a href="/example/button"><b-button>组件列表</b-button></a>
+
+```tsx | inline
+import { Button } from '@banana-ui/react';
+
+export default function App() {
+  return (
+    <>
+      <a href="/guide/quick-start" style={{ marginRight: '10px' }}>
+        <Button type="primary">现在就试试</Button>
+      </a>
+      <a href="/example/button">
+        <Button>组件列表</Button>
+      </a>
+    </>
+  );
+}
+```
