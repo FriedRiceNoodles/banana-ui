@@ -9,6 +9,10 @@ export default defineConfig({
     '/favicons/favicon-64x64.png',
   ],
   logo: '/logos/nav-logo-375.png',
+  analytics: {
+    baidu: 'df33e0123cd576892df8bc4ac64788cf',
+    ga_v2: 'G-SC8THD4FR9',
+  },
   themeConfig: {
     name: 'Banana UI',
     hideNameOnHeader: true,
