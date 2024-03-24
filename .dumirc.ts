@@ -13,6 +13,9 @@ export default defineConfig({
     baidu: 'df33e0123cd576892df8bc4ac64788cf',
     ga_v2: 'G-SC8THD4FR9',
   },
+  sitemap: {
+    hostname: 'banana-ui.com',
+  },
   themeConfig: {
     name: 'Banana UI',
     hideNameOnHeader: true,
