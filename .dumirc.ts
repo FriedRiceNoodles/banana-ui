@@ -14,7 +14,7 @@ export default defineConfig({
     ga_v2: 'G-SC8THD4FR9',
   },
   sitemap: {
-    hostname: 'banana-ui.com',
+    hostname: 'https://banana-ui.com',
   },
   themeConfig: {
     name: 'Banana UI',
