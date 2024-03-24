@@ -1,67 +1,66 @@
-<div>
-  <style>
-    .container {
-      display: inline-flex;
-      flex-direction: column;
-      gap: 8px;
-      --banana-tooltip-max-width: 80px;
-    }
+<style>
+  .container {
+    display: inline-flex;
+    flex-direction: column;
+    gap: 8px;
+    --banana-tooltip-max-width: 80px;
+  }
 
-    .placement-row {
-      display: flex;
-      gap: 8px;
-    }
+  .placement-row {
+    display: flex;
+    gap: 8px;
+  }
 
-    .placement-row b-button {
-      width: 60px;
-    }
-  </style>
-  <div class="container">
-    <div class="placement-row">
-      <b-tooltip content="This is a tooltip." placement="topleft">
-        <b-button style="margin-left: 68px;">TL</b-button>
-      </b-tooltip>
-      <b-tooltip content="This is a tooltip." placement="top">
-        <b-button>Top</b-button>
-      </b-tooltip>
-      <b-tooltip content="This is a tooltip." placement="topright">
-        <b-button style="margin-right: 68px;">TR</b-button>
-      </b-tooltip>
-    </div>
-    <div class="placement-row" style="justify-content: space-between;">
-      <b-tooltip content="This is a tooltip." placement="lefttop">
-        <b-button>LT</b-button>
-      </b-tooltip>
-      <b-tooltip content="This is a tooltip." placement="righttop">
-        <b-button>RT</b-button>
-      </b-tooltip>
-    </div>
-    <div class="placement-row" style="justify-content: space-between;">
-      <b-tooltip content="This is a tooltip." placement="left">
-        <b-button>Left</b-button>
-      </b-tooltip>
-      <b-tooltip content="This is a tooltip." placement="right">
-        <b-button>Right</b-button>
-      </b-tooltip>
-    </div>
-    <div class="placement-row" style="justify-content: space-between;">
-      <b-tooltip content="This is a tooltip." placement="leftbottom">
-        <b-button>LB</b-button>
-      </b-tooltip>
-      <b-tooltip content="This is a tooltip." placement="rightbottom">
-        <b-button>RB</b-button>
-      </b-tooltip>
-    </div>
-    <div class="placement-row">
-      <b-tooltip content="This is a tooltip." placement="bottomleft">
-        <b-button style="margin-left: 68px;">BL</b-button>
-      </b-tooltip>
-      <b-tooltip content="This is a tooltip." placement="bottom">
-        <b-button>Bottom</b-button>
-      </b-tooltip>
-      <b-tooltip content="This is a tooltip." placement="bottomright">
-        <b-button style="margin-right: 68px;">BR</b-button>
-      </b-tooltip>
-    </div>
+  .placement-row b-button {
+    width: 60px;
+  }
+</style>
+
+<div class="container">
+  <div class="placement-row">
+    <b-tooltip content="This is a tooltip." placement="topleft">
+      <b-button style="margin-left: 68px">TL</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." placement="top">
+      <b-button>Top</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." placement="topright">
+      <b-button style="margin-right: 68px">TR</b-button>
+    </b-tooltip>
+  </div>
+  <div class="placement-row" style="justify-content: space-between">
+    <b-tooltip content="This is a tooltip." placement="lefttop">
+      <b-button>LT</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." placement="righttop">
+      <b-button>RT</b-button>
+    </b-tooltip>
+  </div>
+  <div class="placement-row" style="justify-content: space-between">
+    <b-tooltip content="This is a tooltip." placement="left">
+      <b-button>Left</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." placement="right">
+      <b-button>Right</b-button>
+    </b-tooltip>
+  </div>
+  <div class="placement-row" style="justify-content: space-between">
+    <b-tooltip content="This is a tooltip." placement="leftbottom">
+      <b-button>LB</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." placement="rightbottom">
+      <b-button>RB</b-button>
+    </b-tooltip>
+  </div>
+  <div class="placement-row">
+    <b-tooltip content="This is a tooltip." placement="bottomleft">
+      <b-button style="margin-left: 68px">BL</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." placement="bottom">
+      <b-button>Bottom</b-button>
+    </b-tooltip>
+    <b-tooltip content="This is a tooltip." placement="bottomright">
+      <b-button style="margin-right: 68px">BR</b-button>
+    </b-tooltip>
   </div>
 </div>

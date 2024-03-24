@@ -2,8 +2,16 @@ import { defineConfig } from 'dumi';
 
 export default defineConfig({
   outputPath: 'docs-dist',
+  favicons: [
+    '/favicons/favicon.ico',
+    '/favicons/favicon-16x16.png',
+    '/favicons/favicon-32x32.png',
+    '/favicons/favicon-64x64.png',
+  ],
+  logo: '/logos/nav-logo-375.png',
   themeConfig: {
     name: 'Banana UI',
+    hideNameOnHeader: true,
     footer: false,
     hero: {
       showCustomContent: true,
@@ -130,5 +138,6 @@ export default defineConfig({
         },
       ],
     },
+    prefersColor: { default: 'light', switch: false },
   },
 });

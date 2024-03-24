@@ -67,7 +67,7 @@ export default function App() {
 对于 Banana UI 而言，我们会把 Attribute 和 Property 以一定的规则互相转换。转换的规则取决于具体组件属性的类型。
 
 - 如果属性是字符串类型，那么 Attribute 和 Property 是等价的。
-- \*如果属性是数字类型，那么 Attribute 在被转换成 Property 时会被自动转换成数字类型（如果可以的话）。
+- 如果属性是数字类型，那么 Attribute 在被转换成 Property 时会被自动转换成数字类型（如果可以的话）。
 - 如果属性是布尔类型，那么 Attribute 出现在标签上就表示为 true，不出现就表示为 false。
 - 如果属性是对象或者数组类型，那么 Attribute 和 Property 的转换相当于 JSON.stringify 和 JSON.parse。
 
