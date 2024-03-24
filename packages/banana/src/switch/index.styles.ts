@@ -32,9 +32,9 @@ export default [
       background-color: var(--banana-switch-background-no-checked-hover);
     }
 
-    // :host([checked]) > .banana-switch:hover {
-    //   background-color: #4096ff;
-    // }
+    :host([checked]) > .banana-switch:hover {
+      background-color: #4096ff;
+    }
 
     .banana-switch {
       position: relative;

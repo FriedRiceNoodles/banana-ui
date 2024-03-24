@@ -1,4 +1,4 @@
-import { CSSResultGroup, html, LitElement } from 'lit';
+import { CSSResultGroup, html, LitElement, nothing } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { BananaFormElementWithOverriddenProperties, FormController } from 'packages/banana/controllers/form';
@@ -124,14 +124,16 @@ export default class BSwitch
         })}
       ></div>
 
-      <div part="inner" class="switch__inner" style="--banana-inner-width:${this._innerWidth}px">
-        <div class="switch__inner-wrapper switch__checked-offset">
-          <slot name="checked"></slot>
-        </div>
-        <div class="switch__inner-wrapper switch__unchecked-offset">
-          <slot name="unchecked"></slot>
-        </div>
-      </div>
+      ${this._checkedSlotEl || this._uncheckedSlotEl
+        ? html` <div part="inner" class="switch__inner" style="--banana-inner-width:${this._innerWidth}px">
+            <div class="switch__inner-wrapper switch__checked-offset">
+              <slot name="checked"></slot>
+            </div>
+            <div class="switch__inner-wrapper switch__unchecked-offset">
+              <slot name="unchecked"></slot>
+            </div>
+          </div>`
+        : nothing}
     </div>`;
   }
 }
