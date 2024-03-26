@@ -1,11 +1,11 @@
 /* eslint-disable lit-a11y/click-events-have-key-events */
-import { CSSResultGroup, html, LitElement } from 'lit';
+import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
-import styles from './index.styles';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
 import { live } from 'lit/directives/live.js';
-import { FormController, BananaFormElement } from '../../controllers/form';
+import { BananaFormElement, FormController } from '../../controllers/form';
+import styles from './index.styles';
 
 @customElement('b-input')
 export default class BInput extends LitElement implements BananaFormElement {
@@ -26,8 +26,11 @@ export default class BInput extends LitElement implements BananaFormElement {
   @property({ reflect: true })
   name = '';
 
-  @property()
+  @property({ reflect: true })
   value = '';
+
+  @property({ reflect: true, attribute: 'default-value' })
+  defaultValue = '';
 
   @property({ type: Boolean, reflect: true })
   disabled = false;
@@ -77,6 +80,16 @@ export default class BInput extends LitElement implements BananaFormElement {
 
   @query('.input')
   private _input!: HTMLInputElement;
+
+  protected firstUpdated(): void {
+    if (this.defaultValue !== '' && this.value === '') {
+      this.value = this.defaultValue;
+    }
+  }
+
+  protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+    console.log(this.value, this);
+  }
 
   /* Internal methods */
 
