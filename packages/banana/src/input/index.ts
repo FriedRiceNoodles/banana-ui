@@ -1,5 +1,5 @@
 /* eslint-disable lit-a11y/click-events-have-key-events */
-import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
+import { CSSResultGroup, html, LitElement } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import { ifDefined } from 'lit/directives/if-defined.js';
@@ -85,10 +85,6 @@ export default class BInput extends LitElement implements BananaFormElement {
     if (this.defaultValue !== '' && this.value === '') {
       this.value = this.defaultValue;
     }
-  }
-
-  protected updated(_changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
-    console.log(this.value, this);
   }
 
   /* Internal methods */
