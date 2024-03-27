@@ -3,7 +3,7 @@
  */
 
 import { Button, Message, Modal } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function BasicUsage() {
   const [visible, setVisible] = useState(false);
