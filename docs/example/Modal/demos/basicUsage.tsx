@@ -9,7 +9,7 @@ export default function BasicUsage() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div>
+    <>
       <Button type="primary" onClick={() => setVisible(true)}>
         Open Modal
       </Button>
@@ -28,6 +28,6 @@ export default function BasicUsage() {
         <div>Some contents...</div>
         <div>Some contents...</div>
       </Modal>
-    </div>
+    </>
   );
 }

@@ -4,13 +4,13 @@
  */
 
 import { Button, Message, Modal } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function ButtonText() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div>
+    <>
       <Button type="primary" onClick={() => setVisible(true)}>
         Open Modal
       </Button>
@@ -29,6 +29,6 @@ export default function ButtonText() {
       >
         是否开通连续包月？
       </Modal>
-    </div>
+    </>
   );
 }

@@ -1,0 +1,26 @@
+<b-button type="primary">Open Modal</b-button>
+
+<b-modal title="I am a Modal~">
+  <div style="padding: 30px 20px; border: 1px dashed #ccc">
+    <div style="height: 200vh">往下滚动试试~👇🏻👇👇🏻👇👇🏻👇</div>
+    <span>Hi~ o(*￣▽￣*)ブ</span>
+  </div>
+</b-modal>
+
+<script>
+  const button = document.querySelector('b-button');
+  const modal = document.querySelector('b-modal');
+
+  button.addEventListener('click', () => {
+    modal.open = true;
+  });
+
+  modal.addEventListener('ok', () => {
+    modal.open = false;
+    window.BMessage.success({ content: "OK~" })
+  });
+
+  modal.addEventListener('cancel', () => {
+    modal.open = false;
+  });
+</script>

@@ -12,7 +12,7 @@ export default function CustomWidth() {
   const [visible3, setVisible3] = useState(false);
 
   return (
-    <div>
+    <>
       <Button onClick={() => setVisible(true)} style={{ marginRight: '20px' }}>
         一个300px宽度的Modal
       </Button>
@@ -67,6 +67,6 @@ export default function CustomWidth() {
         <div>Some contents...</div>
         <div>Some contents...</div>
       </Modal>
-    </div>
+    </>
   );
 }

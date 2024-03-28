@@ -1,0 +1,24 @@
+<b-button type="primary">
+  Open Modal
+</b-button>
+<b-modal title="会员畅享内容" ok-text="没问题！" cancel-text="算了">
+  是否开通连续包月？
+</b-modal>
+
+<script>
+  const button = document.querySelector('b-button');
+  const modal = document.querySelector('b-modal');
+
+  button.addEventListener('click', () => {
+    modal.open = true;
+  });
+
+  modal.addEventListener('ok', () => {
+    modal.open = false;
+    window.BMessage.success({ content: "OK~" })
+  });
+
+  modal.addEventListener('cancel', () => {
+    modal.open = false;
+  });
+</script>
