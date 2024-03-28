@@ -12,7 +12,7 @@ const toCamelCase = require('../templates/toCamelCase.js');
 const prettierConfig = prettier.resolveConfig.sync(process.cwd());
 
 const createComponent = async () => {
-  const checkDirs = ['packages/banana/src', 'packages/banana-react/src', 'docs/example'];
+  const checkDirs = ['packages/banana/src', 'packages/banana-react/src', 'docs/example', 'public'];
 
   for (const dir of checkDirs) {
     if (!fs.existsSync(path.resolve(process.cwd(), dir))) {
@@ -218,6 +218,7 @@ const createComponent = async () => {
 
   fs.mkdirSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name)));
   fs.mkdirSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'demos'));
+  fs.mkdirSync(path.resolve(process.cwd(), 'public', toCamelCase(name)));
   const basicUsage = require('../templates/docs/basicUsage.js')(name);
   const formattedBasicUsage = prettier.format(basicUsage, {
     ...prettierConfig,
@@ -236,6 +237,18 @@ const createComponent = async () => {
   });
   fs.writeFileSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'index.md'), formattedIndex);
   console.log(`✅ Created 'docs/example/${toCamelCase(name)}/index.md'`);
+
+  const htmlSourceCode = require('../templates/docs/htmlSource.js')(name);
+  const formattedHtmlSourceCode = prettier.format(htmlSourceCode, {
+    ...prettierConfig,
+    parser: 'html',
+  });
+  fs.writeFileSync(
+    path.resolve(process.cwd(), `public`, toCamelCase(name), 'basicUsage.html'),
+    formattedHtmlSourceCode,
+  );
+
+  console.log(`✅ Created 'public/${toCamelCase(name)}/basicUsage.html`);
 
   console.log('----------------------------------------');
   console.log('📝 Docs created successfully.');
