@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.7
+
+### Patch Changes
+
+- 57be102: let modal can custom close icon
+- Updated dependencies [57be102]
+  - @banana-ui/banana@1.17.7
+
 ## 1.17.6
 
 ### Patch Changes
