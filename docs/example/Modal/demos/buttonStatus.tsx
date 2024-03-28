@@ -4,14 +4,14 @@
  */
 
 import { Button, Message, Modal } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function ButtonStatus() {
   const [visible, setVisible] = useState(false);
   const [loading, setLoading] = useState(false);
 
   return (
-    <div>
+    <>
       <Button type="primary" onClick={() => setVisible(true)}>
         自定义按钮状态
       </Button>
@@ -37,6 +37,6 @@ export default function ButtonStatus() {
         <div>Some contents...</div>
         <div>Some contents...</div>
       </Modal>
-    </div>
+    </>
   );
 }

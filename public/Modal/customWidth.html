@@ -1,0 +1,70 @@
+<b-button id="open-button1" style="margin-right: 20px;">一个300px宽度的Modal</b-button>
+<b-button id="open-button2">一个50vw宽度的Modal</b-button>
+<p>你甚至可以使用`css变量`来设置宽度</p>
+<b-button id="open-button3">使用css变量设置宽度</b-button>
+
+<b-modal id="modal1" title="一个300px宽度的Modal" width="300">
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+</b-modal>
+
+<b-modal id="modal2" title="一个50vw宽度的Modal" width="50vw">
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+</b-modal>
+
+<b-modal id="modal3" title="使用css变量设置宽度" style="--banana-modal-width: 50vw;">
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+  <p>Some contents...</p>
+</b-modal>
+
+<script>
+  const button1 = document.querySelector('#open-button1');
+  const button2 = document.querySelector('#open-button2');
+  const button3 = document.querySelector('#open-button3');
+  const modal1 = document.querySelector('#modal1');
+  const modal2 = document.querySelector('#modal2');
+  const modal3 = document.querySelector('#modal3');
+
+  button1.addEventListener('click', () => {
+    modal1.open = true;
+  });
+
+  button2.addEventListener('click', () => {
+    modal2.open = true;
+  });
+
+  button3.addEventListener('click', () => {
+    modal3.open = true;
+  });
+
+  modal1.addEventListener('ok', () => {
+    modal1.open = false;
+    window.BMessage.success({ content: "OK~" })
+  });
+
+  modal2.addEventListener('ok', () => {
+    modal2.open = false;
+    window.BMessage.success({ content: "OK~" })
+  });
+
+  modal3.addEventListener('ok', () => {
+    modal3.open = false;
+    window.BMessage.success({ content: "OK~" })
+  });
+
+  modal1.addEventListener('cancel', () => {
+    modal1.open = false;
+  });
+
+  modal2.addEventListener('cancel', () => {
+    modal2.open = false;
+  });
+
+  modal3.addEventListener('cancel', () => {
+    modal3.open = false;
+  });
+</script>
