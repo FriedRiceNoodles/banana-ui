@@ -1,0 +1,34 @@
+<b-button type="primary" id="open-button">自定义Footer</b-button>
+<b-modal title="删除数据">
+  <p>是否删除数据？</p>
+  <div slot="footer">
+    <b-button id="cancel-button" style="margin-right: 10px;">取消</b-button>
+    <b-button type="danger" id="delete-button">删除</b-button>
+  </div>
+</b-modal>
+
+<script>
+  const button = document.querySelector('#open-button');
+  const modal = document.querySelector('b-modal');
+  const cancelButton = document.querySelector('#cancel-button');
+  const deleteButton = document.querySelector('#delete-button');
+
+  button.addEventListener('click', () => {
+    modal.open = true;
+  });
+
+  // 自定义的Footer中的按钮被点击后不会触发ok或cancel事件，需要手动关闭Modal
+  // 但是点击Modal的遮罩层会或按ESC键或点击Modal的关闭按钮仍然会触发cancel事件
+  modal.addEventListener('cancel', () => {
+    modal.open = false;
+  });
+
+  cancelButton.addEventListener('click', () => {
+    modal.open = false;
+  });
+
+  deleteButton.addEventListener('click', () => {
+    modal.open = false;
+    window.BMessage.success({ content: "已删除数据" })
+  });
+</script>
