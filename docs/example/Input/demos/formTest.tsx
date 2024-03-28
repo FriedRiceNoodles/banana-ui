@@ -21,7 +21,8 @@ export default function FormTest() {
         }}
       >
         <Input type="text" name="username" value="789" />
-        <Input type="password" name="password" />
+        <Input type="text" name="usernameForDefault" defaultValue="789" />
+        <Input type="password" name="password" placeholder="password" />
         <Input type="text" name="test" value="123" disabled />
         <Input type="email" name="email" required placeholder="required email" />
         <Input

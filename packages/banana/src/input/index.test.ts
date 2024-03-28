@@ -1,7 +1,7 @@
 import { expect, fixture, html } from '@open-wc/testing';
-import BInput from '.';
-import sinon from 'sinon';
 import { sendKeys, sendMouse } from '@web/test-runner-commands';
+import sinon from 'sinon';
+import BInput from '.';
 
 describe('b-input', () => {
   it('accessibility tests', async () => {
@@ -298,24 +298,37 @@ describe('form', () => {
     expect(spy.calledOnce).to.equal(true);
   });
 
-  // Default value is not supported yet.
-  // it('should become the default value when the form is reset', async () => {
-  //   const element = await fixture<HTMLFormElement>(html`<form>
-  //     <b-input name="test" value="test"></b-input>
-  //     <button type="reset">Reset</button>
-  //   </form>`);
-  //   const input = element.querySelector('b-input') as BInput;
-  //   const button = element.querySelector('button') as HTMLButtonElement;
+  it('should become the default value when the form is reset', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form>
+      <b-input name="test" default-value="test"></b-input>
+      <button type="reset">Reset</button>
+    </form>`);
+    const input = element.querySelector('b-input') as BInput;
+    const button = element.querySelector('button') as HTMLButtonElement;
 
-  //   // Change the value.
-  //   input.value = 'test1';
-  //   await input.updateComplete;
-  //   expect(input.value).to.equal('test1');
+    // Change the value.
+    input.value = 'test1';
+    await input.updateComplete;
+    expect(input.value).to.equal('test1');
 
-  //   // Then reset it.
-  //   button.click();
-  //   expect(input.value).to.equal('test');
-  // });
+    // Then reset it.
+    button.click();
+    expect(input.value).to.equal('test');
+  });
+
+  it('should become the default value when the form is reset', async () => {
+    const element = await fixture<HTMLFormElement>(html`<form>
+      <b-input name="test" value="test1" default-value="test"></b-input>
+      <button type="reset">Reset</button>
+    </form>`);
+    const input = element.querySelector('b-input') as BInput;
+    const button = element.querySelector('button') as HTMLButtonElement;
+
+    expect(input.value).to.equal('test1');
+
+    button.click();
+    expect(input.value).to.equal('test');
+  });
 });
 
 describe('size', () => {
