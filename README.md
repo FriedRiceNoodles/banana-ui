@@ -11,7 +11,9 @@
 <img height="160" src="https://s6.imgcdn.dev/WIoV0.png" />
 
 官方文档:
-https://banana-ui.com/
+
+- https://banana-ui.com/
+- 国内镜像: https://banana.youniverse.cc/ （没开启科学上网的用户可以访问这里）
 
 ## ⭐️ 特性
 
