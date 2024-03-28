@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.7
+
+### Patch Changes
+
+- 57be102: let modal can custom close icon
+
 ## 1.17.6
 
 ### Patch Changes
