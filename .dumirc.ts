@@ -124,6 +124,10 @@ export default defineConfig({
               link: '/example/stepper',
               title: 'Stepper 数量选择器',
             },
+            {
+              link: '/example/textarea',
+              title: 'Textarea 文本输入框',
+            },
           ],
         },
         {
