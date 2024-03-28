@@ -10,7 +10,8 @@
 
 <img height="160" src="https://s6.imgcdn.dev/WIoV0.png" />
 
-官方文档: https://banana-ui.com/
+官方文档:
+https://banana-ui.com/
 
 ## ⭐️ 特性
 
