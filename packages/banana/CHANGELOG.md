@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.8
+
+### Patch Changes
+
+- 4a86f86: add default-value of input component
+
 ## 1.17.7
 
 ### Patch Changes
