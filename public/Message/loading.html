@@ -1,0 +1,12 @@
+<b-button type="primary">显示一个loading提示</b-button>
+
+<script>
+  const button = document.querySelector('b-button');
+
+  button.addEventListener('click', () => {
+    const messageId = window.BMessage.loading({ content: '正在加载...', duration: 0 });
+    setTimeout(() => {
+      window.BMessage.closeMessage(messageId);
+    }, 5000);
+  });
+</script>

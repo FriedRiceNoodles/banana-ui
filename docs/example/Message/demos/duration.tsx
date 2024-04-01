@@ -4,19 +4,16 @@
  */
 
 import { Button, Message } from '@banana-ui/react';
-import React from 'react';
 
 export default function Duration() {
   return (
-    <div>
-      <Button
-        onClick={() => {
-          Message.info({ content: '这条提示将会被展示10秒...', duration: 10 });
-        }}
-        type="primary"
-      >
-        自定义提示时长
-      </Button>
-    </div>
+    <Button
+      onClick={() => {
+        Message.info({ content: '这条提示将会被展示10秒...', duration: 10 });
+      }}
+      type="primary"
+    >
+      自定义提示时长
+    </Button>
   );
 }
