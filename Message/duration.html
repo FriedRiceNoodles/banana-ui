@@ -1,0 +1,9 @@
+<b-button type="primary">自定义提示时长</b-button>
+
+<script>
+  const button = document.querySelector('b-button');
+
+  button.addEventListener('click', () => {
+    window.BMessage.info({ content: '这条提示将会被展示10秒...', duration: 10 });
+  });
+</script>
