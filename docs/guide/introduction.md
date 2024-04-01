@@ -36,7 +36,7 @@ Banana 最大的特点是它是一个基于 Web Components 的组件库，这意
 ## 寻求帮助 & 参与贡献
 
 欢迎任何形式的提问和贡献，你可以在 [Issues 区](https://github.com/FriedRiceNoodles/banana-ui/issues) 上提出问题或寻求帮助。
-如果你想参与贡献，希望可以先查看 [贡献指南](/guide/contributing.md)。
+如果你想参与贡献，希望可以先查看 [贡献指南](/guide/contributing)。
 
 ## Q & A
 
