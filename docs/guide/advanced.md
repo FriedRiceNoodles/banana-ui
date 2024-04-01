@@ -28,7 +28,7 @@ Banana 中有许多组件使用了插槽，它可以让你自定义组件的内�
 
 结果：
 
-```tsx
+```tsx | inline
 import { Button, Dropdown, Menu, MenuItem } from '@banana-ui/react';
 
 export default function App() {
