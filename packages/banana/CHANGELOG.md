@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.9
+
+### Patch Changes
+
+- 53508b3: Added filter parameter to select.
+
 ## 1.17.8
 
 ### Patch Changes
