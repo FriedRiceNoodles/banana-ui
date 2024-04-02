@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.9
+
+### Patch Changes
+
+- 53508b3: Added filter parameter to select.
+- Updated dependencies [53508b3]
+  - @banana-ui/banana@1.17.9
+
 ## 1.17.8
 
 ### Patch Changes
