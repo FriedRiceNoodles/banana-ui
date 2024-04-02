@@ -16,6 +16,7 @@ demo:
 
 <code src="./demos/basicUsage.tsx"></code>
 <code src="./demos/Multiple.tsx"></code>
+<code src="./demos/filter.tsx"></code>
 <code src="./demos/Clearable.tsx"></code>
 <code src="./demos/Size.tsx"></code>
 <code src="./demos/formTest.tsx"></code>

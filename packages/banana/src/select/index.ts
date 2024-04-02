@@ -4,6 +4,7 @@ import { autoUpdate, computePosition, ComputePositionConfig, flip, offset } from
 import { CSSResultGroup, html, LitElement, nothing, PropertyValueMap } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
+import { live } from 'lit/directives/live.js';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { BananaFormElement, FormController } from 'packages/banana/controllers/form';
 import type BSelectOption from '../select-option';
@@ -83,6 +84,14 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @property({ type: Boolean, reflect: true, attribute: 'default-open' })
   defaultOpen = false;
 
+  // Default filter, it will filter the options by the value of the filter input. (string includes, case-insensitive)
+  @property({ type: Boolean, reflect: true })
+  filter = false;
+
+  // TODO: Custom filter function.
+  // @property({ attribute: false})
+  // customFilter: (option: BSelectOption, filterValue: string) => boolean;
+
   @state()
   open = false;
 
@@ -90,20 +99,29 @@ export default class BSelect extends LitElement implements BananaFormElement {
   @state()
   activeOption = '';
 
+  @state()
+  filterInputValue = '';
+
   @query('.select')
   _select: HTMLElement | undefined;
 
   @query('.select__listbox')
   _listbox: HTMLElement | undefined;
 
-  @query('input')
+  @query('.select__validation-input')
   private _validationInput!: HTMLInputElement;
+
+  @query('.select-selector__filter')
+  private _filterInput: HTMLInputElement | undefined;
 
   @queryAssignedElements({ selector: 'b-select-option' })
   _options!: Array<BSelectOption>;
 
   private get _validOptions() {
-    return this._options.filter((option) => !option.disabled && option.value !== '');
+    return this._options.filter(
+      (option) =>
+        !option.disabled && option.value !== '' && !option.hidden && !option.hasAttribute('data-filter-hidden'),
+    );
   }
 
   private get _isEmpty() {
@@ -322,8 +340,14 @@ export default class BSelect extends LitElement implements BananaFormElement {
     } else {
       this._handleChange('');
     }
-    if (!this.noHideOnClear) {
+
+    if (!this.noHideOnClear && !(this.filter && this.open)) {
       this.hide();
+    }
+
+    if (this.filter && this._filterInput) {
+      this._filterInput.focus();
+      this.filterInputValue = '';
     }
   }
 
@@ -336,6 +360,16 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
   private _handleSlotChange() {
     this.requestUpdate();
+  }
+
+  private _handleFilterInput(event: InputEvent) {
+    const value = (event.target as HTMLInputElement).value;
+    this.filterInputValue = value;
+  }
+
+  private _handleFilterChange(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.filterInputValue = value;
   }
 
   private _convertAttributeWhenMultiple() {
@@ -393,6 +427,19 @@ export default class BSelect extends LitElement implements BananaFormElement {
         }
       }
     }
+
+    if (changedProperties.has('filterInputValue')) {
+      if (this.filter) {
+        this._options.forEach((option) => {
+          // Hide the option if the text content does not contain the filter value. (case-insensitive)
+          // Do not control the display of the option by setting `hidden` attribute, because developers may want to use it for other purposes.
+          option.toggleAttribute(
+            'data-filter-hidden',
+            !option.innerText.toLowerCase().includes(this.filterInputValue.toLowerCase()),
+          );
+        });
+      }
+    }
   }
 
   protected updated(changedProperties: PropertyValueMap<this>): void {
@@ -403,6 +450,11 @@ export default class BSelect extends LitElement implements BananaFormElement {
 
       if (this.open && !this.disabled) {
         this._listbox.hidden = false;
+
+        // Focus the filter input when the listbox is opened.
+        if (this.filter && this._filterInput) {
+          this._filterInput.focus();
+        }
 
         // Width sync.
         if (!this.disableWidthSync) {
@@ -448,6 +500,11 @@ export default class BSelect extends LitElement implements BananaFormElement {
           window.requestAnimationFrame(step);
         } else {
           if (!this.open) {
+            // Clear the filter input value when the listbox is closed.
+            if (this.filter && this._filterInput) {
+              this.filterInputValue = '';
+            }
+
             this._listbox.hidden = true;
             this.dispatchEvent(new CustomEvent('afterHide', eventOptions));
           } else {
@@ -539,7 +596,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
             'select__selector--disabled': this.disabled,
             'select__selector--active': this.open,
             'select__selector--multiple': this.multiple,
-            'select__selector--clearable': this.clearable && !this._isEmpty,
+            'select__selector--clearable': this.clearable && (!this._isEmpty || this.filterInputValue.length),
             'select__selector--small': this.size === 'small',
             'select__selector--medium': this.size === 'medium',
             'select__selector--large': this.size === 'large',
@@ -549,8 +606,28 @@ export default class BSelect extends LitElement implements BananaFormElement {
           ${this.value.length
             ? this.multiple
               ? multipleOptions
-              : html`<span class="select-selector__title">${unsafeHTML(currentOptions[0]?.innerHTML)}</span>`
-            : html`<span class="select-selector__placeholder">${this.placeholder}</span>`}
+              : html`
+                  <span class="select-selector__title" ?hidden=${this.open}>
+                    ${unsafeHTML(currentOptions[0]?.innerHTML)}
+                  </span>
+                `
+            : html`<span class="select-selector__placeholder" ?hidden=${this.open}>${this.placeholder}</span>`}
+          ${this.filter
+            ? html`
+                <div class="select-selector__filter-container" ?hidden=${!this.open}>
+                  <input
+                    class="select-selector__filter"
+                    placeholder=${this.placeholder}
+                    @click=${(event: MouseEvent) => event.stopPropagation()}
+                    @input=${this._handleFilterInput}
+                    @change=${this._handleFilterChange}
+                    .value=${live(this.filterInputValue)}
+                    type="search"
+                    tabindex="-1"
+                  />
+                </div>
+              `
+            : nothing}
           <svg
             t="1682003769967"
             class="select__selector-icon default-expand-icon"
