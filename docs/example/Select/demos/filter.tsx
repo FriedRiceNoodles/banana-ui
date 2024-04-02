@@ -1,13 +1,13 @@
 /**
- * title: 基本使用
+ * title: 开启搜索功能
  */
 
 import { Select, SelectOption } from '@banana-ui/react';
 
-export default function BasicUsage() {
+export default function Filter() {
   return (
-    <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-      <Select placeholder="Choose a fruit" style={{ width: '150px' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
+      <Select placeholder="Choose a fruit" filter style={{ width: '200px' }}>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>
         <SelectOption value="orange">🍊 Orange</SelectOption>
@@ -17,8 +17,7 @@ export default function BasicUsage() {
           🚫 Disabled
         </SelectOption>
       </Select>
-
-      <Select defaultValue={'pear'} placeholder="Choose a fruit" style={{ width: '150px' }}>
+      {/* <Select placeholder="Choose a fruit" filter multiple style={{ width: '300px' }}>
         <SelectOption value="apple">🍎 Apple</SelectOption>
         <SelectOption value="banana">🍌 Banana</SelectOption>
         <SelectOption value="orange">🍊 Orange</SelectOption>
@@ -27,7 +26,7 @@ export default function BasicUsage() {
         <SelectOption value="disabled" disabled>
           🚫 Disabled
         </SelectOption>
-      </Select>
+      </Select> */}
     </div>
   );
 }

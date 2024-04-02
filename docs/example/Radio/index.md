@@ -11,7 +11,6 @@ demo:
 ```
 
 :::info
-
 Radio 必须配合 RadioGroup 使用。
 :::
 

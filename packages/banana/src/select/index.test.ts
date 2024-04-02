@@ -30,6 +30,7 @@ describe('b-select', () => {
       expect(element.clearable).to.equal(false);
       expect(element.noHideOnClear).to.equal(false);
       expect(element.defaultOpen).to.equal(false);
+      expect(element.filter).to.equal(false);
     });
 
     it('should have validation methods', () => {
@@ -56,6 +57,7 @@ describe('b-select', () => {
         clearable
         no-hide-on-clear
         default-open
+        filter
       ></b-select>
     `);
 
@@ -75,6 +77,7 @@ describe('b-select', () => {
       expect(element.clearable).to.equal(true);
       expect(element.noHideOnClear).to.equal(true);
       expect(element.defaultOpen).to.equal(true);
+      expect(element.filter).to.equal(true);
     });
   });
 
@@ -430,6 +433,186 @@ describe('b-select', () => {
       `);
       expect(element.open).to.equal(false);
     });
+  });
+
+  describe('default filter', () => {
+    it('filter input should be hidden when filter is false', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      const filterInput = element.shadowRoot?.querySelector('.select-selector__filter') as HTMLInputElement;
+      expect(filterInput).to.not.exist;
+    });
+
+    it('filter input should be shown when filter is true', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select filter>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+        </b-select>
+      `);
+      const filterInput = element.shadowRoot?.querySelector('.select-selector__filter') as HTMLInputElement;
+      expect(filterInput).to.exist;
+    });
+
+    it('should filter the options when input in the filter input', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select filter>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+          <b-select-option value="pear">Pear</b-select-option>
+        </b-select>
+      `);
+      const filterInput = element.shadowRoot?.querySelector('.select-selector__filter') as HTMLInputElement;
+
+      // Lower case
+      filterInput.value = 'apple';
+      filterInput.dispatchEvent(new Event('input'));
+
+      await element.updateComplete;
+
+      // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+      const options = new Array(...element.querySelectorAll('b-select-option')).filter(
+        (option) => !option.hasAttribute('data-filter-hidden'),
+      ) as BSelectOption[];
+      expect(options.length).to.equal(1);
+      expect(options[0].value).to.equal('apple');
+
+      // Upper case
+      filterInput.value = 'APPLE';
+      filterInput.dispatchEvent(new Event('input'));
+
+      await element.updateComplete;
+
+      const options2 = new Array(...element.querySelectorAll('b-select-option')).filter(
+        (option) => !option.hasAttribute('data-filter-hidden'),
+      ) as BSelectOption[];
+
+      expect(options2.length).to.equal(1);
+      expect(options2[0].value).to.equal('apple');
+
+      // Partial match
+      filterInput.value = 'p';
+      filterInput.dispatchEvent(new Event('input'));
+
+      await element.updateComplete;
+
+      const options3 = new Array(...element.querySelectorAll('b-select-option')).filter(
+        (option) => !option.hasAttribute('data-filter-hidden'),
+      ) as BSelectOption[];
+
+      expect(options3.length).to.equal(2);
+      expect(options3[0].value).to.equal('apple');
+      expect(options3[1].value).to.equal('pear');
+
+      // No match
+      filterInput.value = 'not exist';
+      filterInput.dispatchEvent(new Event('input'));
+
+      await element.updateComplete;
+
+      const options4 = new Array(...element.querySelectorAll('b-select-option')).filter(
+        (option) => !option.hasAttribute('data-filter-hidden'),
+      ) as BSelectOption[];
+
+      expect(options4.length).to.equal(0);
+
+      // Empty string
+      filterInput.value = '';
+      filterInput.dispatchEvent(new Event('input'));
+
+      await element.updateComplete;
+
+      const options5 = new Array(...element.querySelectorAll('b-select-option')).filter(
+        (option) => !option.hasAttribute('data-filter-hidden'),
+      ) as BSelectOption[];
+
+      expect(options5.length).to.equal(4);
+    });
+
+    it('shoule reset the filter input when clear the value', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select filter value="apple" clearable>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+          <b-select-option value="pear">Pear</b-select-option>
+        </b-select>
+      `);
+      const filterInput = element.shadowRoot?.querySelector('.select-selector__filter') as HTMLInputElement;
+
+      filterInput.value = 'apple';
+      filterInput.dispatchEvent(new Event('input'));
+
+      await element.updateComplete;
+
+      const clearIcon = element.shadowRoot?.querySelector('.select__selector-icon.clear-icon') as SVGElement;
+      clearIcon.dispatchEvent(new MouseEvent('click'));
+
+      await element.updateComplete;
+
+      expect(filterInput.value).to.equal('');
+    });
+
+    it('should focus the filter input when open the listbox and reset the filter input when close the listbox', async () => {
+      const element = await fixture<BSelect>(html`
+        <b-select filter>
+          <b-select-option value="apple">Apple</b-select-option>
+          <b-select-option value="banana">Banana</b-select-option>
+          <b-select-option value="orange">Orange</b-select-option>
+          <b-select-option value="pear">Pear</b-select-option>
+        </b-select>
+      `);
+      const filterInput = element.shadowRoot?.querySelector('.select-selector__filter') as HTMLInputElement;
+      const spy = sinon.spy(filterInput, 'focus');
+
+      // Open the listbox
+      const selector = element.shadowRoot?.querySelector('.select__selector') as HTMLElement;
+      selector.click();
+
+      // Await the animation
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      expect(spy.calledOnce).to.equal(true);
+
+      filterInput.value = 'apple';
+      filterInput.dispatchEvent(new Event('input'));
+
+      await element.updateComplete;
+
+      // Close the listbox
+      selector.click();
+      // Await the animation
+      await new Promise((resolve) => setTimeout(resolve, 300));
+      expect(filterInput.value).to.equal('');
+
+      const options = new Array(...element.querySelectorAll('b-select-option')).filter(
+        (option) => !option.hasAttribute('data-filter-hidden'),
+      ) as BSelectOption[];
+
+      expect(options.length).to.equal(4);
+    });
+
+    // it('should show the no options message when no option matches the filter', async () => {
+    //   const element = await fixture<BSelect>(html`
+    //     <b-select filter>
+    //       <b-select-option value="apple">Apple</b-select-option>
+    //       <b-select-option value="banana">Banana</b-select-option>
+    //       <b-select-option value="orange">Orange</b-select-option>
+    //     </b-select>
+    //   `);
+    //   const filterInput = element.shadowRoot?.querySelector('.select-selector__filter') as HTMLInputElement;
+    //   filterInput.value = 'not exist';
+    //   filterInput.dispatchEvent(new Event('input'));
+
+    //   const noOptionsMessage = element.shadowRoot?.querySelector('.select__no-options-message') as HTMLElement;
+    //   expect(noOptionsMessage).to.exist;
+    // });
   });
 
   // todo: keyboard event tests

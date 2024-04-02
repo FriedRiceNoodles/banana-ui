@@ -208,5 +208,17 @@ export default [
     .select-selector__multiple-option-close:hover {
       color: var(--banana-select-multiple-option-close-hover-color, ${unsafeCSS(Var.SelectIconHoverColor)});
     }
+
+    .select-selector__filter {
+      border: none;
+      outline: none;
+      width: 100%;
+      background-color: transparent;
+      box-sizing: border-box;
+      color: inherit;
+      font-size: inherit;
+      line-height: inherit;
+      padding: 0;
+    }
   `,
 ];
