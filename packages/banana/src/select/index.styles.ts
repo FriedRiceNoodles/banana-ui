@@ -209,6 +209,10 @@ export default [
       color: var(--banana-select-multiple-option-close-hover-color, ${unsafeCSS(Var.SelectIconHoverColor)});
     }
 
+    .select-selector__filter-container {
+      width: 100%;
+    }
+
     .select-selector__filter {
       border: none;
       outline: none;
@@ -219,6 +223,11 @@ export default [
       font-size: inherit;
       line-height: inherit;
       padding: 0;
+    }
+
+    .select-selector__filter::-webkit-search-decoration,
+    .select-selector__filter::-webkit-search-cancel-button {
+      appearance: none;
     }
   `,
 ];
