@@ -46,6 +46,10 @@ export default [
       position: relative;
     }
 
+    .select__selector--searching {
+      cursor: text;
+    }
+
     .select__selector--disabled {
       pointer-events: none;
       color: var(--banana-select-disabled-color, ${unsafeCSS(Var.SelectDisabledColor)});
@@ -106,29 +110,43 @@ export default [
       transition: all ${unsafeCSS(Var.TransitionNormal)} ease;
     }
 
-    .default-expand-icon {
-      transform: translateY(-50%) rotate(90deg);
-      color: var(--banana-select-expand-icon-color, ${unsafeCSS(Var.SelectCommonGray)});
+    .expand-icon-container {
+      transform: translateY(-50%);
+      color: var(--banana-select-expand-icon-color, ${unsafeCSS(Var.SelectIconColor)});
     }
 
-    .clear-icon {
+    .clear-icon-container {
       visibility: hidden;
       opacity: 0;
       color: var(--banana-select-clear-icon-color, ${unsafeCSS(Var.SelectIconColor)});
+      cursor: pointer;
     }
 
-    .clear-icon:hover {
+    .select__selector--clearable:hover .clear-icon-container {
+      visibility: visible;
+      opacity: 1;
+    }
+
+    .clear-icon-container:hover {
       color: var(--banana-select-clear-icon-hover-color, ${unsafeCSS(Var.SelectIconHoverColor)});
     }
 
-    .select__selector--clearable:hover .default-expand-icon {
+    .search-icon-container {
       visibility: hidden;
       opacity: 0;
+      color: var(--banana-select-search-icon-color, ${unsafeCSS(Var.SelectIconColor)});
     }
 
-    .select__selector--clearable:hover .clear-icon {
+    .select__selector--searching .search-icon-container {
       visibility: visible;
       opacity: 1;
+    }
+
+    .select__selector--searching .expand-icon-container,
+    .select__selector--clearable:hover .expand-icon-container,
+    .select__selector--clearable:hover .search-icon-container {
+      visibility: hidden;
+      opacity: 0;
     }
 
     .select__listbox {
@@ -209,6 +227,10 @@ export default [
       color: var(--banana-select-multiple-option-close-hover-color, ${unsafeCSS(Var.SelectIconHoverColor)});
     }
 
+    .select-selector__filter-container {
+      width: 100%;
+    }
+
     .select-selector__filter {
       border: none;
       outline: none;
@@ -219,6 +241,11 @@ export default [
       font-size: inherit;
       line-height: inherit;
       padding: 0;
+    }
+
+    .select-selector__filter::-webkit-search-decoration,
+    .select-selector__filter::-webkit-search-cancel-button {
+      appearance: none;
     }
   `,
 ];

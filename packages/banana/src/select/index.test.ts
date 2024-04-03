@@ -360,7 +360,7 @@ describe('b-select', () => {
           <b-select-option value="orange">Orange</b-select-option>
         </b-select>
       `);
-      const clearIcon = element.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      const clearIcon = element.shadowRoot?.querySelector('.clear-icon-container');
       expect(clearIcon).to.exist;
     });
 
@@ -373,7 +373,7 @@ describe('b-select', () => {
         </b-select>
       `);
       element.open = true;
-      const clearIcon = element.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      const clearIcon = element.shadowRoot?.querySelector('.clear-icon-container');
       // mouse event
       clearIcon.dispatchEvent(new MouseEvent('click'));
       expect(element.value).to.equal('');
@@ -389,7 +389,7 @@ describe('b-select', () => {
         </b-select>
       `);
       multipleElement.open = true;
-      const multipleClearIcon = multipleElement.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      const multipleClearIcon = multipleElement.shadowRoot?.querySelector('.clear-icon-container');
       multipleClearIcon.dispatchEvent(new MouseEvent('click'));
       expect(multipleElement.value).to.deep.equal([]);
       // should close the listbox.
@@ -405,7 +405,7 @@ describe('b-select', () => {
         </b-select>
       `);
       element.open = true;
-      const clearIcon = element.shadowRoot?.querySelector('.clear-icon') as SVGElement;
+      const clearIcon = element.shadowRoot?.querySelector('.clear-icon-container');
       clearIcon.dispatchEvent(new MouseEvent('click'));
       expect(element.open).to.equal(true);
     });
@@ -552,7 +552,7 @@ describe('b-select', () => {
 
       await element.updateComplete;
 
-      const clearIcon = element.shadowRoot?.querySelector('.select__selector-icon.clear-icon') as SVGElement;
+      const clearIcon = element.shadowRoot?.querySelector('.clear-icon-container');
       clearIcon.dispatchEvent(new MouseEvent('click'));
 
       await element.updateComplete;
@@ -586,7 +586,7 @@ describe('b-select', () => {
       await element.updateComplete;
 
       // Close the listbox
-      selector.click();
+      document.body.click();
       // Await the animation
       await new Promise((resolve) => setTimeout(resolve, 300));
       expect(filterInput.value).to.equal('');
