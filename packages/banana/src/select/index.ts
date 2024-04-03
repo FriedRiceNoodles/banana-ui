@@ -243,13 +243,23 @@ export default class BSelect extends LitElement implements BananaFormElement {
     }
   }
 
-  private _handleClick(event: MouseEvent) {
+  private _handleSelectorClick(event: MouseEvent) {
     event.stopPropagation();
     if (this.disabled) return;
     if (this.open) {
-      this.hide();
+      // Don't hide the listbox when searching.
+      if (!(this.filter && this.filterInputValue.length)) {
+        this.hide();
+      }
     } else {
       this.show();
+    }
+  }
+
+  private _handleFilterClick(event: MouseEvent) {
+    event.stopPropagation();
+    if (this.open && !this.filterInputValue.length) {
+      this.hide();
     }
   }
 
@@ -597,11 +607,12 @@ export default class BSelect extends LitElement implements BananaFormElement {
             'select__selector--active': this.open,
             'select__selector--multiple': this.multiple,
             'select__selector--clearable': this.clearable && (!this._isEmpty || this.filterInputValue.length),
+            'select__selector--searching': this.filter && this.open,
             'select__selector--small': this.size === 'small',
             'select__selector--medium': this.size === 'medium',
             'select__selector--large': this.size === 'large',
           })}
-          @click=${this._handleClick}
+          @click=${this._handleSelectorClick}
         >
           ${this.value.length
             ? this.multiple
@@ -618,7 +629,7 @@ export default class BSelect extends LitElement implements BananaFormElement {
                   <input
                     class="select-selector__filter"
                     placeholder=${this.placeholder}
-                    @click=${(event: MouseEvent) => event.stopPropagation()}
+                    @click=${this._handleFilterClick}
                     @input=${this._handleFilterInput}
                     @change=${this._handleFilterChange}
                     .value=${live(this.filterInputValue)}
@@ -628,39 +639,38 @@ export default class BSelect extends LitElement implements BananaFormElement {
                 </div>
               `
             : nothing}
-          <svg
-            t="1682003769967"
-            class="select__selector-icon default-expand-icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="933"
-            width="12"
-            height="12"
-          >
-            <path
-              d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
-              fill="currentColor"
-              p-id="934"
-            ></path>
-          </svg>
-          <svg
-            t="1699238137610"
-            class="select__selector-icon clear-icon"
-            viewBox="0 0 1024 1024"
-            version="1.1"
-            xmlns="http://www.w3.org/2000/svg"
-            p-id="1235"
-            width="12"
-            height="12"
-            @click=${this._handleClearIconClick}
-          >
-            <path
-              d="M512 949.333333C270.933333 949.333333 74.666667 753.066667 74.666667 512S270.933333 74.666667 512 74.666667 949.333333 270.933333 949.333333 512 753.066667 949.333333 512 949.333333z m-151.466667-292.266666c10.666667 10.666667 29.866667 12.8 42.666667 2.133333l2.133333-2.133333 104.533334-102.4 102.4 102.4 2.133333 2.133333c12.8 10.666667 32 8.533333 42.666667-2.133333 12.8-12.8 12.8-32 0-44.8L554.666667 509.866667l102.4-102.4 2.133333-2.133334c10.666667-12.8 8.533333-32-2.133333-42.666666s-29.866667-12.8-42.666667-2.133334l-2.133333 2.133334-102.4 102.4-102.4-102.4-2.133334-2.133334c-12.8-10.666667-32-8.533333-42.666666 2.133334-12.8 12.8-12.8 32 0 44.8l102.4 102.4-102.4 102.4-2.133334 2.133333c-10.666667 12.8-10.666667 32 0 42.666667z"
-              fill="currentColor"
-              p-id="1236"
-            ></path>
-          </svg>
+          <div class="select__selector-icons-container">
+            <div class="select__selector-icon expand-icon-container">
+              <slot name="selector-icon-expand">
+                <svg class="default-expand-icon" width="12" height="12" viewBox="0 0 1024 1024">
+                  <path
+                    d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </slot>
+            </div>
+            <div class="select__selector-icon clear-icon-container" @click=${this._handleClearIconClick}>
+              <slot name="selector-icon-clear">
+                <svg class="clear-icon" viewBox="0 0 1024 1024" width="12" height="12">
+                  <path
+                    d="M512 949.333333C270.933333 949.333333 74.666667 753.066667 74.666667 512S270.933333 74.666667 512 74.666667 949.333333 270.933333 949.333333 512 753.066667 949.333333 512 949.333333z m-151.466667-292.266666c10.666667 10.666667 29.866667 12.8 42.666667 2.133333l2.133333-2.133333 104.533334-102.4 102.4 102.4 2.133333 2.133333c12.8 10.666667 32 8.533333 42.666667-2.133333 12.8-12.8 12.8-32 0-44.8L554.666667 509.866667l102.4-102.4 2.133333-2.133334c10.666667-12.8 8.533333-32-2.133333-42.666666s-29.866667-12.8-42.666667-2.133334l-2.133333 2.133334-102.4 102.4-102.4-102.4-2.133334-2.133334c-12.8-10.666667-32-8.533333-42.666666 2.133334-12.8 12.8-12.8 32 0 44.8l102.4 102.4-102.4 102.4-2.133334 2.133333c-10.666667 12.8-10.666667 32 0 42.666667z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </slot>
+            </div>
+            <div class="select__selector-icon search-icon-container">
+              <slot name="selector-icon-search">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none" class="search-icon">
+                  <path
+                    d="M10.3345 11.7488C9.25957 12.5354 7.93402 12.9999 6.49995 12.9999C2.91014 12.9999 0 10.0897 0 6.49995C0 2.91014 2.91014 0 6.49995 0C10.0897 0 12.9999 2.91014 12.9999 6.49995C12.9999 7.93402 12.5354 9.25957 11.7488 10.3345L15.7071 14.2927C16.0976 14.6834 16.0976 15.3164 15.7071 15.7071C15.3164 16.0976 14.6834 16.0976 14.2927 15.7071L10.3345 11.7488ZM6.49996 10.9999C8.98517 10.9999 10.9999 8.98517 10.9999 6.49996C10.9999 4.01475 8.98517 2 6.49996 2C4.01469 2 2 4.01475 2 6.49996C2 8.98517 4.01469 10.9999 6.49996 10.9999Z"
+                    fill="currentColor"
+                  ></path>
+                </svg>
+              </slot>
+            </div>
+          </div>
         </div>
 
         <div

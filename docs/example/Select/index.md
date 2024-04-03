@@ -20,6 +20,7 @@ demo:
 <code src="./demos/Clearable.tsx"></code>
 <code src="./demos/Size.tsx"></code>
 <code src="./demos/formTest.tsx"></code>
+<code src="./demos/customIcons.tsx"></code>
 <code src="./demos/Disabled.tsx"></code>
 
 ## 属性 - Attributes & Properties
@@ -78,9 +79,12 @@ demo:
 
 ### Select
 
-| 插槽      | 说明                                                                                                  |
-| --------- | ----------------------------------------------------------------------------------------------------- |
-| (default) | 选择器的展开内容区域，正常情况下只应该放置`SelectOption`组件，不过其实你也可以往里面放`Divider`组件。 |
+| 插槽                 | 说明                                                                                                  |
+| -------------------- | ----------------------------------------------------------------------------------------------------- |
+| (default)            | 选择器的展开内容区域，正常情况下只应该放置`SelectOption`组件，不过其实你也可以往里面放`Divider`组件。 |
+| selector-icon-expand | 展开图标插槽，可以自定义展开图标                                                                      |
+| selector-icon-clear  | 清空图标插槽，可以自定义清空图标                                                                      |
+| selector-icon-search | 搜索图标插槽，可以自定义搜索图标                                                                      |
 
 ### SelectOption
 
@@ -112,7 +116,7 @@ demo:
 | --banana-select-selector-border                   | 边框样式                                  | 1px solid rgb(151, 154, 154) |
 | --banana-select-disabled-color                    | 禁用状态字体颜色                          | rgba(0, 0, 0, 0.25)          |
 | --banana-select-disabled-background-color         | 禁用状态背景颜色                          | rgba(0, 0, 0, 0.03)          |
-| --banana-select-disabled-border-color             | 禁用状态边框颜色                          | rgba(179, 182, 183)          |
+| --banana-select-disabled-border-color             | 禁用状态边框颜色                          | rgba(179, 182, 183, 1)       |
 | --banana-select-selector-font-size-small          | small 尺寸选择器字体大小                  | 14px                         |
 | --banana-select-selector-height-small             | small 尺寸选择器最小高度                  | 24px                         |
 | --banana-select-selector-padding-small            | small 尺寸选择器内边距                    | 0 24px 0 12px                |
@@ -125,12 +129,13 @@ demo:
 | --banana-select-selector-height-large             | large 尺寸选择器最小高度                  | 40px                         |
 | --banana-select-selector-padding-large            | large 尺寸选择器内边距                    | 0 24px 0 12px                |
 | --banana-select-selector-border-radius-large      | large 尺寸选择器圆角大小                  | 8px                          |
-| --banana-color-primary-hover                      | hover 颜色                                | rgba(0, 79, 179)             |
-| --banana-color-primary-active                     | active 颜色                               | rgba(0, 61, 133)             |
-| --banana-select-placeholder-color                 | placeholder 文字颜色                      | rgba(151, 154, 154)          |
-| --banana-select-expand-icon-color                 | 选择器展开 icon 颜色                      | rgba(151, 154, 154)          |
-| --banana-select-clear-icon-color                  | 清空 icon 颜色                            | rgba(179, 182, 183)          |
-| --banana-select-clear-icon-hover-color            | 清空 icon hover 时颜色                    | rgba(46, 50, 56)             |
+| --banana-color-primary-hover                      | hover 颜色                                | rgba(0, 79, 179, 1)          |
+| --banana-color-primary-active                     | active 颜色                               | rgba(0, 61, 133, 1)          |
+| --banana-select-placeholder-color                 | placeholder 文字颜色                      | rgba(151, 154, 154, 1)       |
+| --banana-select-expand-icon-color                 | 选择器展开 icon 颜色                      | rgba(179, 182, 183, 1)       |
+| --banana-select-clear-icon-color                  | 清空 icon 颜色                            | rgba(179, 182, 183, 1)       |
+| --banana-select-clear-icon-hover-color            | 清空 icon hover 时颜色                    | rgba(46, 50, 56, 1)          |
+| --banana-select-search-icon-color                 | 搜索 icon 颜色                            | rgba(179, 182, 183, 1)       |
 | --banana-select-border-radius                     | 展开面板圆角大小                          | 6px                          |
 | --banana-select-list-padding                      | 展开面板内边距                            | 4px                          |
 | --banana-select-list-max-height                   | 展开面板最大高度                          | 260px                        |
@@ -139,8 +144,8 @@ demo:
 | --banana-select-multiple-option-height-small      | 多选情况下且尺寸为 small，每个选项的高度  | 16px                         |
 | --banana-select-multiple-option-height-medium     | 多选情况下且尺寸为 medium，每个选项的高度 | 24px                         |
 | --banana-select-multiple-option-height-large      | 多选情况下且尺寸为 large，每个选项的高度  | 32px                         |
-| --banana-select-multiple-option-close-color       | 多选情况下，删除选项 icon 颜色            | rgba(179, 182, 183)          |
-| --banana-select-multiple-option-close-hover-color | 多选情况下，删除选项 icon hover 时的颜色  | rgba(46, 50, 56)             |
+| --banana-select-multiple-option-close-color       | 多选情况下，删除选项 icon 颜色            | rgba(179, 182, 183, 1)       |
+| --banana-select-multiple-option-close-hover-color | 多选情况下，删除选项 icon hover 时的颜色  | rgba(46, 50, 56, 1)          |
 
 ### SelectOption
 
