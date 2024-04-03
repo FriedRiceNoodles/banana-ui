@@ -1,5 +1,19 @@
 # @banana/banana-react
 
+## 1.17.10
+
+### Patch Changes
+
+- 8030ca3: Updated select.
+
+  - Added slots for icons.
+  - Improved the behavior on searching.
+
+- fe35ea7: Remove the native cancel button on filter input of select.
+- Updated dependencies [8030ca3]
+- Updated dependencies [fe35ea7]
+  - @banana-ui/banana@1.17.10
+
 ## 1.17.9
 
 ### Patch Changes
