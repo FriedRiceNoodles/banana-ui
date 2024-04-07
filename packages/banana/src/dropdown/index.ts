@@ -1,4 +1,4 @@
-import { arrow, computePosition, ComputePositionConfig, flip, offset, Side } from '@floating-ui/dom';
+import { arrow, autoUpdate, computePosition, ComputePositionConfig, flip, offset, Side } from '@floating-ui/dom';
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -67,6 +67,8 @@ export default class BDropdown extends LitElement {
   private _openTimer: ReturnType<typeof setTimeout> | undefined;
 
   private _closeTimer: ReturnType<typeof setTimeout> | undefined;
+
+  private cleanup: ReturnType<typeof autoUpdate> | undefined;
 
   private _repositioning() {
     if (!this._trigger || !this._content) return;
@@ -269,6 +271,15 @@ export default class BDropdown extends LitElement {
       };
 
       window.requestAnimationFrame(step);
+    }
+  }
+
+  protected updated(changedProperties: PropertyValueMap<any> | Map<PropertyKey, unknown>): void {
+    if (!this._trigger || !this._content) return;
+
+    if (changedProperties.has('open')) {
+      this.cleanup?.();
+      this.cleanup = this.open ? autoUpdate(this._trigger, this._content, () => this._repositioning()) : undefined;
     }
   }
 

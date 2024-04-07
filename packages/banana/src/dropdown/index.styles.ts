@@ -18,7 +18,7 @@ export default [
       top: 0;
       left: 0;
       opacity: 0;
-      z-index: 100;
+      z-index: var(--banana-dropdown-zIndex, 100);
     }
   `,
 ];
