@@ -4,13 +4,13 @@
  */
 
 import { Button, Message, Modal } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function CustomFooter() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div>
+    <>
       <Button type="primary" onClick={() => setVisible(true)}>
         自定义Footer
       </Button>
@@ -33,6 +33,6 @@ export default function CustomFooter() {
           </Button>
         </div>
       </Modal>
-    </div>
+    </>
   );
 }

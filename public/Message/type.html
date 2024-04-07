@@ -1,0 +1,30 @@
+<div style="display: flex; gap: 10px; flex-wrap: wrap;">
+  <b-button id="infoBtn" type="primary">普通提示</b-button>
+  <b-button id="successBtn" type="success">成功提示</b-button>
+  <b-button id="errorBtn" type="danger">错误提示</b-button>
+  <b-button id="warningBtn" type="warning">警告提示</b-button>
+</div>
+
+
+<script>
+  function showInfo() {
+    window.BMessage.info({ content: '一个普通提示' });
+  }
+
+  function showSuccess() {
+    window.BMessage.success({ content: '一个成功提示' });
+  }
+
+  function showError() {
+    window.BMessage.error({ content: '一个错误提示' });
+  }
+
+  function showWarning() {
+    window.BMessage.warning({ content: '一个警告提示' });
+  }
+
+  document.getElementById('infoBtn').addEventListener('click', showInfo);
+  document.getElementById('successBtn').addEventListener('click', showSuccess);
+  document.getElementById('errorBtn').addEventListener('click', showError);
+  document.getElementById('warningBtn').addEventListener('click', showWarning);
+</script>

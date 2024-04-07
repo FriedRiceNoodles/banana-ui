@@ -32,6 +32,11 @@ export default [
       cursor: not-allowed;
     }
 
+    /* data-filter-hidden */
+    :host([data-filter-hidden]) {
+      display: none;
+    }
+
     .option {
       overflow: hidden;
       text-overflow: ellipsis;

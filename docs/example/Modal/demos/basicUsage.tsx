@@ -3,13 +3,13 @@
  */
 
 import { Button, Message, Modal } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function BasicUsage() {
   const [visible, setVisible] = useState(false);
 
   return (
-    <div>
+    <>
       <Button type="primary" onClick={() => setVisible(true)}>
         Open Modal
       </Button>
@@ -28,6 +28,6 @@ export default function BasicUsage() {
         <div>Some contents...</div>
         <div>Some contents...</div>
       </Modal>
-    </div>
+    </>
   );
 }

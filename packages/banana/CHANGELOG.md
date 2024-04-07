@@ -1,5 +1,40 @@
 # banana-ui
 
+## 1.17.10
+
+### Patch Changes
+
+- 8030ca3: Updated select.
+
+  - Added slots for icons.
+  - Improved the behavior on searching.
+
+- fe35ea7: Remove the native cancel button on filter input of select.
+
+## 1.17.9
+
+### Patch Changes
+
+- 53508b3: Added filter parameter to select.
+
+## 1.17.8
+
+### Patch Changes
+
+- 4a86f86: add default-value of input component
+
+## 1.17.7
+
+### Patch Changes
+
+- 57be102: let modal can custom close icon
+
+## 1.17.6
+
+### Patch Changes
+
+- 4a9d6ee: progress backgroundColor attributes named to background-color
+
 ## 1.17.5
 
 ### Patch Changes

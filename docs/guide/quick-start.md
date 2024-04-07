@@ -18,11 +18,19 @@ order: 1
 
 ## 安装/引入
 
+### CDN
+
 ```html
 <script src="https://cdn.jsdelivr.net/npm/@banana-ui/banana/umd/index.js"></script>
 ```
 
-React 用户：
+### NPM 安装
+
+```bash
+npm i @banana-ui/banana
+```
+
+### React 用户
 
 ```bash
 npm i @banana-ui/react
@@ -32,11 +40,88 @@ npm i @banana-ui/react
 
 ## 使用
 
+### 原生 HTML，或除 React 以外的前端框架
+
+使用 CDN 安装/引入的用户，已经可以直接使用组件了
+
 ```html
 <b-button type="primary">Hello Banana</b-button>
 ```
 
-React 用户：
+使用 NPM 安装的用户，需要引入组件后使用，这里以在 Vue 环境下使用举例：
+
+```vue
+<script setup>
+// 全量引入
+import '@banana-ui/banana';
+
+// 当然，我会更推荐你按需引入
+// 但由于Vue的一些特性，按需引入需要你做一些额外的配置工作，下文会提到这点
+import { BButton } from '@banana-ui/banana';
+</script>
+
+<template>
+  <b-button>Click me</b-button>
+</template>
+```
+
+:::warning{title="Vue 的按需引入"}
+默认情况下，Vue 会将任何非原生的 HTML 标签优先当作 Vue 组件处理，而将“渲染一个自定义元素”作为后备选项。
+上面这句话出自 Vue 的官方文档，简单来说，如果你想在 Vue 中按需引入 Banana，你需要一些配置。
+
+#### 浏览器内编译时的示例配置 ​
+
+```js
+// 仅在浏览器内编译时才会工作
+// 如果使用了构建工具，请看下面的配置示例
+app.config.compilerOptions.isCustomElement = (tag) => tag.includes('b-');
+```
+
+#### Vite 示例配置 ​
+
+```js
+// vite.config.js
+import vue from '@vitejs/plugin-vue';
+
+export default {
+  plugins: [
+    vue({
+      template: {
+        compilerOptions: {
+          // 将'b-'开头的标签视为自定义元素
+          isCustomElement: (tag) => tag.includes('b-'),
+        },
+      },
+    }),
+  ],
+};
+```
+
+#### Vue CLI 示例配置 ​
+
+```js
+// vue.config.js
+module.exports = {
+  chainWebpack: (config) => {
+    config.module
+      .rule('vue')
+      .use('vue-loader')
+      .tap((options) => ({
+        ...options,
+        compilerOptions: {
+          // 将'b-'开头的标签视为自定义元素
+          isCustomElement: (tag) => tag.startsWith('b-'),
+        },
+      }));
+  },
+};
+```
+
+参考：https://cn.vuejs.org/guide/extras/web-components.html#using-custom-elements-in-vue
+
+:::
+
+### React 用户：
 
 ```jsx | pure
 import { Button } from '@banana-ui/react';
@@ -67,7 +152,7 @@ export default function App() {
 对于 Banana UI 而言，我们会把 Attribute 和 Property 以一定的规则互相转换。转换的规则取决于具体组件属性的类型。
 
 - 如果属性是字符串类型，那么 Attribute 和 Property 是等价的。
-- \*如果属性是数字类型，那么 Attribute 在被转换成 Property 时会被自动转换成数字类型（如果可以的话）。
+- 如果属性是数字类型，那么 Attribute 在被转换成 Property 时会被自动转换成数字类型（如果可以的话）。
 - 如果属性是布尔类型，那么 Attribute 出现在标签上就表示为 true，不出现就表示为 false。
 - 如果属性是对象或者数组类型，那么 Attribute 和 Property 的转换相当于 JSON.stringify 和 JSON.parse。
 

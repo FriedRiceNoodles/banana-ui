@@ -85,6 +85,20 @@ describe('slots', () => {
     expect(footerSlot.assignedElements().length).to.equal(1);
     expect(footerSlot.assignedElements()[0].textContent).to.equal('Modal footer');
   });
+
+  it('should render the closeIcon slot', async () => {
+    const element = await fixture<BModal>(html`
+      <b-modal open>
+        <p>Modal content</p>
+        <p>Modal content</p>
+        <p slot="closeIcon">CLOSE</p>
+      </b-modal>
+    `);
+    const iconSlot = element.shadowRoot?.querySelector('slot[name="closeIcon"]') as HTMLSlotElement;
+
+    expect(iconSlot.assignedElements().length).to.equal(1);
+    expect(iconSlot.assignedElements()[0].textContent).to.equal('CLOSE');
+  });
 });
 
 describe('custom width', () => {

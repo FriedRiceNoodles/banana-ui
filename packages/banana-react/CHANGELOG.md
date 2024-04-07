@@ -1,5 +1,51 @@
 # @banana/banana-react
 
+## 1.17.10
+
+### Patch Changes
+
+- 8030ca3: Updated select.
+
+  - Added slots for icons.
+  - Improved the behavior on searching.
+
+- fe35ea7: Remove the native cancel button on filter input of select.
+- Updated dependencies [8030ca3]
+- Updated dependencies [fe35ea7]
+  - @banana-ui/banana@1.17.10
+
+## 1.17.9
+
+### Patch Changes
+
+- 53508b3: Added filter parameter to select.
+- Updated dependencies [53508b3]
+  - @banana-ui/banana@1.17.9
+
+## 1.17.8
+
+### Patch Changes
+
+- 4a86f86: add default-value of input component
+- Updated dependencies [4a86f86]
+  - @banana-ui/banana@1.17.8
+
+## 1.17.7
+
+### Patch Changes
+
+- 57be102: let modal can custom close icon
+- Updated dependencies [57be102]
+  - @banana-ui/banana@1.17.7
+
+## 1.17.6
+
+### Patch Changes
+
+- 4a9d6ee: progress backgroundColor attributes named to background-color
+- Updated dependencies [4a9d6ee]
+  - @banana-ui/banana@1.17.6
+
 ## 1.17.5
 
 ### Patch Changes

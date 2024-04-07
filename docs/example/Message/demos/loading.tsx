@@ -4,21 +4,18 @@
  */
 
 import { Button, Message } from '@banana-ui/react';
-import React from 'react';
 
 export default function Loading() {
   return (
-    <div>
-      <Button
-        onClick={() => {
-          const messageId = Message.loading({ content: '正在加载...', duration: 0 });
-          setTimeout(() => {
-            Message.closeMessage(messageId);
-          }, 5000);
-        }}
-      >
-        显示一个loading提示
-      </Button>
-    </div>
+    <Button
+      onClick={() => {
+        const messageId = Message.loading({ content: '正在加载...', duration: 0 });
+        setTimeout(() => {
+          Message.closeMessage(messageId);
+        }, 5000);
+      }}
+    >
+      显示一个loading提示
+    </Button>
   );
 }

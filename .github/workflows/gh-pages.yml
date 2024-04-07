@@ -24,6 +24,10 @@ jobs:
       # 组件库打包
       - name: Build packages
         run: pnpm build
+
+      - name: Before Test
+        run: pnpm install playwright -g && pnpm exec playwright install
+
       # 测试
       - name: Test
         run: pnpm test
