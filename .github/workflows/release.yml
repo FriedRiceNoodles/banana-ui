@@ -34,7 +34,7 @@ jobs:
         run: pnpm build
 
       - name: Before Test
-        run: pnpm install playwright -D -w && pnpm exec playwright uninstall --all && pnpm exec playwright install
+        run: cd packages/banana && pnpm beforeTest
 
       # 测试
       - name: Test
