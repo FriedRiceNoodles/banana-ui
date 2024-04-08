@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.11
+
+### Patch Changes
+
+- 9c7577e: fix dropdown position error when window resize
+
 ## 1.17.10
 
 ### Patch Changes
