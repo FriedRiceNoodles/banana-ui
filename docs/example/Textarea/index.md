@@ -23,13 +23,13 @@ demo:
 
 | 属性           | 说明                                                                                                                                            | 类型                                                                                            | 默认值     |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------- |
-| name           | The name of the textarea, submitted as a name/value pair with form data.                                                                        | `string`                                                                                        | `''`       |
-| value          | The current value of the textarea, submitted as a name/value pair with form data.                                                               | `string`                                                                                        | `''`       |
+| name           | The name of the textarea, submitted as a name/value pair with form data.                                                                        | `string`                                                                                        | -          |
+| value          | The current value of the textarea, submitted as a name/value pair with form data.                                                               | `string`                                                                                        | -          |
 | size           | The textarea’s size.                                                                                                                            | `'small'` \| `'medium'` \| `'large'`                                                            | `'medium'` |
 | placeholder    | Placeholder text to show as a hint when the input is empty.                                                                                     | `string`                                                                                        | -          |
 | rows           | The number of rows to display by default.                                                                                                       | `number`                                                                                        | 4          |
-| minlength      | The minimum length of input that will be considered valid.                                                                                      | `number`                                                                                        |            |
-| maxlength      | The maximum length of input that will be considered valid.                                                                                      | `number`                                                                                        |            |
+| minlength      | The minimum length of input that will be considered valid.                                                                                      | `number`                                                                                        | -          |
+| maxlength      | The maximum length of input that will be considered valid.                                                                                      | `number`                                                                                        | -          |
 | autocapitalize | Controls whether and how text input is automatically capitalized as it is entered by the user.                                                  | `'off'` \| `'none'` \| `'on'` \| `'sentences'`\| `'words'`\| `'characters'`                     | `'off'`    |
 | autocorrect    | Indicates whether the browser’s autocorrect feature is on or off.                                                                               | `'off'` \| `'on'`                                                                               | `'on'`     |
 | spellcheck     | Enables spell checking on the textarea.                                                                                                         | `boolean`                                                                                       | true       |
@@ -42,19 +42,18 @@ demo:
 
 ## 方法 - Methods
 
-| 方法             | 说明                                                                     | 参数 |
-| ---------------- | ------------------------------------------------------------------------ | ---- |
-| reportValidity() | 报告表单验证结果,返回表单验证结果，如果验证成功返回 true，否则返回 false | -    |
-| checkValidity()  | 检查输入字段的有效性,如果输入字段有效则返回 true，否则返回 false         | -    |
+| 方法             | 说明                                                                                                                                                                              | 参数 |
+| ---------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---- |
+| reportValidity() | 触发合法性校验，返回输入框当前的值是否合法，如果是不合法的值，会弹出提示。[查看 MDN 相关文档。](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/reportValidity) | -    |
+| checkValidity()  | 返回输入框当前的值是否合法。[查看 MDN 相关文档。](https://developer.mozilla.org/en-US/docs/Web/API/HTMLInputElement/checkValidity)                                                | -    |
 
 ## 事件 - Events
 
-| 事件   | 说明                                                                        | Event Detail |
-| ------ | --------------------------------------------------------------------------- | ------------ |
-| change | Emitted when an alteration to the control’s value is committed by the user. | -            |
-| input  | Emitted when the control receives input.                                    | -            |
-| focus  | Emitted when the control gains focus.                                       | -            |
-| blur   | Emitted when the control loses focus.                                       | -            |
+| 事件   | 说明                                                                        | Event Detail      |
+| ------ | --------------------------------------------------------------------------- | ----------------- |
+| change | Emitted when an alteration to the control’s value is committed by the user. | `{value: string}` |
+| focus  | Emitted when the control gains focus.                                       | -                 |
+| blur   | Emitted when the control loses focus.                                       | -                 |
 
 ## CSS Parts
 

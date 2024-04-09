@@ -126,14 +126,6 @@ export default class BTextarea extends LitElement implements BananaFormElement {
     }
   }
 
-  // private _handleInputKeyDown(event: KeyboardEvent) {
-  //   const isKeyCombination = event.metaKey || event.ctrlKey || event.altKey || event.shiftKey;
-
-  //   if (event.key === 'Enter' && !isKeyCombination && !event.isComposing) {
-  //     this.formController.submit();
-  //   }
-  // }
-
   // Pass the reportValidity() method to the form controller.
   reportValidity() {
     return this._textarea.reportValidity();
@@ -181,7 +173,6 @@ export default class BTextarea extends LitElement implements BananaFormElement {
           spellcheck=${ifDefined(this.spellcheck)}
           inputmode=${ifDefined(this.inputmode)}
           @change="${this._handleChange}"
-          @input="${this._handleChange}"
           @focus="${this._handleFocus}"
           @blur="${this._handleBlur}"
         ></textarea>

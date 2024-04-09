@@ -109,7 +109,8 @@ describe('b-textarea', () => {
       const element = await fixture<BTextarea>(html`<b-textarea></b-textarea>`);
       const textarea = element.shadowRoot!.querySelector('textarea') as HTMLTextAreaElement;
       textarea.value = 'test';
-      textarea.dispatchEvent(new Event('input'));
+      textarea.dispatchEvent(new Event('change'));
+      element.blur();
       expect(element.value).to.equal('test');
     });
 
