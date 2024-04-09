@@ -1,6 +1,6 @@
 {
   "name": "@banana-ui/banana",
-  "version": "1.17.10",
+  "version": "1.17.11",
   "description": "An UI library of web components can be used in any framework",
   "keywords": [
     "web components",
@@ -34,6 +34,7 @@
     "package.json"
   ],
   "scripts": {
+    "beforeTest": "pnpm install playwright -D && playwright install",
     "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs && pnpm run tsc && pnpm run cem",
     "cem": "custom-elements-manifest analyze --config \"custom-elements-manifest.config.js\"",
     "dev": "rollup -c ../../rollup.config.dev.mjs -w --no-watch.clearScreen",

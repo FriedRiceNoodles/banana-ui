@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.11
+
+### Patch Changes
+
+- 9c7577e: fix dropdown position error when window resize
+- Updated dependencies [9c7577e]
+  - @banana-ui/banana@1.17.11
+
 ## 1.17.10
 
 ### Patch Changes

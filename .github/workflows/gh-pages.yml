@@ -26,7 +26,7 @@ jobs:
         run: pnpm build
 
       - name: Before Test
-        run: pnpm install playwright -g && pnpm exec playwright install
+        run: cd packages/banana && pnpm beforeTest
 
       # 测试
       - name: Test
