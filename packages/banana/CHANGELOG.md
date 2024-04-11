@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.17.12
+
+### Patch Changes
+
+- 800c8f5: Add events for dropdown.
+
 ## 1.17.11
 
 ### Patch Changes
