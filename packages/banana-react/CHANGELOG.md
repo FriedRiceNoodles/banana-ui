@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.17.12
+
+### Patch Changes
+
+- 800c8f5: Add events for dropdown.
+- Updated dependencies [800c8f5]
+  - @banana-ui/banana@1.17.12
+
 ## 1.17.11
 
 ### Patch Changes
