@@ -115,27 +115,25 @@ describe('b-switch', () => {
       expect(spy.calledTwice).to.equal(true);
     });
 
-    // it('should toggle the display text when provide slot to switch', async () => {
-    //   const element = await fixture<BSwitch>(html`<b-switch>
-    //     <span slot="checked_content">open</span>
-    //     <span slot="unchecked_content">unOpen</span>
-    //   </b-switch>`);
-    //   const clickElement = element.shadowRoot?.querySelector('.banana-switch') as HTMLLabelElement;
+    it('should toggle the display text when provide slot to switch', async () => {
+      const element = await fixture<BSwitch>(html`<b-switch>
+        <span slot="checked">open</span>
+        <span slot="unchecked">unOpen</span>
+      </b-switch>`);
+      const clickElement = element.shadowRoot?.querySelector('.switch__inner') as HTMLLabelElement;
 
-    //   const checkedEl = element.shadowRoot?.querySelector('.switch__inner-checked') as HTMLLabelElement;
+      const checkedEl = element.shadowRoot?.querySelector('slot[name="checked"]') as HTMLSlotElement;
 
-    //   const unCheckedEl = element.shadowRoot?.querySelector('.switch__inner-unchecked') as HTMLLabelElement;
+      const unCheckedEl = element.shadowRoot?.querySelector('slot[name="unchecked"]') as HTMLSlotElement;
 
-    //   console.log('checkedEl', checkedEl);
-
-    //   // Change event should be fired.
-    //   expect(unCheckedEl.textContent).equal('unOpen');
-    //   const spy = sinon.spy();
-    //   element.addEventListener('change', spy);
-    //   clickElement.click();
-    //   await element.updateComplete;
-    //   expect(checkedEl.textContent).equal('open');
-    // });
+      // Change event should be fired.
+      expect(unCheckedEl.assignedElements()[0].textContent).equal('unOpen');
+      const spy = sinon.spy();
+      element.addEventListener('change', spy);
+      clickElement.click();
+      await element.updateComplete;
+      expect(checkedEl.assignedElements()[0].textContent).equal('open');
+    });
   });
 
   describe('form', () => {

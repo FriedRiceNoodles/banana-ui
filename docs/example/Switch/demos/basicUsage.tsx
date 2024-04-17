@@ -5,5 +5,5 @@
 import { Switch } from '@banana-ui/react';
 
 export default function BasicUsage() {
-  return <Switch></Switch>;
+  return <Switch />;
 }

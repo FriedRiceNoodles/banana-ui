@@ -77,6 +77,13 @@ export default class BSwitch
     this.dispatchEvent(new CustomEvent('change', eventOptions));
   }
 
+  private _handleKeyDown(event: KeyboardEvent) {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      this._handleChange();
+    }
+  }
+
   protected firstUpdated(): void {
     if (!this.checked) {
       this.checked = this.defaultChecked;
@@ -97,24 +104,20 @@ export default class BSwitch
   }
 
   render() {
-    // eslint-disable-next-line lit-a11y/click-events-have-key-events
     return html`<div
+      @click=${this._handleChange}
+      @keydown=${this._handleKeyDown}
       part="base"
       class=${classMap({
         'banana-switch': true,
         'banana-switch-sm': this.size === 'small',
       })}
-      @click=${this._handleChange}
-      aria-label="Name"
     >
       <input
-        part="input"
-        aria-label="checkbox"
-        ?checked=${this.checked}
-        type="checkbox"
         class="switch__input"
-        role="switch"
-        aria-checked=${this.checked}
+        aria-label="Switch__inner"
+        value=${this.checked ? '1' : ''}
+        ?require=${this.required}
       />
       <div
         part="control"

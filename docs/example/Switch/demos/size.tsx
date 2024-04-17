@@ -14,8 +14,8 @@ export default function BasicUsage() {
         gap: '6px',
       }}
     >
-      <Switch size="small"></Switch>
-      <Switch></Switch>
+      <Switch size="small" />
+      <Switch />
       <span>自定义尺寸</span>
       <Switch
         style={
@@ -25,7 +25,7 @@ export default function BasicUsage() {
             '--banana-switch-control-size': '24px',
           } as React.CSSProperties
         }
-      ></Switch>
+      />
     </div>
   );
 }

@@ -13,8 +13,8 @@ export default function Disabled() {
         gap: '6px',
       }}
     >
-      <Switch disabled></Switch>
-      <Switch disabled checked></Switch>
+      <Switch disabled />
+      <Switch disabled checked />
     </div>
   );
 }
