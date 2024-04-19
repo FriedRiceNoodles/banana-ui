@@ -172,7 +172,7 @@ export default class BTextarea extends LitElement implements BananaFormElement {
           ?autofocus=${this.autofocus}
           spellcheck=${ifDefined(this.spellcheck)}
           inputmode=${ifDefined(this.inputmode)}
-          @change="${this._handleChange}"
+          @input="${this._handleChange}"
           @focus="${this._handleFocus}"
           @blur="${this._handleBlur}"
         ></textarea>

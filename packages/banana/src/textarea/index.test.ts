@@ -109,7 +109,7 @@ describe('b-textarea', () => {
       const element = await fixture<BTextarea>(html`<b-textarea></b-textarea>`);
       const textarea = element.shadowRoot!.querySelector('textarea') as HTMLTextAreaElement;
       textarea.value = 'test';
-      textarea.dispatchEvent(new Event('change'));
+      textarea.dispatchEvent(new Event('input'));
       element.blur();
       expect(element.value).to.equal('test');
     });
@@ -161,6 +161,8 @@ it('should focus the native input when click the wrapper', async () => {
   expect(focusSpy.calledOnce).to.equal(true);
   expect(wrapper.classList.contains('textarea__wrapper--focusing')).to.equal(true);
   await sendKeys({ press: 'a' });
+  console.log('document.activeElement', document.activeElement);
+  console.log('textarea', textarea.value, element.value);
 
   expect(element.value).to.equal('a');
   expect(textarea.value).to.equal('a');
