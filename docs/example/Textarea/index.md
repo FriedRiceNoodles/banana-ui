@@ -4,7 +4,7 @@ demo:
   cols: 2
 ---
 
-# Textarea 文本输入框
+# Textarea 文本输入框 <Badge>表单组件</Badge>
 
 ```
 <b-textarea> | Textarea
@@ -21,7 +21,7 @@ demo:
 
 ## 属性 - Attributes & Properties
 
-| 属性           | 说明                                                                                                                                            | 类型                                                                                            | 默认值     |
+<!-- | 属性           | 说明                                                                                                                                            | 类型                                                                                            | 默认值     |
 | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ---------- |
 | name           | The name of the textarea, submitted as a name/value pair with form data.                                                                        | `string`                                                                                        | -          |
 | value          | The current value of the textarea, submitted as a name/value pair with form data.                                                               | `string`                                                                                        | -          |
@@ -38,7 +38,26 @@ demo:
 | disabled       | Disables the textarea.                                                                                                                          | `boolean`                                                                                       | false      |
 | readonly       | Makes the textarea readonly.                                                                                                                    | `boolean`                                                                                       | false      |
 | required       | Makes the textarea a required field.                                                                                                            | `boolean`                                                                                       | false      |
-| controlled     | Makes the textarea a controlled field.                                                                                                          | `boolean`                                                                                       | false      |
+| controlled     | Makes the textarea a controlled field.                                                                                                          | `boolean`                                                                                       | false      | -->
+
+| 属性           | 说明                                                               | 类型                                                                                            | 默认值     |
+| -------------- | ------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------- | ---------- |
+| name           | 用于表单提交的 name 字段                                           | `string`                                                                                        | -          |
+| value          | 文本框输入的值                                                     | `string`                                                                                        | -          |
+| size           | 文本框的尺寸                                                       | `'small'` \| `'medium'` \| `'large'`                                                            | `'medium'` |
+| placeholder    | 输入框为空时的提示文本                                             | `string`                                                                                        | -          |
+| rows           | 默认显示的行数                                                     | `number`                                                                                        | 4          |
+| minlength      | 输入的最小长度                                                     | `number`                                                                                        | -          |
+| maxlength      | 输入的最大长度                                                     | `number`                                                                                        | -          |
+| autocapitalize | 控制用户输入时是否自动大写                                         | `'off'` \| `'none'` \| `'on'` \| `'sentences'`\| `'words'`\| `'characters'`                     | `'off'`    |
+| autocorrect    | 控制用户输入时是否自动纠正                                         | `'off'` \| `'on'`                                                                               | `'on'`     |
+| spellcheck     | 是否启用拼写检查                                                   | `boolean`                                                                                       | true       |
+| inputmode      | 告诉浏览器用户输入的数据类型，以便在支持的设备上显示适当的虚拟键盘 | `'none'` \| `'text'` \| `'decimal'` \| `'numeric'`\| `'tel'`\| `'search'`\| `'email'`\| `'url'` | `'text'`   |
+| autofocus      | 是否在页面加载时自动获取焦点                                       | `boolean`                                                                                       | false      |
+| disabled       | 是否禁用输入框                                                     | `boolean`                                                                                       | false      |
+| readonly       | 是否只读                                                           | `boolean`                                                                                       | false      |
+| required       | 是否必填                                                           | `boolean`                                                                                       | false      |
+| controlled     | 是否受控                                                           | `boolean`                                                                                       | false      |
 
 ## 方法 - Methods
 
@@ -49,11 +68,17 @@ demo:
 
 ## 事件 - Events
 
-| 事件   | 说明                                                                        | Event Detail      |
+<!-- | 事件   | 说明                                                                        | Event Detail      |
 | ------ | --------------------------------------------------------------------------- | ----------------- |
 | change | Emitted when an alteration to the control’s value is committed by the user. | `{value: string}` |
 | focus  | Emitted when the control gains focus.                                       | -                 |
-| blur   | Emitted when the control loses focus.                                       | -                 |
+| blur   | Emitted when the control loses focus.                                       | -                 | -->
+
+| 事件   | 说明                       | Event Detail      |
+| ------ | -------------------------- | ----------------- |
+| change | 输入框的值发生改变时触发。 | `{value: string}` |
+| focus  | 输入框获得焦点时触发。     | -                 |
+| blur   | 输入框失去焦点时触发。     | -                 |
 
 ## CSS Parts
 
