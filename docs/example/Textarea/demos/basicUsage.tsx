@@ -13,7 +13,7 @@ export default function BasicUsage() {
         gap: '16px',
       }}
     >
-      <Textarea placeholder="Basic usage" />
+      <Textarea />
       <Textarea placeholder="Custom placeholder" />
       <Textarea placeholder="Disabled" disabled />
     </div>
