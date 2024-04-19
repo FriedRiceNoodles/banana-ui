@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.18.0
+
+### Minor Changes
+
+- 6af84b1: New Component: Textarea
+
 ## 1.17.12
 
 ### Patch Changes

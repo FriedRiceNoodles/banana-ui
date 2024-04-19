@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.18.0
+
+### Minor Changes
+
+- 6af84b1: New Component: Textarea
+
+### Patch Changes
+
+- Updated dependencies [6af84b1]
+  - @banana-ui/banana@1.18.0
+
 ## 1.17.12
 
 ### Patch Changes
