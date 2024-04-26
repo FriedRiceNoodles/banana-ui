@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.18.1
+
+### Patch Changes
+
+- 05b4cba: Added part attributes for select.
+- Updated dependencies [05b4cba]
+  - @banana-ui/banana@1.18.1
+
 ## 1.18.0
 
 ### Minor Changes

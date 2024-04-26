@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.18.1
+
+### Patch Changes
+
+- 05b4cba: Added part attributes for select.
+
 ## 1.18.0
 
 ### Minor Changes
