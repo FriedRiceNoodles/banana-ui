@@ -96,10 +96,12 @@ demo:
 
 ### Select
 
-| Part    | 说明           |
-| ------- | -------------- |
-| base    | 包裹组件的容器 |
-| listbox | 选择器展开部分 |
+| Part           | 说明             |
+| -------------- | ---------------- |
+| base           | 包裹组件的容器   |
+| selector       | 选择器部分       |
+| selector-title | 选择器的文本部分 |
+| listbox        | 选择器展开部分   |
 
 ### SelectOption
 
