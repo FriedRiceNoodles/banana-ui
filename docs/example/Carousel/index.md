@@ -15,6 +15,7 @@ group: 组件
 ## 代码演示
 
 <code src="./demos/basicUsage.tsx"></code>
+<code src="./demos/verticalMode.tsx"></code>
 <code src="./demos/loop.tsx"></code>
 <code src="./demos/slidesPerView.tsx"></code>
 <code src="./demos/demo3.tsx"></code>
