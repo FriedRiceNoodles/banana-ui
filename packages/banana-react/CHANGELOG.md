@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.18.2
+
+### Patch Changes
+
+- 844e0a1: add vertical mode for carousel
+- Updated dependencies [844e0a1]
+  - @banana-ui/banana@1.18.2
+
 ## 1.18.1
 
 ### Patch Changes

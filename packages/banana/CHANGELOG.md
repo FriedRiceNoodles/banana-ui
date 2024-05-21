@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.18.2
+
+### Patch Changes
+
+- 844e0a1: add vertical mode for carousel
+
 ## 1.18.1
 
 ### Patch Changes
