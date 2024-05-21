@@ -1,10 +1,11 @@
 /**
- * title: 垂直方向
+ * title: 垂直展示
+ * description: 当需要垂直展示时，需要手动指定容器高度(设置对应css变量`--banana-carousel-vertical-height`)
  */
 
 import { Carousel } from '@banana-ui/react';
 
-export default function VerticalMode() {
+export default function Vertical() {
   const style = `
     .demo-slide--vertical {
       display: flex;
@@ -22,7 +23,7 @@ export default function VerticalMode() {
   return (
     <>
       <style>{style}</style>
-      <Carousel className="container" indicator navigation verticalMode>
+      <Carousel className="container" vertical>
         <div className="demo-slide--vertical">1</div>
         <div className="demo-slide--vertical">2</div>
         <div className="demo-slide--vertical">3</div>
