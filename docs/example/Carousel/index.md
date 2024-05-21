@@ -26,6 +26,7 @@ group: 组件
 <code src="./demos/disableFill.tsx"></code>
 <code src="./demos/useRef.tsx"></code>
 <code src="./demos/autoHeight.tsx"></code>
+<code src="./demos/vertical.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
@@ -42,6 +43,7 @@ group: 组件
 | disableFill <br /> (disable-fill)                    | 默认情况下，当你传入的轮播图个数小于 slidesPerView 时，会自动填充，传入此属性可以取消这个行为 | `boolean` | false  |
 | autoHeight                                           | 是否自动调整高度                                                                              | `boolean` | false  |
 | indicator                                            | 是否显示指示器（默认为小圆点）                                                                | `boolean` | false  |
+| vertical                                             | 是否垂直展示                                                                                  | `boolean` | false  |
 
 ## 方法 - Methods
 
@@ -90,3 +92,4 @@ group: 组件
 | --banana-carousel-indicator-gap       | 指示器之间的间隔                                  | `--banana-carousel-indicator-size` |
 | --banana-carousel-indicator-size      | 指示器的大小                                      | 8px                                |
 | --banana-carousel-indicator-color     | 指示器的颜色（非激活状态的指示器`opacity`为 0.5） | rgba(46, 50, 56, 1)                |
+| --banana-carousel-vertical-height     | 垂直展示时，需要指定容器的高度                    | 100%                               |
