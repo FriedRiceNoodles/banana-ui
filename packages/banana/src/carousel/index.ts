@@ -123,7 +123,7 @@ export default class BCarousel extends LitElement {
   indicator = false;
 
   @property({ type: Boolean })
-  verticalMode = false;
+  vertical = false;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
@@ -151,7 +151,7 @@ export default class BCarousel extends LitElement {
 
   private get _externalWrapperSize() {
     return (
-      (this.verticalMode
+      (this.vertical
         ? this._externalWrapper?.getBoundingClientRect().height
         : this._externalWrapper?.getBoundingClientRect().width) ?? 0
     );
@@ -174,7 +174,7 @@ export default class BCarousel extends LitElement {
   }
 
   private get coordinateDirection() {
-    return this.verticalMode ? 'y' : 'x';
+    return this.vertical ? 'y' : 'x';
   }
 
   // Record how many cycles have been made if `loop` is true.
@@ -299,7 +299,7 @@ export default class BCarousel extends LitElement {
       const translateValue = this._loopCount * this.totalSlidesSizeWithGap;
 
       for (const slide of this._slides) {
-        slide.style.transform = this.verticalMode
+        slide.style.transform = this.vertical
           ? `translate3d(0, ${translateValue}px, 0)`
           : `translate3d(${translateValue}px, 0, 0)`;
       }
@@ -340,7 +340,7 @@ export default class BCarousel extends LitElement {
       for (let i = 0; i < this._slidesPerView; i++) {
         const copyAtTheBeginning = CopysAtTheBeginning[i];
         copyAtTheBeginning.setAttribute('data-clone', String(this._slides.length - this._slidesPerView + i));
-        copyAtTheBeginning.style.transform = this.verticalMode
+        copyAtTheBeginning.style.transform = this.vertical
           ? `translate3d(0, ${_translateValue}px, 0)`
           : `translate3d(${_translateValue}px, 0, 0)`;
         this.append(copyAtTheBeginning);
@@ -348,7 +348,7 @@ export default class BCarousel extends LitElement {
       for (let i = 0; i < this._slidesPerView; i++) {
         const copyAtTheEnd = CopysAtTheEnd[i];
         copyAtTheEnd.setAttribute('data-clone', String(i));
-        copyAtTheEnd.style.transform = this.verticalMode
+        copyAtTheEnd.style.transform = this.vertical
           ? `translate3d(0, ${translateValue}px, 0)`
           : `translate3d(${translateValue}px, 0, 0)`;
         this.append(copyAtTheEnd);
@@ -381,7 +381,7 @@ export default class BCarousel extends LitElement {
 
     // When start dragging, that _pointerStartX obviously won't be undefined.
     // Dragging can only occur after DragStart, and the _onDragStart function will set the _pointerStartX.
-    this._dragDistance = this.verticalMode
+    this._dragDistance = this.vertical
       ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
         this._pointerCurrentY - this._pointerStartY!
       : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
@@ -410,7 +410,7 @@ export default class BCarousel extends LitElement {
 
     const speed = Math.abs(diffMoveDistance / diffTime);
 
-    const isOverMinSpeed = this.verticalMode ? speed >= this._minSpeedToMoveY : speed >= this._minSpeedToMoveX;
+    const isOverMinSpeed = this.vertical ? speed >= this._minSpeedToMoveY : speed >= this._minSpeedToMoveX;
     if (isOverMinSpeed) {
       if (diffMoveDistance < 0) {
         this.next();
@@ -466,11 +466,11 @@ export default class BCarousel extends LitElement {
 
     if (this._loop) {
       const loopShift = -(this.totalSlidesSizeWithGap * this._loopCount);
-      return this.verticalMode
+      return this.vertical
         ? [0, -this.currentIndex * wholeDistance + this._dragDistance + loopShift]
         : [-this.currentIndex * wholeDistance + this._dragDistance + loopShift, 0];
     } else {
-      return this.verticalMode
+      return this.vertical
         ? [0, -this.currentIndex * wholeDistance + this._dragDistance]
         : [-this.currentIndex * wholeDistance + this._dragDistance, 0];
     }
@@ -511,7 +511,7 @@ export default class BCarousel extends LitElement {
           part="external-wrapper"
           class=${classMap({
             'external-wrapper': true,
-            'external-wrapper--vertical': this.verticalMode,
+            'external-wrapper--vertical': this.vertical,
           })}
           @mouseenter=${this._onWrapperMouseEnter}
           @mouseleave=${this._onWrapperMouseLeave}
@@ -522,8 +522,8 @@ export default class BCarousel extends LitElement {
             @touchstart="${this._eventHandler}"
             class=${classMap({
               'slides-wrapper': true,
-              'slides-wrapper--normal': !this.verticalMode,
-              'slides-wrapper--vertical': this.verticalMode,
+              'slides-wrapper--normal': !this.vertical,
+              'slides-wrapper--vertical': this.vertical,
               'no-transition': this._isDragging,
             })}
             style="transform: translate3d(${translateX}px, ${translateY}px, 0px); --banana-carousel-slidesPerView: ${this
@@ -537,8 +537,8 @@ export default class BCarousel extends LitElement {
           part="indicators"
           class=${classMap({
             indicators: true,
-            'indicators--normal': !this.verticalMode,
-            'indicators--vertical': this.verticalMode,
+            'indicators--normal': !this.vertical,
+            'indicators--vertical': this.vertical,
           })}
           ?hidden=${!this.indicator}
         >
@@ -565,10 +565,10 @@ export default class BCarousel extends LitElement {
             : ''}"
           class=${classMap({
             'navigation-buttons': true,
-            'navigation-button--normal': !this.verticalMode,
-            'navigation-button--previous__normal': !this.verticalMode,
-            'navigation-button--vertical': this.verticalMode,
-            'navigation-button--previous__vertical': this.verticalMode,
+            'navigation-button--normal': !this.vertical,
+            'navigation-button--previous__normal': !this.vertical,
+            'navigation-button--vertical': this.vertical,
+            'navigation-button--previous__vertical': this.vertical,
             'navigation-button--disabled': previousNavigationDisabled,
           })}
           ?hidden=${!this.navigation}
@@ -602,10 +602,10 @@ export default class BCarousel extends LitElement {
             : ''}"
           class=${classMap({
             'navigation-buttons': true,
-            'navigation-button--normal': !this.verticalMode,
-            'navigation-button--next__normal': !this.verticalMode,
-            'navigation-button--vertical': this.verticalMode,
-            'navigation-button--next__vertical': this.verticalMode,
+            'navigation-button--normal': !this.vertical,
+            'navigation-button--next__normal': !this.vertical,
+            'navigation-button--vertical': this.vertical,
+            'navigation-button--next__vertical': this.vertical,
             'navigation-button--disabled': nextNavigationDisabled,
           })}
           ?hidden=${!this.navigation}
