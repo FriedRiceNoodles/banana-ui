@@ -26,7 +26,7 @@ async function discover(root: Element | ShadowRoot) {
   if (!root) return;
 
   const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : '';
-  const rootIsBananaElement = rootTagName?.startsWith('b-');
+  const rootIsBananaElement = rootTagName?.toLowerCase().startsWith('b-');
   const rootIsCustomElement = rootTagName?.includes('-');
 
   const tags = [...root.querySelectorAll(':not(:defined)')]
@@ -41,8 +41,8 @@ async function discover(root: Element | ShadowRoot) {
   // Make the list unique
   const tagsToRegister = [...new Set(tags)];
 
-  const notBananaCustomElements = [...root.querySelectorAll(':not(:defined)')].filter(
-    (el) => !el.tagName.toLowerCase().startsWith('b-'),
+  const notBananaCustomElements = [...root.querySelectorAll('*')].filter(
+    (el) => el.tagName.includes('-') && !el.tagName.toLowerCase().startsWith('b-'),
   );
 
   // If the root element is a custom element and not a Banana component, add it to the list
