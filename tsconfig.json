@@ -7,6 +7,7 @@
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
     "jsx": "react-jsx",
+    "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
