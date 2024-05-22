@@ -50,7 +50,7 @@ function register(tagName: string): Promise<void> {
   }
 
   const tagWithoutPrefix = tagName.replace(/^b-/i, '');
-  const path = getBasePath(`${tagWithoutPrefix}/${tagWithoutPrefix}.js`);
+  const path = getBasePath(`${tagWithoutPrefix}/index.js`);
 
   // Register it
   return new Promise((resolve, reject) => {

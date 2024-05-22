@@ -120,9 +120,6 @@ if (fs.existsSync('./src/banana-autoloader.ts')) {
       nodeResolve({
         extensions: ['.ts', '.js'],
       }),
-      commonjs(),
-      babel(babelConfig),
-      terser(),
     ],
   });
 }
