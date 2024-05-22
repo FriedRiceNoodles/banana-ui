@@ -23,8 +23,12 @@ const observer = new MutationObserver((mutations) => {
  * Checks a node for undefined elements and attempts to register them.
  */
 async function discover(root: Element | ShadowRoot) {
+  if (!root) return;
+
   const rootTagName = root instanceof Element ? root.tagName.toLowerCase() : '';
   const rootIsBananaElement = rootTagName?.startsWith('b-');
+  const rootIsCustomElement = rootTagName?.includes('-');
+
   const tags = [...root.querySelectorAll(':not(:defined)')]
     .map((el) => el.tagName.toLowerCase())
     .filter((tag) => tag.startsWith('b-'));
@@ -36,6 +40,24 @@ async function discover(root: Element | ShadowRoot) {
 
   // Make the list unique
   const tagsToRegister = [...new Set(tags)];
+
+  const notBananaCustomElements = [...root.querySelectorAll(':not(:defined)')].filter(
+    (el) => !el.tagName.toLowerCase().startsWith('b-'),
+  );
+
+  // If the root element is a custom element and not a Banana component, add it to the list
+  if (rootIsCustomElement && !rootIsBananaElement && root instanceof Element) {
+    notBananaCustomElements.push(root);
+  }
+
+  const customElementsPromises = notBananaCustomElements.map((el) => {
+    return customElements.whenDefined(el.tagName);
+  });
+  void Promise.allSettled(customElementsPromises).then(() => {
+    notBananaCustomElements.forEach((el) => {
+      if (el.shadowRoot) void discover(el.shadowRoot);
+    });
+  });
 
   await Promise.allSettled(tagsToRegister.map((tagName) => register(tagName)));
 }
