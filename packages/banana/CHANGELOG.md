@@ -1,5 +1,29 @@
 # banana-ui
 
+## 1.18.2
+
+### Patch Changes
+
+- 844e0a1: add vertical mode for carousel
+
+## 1.18.1
+
+### Patch Changes
+
+- 05b4cba: Added part attributes for select.
+
+## 1.18.0
+
+### Minor Changes
+
+- 6af84b1: New Component: Textarea
+
+## 1.17.12
+
+### Patch Changes
+
+- 800c8f5: Add events for dropdown.
+
 ## 1.17.11
 
 ### Patch Changes

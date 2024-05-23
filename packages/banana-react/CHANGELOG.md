@@ -1,5 +1,40 @@
 # @banana/banana-react
 
+## 1.18.2
+
+### Patch Changes
+
+- 844e0a1: add vertical mode for carousel
+- Updated dependencies [844e0a1]
+  - @banana-ui/banana@1.18.2
+
+## 1.18.1
+
+### Patch Changes
+
+- 05b4cba: Added part attributes for select.
+- Updated dependencies [05b4cba]
+  - @banana-ui/banana@1.18.1
+
+## 1.18.0
+
+### Minor Changes
+
+- 6af84b1: New Component: Textarea
+
+### Patch Changes
+
+- Updated dependencies [6af84b1]
+  - @banana-ui/banana@1.18.0
+
+## 1.17.12
+
+### Patch Changes
+
+- 800c8f5: Add events for dropdown.
+- Updated dependencies [800c8f5]
+  - @banana-ui/banana@1.17.12
+
 ## 1.17.11
 
 ### Patch Changes

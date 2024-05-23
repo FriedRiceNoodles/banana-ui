@@ -613,12 +613,13 @@ export default class BSelect extends LitElement implements BananaFormElement {
             'select__selector--large': this.size === 'large',
           })}
           @click=${this._handleSelectorClick}
+          part="selector"
         >
           ${this.value.length
             ? this.multiple
               ? multipleOptions
               : html`
-                  <span class="select-selector__title" ?hidden=${this.open}>
+                  <span class="select-selector__title" part="selector-title" ?hidden=${this.open}>
                     ${unsafeHTML(currentOptions[0]?.innerHTML)}
                   </span>
                 `
