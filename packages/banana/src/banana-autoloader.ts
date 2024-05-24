@@ -50,6 +50,7 @@ async function discover(root: Element | ShadowRoot) {
     notBananaCustomElements.push(root);
   }
 
+  // Discover any shadow roots
   const customElementsPromises = notBananaCustomElements.map((el) => {
     return customElements.whenDefined(el.tagName);
   });
