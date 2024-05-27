@@ -15,12 +15,20 @@ export default [
     .marquee {
       overflow: hidden;
       background-color: var(--banana-marquee-background-color);
+
+      display: flex;
+      flex-direction: row;
+      align-items: center;
     }
 
     .content {
+      overflow: hidden;
       display: inline-block;
+      flex: 0 0 auto;
       white-space: nowrap;
       animation: marquee var(--banana-marquee-duration) linear infinite;
+      min-width: 100%;
+      animation-play-state: var(--banana-marquee-fixed);
     }
 
     @media (any-hover: hover) {
