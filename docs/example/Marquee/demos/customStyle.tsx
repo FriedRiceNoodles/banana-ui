@@ -17,6 +17,9 @@ export default function CustomStyle() {
       color: #fff;
       font-family: "Gill Sans", sans-serif;
     }
+    .cat::part(content) {
+      border-radius: 10px;
+    }
   `;
 
   return (
@@ -35,6 +38,7 @@ export default function CustomStyle() {
           }
         />
         <Marquee content={content} className="foo" />
+        <Marquee content={content} className="cat" />
       </div>
     </>
   );
