@@ -19,6 +19,7 @@ demo:
 <code src="./demos/duration.tsx"></code>
 <code src="./demos/pauseWhenHover.tsx"></code>
 <code src="./demos/customStyle.tsx"></code>
+<code src="./demos/fixedUsage.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
@@ -28,6 +29,7 @@ demo:
 | color                                    | 跑马灯的文本颜色    | `string`  | ''     |
 | duration                                 | 滚动时长（单位：s） | `number`  | 20     |
 | pauseWhenHover <br /> (pause-when-hover) | 鼠标悬停时是否暂停  | `boolean` | false  |
+| fixed                                    | 短文案固定          | `boolean` | false  |
 
 ## CSS Parts
 
