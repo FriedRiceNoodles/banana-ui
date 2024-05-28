@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.18.3
+
+### Patch Changes
+
+- 6800fbf: slide item's gap use margin to complete
+
 ## 1.18.2
 
 ### Patch Changes
