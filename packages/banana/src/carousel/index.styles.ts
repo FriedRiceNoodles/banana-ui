@@ -34,7 +34,6 @@ export default [
       transition: transform var(--banana-carousel-transition-duration, ${unsafeCSS(Var.TransitionNormal)});
       /* This variable should not be used directly, use the gap property instead */
       /* DO NOT PUT IT IN THE DOCUMENTATION */
-      gap: calc(var(--banana-carousel-gap, 0) * 1px);
     }
     .slides-wrapper--vertical {
       flex-direction: column;
@@ -55,6 +54,7 @@ export default [
       height: 100%;
       flex-grow: 0;
       flex-shrink: 0;
+      margin-right: calc(var(--banana-carousel-gap, 0) * 1px);
     }
 
     .slides-wrapper--vertical ::slotted(*) {
@@ -67,6 +67,7 @@ export default [
       width: 100%;
       flex-grow: 0;
       flex-shrink: 0;
+      margin-bottom: calc(var(--banana-carousel-gap, 0) * 1px);
     }
 
     .navigation-buttons {
