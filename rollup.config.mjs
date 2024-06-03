@@ -42,7 +42,7 @@ const UMDName = process
   .pop()
   .replace(/(^|-)(\w)/g, (_, _$1, $2) => $2.toUpperCase());
 
-export default [
+const rollupConfig = [
   {
     input: './src/index.ts',
     output: {
@@ -105,3 +105,23 @@ export default [
     ],
   },
 ];
+
+// 如果存在./src/autoloader.ts，则添加到rollupConfig中
+if (fs.existsSync('./src/banana-autoloader.ts')) {
+  rollupConfig.push({
+    input: './src/banana-autoloader.ts',
+    output: {
+      dir: 'dist',
+      format: 'es',
+      entryFileNames: 'banana-autoloader.js',
+    },
+    plugins: [
+      typescript(),
+      nodeResolve({
+        extensions: ['.ts', '.js'],
+      }),
+    ],
+  });
+}
+
+export default rollupConfig;
