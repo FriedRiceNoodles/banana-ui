@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.18.3
+
+### Patch Changes
+
+- 6800fbf: slide item's gap use margin to complete
+- Updated dependencies [6800fbf]
+  - @banana-ui/banana@1.18.3
+
 ## 1.18.2
 
 ### Patch Changes
