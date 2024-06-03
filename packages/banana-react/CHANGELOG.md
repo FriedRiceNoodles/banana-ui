@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.19.0
+
+### Minor Changes
+
+- 4bb6fbb: Autoloader for banana.
+
+### Patch Changes
+
+- Updated dependencies [4bb6fbb]
+  - @banana-ui/banana@1.19.0
+
 ## 1.18.3
 
 ### Patch Changes
