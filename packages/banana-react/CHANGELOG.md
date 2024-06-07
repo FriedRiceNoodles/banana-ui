@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.19.1
+
+### Patch Changes
+
+- 94c54f0: Make autoloader covers b-message
+- Updated dependencies [94c54f0]
+  - @banana-ui/banana@1.19.1
+
 ## 1.19.0
 
 ### Minor Changes

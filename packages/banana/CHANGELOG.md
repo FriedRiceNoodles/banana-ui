@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.19.1
+
+### Patch Changes
+
+- 94c54f0: Make autoloader covers b-message
+
 ## 1.19.0
 
 ### Minor Changes
