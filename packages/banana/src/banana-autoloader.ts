@@ -86,3 +86,11 @@ void discover(document.body);
 
 // Listen for new undefined elements
 observer.observe(document.documentElement, { subtree: true, childList: true });
+
+// BMessage is a special case because it's often used by window.BMessage methods but not directly in the DOM
+// If it's not defined, import it directly
+if (!customElements.get('b-message')) {
+  // import the module
+  const path = getBasePath('message/index.js');
+  void import(path);
+}
