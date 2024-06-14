@@ -140,7 +140,7 @@ describe('b-tooltip', () => {
   });
 
   describe('when triggerAction is click', () => {
-    it('should not show the content when mouse enter the trigger and should not hide the content when mouse leave the trigger or contentƒ', async () => {
+    it('should not show the content when mouse enter the trigger and should not hide the content when mouse leave the trigger or content', async () => {
       const element = await fixture<BTooltip>(
         html`
           <b-tooltip content="tooltip" trigger-action="click">
@@ -249,6 +249,43 @@ describe('b-tooltip', () => {
       document.dispatchEvent(new MouseEvent('click', { bubbles: true }));
       await aTimeout(100);
       expect(element.open).to.equal(false);
+    });
+  });
+
+  describe('when triggerAction is none', () => {
+    it('should show the content when tooltip is rendered', async () => {
+      const element = await fixture<BTooltip>(
+        html`
+          <b-tooltip content="tooltip" trigger-action="none">
+            <button>Test</button>
+          </b-tooltip>
+        `,
+      );
+
+      expect(element.open).to.equal(true);
+    });
+
+    it('should not hide the content when mouse enter the trigger or content', async () => {
+      const element = await fixture<BTooltip>(
+        html`
+          <b-tooltip content="tooltip" trigger-action="none">
+            <button>Test</button>
+          </b-tooltip>
+        `,
+      );
+      const trigger = element.shadowRoot?.querySelector('.tooltip__trigger') as HTMLSlotElement;
+
+      expect(element.open).to.equal(true);
+      // Mouse enter the dropdown trigger.
+      trigger.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await aTimeout(100);
+      expect(element.open).to.equal(true);
+
+      // Mouse enter the dropdown content.
+      const content = element.shadowRoot?.querySelector('.tooltip__content') as HTMLElement;
+      content.dispatchEvent(new MouseEvent('mouseenter', { bubbles: true }));
+      await aTimeout(100);
+      expect(element.open).to.equal(true);
     });
   });
 
