@@ -1,4 +1,14 @@
-import { arrow, computePosition, ComputePositionConfig, flip, offset, platform, shift, Side } from '@floating-ui/dom';
+import {
+  arrow,
+  autoUpdate,
+  computePosition,
+  ComputePositionConfig,
+  flip,
+  offset,
+  platform,
+  shift,
+  Side,
+} from '@floating-ui/dom';
 import { offsetParent } from 'composed-offset-position';
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, state } from 'lit/decorators.js';
@@ -45,6 +55,8 @@ export default class BTooltip extends LitElement {
 
   private _closeTimer: ReturnType<typeof setTimeout> | undefined;
 
+  private cleanup: ReturnType<typeof autoUpdate> | undefined;
+
   @property()
   content = '';
 
@@ -72,8 +84,9 @@ export default class BTooltip extends LitElement {
   @property({ type: Number, reflect: true, attribute: 'mouse-leave-delay' })
   mouseLeaveDelay = 100;
 
+  // If the trigger action is `none`, the tooltip always shows.
   @property({ reflect: true, attribute: 'trigger-action' })
-  triggerAction: 'hover' | 'click' = 'hover';
+  triggerAction: 'hover' | 'click' | 'none' = 'hover';
 
   @property({ type: Boolean, reflect: true, attribute: 'no-arrow' })
   noArrow = false;
@@ -145,7 +158,6 @@ export default class BTooltip extends LitElement {
 
   private _repositioning() {
     if (!this._trigger || !this._content) return;
-
     const middleware: ComputePositionConfig['middleware'] = [offset(this.margin), shift({ padding: 10 })];
     if (!this.disableAutoAdjustOverflow) middleware.push(flip());
     if (this._arrow !== undefined && !this.noArrow) middleware.push(arrow({ element: this._arrow }));
@@ -198,6 +210,7 @@ export default class BTooltip extends LitElement {
   }
 
   private _close() {
+    if (this.triggerAction === 'none') return;
     this.open = false;
 
     if (this.triggerAction === 'hover') {
@@ -252,8 +265,15 @@ export default class BTooltip extends LitElement {
     if (!this._content) return;
 
     // Pass an `open` attribute directly is not allowed.
-    this.open = false;
-    this._content.hidden = true;
+    this.open = this.triggerAction === 'none';
+    this._content.hidden = !this.open;
+    if (this.triggerAction === 'none') {
+      void this.updateComplete.then(() => {
+        if (!this._trigger || !this._content) return;
+        this.cleanup = this.open ? autoUpdate(this._trigger, this._content, () => this._repositioning()) : undefined;
+        this._repositioning();
+      });
+    }
 
     // If the arrow slot is not provided, set the default arrow.
     if (this._arrowSlot?.assignedElements()[0] === undefined) {
@@ -262,6 +282,12 @@ export default class BTooltip extends LitElement {
   }
 
   protected willUpdate(changedProperties: PropertyValueMap<this>): void {
+    if (changedProperties.has('triggerAction')) {
+      if (this.triggerAction !== 'none') {
+        this.cleanup?.();
+      }
+    }
+
     if (changedProperties.has('maxWidth')) {
       const width = this.maxWidth !== undefined ? String(this.maxWidth) : '';
       const _regExp = /^\d+$/;
