@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.19.2
+
+### Patch Changes
+
+- 07107d5: Added a new trigger action to tooltip.
+- Updated dependencies [07107d5]
+  - @banana-ui/banana@1.19.2
+
 ## 1.19.1
 
 ### Patch Changes

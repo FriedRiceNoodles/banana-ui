@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.19.2
+
+### Patch Changes
+
+- 07107d5: Added a new trigger action to tooltip.
+
 ## 1.19.1
 
 ### Patch Changes
