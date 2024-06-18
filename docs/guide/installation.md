@@ -7,28 +7,35 @@ order: 2
 
 ## 原生环境和非 React 框架
 
-NPM 安装：
+### NPM 安装：
 
 ```bash
 npm i @banana-ui/banana
 ```
 
-CDN 引入：
+### CDN 引入：
 
 ```html
 /* UMD Namespace: Banana */
 <script src="https://cdn.jsdelivr.net/npm/@banana-ui/banana/umd/index.js"></script>
 ```
 
+or
+
+```html
+<!-- 按需引入 -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@banana-ui/banana/dist/banana-autoloader.js"></script>
+```
+
 ## React
 
-NPM 安装：
+### NPM 安装：
 
 ```bash
 npm i @banana-ui/react
 ```
 
-CDN 引入：
+### CDN 引入：
 
 ```html
 /* UMD Namespace: BananaReact */
