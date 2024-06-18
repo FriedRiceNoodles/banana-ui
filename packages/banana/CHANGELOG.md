@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.19.3
+
+### Patch Changes
+
+- 4fedae7: Fix a bug that make empty content shown when the trigger action is none.
+
 ## 1.19.2
 
 ### Patch Changes
