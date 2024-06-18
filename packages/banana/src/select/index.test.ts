@@ -375,7 +375,7 @@ describe('b-select', () => {
       element.open = true;
       const clearIcon = element.shadowRoot?.querySelector('.clear-icon-container');
       // mouse event
-      clearIcon.dispatchEvent(new MouseEvent('click'));
+      clearIcon?.dispatchEvent(new MouseEvent('click'));
       expect(element.value).to.equal('');
       // should close the listbox.
       expect(element.open).to.equal(false);
@@ -390,7 +390,7 @@ describe('b-select', () => {
       `);
       multipleElement.open = true;
       const multipleClearIcon = multipleElement.shadowRoot?.querySelector('.clear-icon-container');
-      multipleClearIcon.dispatchEvent(new MouseEvent('click'));
+      multipleClearIcon?.dispatchEvent(new MouseEvent('click'));
       expect(multipleElement.value).to.deep.equal([]);
       // should close the listbox.
       expect(multipleElement.open).to.equal(false);
@@ -406,7 +406,7 @@ describe('b-select', () => {
       `);
       element.open = true;
       const clearIcon = element.shadowRoot?.querySelector('.clear-icon-container');
-      clearIcon.dispatchEvent(new MouseEvent('click'));
+      clearIcon?.dispatchEvent(new MouseEvent('click'));
       expect(element.open).to.equal(true);
     });
   });
@@ -553,7 +553,7 @@ describe('b-select', () => {
       await element.updateComplete;
 
       const clearIcon = element.shadowRoot?.querySelector('.clear-icon-container');
-      clearIcon.dispatchEvent(new MouseEvent('click'));
+      clearIcon?.dispatchEvent(new MouseEvent('click'));
 
       await element.updateComplete;
 
