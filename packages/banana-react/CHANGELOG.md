@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.19.3
+
+### Patch Changes
+
+- 4fedae7: Fix a bug that make empty content shown when the trigger action is none.
+- Updated dependencies [4fedae7]
+  - @banana-ui/banana@1.19.3
+
 ## 1.19.2
 
 ### Patch Changes
