@@ -380,11 +380,13 @@ export default class BTooltip extends LitElement {
           @keydown=${this._onTriggerKeyDown}
         ></slot>
         <div
-          class="tooltip__content"
+          class=${classMap({
+            tooltip__content: true,
+            'tooltip__empty-content': (this.content.length || 0) === 0,
+          })}
           part="drop"
           @mouseenter=${this._onContentMouseEnter}
           @mouseleave=${this._onContentMouseLeave}
-          ?hidden=${(this.content?.length || 0) === 0}
         >
           <slot name="content">
             <div part="content" class="tooltip__content-body">${this.content}</div>
