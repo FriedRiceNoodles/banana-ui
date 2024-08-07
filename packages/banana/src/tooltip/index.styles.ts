@@ -22,6 +22,10 @@ export default [
       z-index: 100;
     }
 
+    .tooltip__empty-content {
+      display: none;
+    }
+
     .tooltip__content-body {
       padding: var(--banana-tooltip-padding, ${unsafeCSS(Var.TooltipPadding)});
       background-color: var(--banana-tooltip-background-color, ${unsafeCSS(Var.TooltipBackgroundColor)});

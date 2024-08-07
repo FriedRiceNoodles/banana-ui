@@ -1,5 +1,48 @@
 # @banana/banana-react
 
+## 1.19.3
+
+### Patch Changes
+
+- 4fedae7: Fix a bug that make empty content shown when the trigger action is none.
+- Updated dependencies [4fedae7]
+  - @banana-ui/banana@1.19.3
+
+## 1.19.2
+
+### Patch Changes
+
+- 07107d5: Added a new trigger action to tooltip.
+- Updated dependencies [07107d5]
+  - @banana-ui/banana@1.19.2
+
+## 1.19.1
+
+### Patch Changes
+
+- 94c54f0: Make autoloader covers b-message
+- Updated dependencies [94c54f0]
+  - @banana-ui/banana@1.19.1
+
+## 1.19.0
+
+### Minor Changes
+
+- 4bb6fbb: Autoloader for banana.
+
+### Patch Changes
+
+- Updated dependencies [4bb6fbb]
+  - @banana-ui/banana@1.19.0
+
+## 1.18.3
+
+### Patch Changes
+
+- 6800fbf: slide item's gap use margin to complete
+- Updated dependencies [6800fbf]
+  - @banana-ui/banana@1.18.3
+
 ## 1.18.2
 
 ### Patch Changes

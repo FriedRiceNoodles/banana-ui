@@ -492,6 +492,19 @@ export default class BCarousel extends LitElement {
     this.requestUpdate();
     await this.updateComplete;
     this.calcHeight();
+    this._calcLastSlideGap();
+  }
+
+  private _calcLastSlideGap() {
+    if (this._loop) {
+      this.vertical
+        ? (this._slidesWithCopys[this._slidesWithCopys.length - 1].style.marginBottom = '0px')
+        : (this._slidesWithCopys[this._slidesWithCopys.length - 1].style.marginRight = '0px');
+    } else {
+      this.vertical
+        ? (this._slides[this._slides.length - 1].style.marginBottom = '0px')
+        : (this._slides[this._slides.length - 1].style.marginRight = '0px');
+    }
   }
 
   render() {

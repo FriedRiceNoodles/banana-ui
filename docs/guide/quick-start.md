@@ -21,7 +21,15 @@ order: 1
 ### CDN
 
 ```html
+<!-- 全量引入 -->
 <script src="https://cdn.jsdelivr.net/npm/@banana-ui/banana/umd/index.js"></script>
+```
+
+or
+
+```html
+<!-- 按需引入 -->
+<script type="module" src="https://cdn.jsdelivr.net/npm/@banana-ui/banana/dist/banana-autoloader.js"></script>
 ```
 
 ### NPM 安装

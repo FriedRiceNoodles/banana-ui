@@ -1,5 +1,35 @@
 # banana-ui
 
+## 1.19.3
+
+### Patch Changes
+
+- 4fedae7: Fix a bug that make empty content shown when the trigger action is none.
+
+## 1.19.2
+
+### Patch Changes
+
+- 07107d5: Added a new trigger action to tooltip.
+
+## 1.19.1
+
+### Patch Changes
+
+- 94c54f0: Make autoloader covers b-message
+
+## 1.19.0
+
+### Minor Changes
+
+- 4bb6fbb: Autoloader for banana.
+
+## 1.18.3
+
+### Patch Changes
+
+- 6800fbf: slide item's gap use margin to complete
+
 ## 1.18.2
 
 ### Patch Changes
