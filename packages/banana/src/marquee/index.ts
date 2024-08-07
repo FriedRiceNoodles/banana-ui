@@ -1,5 +1,5 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query } from 'lit/decorators.js';
+import { customElement, property, query, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './index.styles';
 
@@ -16,7 +16,6 @@ export default class BMarquee extends LitElement {
     super.disconnectedCallback();
     // 停止观察元素的尺寸变化
     this._marquee && this.resizeObserver?.unobserve(this._marquee);
-    this._mainContent && this.resizeObserver?.unobserve(this._mainContent);
   }
 
   @property()
@@ -32,47 +31,44 @@ export default class BMarquee extends LitElement {
   @property({ type: Boolean, attribute: 'pause-when-hover' })
   pauseWhenHover = false;
 
-  @property({ type: Boolean })
+  @property({ type: Boolean, reflect: true })
   fixed = false;
 
-  private _animationPlayState: 'running' | 'paused' = 'running';
+  // 判断是否是 normal还是fixed (fixed为true时，才生效)
+  @state()
+  _isNormal = true;
 
   @query('.marquee')
   _marquee: HTMLDivElement | undefined;
 
-  @query('#main-content')
-  _mainContent: HTMLDivElement | undefined;
+  @query('.content')
+  _content: HTMLDivElement | undefined;
 
   firstUpdated() {
+    this._setBananaMarqueeWidth();
+
     // 观察元素的尺寸变化
-    if (this._marquee && this._mainContent && this.fixed) {
+    if (this._marquee) {
       this.resizeObserver = new ResizeObserver(() => this._calculateWidth());
 
       this.resizeObserver?.observe(this._marquee);
-      this.resizeObserver?.observe(this._mainContent);
     }
   }
 
   private _calculateWidth() {
-    if (this._marquee && this._mainContent && this.fixed) {
-      const marqueeWidth = this._marquee.getBoundingClientRect().width;
-      const contentWidth = this._mainContent.getBoundingClientRect().width;
+    // marquee的宽度变化了 重新设置marquee的宽度
+    this._setBananaMarqueeWidth();
 
-      if (contentWidth > marqueeWidth) {
-        this._animationPlayState = 'running';
-        this._setStyleFixed();
-      } else {
-        if (this._animationPlayState === 'running') {
-          // 暂停的时候等上一次的动画是否结束 结束后才暂停 这样比较友好
-          this._animationPlayState = 'paused';
-          this._mainContent.addEventListener('animationiteration', this._setStyleFixed.bind(this), { once: true });
-        }
-      }
+    if (this._marquee && this._content && this.fixed) {
+      const marqueeWidth = this._marquee.getBoundingClientRect().width;
+      const contentWidth = this._content.getBoundingClientRect().width;
+
+      this._isNormal = contentWidth > marqueeWidth;
     }
   }
 
-  private _setStyleFixed() {
-    this.style.setProperty('--banana-marquee-fixed', this._animationPlayState);
+  private _setBananaMarqueeWidth() {
+    this.style.setProperty('--banana-marquee-width', `${this._marquee!.getBoundingClientRect().width}px`);
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
@@ -85,25 +81,23 @@ export default class BMarquee extends LitElement {
       const duration = this.duration;
       this.style.setProperty('--banana-marquee-duration', `${duration}s`);
     }
-
-    if (_changedProperties.has('fixed')) {
-      const fixed = this.fixed;
-      this._animationPlayState = fixed ? 'paused' : 'running';
-      this._setStyleFixed();
-    }
   }
 
   render() {
+    const marqueeClass = classMap({
+      marquee: true,
+      'marquee--pause-when-hover': this.pauseWhenHover,
+    });
+
+    const contentClass = classMap({
+      content: true,
+      'content-normal': this._isNormal,
+      'content-fixed': !this._isNormal,
+    });
+
     return html`
-      <div
-        part="base"
-        class=${classMap({
-          marquee: true,
-          'marquee--pause-when-hover': this.pauseWhenHover,
-        })}
-      >
-        <div id="main-content" part="content" class="content">${this.content}</div>
-        <div part="content" class="content">${this.content}</div>
+      <div part="base" class=${marqueeClass}>
+        <div part="content" class=${contentClass}>${this.content}</div>
       </div>
     `;
   }

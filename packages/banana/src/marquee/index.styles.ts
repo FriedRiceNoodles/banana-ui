@@ -21,14 +21,21 @@ export default [
       align-items: center;
     }
 
-    .content {
+    .content-normal {
       overflow: hidden;
       display: inline-block;
       flex: 0 0 auto;
       white-space: nowrap;
       animation: marquee var(--banana-marquee-duration) linear infinite;
-      min-width: 100%;
-      animation-play-state: var(--banana-marquee-fixed);
+      transform: translateX(var(--banana-marquee-width, 100%));
+    }
+
+    .content-fixed {
+      overflow: hidden;
+      display: inline-block;
+      flex: 0 0 auto;
+      white-space: nowrap;
+      transform: translateX(0);
     }
 
     @media (any-hover: hover) {
@@ -39,7 +46,7 @@ export default [
 
     @keyframes marquee {
       0% {
-        transform: translateX(0);
+        transform: translateX(var(--banana-marquee-width, 100%));
       }
 
       100% {
