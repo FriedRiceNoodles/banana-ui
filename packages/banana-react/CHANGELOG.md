@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.19.4
+
+### Patch Changes
+
+- e738a5e: Added fixed parameter for marquee
+- Updated dependencies [e738a5e]
+  - @banana-ui/banana@1.19.4
+
 ## 1.19.3
 
 ### Patch Changes
