@@ -19,17 +19,17 @@ demo:
 <code src="./demos/duration.tsx"></code>
 <code src="./demos/pauseWhenHover.tsx"></code>
 <code src="./demos/customStyle.tsx"></code>
-<code src="./demos/fixedUsage.tsx"></code>
+<code src="./demos/fixed.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
-| 属性                                     | 说明                | 类型      | 默认值 |
-| ---------------------------------------- | ------------------- | --------- | ------ |
-| content                                  | 跑马灯的文本内容    | `string`  | ''     |
-| color                                    | 跑马灯的文本颜色    | `string`  | ''     |
-| duration                                 | 滚动时长（单位：s） | `number`  | 20     |
-| pauseWhenHover <br /> (pause-when-hover) | 鼠标悬停时是否暂停  | `boolean` | false  |
-| fixed                                    | 短文案固定          | `boolean` | false  |
+| 属性                                     | 说明                                                                        | 类型      | 默认值 |
+| ---------------------------------------- | --------------------------------------------------------------------------- | --------- | ------ |
+| content                                  | 跑马灯的文本内容                                                            | `string`  | ''     |
+| color                                    | 跑马灯的文本颜色                                                            | `string`  | ''     |
+| duration                                 | 滚动时长（单位：s）                                                         | `number`  | 20     |
+| pauseWhenHover <br /> (pause-when-hover) | 鼠标悬停时是否暂停                                                          | `boolean` | false  |
+| fixed                                    | 短文案固定，传入 `fixed` 属性后，如果文案宽度小于容器宽度，则文案不会滚动。 | `boolean` | false  |
 
 ## CSS Parts
 

@@ -1,5 +1,5 @@
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
-import { customElement, property, query, state } from 'lit/decorators.js';
+import { customElement, property, query } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
 import styles from './index.styles';
 
@@ -14,7 +14,6 @@ export default class BMarquee extends LitElement {
 
   disconnectedCallback() {
     super.disconnectedCallback();
-    // 停止观察元素的尺寸变化
     this._marquee && this.resizeObserver?.unobserve(this._marquee);
   }
 
@@ -34,10 +33,6 @@ export default class BMarquee extends LitElement {
   @property({ type: Boolean, reflect: true })
   fixed = false;
 
-  // 判断是否是 normal还是fixed (fixed为true时，才生效)
-  @state()
-  _isNormal = true;
-
   @query('.marquee')
   _marquee: HTMLDivElement | undefined;
 
@@ -47,28 +42,19 @@ export default class BMarquee extends LitElement {
   firstUpdated() {
     this._setBananaMarqueeWidth();
 
-    // 观察元素的尺寸变化
     if (this._marquee) {
-      this.resizeObserver = new ResizeObserver(() => this._calculateWidth());
+      this.resizeObserver = new ResizeObserver(() => this._setBananaMarqueeWidth());
 
       this.resizeObserver?.observe(this._marquee);
     }
   }
 
-  private _calculateWidth() {
-    // marquee的宽度变化了 重新设置marquee的宽度
-    this._setBananaMarqueeWidth();
-
-    if (this._marquee && this._content && this.fixed) {
-      const marqueeWidth = this._marquee.getBoundingClientRect().width;
-      const contentWidth = this._content.getBoundingClientRect().width;
-
-      this._isNormal = contentWidth > marqueeWidth;
-    }
-  }
-
   private _setBananaMarqueeWidth() {
-    this.style.setProperty('--banana-marquee-width', `${this._marquee!.getBoundingClientRect().width}px`);
+    if (!this._marquee) return;
+    // Width of the marquee element(not the content)
+    // This is used to calculate the animation transform
+    this.style.setProperty('--banana-marquee-width', `${this._marquee.getBoundingClientRect().width}px`);
+    this.requestUpdate();
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
@@ -84,6 +70,10 @@ export default class BMarquee extends LitElement {
   }
 
   render() {
+    const marqueeWidth = this._marquee?.getBoundingClientRect().width ?? 0;
+    const contentWidth = this._content?.getBoundingClientRect().width ?? 0;
+    const shouldBeFixed = !!(this._marquee && this._content && contentWidth < marqueeWidth && this.fixed);
+
     const marqueeClass = classMap({
       marquee: true,
       'marquee--pause-when-hover': this.pauseWhenHover,
@@ -91,8 +81,8 @@ export default class BMarquee extends LitElement {
 
     const contentClass = classMap({
       content: true,
-      'content-normal': this._isNormal,
-      'content-fixed': !this._isNormal,
+      'content-normal': !shouldBeFixed,
+      'content-fixed': shouldBeFixed,
     });
 
     return html`
