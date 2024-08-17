@@ -1,6 +1,6 @@
 # banana-ui
 
-## 1.19.4
+## 1.19.5
 
 ### Patch Changes
 
