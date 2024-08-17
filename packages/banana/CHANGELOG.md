@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.19.4
+
+### Patch Changes
+
+- add fixed for marquee
+
 ## 1.19.3
 
 ### Patch Changes

@@ -1,5 +1,12 @@
 # @banana/banana-react
 
+## 1.19.4
+
+### Patch Changes
+
+- Updated dependencies
+  - @banana-ui/banana@1.19.4
+
 ## 1.19.3
 
 ### Patch Changes

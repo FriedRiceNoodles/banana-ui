@@ -104,4 +104,42 @@ describe('b-marquee', () => {
       expect(animationPlayState3).to.equal('running');
     });
   });
+
+  describe('custom fixed', () => {
+    it('pauses animation when content width is less than marquee width', async () => {
+      const element = await fixture<BMarquee>(html`<b-marquee fixed content="short content"></b-marquee>`);
+
+      // Simulate content width being less than marquee width
+      element._marquee!.getBoundingClientRect = () => ({ width: 100 } as DOMRect);
+      element._content!.getBoundingClientRect = () => ({ width: 50 } as DOMRect);
+
+      // 强制调用私有方法
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      (element as any)?.firstUpdated();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      (element as any)?._calculateWidth();
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect((element as any)._isNormal).to.equal(false);
+      expect(element.style.getPropertyValue('--banana-marquee-width')).to.equal('100px');
+    });
+
+    it('resumes animation when content width is greater than marquee width', async () => {
+      const element = await fixture<BMarquee>(html`<b-marquee fixed content="a very very long content"></b-marquee>`);
+
+      // Simulate content width being greater than marquee width
+      element._marquee!.getBoundingClientRect = () => ({ width: 100 } as DOMRect);
+      element._content!.getBoundingClientRect = () => ({ width: 200 } as DOMRect);
+
+      // 强制调用私有方法
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      (element as any)?.firstUpdated();
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      (element as any)?._calculateWidth();
+
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
+      expect((element as any)._isNormal).to.equal(true);
+      expect(element.style.getPropertyValue('--banana-marquee-width')).to.equal('100px');
+    });
+  });
 });
