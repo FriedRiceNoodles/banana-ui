@@ -52,7 +52,7 @@ describe('b-marquee', () => {
     });
   });
 
-  describe('custom pause-when-hover', () => {
+  describe('pause-when-hover', () => {
     it('when set to true', async () => {
       const text =
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec a diam lectus. Sed sit amet ipsum mauris.';
@@ -105,41 +105,37 @@ describe('b-marquee', () => {
     });
   });
 
-  describe('custom fixed', () => {
-    it('pauses animation when content width is less than marquee width', async () => {
-      const element = await fixture<BMarquee>(html`<b-marquee fixed content="short content"></b-marquee>`);
+  describe('the fixed parameter', () => {
+    it('content should be fixed when the content is shorter than the marquee', async () => {
+      const element = await fixture(html`
+        <div class="marquee-wrapper" style="width: 200px;">
+          <b-marquee fixed content="short content"></b-marquee>
+        </div>
+      `);
+      const marquee = element.querySelector('b-marquee') as BMarquee;
+      const content = marquee.shadowRoot?.querySelector('.content') as HTMLElement;
 
-      // Simulate content width being less than marquee width
-      element._marquee!.getBoundingClientRect = () => ({ width: 100 } as DOMRect);
-      element._content!.getBoundingClientRect = () => ({ width: 50 } as DOMRect);
+      // Check if the width of the marquee is greater than the content
+      expect(marquee.getBoundingClientRect().width).to.be.greaterThan(content.getBoundingClientRect().width);
 
-      // 强制调用私有方法
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      (element as any)?.firstUpdated();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      (element as any)?._calculateWidth();
-
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      expect((element as any)._isNormal).to.equal(false);
-      expect(element.style.getPropertyValue('--banana-marquee-width')).to.equal('100px');
+      // Check if the content is fixed
+      expect(content.classList.contains('content-fixed')).to.equal(true);
     });
 
-    it('resumes animation when content width is greater than marquee width', async () => {
-      const element = await fixture<BMarquee>(html`<b-marquee fixed content="a very very long content"></b-marquee>`);
+    it('content should not be fixed when the content is longer than the marquee even if the fixed parameter is true', async () => {
+      const element = await fixture(html`
+        <div class="marquee-wrapper" style="width: 10px;">
+          <b-marquee fixed content="long content long content long content long content long content"></b-marquee>
+        </div>
+      `);
+      const marquee = element.querySelector('b-marquee') as BMarquee;
+      const content = marquee.shadowRoot?.querySelector('.content') as HTMLElement;
 
-      // Simulate content width being greater than marquee width
-      element._marquee!.getBoundingClientRect = () => ({ width: 100 } as DOMRect);
-      element._content!.getBoundingClientRect = () => ({ width: 200 } as DOMRect);
+      // Check if the width of the marquee is less than the content
+      expect(marquee.getBoundingClientRect().width).to.be.lessThan(content.getBoundingClientRect().width);
 
-      // 强制调用私有方法
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      (element as any)?.firstUpdated();
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      (element as any)?._calculateWidth();
-
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-member-access
-      expect((element as any)._isNormal).to.equal(true);
-      expect(element.style.getPropertyValue('--banana-marquee-width')).to.equal('100px');
+      // Check if the content is not fixed
+      expect(content.classList.contains('content-fixed')).to.equal(false);
     });
   });
 });

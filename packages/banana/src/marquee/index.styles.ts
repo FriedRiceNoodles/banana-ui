@@ -15,26 +15,23 @@ export default [
     .marquee {
       overflow: hidden;
       background-color: var(--banana-marquee-background-color);
-
       display: flex;
       flex-direction: row;
       align-items: center;
     }
 
-    .content-normal {
+    .content {
       overflow: hidden;
       display: inline-block;
       flex: 0 0 auto;
       white-space: nowrap;
+    }
+
+    .content-normal {
       animation: marquee var(--banana-marquee-duration) linear infinite;
-      transform: translateX(var(--banana-marquee-width, 100%));
     }
 
     .content-fixed {
-      overflow: hidden;
-      display: inline-block;
-      flex: 0 0 auto;
-      white-space: nowrap;
       transform: translateX(0);
     }
 
@@ -46,7 +43,7 @@ export default [
 
     @keyframes marquee {
       0% {
-        transform: translateX(var(--banana-marquee-width, 100%));
+        transform: translateX(var(--banana-marquee-width));
       }
 
       100% {
