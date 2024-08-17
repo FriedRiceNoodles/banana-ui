@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.19.5
+
+### Patch Changes
+
+- e738a5e: Added fixed parameter for marquee
+
 ## 1.19.3
 
 ### Patch Changes
