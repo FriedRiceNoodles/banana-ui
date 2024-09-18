@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.20.0
+
+### Minor Changes
+
+- f88a2b9: Upgrade to lit3
+
+### Patch Changes
+
+- Updated dependencies [f88a2b9]
+  - @banana-ui/banana@1.20.0
+
 ## 1.19.5
 
 ### Patch Changes
