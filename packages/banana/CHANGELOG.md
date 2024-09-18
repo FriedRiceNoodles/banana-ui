@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.20.0
+
+### Minor Changes
+
+- f88a2b9: Upgrade to lit3
+
 ## 1.19.5
 
 ### Patch Changes
