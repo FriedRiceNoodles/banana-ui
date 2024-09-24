@@ -17,7 +17,7 @@ jobs:
       # 安装 pnpm
       - uses: pnpm/action-setup@v2
         with:
-          version: 8.7.0
+          version: 9.3.0
       # 安装依赖
       - name: Install dependencies
         run: pnpm install
