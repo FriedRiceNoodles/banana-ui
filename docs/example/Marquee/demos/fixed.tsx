@@ -5,7 +5,7 @@
 
 import { Marquee } from '@banana-ui/react';
 
-export default function BasicUsage() {
+export default function Fixed() {
   const content = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.';
 
   return <Marquee fixed content={content} />;

@@ -6,7 +6,7 @@ export default [
   componentStyles,
   css`
     :host {
-      line-height: var(--banana-marquee-line-height, ${unsafeCSS(Var.LineHeightDense)});
+      line-height: var(--banana-marquee-line-height, ${unsafeCSS(Var.LineHeightDenser)});
       color: var(--banana-marquee-color);
       font-size: var(--banana-marquee-font-size);
       overflow: hidden;
@@ -21,18 +21,26 @@ export default [
     }
 
     .content {
-      overflow: hidden;
       display: inline-block;
-      flex: 0 0 auto;
+      flex-shrink: 0;
       white-space: nowrap;
+      height: var(
+        --banana-marquee-height,
+        calc(var(--banana-marquee-line-height, ${unsafeCSS(Var.LineHeightDenser)}) * 1em)
+      );
     }
 
-    .content-normal {
-      animation: marquee var(--banana-marquee-duration) linear infinite;
+    .content:not(.content-fixed) {
+      animation: marquee-horizontal var(--banana-marquee-duration) linear infinite;
     }
 
-    .content-fixed {
-      transform: translateX(0);
+    .content-vertical:not(.content-fixed) {
+      animation: marquee-vertical var(--banana-marquee-duration) linear infinite;
+    }
+
+    .content-vertical {
+      flex-shrink: unset;
+      white-space: normal;
     }
 
     @media (any-hover: hover) {
@@ -41,13 +49,23 @@ export default [
       }
     }
 
-    @keyframes marquee {
+    @keyframes marquee-horizontal {
       0% {
         transform: translateX(var(--banana-marquee-width));
       }
 
       100% {
         transform: translateX(-100%);
+      }
+    }
+
+    @keyframes marquee-vertical {
+      0% {
+        transform: translateY(var(--banana-marquee-height));
+      }
+
+      100% {
+        transform: translateY(-100%);
       }
     }
   `,

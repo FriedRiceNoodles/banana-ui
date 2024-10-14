@@ -20,6 +20,8 @@ describe('b-marquee', () => {
     expect(element.color).to.equal(undefined);
     expect(element.duration).to.equal(20);
     expect(element.pauseWhenHover).to.equal(false);
+    expect(element.fixed).to.equal(false);
+    expect(element.vertical).to.equal(false);
   });
 
   describe('custom content', () => {
