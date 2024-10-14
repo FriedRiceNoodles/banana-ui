@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.20.1
+
+### Patch Changes
+
+- be364d7: Added vertical parameter to marquee.
+
 ## 1.20.0
 
 ### Minor Changes
