@@ -20,6 +20,7 @@ demo:
 <code src="./demos/pauseWhenHover.tsx"></code>
 <code src="./demos/customStyle.tsx"></code>
 <code src="./demos/fixed.tsx"></code>
+<code src="./demos/vertical.tsx"></code>
 
 ## 属性 - Attributes & Properties
 
@@ -30,6 +31,7 @@ demo:
 | duration                                 | 滚动时长（单位：s）                                                         | `number`  | 20     |
 | pauseWhenHover <br /> (pause-when-hover) | 鼠标悬停时是否暂停                                                          | `boolean` | false  |
 | fixed                                    | 短文案固定，传入 `fixed` 属性后，如果文案宽度小于容器宽度，则文案不会滚动。 | `boolean` | false  |
+| vertical                                 | 垂直滚动                                                                    | `boolean` | false  |
 
 ## CSS Parts
 
@@ -40,9 +42,10 @@ demo:
 
 ## 样式变量
 
-| 变量                              | 说明             | 默认值 |
-| --------------------------------- | ---------------- | ------ |
-| --banana-marquee-color            | 跑马灯的文本颜色 | -      |
-| --banana-marquee-font-size        | 跑马灯的字体大小 | -      |
-| --banana-marquee-line-height      | 跑马灯的文字行高 | '1.4'  |
-| --banana-marquee-background-color | 跑马灯的背景色   | -      |
+| 变量                              | 说明             | 默认值                                          |
+| --------------------------------- | ---------------- | ----------------------------------------------- |
+| --banana-marquee-color            | 跑马灯的文本颜色 | -                                               |
+| --banana-marquee-font-size        | 跑马灯的字体大小 | -                                               |
+| --banana-marquee-line-height      | 跑马灯的文字行高 | '1'                                             |
+| --banana-marquee-background-color | 跑马灯的背景色   | -                                               |
+| --banana-marquee-height           | 跑马灯的高度     | `calc(var(--banana-marquee-line-height) * 1em)` |

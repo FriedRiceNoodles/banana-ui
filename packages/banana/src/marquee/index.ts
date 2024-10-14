@@ -33,6 +33,9 @@ export default class BMarquee extends LitElement {
   @property({ type: Boolean, reflect: true })
   fixed = false;
 
+  @property({ type: Boolean, reflect: true })
+  vertical = false;
+
   @query('.marquee')
   _marquee: HTMLDivElement | undefined;
 
@@ -81,8 +84,8 @@ export default class BMarquee extends LitElement {
 
     const contentClass = classMap({
       content: true,
-      'content-normal': !shouldBeFixed,
       'content-fixed': shouldBeFixed,
+      'content-vertical': this.vertical,
     });
 
     return html`
