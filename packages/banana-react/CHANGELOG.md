@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.20.1
+
+### Patch Changes
+
+- be364d7: Added vertical parameter to marquee.
+- Updated dependencies [be364d7]
+  - @banana-ui/banana@1.20.1
+
 ## 1.20.0
 
 ### Minor Changes
