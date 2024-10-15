@@ -95,6 +95,10 @@ export default defineConfig({
               link: 'example/progress',
               title: 'Progress 进度条',
             },
+            {
+              link: 'example/tabs',
+              title: 'Tabs 标签页',
+            },
           ],
         },
         {
