@@ -163,12 +163,15 @@ export default class BTabs extends LitElement {
         <div class="tab__container">
           <div class="tab__nav" part="nav">
             <slot name="left-extra-render"></slot>
-            <div part="nav-list" class="tab__nav-wrapper">
-              ${this.type === 'line'
-                ? html`<div part="active-tab-underlined" class="tabs__underlined"></div>`
-                : nothing}
-              <slot name="nav"></slot>
+            <div class="tab__nav-list">
+              <div part="nav-list" class="tab__nav-wrapper">
+                ${this.type === 'line'
+                  ? html`<div part="active-tab-underlined" class="tabs__underlined"></div>`
+                  : nothing}
+                <slot name="nav"></slot>
+              </div>
             </div>
+
             <slot name="right-extra-render"></slot>
           </div>
         </div>

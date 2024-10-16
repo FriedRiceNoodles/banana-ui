@@ -40,12 +40,6 @@ export default [
     .tab__nav {
       align-items: center;
       display: flex;
-      scrollbar-width: none;
-    }
-
-    .tab-pos--top .tab__nav,
-    .tab-pos--bottom .tab__nav {
-      overflow-x: auto;
     }
 
     .tab-pos--left .tab__nav,
@@ -53,20 +47,25 @@ export default [
       overflow-y: auto;
     }
 
-    .tab-pos--top:not(.tab-type--block) .tab__nav-wrapper {
+    .tab-pos--top:not(.tab-type--block) .tab__nav {
       border-bottom: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
-    .tab-pos--bottom:not(.tab-type--block) .tab__nav-wrapper {
+    .tab-pos--bottom:not(.tab-type--block) .tab__nav {
       border-top: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
-    .tab-pos--left:not(.tab-type--block) .tab__nav-wrapper {
+    .tab-pos--left:not(.tab-type--block) .tab__nav {
       border-right: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
-    .tab-pos--right:not(.tab-type--block) .tab__nav-wrapper {
+    .tab-pos--right:not(.tab-type--block) .tab__nav {
       border-left: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
+    }
+
+    .tab__nav-list {
+      overflow-x: auto;
+      scrollbar-width: none;
     }
 
     .tab__nav-wrapper {
@@ -92,7 +91,7 @@ export default [
     }
 
     .tab-pos--top div[part='active-tab-underlined'] {
-      bottom: calc(-1 * var(--banana-tab-nav-divider-size));
+      bottom: 0;
       height: var(--banana-tab-underlined-size);
     }
 
