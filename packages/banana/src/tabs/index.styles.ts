@@ -38,6 +38,7 @@ export default [
     }
 
     .tab__nav {
+      position: relative;
       align-items: center;
       display: flex;
     }
@@ -47,19 +48,35 @@ export default [
       overflow-y: auto;
     }
 
-    .tab-pos--top:not(.tab-type--block) .tab__nav {
+    .tab-pos--top:not(.tab-type--block) .tab__nav::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      width: 100%;
       border-bottom: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
-    .tab-pos--bottom:not(.tab-type--block) .tab__nav {
+    .tab-pos--bottom:not(.tab-type--block) .tab__nav::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      width: 100%;
       border-top: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
-    .tab-pos--left:not(.tab-type--block) .tab__nav {
+    .tab-pos--left:not(.tab-type--block) .tab__nav::before {
+      content: '';
+      position: absolute;
+      right: 0;
+      height: 100%;
       border-right: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
-    .tab-pos--right:not(.tab-type--block) .tab__nav {
+    .tab-pos--right:not(.tab-type--block) .tab__nav::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      height: 100%;
       border-left: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
@@ -96,17 +113,17 @@ export default [
     }
 
     .tab-pos--bottom div[part='active-tab-underlined'] {
-      top: calc(-1 * var(--banana-tab-nav-divider-size));
+      top: 0;
       height: var(--banana-tab-underlined-size);
     }
 
     .tab-pos--left div[part='active-tab-underlined'] {
-      right: calc(-1 * var(--banana-tab-nav-divider-size));
+      right: 0;
       width: var(--banana-tab-underlined-size);
     }
 
     .tab-pos--right div[part='active-tab-underlined'] {
-      left: calc(-1 * var(--banana-tab-nav-divider-size));
+      left: 0;
       width: var(--banana-tab-underlined-size);
     }
 
