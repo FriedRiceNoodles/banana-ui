@@ -7,6 +7,7 @@ export default [
   css`
     :host {
       line-height: ${unsafeCSS(Var.LineHeightDense)};
+      --banana-tab-height: auto;
       --banana-tab-nav-divider-color: rgba(${unsafeCSS(Colors.Gray1)});
       --banana-tab-nav-divider-size: 2px;
       --banana-tab-underlined-color: rgba(${unsafeCSS(Colors.Blue3)});
@@ -27,10 +28,12 @@ export default [
     }
 
     .tab-pos--left {
+      height: var(--banana-tab-height);
       flex-direction: row;
     }
 
     .tab-pos--right {
+      height: var(--banana-tab-height);
       flex-direction: row-reverse;
     }
     .tab__container {
@@ -45,7 +48,7 @@ export default [
 
     .tab-pos--left .tab__nav,
     .tab-pos--right .tab__nav {
-      overflow-y: auto;
+      height: 100%;
     }
 
     .tab-pos--top:not(.tab-type--block) .tab__nav::before {
@@ -80,9 +83,17 @@ export default [
       border-left: var(--banana-tab-nav-divider-size) solid var(--banana-tab-nav-divider-color);
     }
 
-    .tab__nav-list {
+    .tab-pos--top .tab__nav-list,
+    .tab-pos--bottom .tab__nav-list {
       overflow-x: auto;
       scrollbar-width: none;
+    }
+
+    .tab-pos--left .tab__nav-list,
+    .tab-pos--right .tab__nav-list {
+      overflow-y: auto;
+      scrollbar-width: none;
+      height: 100%;
     }
 
     .tab__nav-wrapper {
