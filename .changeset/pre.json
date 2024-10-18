@@ -1,0 +1,10 @@
+{
+  "mode": "pre",
+  "tag": "next",
+  "initialVersions": {
+    "@banana-ui/banana": "1.20.1",
+    "@banana/banana-cli": "0.2.0",
+    "@banana-ui/react": "1.20.1"
+  },
+  "changesets": ["gorgeous-queens-clean"]
+}

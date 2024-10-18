@@ -20,6 +20,9 @@ import BRating from './rating';
 import BSelect from './select';
 import BSelectOption from './select-option';
 import BStepper from './stepper';
+import BTabItem from './tab-item';
+import BTabPanel from './tab-panel';
+import BTabs from './tabs';
 import BTextarea from './textarea';
 import BTooltip from './tooltip';
 
@@ -46,6 +49,9 @@ export {
   BSelect,
   BSelectOption,
   BStepper,
+  BTabItem,
+  BTabPanel,
+  BTabs,
   BTextarea,
   BTooltip,
 };

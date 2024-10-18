@@ -1,5 +1,16 @@
 # @banana/banana-react
 
+## 1.21.0-next.0
+
+### Minor Changes
+
+- add new tab component
+
+### Patch Changes
+
+- Updated dependencies
+  - @banana-ui/banana@1.21.0-next.0
+
 ## 1.20.1
 
 ### Patch Changes

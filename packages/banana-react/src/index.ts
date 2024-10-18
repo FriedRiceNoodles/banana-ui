@@ -20,6 +20,9 @@ import { Rating } from './rating';
 import { Select } from './select';
 import { SelectOption } from './select-option';
 import { Stepper } from './stepper';
+import { TabItem } from './tab-item';
+import { TabPanel } from './tab-panel';
+import { Tabs } from './tabs';
 import { Textarea } from './textarea';
 import { Tooltip } from './tooltip';
 
@@ -46,6 +49,9 @@ export {
   Select,
   SelectOption,
   Stepper,
+  TabItem,
+  TabPanel,
+  Tabs,
   Textarea,
   Tooltip,
 };
