@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.21.0-next.0
+
+### Minor Changes
+
+- add new tab component
+
 ## 1.20.1
 
 ### Patch Changes
