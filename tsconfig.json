@@ -6,12 +6,13 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "useDefineForClassFields": false,
-    "jsx": "react",
+    "jsx": "react-jsx",
+    "module": "esnext",
     "moduleResolution": "node",
     "baseUrl": "./",
     "paths": {
       "@@/*": [".dumi/tmp/*"]
     }
   },
-  "include": [".dumi/**/*", ".dumirc.ts", "packages/**/*", "rollup.config.mjs", "docs/**/*"]
+  "include": [".dumirc.ts", "packages/**/*", "rollup.config.mjs", "docs/**/*"]
 }

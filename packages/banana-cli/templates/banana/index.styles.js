@@ -8,7 +8,7 @@ export default [
   componentStyles,
   css\`
     :host {
-      color: rgba(\${unsafeCSS(Colors.Red3)});
+      color: rgba(\${unsafeCSS(Colors.Red5)});
       line-height: \${unsafeCSS(Var.LineHeightDense)};
     }
   \`,

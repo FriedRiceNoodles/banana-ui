@@ -1,4 +1,4 @@
-import { Button, Popup } from '@banana/banana-react';
+import { Button, Popup } from '@banana-ui/react';
 import React, { useState } from 'react';
 
 export default function BasicUsage() {

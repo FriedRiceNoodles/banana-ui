@@ -2,8 +2,8 @@
  * title: 自定义间距
  */
 
+import { Divider } from '@banana-ui/react';
 import React from 'react';
-import { Divider } from '@banana/banana-react';
 
 export default function customSpacing() {
   const style = `
@@ -15,7 +15,7 @@ export default function customSpacing() {
     `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <p>
         你可以使用<code>spacing</code>参数自定义分割线的间距：
@@ -39,6 +39,6 @@ export default function customSpacing() {
       <div className="surrounding">上面的元素</div>
       <Divider style={{ '--banana-divider-spacing': '8px' } as React.CSSProperties} />
       <div className="surrounding">下面的元素</div>
-    </div>
+    </>
   );
 }

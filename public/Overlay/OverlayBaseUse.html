@@ -1,0 +1,15 @@
+<b-button>展开遮罩层</b-button>
+<b-overlay></b-overlay>
+
+<script>
+  const btn = document.querySelector('b-button');
+  const overlay = document.querySelector('b-overlay');
+
+  btn.addEventListener('click', () => {
+    overlay.open = true;
+  });
+
+  overlay.addEventListener('close', () => {
+    overlay.open = false;
+  });
+</script>

@@ -3,8 +3,7 @@
  * debug: true
  */
 
-import { Carousel } from '@banana/banana-react';
-import React from 'react';
+import { Carousel } from '@banana-ui/react';
 
 export default function CarouselDemo3() {
   const style = `

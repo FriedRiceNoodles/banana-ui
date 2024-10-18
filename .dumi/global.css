@@ -1,0 +1,17 @@
+.markdown ul > li {
+  margin-left: 20px;
+  padding-left: 4px;
+  list-style-type: circle;
+}
+
+.dumi-default-table-content td:first-child {
+  font-weight: 500;
+}
+
+.dumi-default-table-content th {
+  text-align: left;
+}
+
+.main-info-logo {
+  width: 400px;
+}

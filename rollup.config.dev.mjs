@@ -2,6 +2,7 @@ import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
+import runTSC from './scripts/rollup-plugin-copy-types.js'
 
 const componentNames = fs
   // 获取所有文件夹及文件
@@ -33,6 +34,7 @@ export default [
         extensions: ['.ts', '.js'],
       }),
       commonjs(),
+      runTSC(),
     ],
   },
 ];

@@ -12,16 +12,18 @@ const toCamelCase = require('../templates/toCamelCase.js');
 const prettierConfig = prettier.resolveConfig.sync(process.cwd());
 
 const createComponent = async () => {
-  const checkDirs = ['packages/banana/src', 'packages/banana-react/src', 'docs/example'];
+  const checkDirs = ['packages/banana/src', 'packages/banana-react/src', 'docs/example', 'public'];
 
   for (const dir of checkDirs) {
     if (!fs.existsSync(path.resolve(process.cwd(), dir))) {
-      console.error(`❌ Directory '${dir}' does not exist, please run the command in the root directory of the project.`);
+      console.error(
+        `❌ Directory '${dir}' does not exist, please run the command in the root directory of the project.`,
+      );
       process.exit(1);
     }
   }
 
-  const { name, dirs, chineseName, description } = await inquirer.prompt([
+  const { name, dirs, chineseName, description, formField } = await inquirer.prompt([
     {
       type: 'input',
       name: 'name',
@@ -53,6 +55,12 @@ const createComponent = async () => {
         return true;
       },
       message: 'Description of the component:',
+    },
+    {
+      type: 'confirm',
+      name: 'formField',
+      message: 'Is this a field of the form?',
+      default: false,
     },
     {
       type: 'checkbox',
@@ -92,7 +100,7 @@ const createComponent = async () => {
 
     fs.mkdirSync(path.resolve(process.cwd(), 'packages/banana/src', name));
 
-    const index = require('../templates/banana/index.js')(name);
+    const index = require('../templates/banana/index.js')(name, formField);
     const formatted = prettier.format(index, {
       ...prettierConfig,
       parser: 'typescript',
@@ -108,7 +116,7 @@ const createComponent = async () => {
     fs.writeFileSync(path.resolve(process.cwd(), 'packages/banana/src', name, 'index.styles.ts'), formattedStyles);
     console.log(`✅ Created 'packages/banana/src/${name}/index.styles.ts'`);
 
-    const test = require('../templates/banana/index.test.js')(name);
+    const test = require('../templates/banana/index.test.js')(name, formField);
     const formattedTest = prettier.format(test, {
       ...prettierConfig,
       parser: 'typescript',
@@ -119,7 +127,11 @@ const createComponent = async () => {
     const componentNames = fs
       .readdirSync(path.resolve(process.cwd(), 'packages/banana/src'), { withFileTypes: true })
       // filter out which is not a directory or does not have index.ts
-      .filter((dirent) => dirent.isDirectory() && fs.existsSync(path.resolve(process.cwd(), 'packages/banana/src', dirent.name, 'index.ts')))
+      .filter(
+        (dirent) =>
+          dirent.isDirectory() &&
+          fs.existsSync(path.resolve(process.cwd(), 'packages/banana/src', dirent.name, 'index.ts')),
+      )
       .map((dirent) => dirent.name);
 
     const bananaIndex = require('../templates/banana/banana-index.js')(componentNames);
@@ -132,7 +144,10 @@ const createComponent = async () => {
 
     // build after create
     console.log('🚀 Building...');
-    require('child_process').execSync('pnpm build', { stdio: 'inherit', cwd: path.resolve(process.cwd(), 'packages/banana') });
+    require('child_process').execSync('pnpm build', {
+      stdio: 'inherit',
+      cwd: path.resolve(process.cwd(), 'packages/banana'),
+    });
     console.log('✅ Build completed.');
 
     console.log('----------------------------------------');
@@ -148,7 +163,7 @@ const createComponent = async () => {
     fs.mkdirSync(path.resolve(process.cwd(), 'packages/banana-react/src', name));
 
     if (dirs.includes('banana')) {
-      const index = require('../templates/banana-react/index.js')(name);
+      const index = require('../templates/banana-react/index.js')(name, formField);
       const formatted = prettier.format(index, {
         ...prettierConfig,
         parser: 'typescript',
@@ -169,7 +184,11 @@ const createComponent = async () => {
     const componentNames = fs
       .readdirSync(path.resolve(process.cwd(), 'packages/banana-react/src'), { withFileTypes: true })
       // filter out which is not a directory or does not have index.ts
-      .filter((dirent) => dirent.isDirectory() && fs.existsSync(path.resolve(process.cwd(), 'packages/banana/src', dirent.name, 'index.ts')))
+      .filter(
+        (dirent) =>
+          dirent.isDirectory() &&
+          fs.existsSync(path.resolve(process.cwd(), 'packages/banana/src', dirent.name, 'index.ts')),
+      )
       .map((dirent) => dirent.name);
 
     const bananaReactIndex = require('../templates/banana-react/banana-react-index.js')(componentNames);
@@ -182,7 +201,10 @@ const createComponent = async () => {
 
     // build after create
     console.log('🚀 Building...');
-    require('child_process').execSync('pnpm build', { stdio: 'inherit', cwd: path.resolve(process.cwd(), 'packages/banana-react') });
+    require('child_process').execSync('pnpm build', {
+      stdio: 'inherit',
+      cwd: path.resolve(process.cwd(), 'packages/banana-react'),
+    });
     console.log('✅ Build completed.');
 
     console.log('----------------------------------------');
@@ -196,12 +218,16 @@ const createComponent = async () => {
 
   fs.mkdirSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name)));
   fs.mkdirSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'demos'));
+  fs.mkdirSync(path.resolve(process.cwd(), 'public', toCamelCase(name)));
   const basicUsage = require('../templates/docs/basicUsage.js')(name);
   const formattedBasicUsage = prettier.format(basicUsage, {
     ...prettierConfig,
     parser: 'typescript',
   });
-  fs.writeFileSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'demos', 'basicUsage.tsx'), formattedBasicUsage);
+  fs.writeFileSync(
+    path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'demos', 'basicUsage.tsx'),
+    formattedBasicUsage,
+  );
   console.log(`✅ Created 'docs/example/${toCamelCase(name)}/basicUsage.tsx'`);
 
   const index = require('../templates/docs/index.js')(name, chineseName, description);
@@ -211,6 +237,18 @@ const createComponent = async () => {
   });
   fs.writeFileSync(path.resolve(process.cwd(), 'docs/example', toCamelCase(name), 'index.md'), formattedIndex);
   console.log(`✅ Created 'docs/example/${toCamelCase(name)}/index.md'`);
+
+  const htmlSourceCode = require('../templates/docs/htmlSource.js')(name);
+  const formattedHtmlSourceCode = prettier.format(htmlSourceCode, {
+    ...prettierConfig,
+    parser: 'html',
+  });
+  fs.writeFileSync(
+    path.resolve(process.cwd(), `public`, toCamelCase(name), 'basicUsage.html'),
+    formattedHtmlSourceCode,
+  );
+
+  console.log(`✅ Created 'public/${toCamelCase(name)}/basicUsage.html`);
 
   console.log('----------------------------------------');
   console.log('📝 Docs created successfully.');

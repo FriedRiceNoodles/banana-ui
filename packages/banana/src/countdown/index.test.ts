@@ -1,6 +1,6 @@
 import { aTimeout, expect, fixture, html } from '@open-wc/testing';
-import BCountdown from '.';
 import sinon from 'sinon';
+import BCountdown from '.';
 
 describe('b-countdown', () => {
   it('accessibility tests', async () => {
@@ -66,9 +66,17 @@ describe('b-countdown', () => {
       // A new element with a long time and a long format
       // 6Years 6Months 6Days 6Hours 6Minutes 6Seconds 666Milliseconds
       const longTime =
-        6 * 365 * 24 * 60 * 60 * 1000 + 6 * 30 * 24 * 60 * 60 * 1000 + 6 * 24 * 60 * 60 * 1000 + 6 * 60 * 60 * 1000 + 6 * 60 * 1000 + 6 * 1000 + 666;
+        6 * 365 * 24 * 60 * 60 * 1000 +
+        6 * 30 * 24 * 60 * 60 * 1000 +
+        6 * 24 * 60 * 60 * 1000 +
+        6 * 60 * 60 * 1000 +
+        6 * 60 * 1000 +
+        6 * 1000 +
+        666;
       const longFormat = 'YY:MM:DD:HH:mm:ss.SSS';
-      const longElement = await fixture<BCountdown>(html`<b-countdown time="${longTime}" format="${longFormat}"></b-countdown>`);
+      const longElement = await fixture<BCountdown>(
+        html`<b-countdown time="${longTime}" format="${longFormat}"></b-countdown>`,
+      );
       expect(longElement).shadowDom.to.equal(`
         <span class="countdown countdown--default" part="base">06:06:06:06:06:06.666</span>
       `);
@@ -79,7 +87,9 @@ describe('b-countdown', () => {
       // To escape characters, wrap them in square brackets (e.g. [MM]).
       // See https://day.js.org/docs/en/display/format
       const escapeFormat = 'HH:mm:ss.SSS [MM]';
-      const escapeElement = await fixture<BCountdown>(html`<b-countdown time="1000" format="${escapeFormat}"></b-countdown>`);
+      const escapeElement = await fixture<BCountdown>(
+        html`<b-countdown time="1000" format="${escapeFormat}"></b-countdown>`,
+      );
       expect(escapeElement).shadowDom.to.equal(`
         <span class="countdown countdown--default" part="base">00:00:01.000 MM</span>
       `);
@@ -109,9 +119,9 @@ describe('b-countdown', () => {
       // Should not have separator when there is no slot, but should have a hidden and empty separator slot
       expect(element).shadowDom.to.equal(`
         <span class="countdown countdown--separate" part="base">
-          <span class="countdown__item" part="separate-item">00</span>
-          <span class="countdown__item" part="separate-item">00</span>
-          <span class="countdown__item" part="separate-item">02</span>
+          <span class="countdown__item" part="separate-item separate-item-0">00</span>
+          <span class="countdown__item" part="separate-item separate-item-1">00</span>
+          <span class="countdown__item" part="separate-item separate-item-2">02</span>
         </span>
         <slot hidden name="separator" class="countdown__separator"></slot>
       `);
@@ -130,15 +140,17 @@ describe('b-countdown', () => {
     });
 
     it('should render correctly when provided slot', async () => {
-      const element = await fixture<BCountdown>(html`<b-countdown time="2000" separate><span class="separator" slot="separator">:</span></b-countdown>`);
+      const element = await fixture<BCountdown>(
+        html`<b-countdown time="2000" separate><span class="separator" slot="separator">:</span></b-countdown>`,
+      );
       // Should have separator when there is a slot
       expect(element).shadowDom.to.equal(`
         <span class="countdown countdown--separate" part="base">
-          <span class="countdown__item" part="separate-item">00</span>
+          <span class="countdown__item" part="separate-item separate-item-0">00</span>
           <span class="separator" slot="separator" part="separator">:</span>
-          <span class="countdown__item" part="separate-item">00</span>
+          <span class="countdown__item" part="separate-item separate-item-1">00</span>
           <span class="separator" slot="separator" part="separator">:</span>
-          <span class="countdown__item" part="separate-item">02</span>
+          <span class="countdown__item" part="separate-item separate-item-2">02</span>
         </span>
         <slot hidden name="separator" class="countdown__separator"></slot>
       `);
@@ -166,7 +178,9 @@ describe('b-countdown', () => {
 
   it('css variables should work', async () => {
     const element = await fixture<BCountdown>(
-      html`<b-countdown style="--banana-countdown-font-size: 20px; --banana-countdown-font-weight: 600; --banana-countdown-color: #f00;"></b-countdown>`,
+      html`<b-countdown
+        style="--banana-countdown-font-size: 20px; --banana-countdown-font-weight: 600; --banana-countdown-color: #f00;"
+      ></b-countdown>`,
     );
     expect(getComputedStyle(element).fontSize).to.equal('20px');
     expect(getComputedStyle(element).fontWeight).to.equal('600');

@@ -6,6 +6,10 @@ demo:
 
 # Divider 分割线
 
+```
+<b-divider> | Divider
+```
+
 ## 介绍
 
 区隔内容的分割线。

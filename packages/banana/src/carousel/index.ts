@@ -1,3 +1,4 @@
+/* eslint-disable lit-a11y/click-events-have-key-events */
 import { CSSResultGroup, html, LitElement, PropertyValueMap } from 'lit';
 import { customElement, property, query, queryAssignedElements, state } from 'lit/decorators.js';
 import { classMap } from 'lit/directives/class-map.js';
@@ -45,7 +46,6 @@ export default class BCarousel extends LitElement {
 
   protected firstUpdated(): void {
     this._calcPosition();
-    this._calcHeight();
   }
 
   protected willUpdate(_changedProperties: PropertyValueMap<this>): void {
@@ -53,12 +53,16 @@ export default class BCarousel extends LitElement {
       this._resetAutoplayTimer();
     }
 
-    if (_changedProperties.has('currentIndex') || _changedProperties.has('gap') || _changedProperties.has('slidesPerView')) {
+    if (
+      _changedProperties.has('currentIndex') ||
+      _changedProperties.has('gap') ||
+      _changedProperties.has('slidesPerView')
+    ) {
       this._calcPosition();
     }
 
     if (_changedProperties.has('currentIndex') && this.autoHeight) {
-      this._calcHeight();
+      this.calcHeight();
     }
   }
 
@@ -81,24 +85,25 @@ export default class BCarousel extends LitElement {
   }
 
   // Do not use this property directly, use internal _slidesPerView instead.
-  @property({ type: Number, reflect: true })
+  @property({ type: Number, reflect: true, attribute: 'slides-per-view' })
   slidesPerView = 1;
 
   private get _slidesPerView() {
-    return this._slides.length >= this.slidesPerView || !this.fill ? this.slidesPerView : this._slides.length;
+    return this._slides.length >= this.slidesPerView || this.disableFill ? this.slidesPerView : this._slides.length;
   }
 
   @property({ type: Boolean, reflect: true })
   autoplay = false;
 
   // Unit: ms
-  @property({ type: Number })
+  @property({ type: Number, reflect: true, attribute: 'autoplay-delay' })
   autoplayDelay = 3000;
 
-  @property({ type: Boolean })
-  pauseOnMouseEnter = true;
+  // Caraousel will pause when mouse enter by default.
+  @property({ type: Boolean, reflect: true, attribute: 'no-pause-on-mouse-enter' })
+  noPauseOnMouseEnter = false;
 
-  @property({ type: Boolean, reflect: true })
+  @property({ type: Boolean, reflect: true, attribute: 'disable-drag' })
   disableDrag = false;
 
   @property({ type: Boolean, reflect: true })
@@ -107,12 +112,18 @@ export default class BCarousel extends LitElement {
   @property({ type: Number, reflect: true })
   gap = 0;
 
-  // If the `fill` property is set to true, then carousel will be filled when the slide count is less than the `slidesPerView` property.
-  @property({ type: Boolean, reflect: true })
-  fill = true;
+  // By default, carousel will be filled when the slide count is less than the `slidesPerView` property.
+  @property({ type: Boolean, reflect: true, attribute: 'disable-fill' })
+  disableFill = false;
+
+  @property({ type: Boolean, reflect: true, attribute: 'auto-height' })
+  autoHeight = false;
 
   @property({ type: Boolean, reflect: true })
-  autoHeight = false;
+  indicator = false;
+
+  @property({ type: Boolean })
+  vertical = false;
 
   @query('.external-wrapper')
   _externalWrapper: HTMLDivElement | undefined;
@@ -138,12 +149,16 @@ export default class BCarousel extends LitElement {
   @state()
   autoplayTimer: ReturnType<typeof setInterval> | undefined;
 
-  private get _externalWrapperWidth() {
-    return this._externalWrapper?.getBoundingClientRect().width || 0;
+  private get _externalWrapperSize() {
+    return (
+      (this.vertical
+        ? this._externalWrapper?.getBoundingClientRect().height
+        : this._externalWrapper?.getBoundingClientRect().width) ?? 0
+    );
   }
 
-  private get _slideWidth() {
-    return (this._externalWrapperWidth - (this._slidesPerView - 1) * this.gap) / this._slidesPerView;
+  private get _slideUnitSize() {
+    return (this._externalWrapperSize - (this._slidesPerView - 1) * this.gap) / this._slidesPerView;
   }
 
   private get MIN() {
@@ -154,8 +169,12 @@ export default class BCarousel extends LitElement {
     return this._slides.length - 1;
   }
 
-  private get totalWidth() {
-    return this._slideWidth * this._slides.length + this._slides.length * this.gap;
+  private get totalSlidesSizeWithGap() {
+    return this._slideUnitSize * this._slides.length + this._slides.length * this.gap;
+  }
+
+  private get coordinateDirection() {
+    return this.vertical ? 'y' : 'x';
   }
 
   // Record how many cycles have been made if `loop` is true.
@@ -258,12 +277,15 @@ export default class BCarousel extends LitElement {
     window.removeEventListener(EVENTS.TOUCHCANCEL, this._eventHandler);
   }
 
-  private _calcHeight() {
+  public calcHeight() {
     // _externalWrapper is not ready when the component is first rendered.
     if (!this.autoHeight || !this._externalWrapper) return;
 
     const currentSlide = this._slides[this.currentIndex];
+    if (!currentSlide) return;
+
     const currentSlideHeight = currentSlide.getBoundingClientRect().height;
+    if (currentSlideHeight === 0) return;
     this._externalWrapper.style.height = `${currentSlideHeight}px`;
   }
 
@@ -274,10 +296,12 @@ export default class BCarousel extends LitElement {
 
   private _repositioningSlides() {
     if (this._loop) {
-      const translateValue = this._loopCount * this.totalWidth;
+      const translateValue = this._loopCount * this.totalSlidesSizeWithGap;
 
       for (const slide of this._slides) {
-        slide.style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        slide.style.transform = this.vertical
+          ? `translate3d(0, ${translateValue}px, 0)`
+          : `translate3d(${translateValue}px, 0, 0)`;
       }
     }
   }
@@ -292,14 +316,18 @@ export default class BCarousel extends LitElement {
         }
       }
 
-      const slideWidthWithGap = this._slideWidth + this.gap;
-      const translateValue = this._loopCount * this.totalWidth - slideWidthWithGap * this._slidesPerView || 0;
-      const _translateValue = (this._loopCount - 1) * this.totalWidth - slideWidthWithGap * this._slidesPerView || 0;
+      const slideWidthWithGap = this._slideUnitSize + this.gap;
+      const translateValue =
+        this._loopCount * this.totalSlidesSizeWithGap - slideWidthWithGap * this._slidesPerView || 0;
+      const _translateValue =
+        (this._loopCount - 1) * this.totalSlidesSizeWithGap - slideWidthWithGap * this._slidesPerView || 0;
 
       // Those copys will append to the beginning of slides.
       const CopysAtTheBeginning = [];
       for (let i = 0; i < this._slidesPerView; i++) {
-        CopysAtTheBeginning.push(this._slides[this._slides.length - this._slidesPerView + i].cloneNode(true) as HTMLElement);
+        CopysAtTheBeginning.push(
+          this._slides[this._slides.length - this._slidesPerView + i].cloneNode(true) as HTMLElement,
+        );
       }
 
       // Those copys will append to the end of slides.
@@ -312,13 +340,17 @@ export default class BCarousel extends LitElement {
       for (let i = 0; i < this._slidesPerView; i++) {
         const copyAtTheBeginning = CopysAtTheBeginning[i];
         copyAtTheBeginning.setAttribute('data-clone', String(this._slides.length - this._slidesPerView + i));
-        copyAtTheBeginning.style.transform = `translate3d(${_translateValue}px, 0, 0)`;
+        copyAtTheBeginning.style.transform = this.vertical
+          ? `translate3d(0, ${_translateValue}px, 0)`
+          : `translate3d(${_translateValue}px, 0, 0)`;
         this.append(copyAtTheBeginning);
       }
       for (let i = 0; i < this._slidesPerView; i++) {
         const copyAtTheEnd = CopysAtTheEnd[i];
         copyAtTheEnd.setAttribute('data-clone', String(i));
-        copyAtTheEnd.style.transform = `translate3d(${translateValue}px, 0, 0)`;
+        copyAtTheEnd.style.transform = this.vertical
+          ? `translate3d(0, ${translateValue}px, 0)`
+          : `translate3d(${translateValue}px, 0, 0)`;
         this.append(copyAtTheEnd);
       }
     }
@@ -349,8 +381,11 @@ export default class BCarousel extends LitElement {
 
     // When start dragging, that _pointerStartX obviously won't be undefined.
     // Dragging can only occur after DragStart, and the _onDragStart function will set the _pointerStartX.
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    this._dragDistance = this._pointerCurrentX - this._pointerStartX!;
+    this._dragDistance = this.vertical
+      ? // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        this._pointerCurrentY - this._pointerStartY!
+      : // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+        this._pointerCurrentX - this._pointerStartX!;
   }
 
   private _onDragEnd(e: Event) {
@@ -367,33 +402,43 @@ export default class BCarousel extends LitElement {
 
     this._trackingCoordinates = [];
 
-    const diffX = lastTrackingCoordinate.x - firstTrackingCoordinate.x;
-    // const diffY = lastTrackingCoordinate.y - firstTrackingCoordinate.y;
+    const diffMoveDistance =
+      lastTrackingCoordinate[this.coordinateDirection] - firstTrackingCoordinate[this.coordinateDirection];
     const diffTime = lastTrackingCoordinate.time - firstTrackingCoordinate.time;
 
     this._dragDistance = 0;
 
-    const speedX = Math.abs(diffX / diffTime);
-    if (speedX >= this._minSpeedToMoveX) {
-      if (diffX < 0) {
+    const speed = Math.abs(diffMoveDistance / diffTime);
+
+    const isOverMinSpeed = this.vertical ? speed >= this._minSpeedToMoveY : speed >= this._minSpeedToMoveX;
+    if (isOverMinSpeed) {
+      if (diffMoveDistance < 0) {
         this.next();
       } else {
         this.prev();
       }
     } else {
       // Move if speed is not enough but dragging more than half.
-      const wrapperX = this._externalWrapper?.getBoundingClientRect().x || 0;
-      const distanceFromSlidesToWrapper = this._slides.map((item) => item.getBoundingClientRect().x - wrapperX);
+      const wrapperCoordinateOfDirection =
+        this._externalWrapper?.getBoundingClientRect()[this.coordinateDirection] || 0;
+      const distanceFromSlidesToWrapper = this._slides.map(
+        (item) => item.getBoundingClientRect()[this.coordinateDirection] - wrapperCoordinateOfDirection,
+      );
       const distanceOfCurrentSlidesToWrapper = distanceFromSlidesToWrapper[this.currentIndex];
 
-      if (distanceOfCurrentSlidesToWrapper < 0 && -distanceOfCurrentSlidesToWrapper > this._slideWidth / 2) {
+      if (distanceOfCurrentSlidesToWrapper < 0 && -distanceOfCurrentSlidesToWrapper > this._slideUnitSize / 2) {
         this.next();
-      } else if (distanceOfCurrentSlidesToWrapper > 0 && distanceOfCurrentSlidesToWrapper > this._slideWidth / 2) {
+      } else if (distanceOfCurrentSlidesToWrapper > 0 && distanceOfCurrentSlidesToWrapper > this._slideUnitSize / 2) {
         this.prev();
       }
     }
 
     this._removeEvents();
+  }
+
+  public goto(index: number) {
+    this._resetAutoplayTimer();
+    this.currentIndex = index;
   }
 
   public next() {
@@ -417,31 +462,56 @@ export default class BCarousel extends LitElement {
   }
 
   private _externalWrapperTranslate() {
-    const wholeWidth = this._slideWidth + this.gap;
+    const wholeDistance = this._slideUnitSize + this.gap;
 
     if (this._loop) {
-      const loopShift = -(this.totalWidth * this._loopCount);
-      return -this.currentIndex * wholeWidth + this._dragDistance + loopShift;
+      const loopShift = -(this.totalSlidesSizeWithGap * this._loopCount);
+      return this.vertical
+        ? [0, -this.currentIndex * wholeDistance + this._dragDistance + loopShift]
+        : [-this.currentIndex * wholeDistance + this._dragDistance + loopShift, 0];
     } else {
-      return -this.currentIndex * wholeWidth + this._dragDistance;
+      return this.vertical
+        ? [0, -this.currentIndex * wholeDistance + this._dragDistance]
+        : [-this.currentIndex * wholeDistance + this._dragDistance, 0];
     }
   }
 
   private _onWrapperMouseEnter() {
-    if (this.pauseOnMouseEnter) {
+    if (!this.noPauseOnMouseEnter) {
       this._clearAutoplayTimer();
     }
   }
 
   private _onWrapperMouseLeave() {
-    if (this.pauseOnMouseEnter) {
+    if (!this.noPauseOnMouseEnter) {
       this._setAutoplayTimer();
+    }
+  }
+
+  private async _handleSlotChange() {
+    this.requestUpdate();
+    await this.updateComplete;
+    this.calcHeight();
+    this._calcLastSlideGap();
+  }
+
+  private _calcLastSlideGap() {
+    if (this._loop) {
+      this.vertical
+        ? (this._slidesWithCopys[this._slidesWithCopys.length - 1].style.marginBottom = '0px')
+        : (this._slidesWithCopys[this._slidesWithCopys.length - 1].style.marginRight = '0px');
+    } else {
+      this.vertical
+        ? (this._slides[this._slides.length - 1].style.marginBottom = '0px')
+        : (this._slides[this._slides.length - 1].style.marginRight = '0px');
     }
   }
 
   render() {
     const previousNavigationDisabled = this._computePrev(this.currentIndex) === this.currentIndex;
     const nextNavigationDisabled = this._computeNext(this.currentIndex) === this.currentIndex;
+
+    const [translateX, translateY] = this._externalWrapperTranslate();
 
     return html`
       <div
@@ -450,28 +520,68 @@ export default class BCarousel extends LitElement {
           carousel: true,
         })}
       >
-        <div part="external-wrapper" class="external-wrapper" @mouseenter=${this._onWrapperMouseEnter} @mouseleave=${this._onWrapperMouseLeave}>
+        <div
+          part="external-wrapper"
+          class=${classMap({
+            'external-wrapper': true,
+            'external-wrapper--vertical': this.vertical,
+          })}
+          @mouseenter=${this._onWrapperMouseEnter}
+          @mouseleave=${this._onWrapperMouseLeave}
+        >
           <div
             part="slides-wrapper"
             @mousedown="${this._eventHandler}"
             @touchstart="${this._eventHandler}"
             class=${classMap({
               'slides-wrapper': true,
+              'slides-wrapper--normal': !this.vertical,
+              'slides-wrapper--vertical': this.vertical,
               'no-transition': this._isDragging,
             })}
-            style="transform: translate3d(${this._externalWrapperTranslate()}px, 0px, 0px); --banana-carousel-slidesPerView: ${this
+            style="transform: translate3d(${translateX}px, ${translateY}px, 0px); --banana-carousel-slidesPerView: ${this
               ._slidesPerView}; --banana-carousel-gap: ${this.gap}"
           >
-            <slot part="slide" @slotchange=${() => this.requestUpdate()}></slot>
+            <slot part="slide" @slotchange=${this._handleSlotChange}></slot>
           </div>
         </div>
 
+        <ul
+          part="indicators"
+          class=${classMap({
+            indicators: true,
+            'indicators--normal': !this.vertical,
+            'indicators--vertical': this.vertical,
+          })}
+          ?hidden=${!this.indicator}
+        >
+          ${this._slides.map(
+            (_, index) => html`
+              <li
+                part="indicator${index === this.currentIndex ? ' indicator--active' : ''}"
+                class=${classMap({
+                  indicator: true,
+                  active: index === this.currentIndex,
+                })}
+                @click=${() => {
+                  this.goto(index);
+                }}
+              ></li>
+            `,
+          )}
+        </ul>
+
         <button
           @click=${this.prev}
-          part="navigation-buttons navigation-button--previous ${previousNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
+          part="navigation-buttons navigation-button--previous ${previousNavigationDisabled
+            ? 'navigation-buttons--disabled'
+            : ''}"
           class=${classMap({
             'navigation-buttons': true,
-            'navigation-button--previous': true,
+            'navigation-button--normal': !this.vertical,
+            'navigation-button--previous__normal': !this.vertical,
+            'navigation-button--vertical': this.vertical,
+            'navigation-button--previous__vertical': this.vertical,
             'navigation-button--disabled': previousNavigationDisabled,
           })}
           ?hidden=${!this.navigation}
@@ -479,7 +589,16 @@ export default class BCarousel extends LitElement {
         >
           <slot name="prev-button">
             <div class="default-prev-icon">
-              <svg t="1685007670520" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="993" width="24" height="24">
+              <svg
+                t="1685007670520"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="993"
+                width="24"
+                height="24"
+              >
                 <path
                   d="M384 512L731.733333 202.666667c17.066667-14.933333 19.2-42.666667 4.266667-59.733334-14.933333-17.066667-42.666667-19.2-59.733333-4.266666l-384 341.333333c-10.666667 8.533333-14.933333 19.2-14.933334 32s4.266667 23.466667 14.933334 32l384 341.333333c8.533333 6.4 19.2 10.666667 27.733333 10.666667 12.8 0 23.466667-4.266667 32-14.933333 14.933333-17.066667 14.933333-44.8-4.266667-59.733334L384 512z"
                   fill="#333"
@@ -491,10 +610,15 @@ export default class BCarousel extends LitElement {
         </button>
         <button
           @click=${this.next}
-          part="navigation-buttons navigation-button--next ${nextNavigationDisabled ? 'navigation-buttons--disabled' : ''}"
+          part="navigation-buttons navigation-button--next ${nextNavigationDisabled
+            ? 'navigation-buttons--disabled'
+            : ''}"
           class=${classMap({
             'navigation-buttons': true,
-            'navigation-button--next': true,
+            'navigation-button--normal': !this.vertical,
+            'navigation-button--next__normal': !this.vertical,
+            'navigation-button--vertical': this.vertical,
+            'navigation-button--next__vertical': this.vertical,
             'navigation-button--disabled': nextNavigationDisabled,
           })}
           ?hidden=${!this.navigation}
@@ -502,7 +626,16 @@ export default class BCarousel extends LitElement {
         >
           <slot name="next-button">
             <div class="default-next-icon">
-              <svg t="1685007929073" class="icon" viewBox="0 0 1024 1024" version="1.1" xmlns="http://www.w3.org/2000/svg" p-id="1147" width="24" height="24">
+              <svg
+                t="1685007929073"
+                class="icon"
+                viewBox="0 0 1024 1024"
+                version="1.1"
+                xmlns="http://www.w3.org/2000/svg"
+                p-id="1147"
+                width="24"
+                height="24"
+              >
                 <path
                   d="M731.733333 480l-384-341.333333c-17.066667-14.933333-44.8-14.933333-59.733333 4.266666-14.933333 17.066667-14.933333 44.8 4.266667 59.733334L640 512 292.266667 821.333333c-17.066667 14.933333-19.2 42.666667-4.266667 59.733334 8.533333 8.533333 19.2 14.933333 32 14.933333 10.666667 0 19.2-4.266667 27.733333-10.666667l384-341.333333c8.533333-8.533333 14.933333-19.2 14.933334-32s-4.266667-23.466667-14.933334-32z"
                   fill="#333"

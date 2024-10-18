@@ -3,8 +3,11 @@
  * debug: true
  */
 
-import { Button, Carousel } from '@banana/banana-react';
-import React, { useRef } from 'react';
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+
+import { Button, Carousel } from '@banana-ui/react';
+import { useRef } from 'react';
 
 export default function CarouselDemo0() {
   const carousel = useRef(null);
@@ -22,7 +25,7 @@ export default function CarouselDemo0() {
    `;
 
   return (
-    <div>
+    <>
       <style>{style}</style>
       <Carousel ref={carousel} slidesPerView={5} loop gap={20}>
         <div className="demo-slide">1</div>
@@ -37,8 +40,8 @@ export default function CarouselDemo0() {
         <div className="demo-slide">10</div>
       </Carousel>
 
-      <Button onclick={() => (carousel.current!.currentIndex = 0)}>go 1</Button>
-      <Button onclick={() => (carousel.current!.currentIndex = 9)}>go 10</Button>
-    </div>
+      <Button onclick={() => carousel.current?.goto(0)}>go 1</Button>
+      <Button onclick={() => carousel.current?.goto(9)}>go 10</Button>
+    </>
   );
 }

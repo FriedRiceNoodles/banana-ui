@@ -64,7 +64,7 @@ describe('b-progress', () => {
   });
 
   it('when provided a backgroundColor parameter', async () => {
-    const element = await fixture<BProgress>(html`<b-progress backgroundColor="red"></b-progress>`);
+    const element = await fixture<BProgress>(html`<b-progress background-color="red"></b-progress>`);
     const progressElement = element.shadowRoot?.querySelector('.progress') as HTMLElement;
     let backgroundColor = window.getComputedStyle(progressElement).backgroundColor;
 
@@ -119,7 +119,9 @@ describe('b-progress', () => {
   });
 
   it('custom border radius', async () => {
-    const element = await fixture<BProgress>(html`<b-progress style="--banana-progress-border-radius: 2px"></b-progress>`);
+    const element = await fixture<BProgress>(
+      html`<b-progress style="--banana-progress-border-radius: 2px"></b-progress>`,
+    );
     const progressElement = element.shadowRoot?.querySelector('.progress') as HTMLElement;
     const innerElement = element.shadowRoot?.querySelector('.progress-bar') as HTMLElement;
     const progressBorderRadius = window.getComputedStyle(progressElement).borderRadius;

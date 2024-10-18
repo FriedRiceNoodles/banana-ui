@@ -1,10 +1,21 @@
 {
-  "name": "@banana/banana-react",
-  "version": "1.9.2",
-  "description": "",
-  "keywords": [],
-  "license": "ISC",
-  "author": "",
+  "name": "@banana-ui/react",
+  "version": "1.21.0-next.1",
+  "description": "React components for Banana UI",
+  "keywords": [
+    "web components",
+    "custom elements",
+    "components",
+    "UI library",
+    "react"
+  ],
+  "homepage": "https://github.com/FriedRiceNoodles/banana-ui",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/FriedRiceNoodles/banana-ui.git"
+  },
+  "license": "MIT",
+  "author": "炒米粉",
   "type": "module",
   "exports": {
     ".": {
@@ -14,6 +25,7 @@
     }
   },
   "main": "dist/index",
+  "jsdelivr": "umd/index.js",
   "module": "dist/index",
   "files": [
     "dist/*",
@@ -24,12 +36,12 @@
   ],
   "scripts": {
     "build": "rimraf umd && rimraf dist && rimraf node && rollup -c ../../rollup.config.mjs && npm run tsc",
-    "dev": "rollup -c ../../rollup.config.dev.mjs -p ../../scripts/rollup-plugin-copy-types.js -p ../../scripts/rollup-plugin-force-render.js -w --no-watch.clearScreen",
+    "dev": "rollup -c ../../rollup.config.dev.mjs -w --no-watch.clearScreen",
     "tsc": "rimraf types && npx tsc --project ./tsconfig.types.json && node ./copyTypesToDist.cjs"
   },
   "dependencies": {
-    "@lit-labs/react": "^1.1.1",
-    "banana-ui": "workspace:*"
+    "@banana-ui/banana": "workspace:*",
+    "@lit-labs/react": "^1.1.1"
   },
   "devDependencies": {
     "@types/react": "^18.0.26",
@@ -38,7 +50,8 @@
     "typescript": "^5.0.4"
   },
   "publishConfig": {
-    "registry": "https://packages.aliyun.com/6160015009edb81ca824f556/npm/npm-registry/"
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
   },
   "moduleResolution": "node"
 }

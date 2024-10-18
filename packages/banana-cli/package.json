@@ -1,6 +1,7 @@
 {
   "name": "@banana/banana-cli",
-  "version": "0.1.0",
+  "version": "0.2.0",
+  "private": true,
   "description": "banana cli",
   "keywords": [],
   "license": "ISC",
@@ -16,8 +17,5 @@
     "inquirer": "^8.0.0",
     "prettier": "^2.7.1",
     "yargs": "^17.7.2"
-  },
-  "publishConfig": {
-    "registry": "https://packages.aliyun.com/6160015009edb81ca824f556/npm/npm-registry/"
   }
 }

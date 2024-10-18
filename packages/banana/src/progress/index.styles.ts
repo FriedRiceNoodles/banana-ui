@@ -27,7 +27,7 @@ export default [
       height: 100%;
       border-radius: var(--banana-progress-border-radius, calc(var(--banana-progress-height, 10px) / 2));
       background: var(--banana-progress-color, ${unsafeCSS(Var.ColorPrimary)});
-      transition: width 0.6s ease;
+      transition: width var(--banana-progress-transition-duration, ${unsafeCSS(Var.TransitionSlow)}) ease;
     }
   `,
 ];

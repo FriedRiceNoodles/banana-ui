@@ -1,0 +1,9 @@
+<b-button type="primary">显示一个全局提示</b-button>
+
+<script>
+  const button = document.querySelector('b-button');
+
+  button.addEventListener('click', () => {
+    window.BMessage.open({ content: 'Say hi~' });
+  });
+</script>

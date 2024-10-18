@@ -6,6 +6,10 @@ demo:
 
 # Countdown 倒计时
 
+```
+<b-countdown> | Countdown
+```
+
 倒计时组件,支持自定义格式化和毫秒级精度.
 
 ## 代码演示

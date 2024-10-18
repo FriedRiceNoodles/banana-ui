@@ -1,0 +1,32 @@
+<b-button type="primary">
+  自定义按钮状态
+</b-button>
+<b-modal title="I am a Modal~">
+  <div>Some contents...</div>
+  <div>Some contents...</div>
+  <div>Some contents...</div>
+</b-modal>
+
+<script>
+  const button = document.querySelector('b-button');
+  const modal = document.querySelector('b-modal');
+
+  button.addEventListener('click', () => {
+    modal.open = true;
+  });
+
+  modal.addEventListener('ok', () => {
+    modal.okButtonLoading = true;
+    modal.cancelButtonDisabled = true;
+    setTimeout(() => {
+      modal.okButtonLoading = false;
+      modal.cancelButtonDisabled = false;
+      modal.open = false;
+      window.BMessage.success({ content: "OK~" })
+    }, 3000);
+  });
+
+  modal.addEventListener('cancel', () => {
+    modal.open = false;
+  });
+</script>

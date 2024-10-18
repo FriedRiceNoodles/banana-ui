@@ -15,6 +15,7 @@ export default [
     /* Block */
     :host([block]) {
       display: block;
+      width: 100%;
     }
 
     .button {
@@ -22,8 +23,9 @@ export default [
       align-items: center;
       justify-content: center;
       width: 100%;
+      line-height: 1;
       border-style: solid;
-      border-width: var(--banana-button-boder-width, ${unsafeCSS(Var.InputBorderWidth)});
+      border-width: var(--banana-button-border-width, ${unsafeCSS(Var.InputBorderWidth)});
       border-radius: var(--banana-button-border-radius, ${unsafeCSS(Var.BorderRadiusSmall)});
       font-family: var(--banana-button-font-family, ${unsafeCSS(Var.InputFontFamily)});
       font-weight: var(--banana-button-font-weight, ${unsafeCSS(Fonts.FontWeightNormal)});
@@ -33,8 +35,8 @@ export default [
       vertical-align: middle;
       padding: 0;
       cursor: inherit;
-      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color, ${unsafeCSS(Var.TransitionVeryFast)} border,
-        ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
+      transition: ${unsafeCSS(Var.TransitionVeryFast)} background-color, ${unsafeCSS(Var.TransitionVeryFast)} color,
+        ${unsafeCSS(Var.TransitionVeryFast)} border, ${unsafeCSS(Var.TransitionVeryFast)} box-shadow;
     }
 
     /* Disabled */
@@ -55,10 +57,12 @@ export default [
       border-style: dashed;
     }
 
-    .button--default:hover:not(.button--disabled),
-    .button--dashed:hover:not(.button--disabled) {
-      color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
-      border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+    @media (any-hover: hover) {
+      .button--default:hover:not(.button--disabled),
+      .button--dashed:hover:not(.button--disabled) {
+        color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+        border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+      }
     }
 
     .button--default:active:not(.button--disabled),
@@ -77,9 +81,11 @@ export default [
       --button-loading-color: #fff;
     }
 
-    .button--primary:hover:not(.button--disabled) {
-      background-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
-      border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+    @media (any-hover: hover) {
+      .button--primary:hover:not(.button--disabled) {
+        background-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+        border-color: var(--banana-color-primary-hover, ${unsafeCSS(Var.ColorPrimaryHover)});
+      }
     }
 
     .button--primary:active:not(.button--disabled) {
@@ -95,9 +101,11 @@ export default [
       --button-loading-color: #fff;
     }
 
-    .button--success:hover:not(.button--disabled) {
-      background-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
-      border-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
+    @media (any-hover: hover) {
+      .button--success:hover:not(.button--disabled) {
+        background-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
+        border-color: var(--banana-color-success-hover, ${unsafeCSS(Var.ColorSuccessHover)});
+      }
     }
 
     .button--success:active:not(.button--disabled) {
@@ -112,10 +120,11 @@ export default [
       color: #fff;
       --button-loading-color: #fff;
     }
-
-    .button--warning:hover:not(.button--disabled) {
-      background-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
-      border-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
+    @media (any-hover: hover) {
+      .button--warning:hover:not(.button--disabled) {
+        background-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
+        border-color: var(--banana-color-warning-hover, ${unsafeCSS(Var.ColorWarningHover)});
+      }
     }
 
     .button--warning:active:not(.button--disabled) {
@@ -131,9 +140,11 @@ export default [
       --button-loading-color: #fff;
     }
 
-    .button--danger:hover:not(.button--disabled) {
-      background-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
-      border-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
+    @media (any-hover: hover) {
+      .button--danger:hover:not(.button--disabled) {
+        background-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
+        border-color: var(--banana-color-danger-hover, ${unsafeCSS(Var.ColorDangerHover)});
+      }
     }
 
     .button--danger:active:not(.button--disabled) {

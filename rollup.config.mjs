@@ -1,10 +1,11 @@
+import { babel } from '@rollup/plugin-babel';
 import commonjs from '@rollup/plugin-commonjs';
 import nodeResolve from '@rollup/plugin-node-resolve';
-import typescript from '@rollup/plugin-typescript';
-import { babel } from '@rollup/plugin-babel';
 import terser from '@rollup/plugin-terser';
-import filesize from 'rollup-plugin-filesize';
+import typescript from '@rollup/plugin-typescript';
 import fs from 'fs';
+import process from 'process';
+import filesize from 'rollup-plugin-filesize';
 
 const babelConfig = {
   babelHelpers: 'bundled',
@@ -18,6 +19,7 @@ const babelConfig = {
     setPublicClassFields: true,
   },
   exclude: 'node_modules/**',
+  extensions: ['.ts', '.js'],
 };
 
 const componentNames = fs
@@ -33,13 +35,20 @@ const componentNames = fs
   // 带上package/src/index.ts
   .concat({ path: 'index', name: 'index' });
 
-export default [
+// 获取包名(当前所在的文件夹名)并转换成大驼峰
+const UMDName = process
+  .cwd()
+  .split('/')
+  .pop()
+  .replace(/(^|-)(\w)/g, (_, _$1, $2) => $2.toUpperCase());
+
+const rollupConfig = [
   {
     input: './src/index.ts',
     output: {
       dir: './umd',
       format: 'umd',
-      name: 'umd',
+      name: UMDName,
     },
     plugins: [
       typescript({
@@ -96,3 +105,23 @@ export default [
     ],
   },
 ];
+
+// 如果存在./src/autoloader.ts，则添加到rollupConfig中
+if (fs.existsSync('./src/banana-autoloader.ts')) {
+  rollupConfig.push({
+    input: './src/banana-autoloader.ts',
+    output: {
+      dir: 'dist',
+      format: 'es',
+      entryFileNames: 'banana-autoloader.js',
+    },
+    plugins: [
+      typescript(),
+      nodeResolve({
+        extensions: ['.ts', '.js'],
+      }),
+    ],
+  });
+}
+
+export default rollupConfig;

@@ -3,8 +3,7 @@
  * description: 通过 `triggerAction` 参数设置触发方式，可选值为 `hover`、`click`， 默认为 `hover`。
  */
 
-import { Dropdown, Button, Divider, Menu, MenuItem } from '@banana/banana-react';
-import React from 'react';
+import { Button, Divider, Dropdown, Menu, MenuItem } from '@banana-ui/react';
 
 export default function TriggerAction() {
   return (

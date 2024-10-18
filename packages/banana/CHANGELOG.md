@@ -1,5 +1,397 @@
 # banana-ui
 
+## 1.21.0-next.1
+
+### Patch Changes
+
+- add custom event in react env
+
+## 1.21.0-next.0
+
+### Minor Changes
+
+- add new tab component
+
+## 1.20.1
+
+### Patch Changes
+
+- be364d7: Added vertical parameter to marquee.
+
+## 1.20.0
+
+### Minor Changes
+
+- f88a2b9: Upgrade to lit3
+
+## 1.19.5
+
+### Patch Changes
+
+- e738a5e: Added fixed parameter for marquee
+
+## 1.19.3
+
+### Patch Changes
+
+- 4fedae7: Fix a bug that make empty content shown when the trigger action is none.
+
+## 1.19.2
+
+### Patch Changes
+
+- 07107d5: Added a new trigger action to tooltip.
+
+## 1.19.1
+
+### Patch Changes
+
+- 94c54f0: Make autoloader covers b-message
+
+## 1.19.0
+
+### Minor Changes
+
+- 4bb6fbb: Autoloader for banana.
+
+## 1.18.3
+
+### Patch Changes
+
+- 6800fbf: slide item's gap use margin to complete
+
+## 1.18.2
+
+### Patch Changes
+
+- 844e0a1: add vertical mode for carousel
+
+## 1.18.1
+
+### Patch Changes
+
+- 05b4cba: Added part attributes for select.
+
+## 1.18.0
+
+### Minor Changes
+
+- 6af84b1: New Component: Textarea
+
+## 1.17.12
+
+### Patch Changes
+
+- 800c8f5: Add events for dropdown.
+
+## 1.17.11
+
+### Patch Changes
+
+- 9c7577e: fix dropdown position error when window resize
+
+## 1.17.10
+
+### Patch Changes
+
+- 8030ca3: Updated select.
+
+  - Added slots for icons.
+  - Improved the behavior on searching.
+
+- fe35ea7: Remove the native cancel button on filter input of select.
+
+## 1.17.9
+
+### Patch Changes
+
+- 53508b3: Added filter parameter to select.
+
+## 1.17.8
+
+### Patch Changes
+
+- 4a86f86: add default-value of input component
+
+## 1.17.7
+
+### Patch Changes
+
+- 57be102: let modal can custom close icon
+
+## 1.17.6
+
+### Patch Changes
+
+- 4a9d6ee: progress backgroundColor attributes named to background-color
+
+## 1.17.5
+
+### Patch Changes
+
+- bdf40c9: fix the separator re-render error when the separator appears
+- 20d28ea: fix question of separate render abnormal when the separate visiable status changed
+- 76f54ac: fix separate not re-render when sparate slot changed
+
+## 1.17.4
+
+### Patch Changes
+
+- b1a770e: Fixed a styling issue in the Radio component.
+
+## 1.17.3
+
+### Patch Changes
+
+- 48c856f: Try auto github releases note, https://github.com/changesets/action/pull/345
+
+## 1.17.2
+
+### Patch Changes
+
+- c5549a4: Try auto release by github action
+
+## 1.17.1
+
+### Patch Changes
+
+- a7460ab: Added custom elements manifest.
+
+## 1.17.0
+
+### Minor Changes
+
+- 6691772: New component: Radio
+
+## 1.16.0
+
+### Minor Changes
+
+- New version for modal.
+
+## 1.15.1
+
+### Patch Changes
+
+- Added keyboard event to checkbox.
+
+## 1.15.0
+
+### Minor Changes
+
+- New component--Checkbox
+
+## 1.14.2
+
+### Patch Changes
+
+- Fix a Countdown bug causing an exception when the time is set to 0 in separate mode, resulting in missing separators.
+
+## 1.14.1
+
+### Patch Changes
+
+- Updated babel config.
+
+## 1.14.0
+
+### Minor Changes
+
+- add stepper component
+
+## 1.13.3
+
+### Patch Changes
+
+- Version updated.
+
+## 1.13.2
+
+### Patch Changes
+
+- Prevent scrolling when overlay is opened in a better way.
+
+## 1.13.1
+
+### Patch Changes
+
+- Change the fill parameter of carousel to disableFill.
+
+## 1.13.0
+
+### Minor Changes
+
+- New component——tooltip
+
+## 1.12.5
+
+### Patch Changes
+
+- change rollup build config
+
+## 1.12.4
+
+### Patch Changes
+
+- Using globalThis instead of window.
+
+## 1.12.3
+
+### Patch Changes
+
+- Fixed a bug of marquee which cause unexpected overflow in a flex box.
+
+## 1.12.2
+
+### Patch Changes
+
+- Optimize the styles of message.
+
+## 1.12.1
+
+### Patch Changes
+
+- countdown component add new part that includes it's index in separate mode
+
+## 1.12.0
+
+### Minor Changes
+
+- New component: message
+
+## 1.11.0
+
+### Minor Changes
+
+- New component——Marquee
+
+## 1.10.14
+
+### Patch Changes
+
+- Make rating able to show error message when the result of reportValidate() is false.
+
+## 1.10.13
+
+### Patch Changes
+
+- Some patch change of rating.
+
+## 1.10.12
+
+### Patch Changes
+
+- Hotfix for button, a bug make the outline-button does not transparent.
+
+## 1.10.11
+
+### Patch Changes
+
+- 74fb5e3: Doc and unit test for rating component.
+- 8818866: Avoid the hover on mobile of button component.
+
+## 1.10.10
+
+### Patch Changes
+
+- Fixed some bugs about rating component, and added unit test codes for it.
+
+## 1.10.9
+
+### Patch Changes
+
+- Fixed a bug that cause an incorrect behavior when a collapse is default open but invisible.
+
+## 1.10.8
+
+### Patch Changes
+
+- Fixed a style problem of carousel.
+
+## 1.10.7
+
+### Patch Changes
+
+- Fixed some style problems of collapse.
+
+## 1.10.6
+
+### Patch Changes
+
+- Fixed a bug of carousel which cause a style problem in firefox, added a part attribute to active indicator of carousel.
+
+## 1.10.5
+
+### Patch Changes
+
+- Added polyfill for form.requestSubmit()
+
+## 1.10.4
+
+### Patch Changes
+
+- Make the calcHeight method of carousel to be public.
+
+## 1.10.3
+
+### Patch Changes
+
+- Fixed a incorrect css variable of rating, added a css variable to progress.
+
+## 1.10.2
+
+### Patch Changes
+
+- Added indicator parameter to carousel.
+
+## 1.10.1
+
+### Patch Changes
+
+- Fixed a bug of carousel.
+
+## 1.10.0
+
+### Minor Changes
+
+- 34549ad: Beta version for form, input, rating.
+
+### Patch Changes
+
+- 37ac10a: Fixed a bug which cause defaultValue paramter not working on rating component.
+- 375f8ff: Rating: Keep internal value and value property synchronized.
+- Added controlled parameter to input component.
+
+## 1.10.0-beta.3
+
+### Patch Changes
+
+- Added controlled parameter to input component.
+
+## 1.10.0-beta.2
+
+### Patch Changes
+
+- Rating: Keep internal value and value property synchronized.
+
+## 1.10.0-beta.1
+
+### Patch Changes
+
+- Fixed a bug which cause defaultValue paramter not working on rating component.
+
+## 1.10.0-beta.0
+
+### Minor Changes
+
+- Beta version for form, input, rating.
+
+## 1.9.3
+
+### Patch Changes
+
+- Fixed a bug at autoHeight parameter of carousel component.
+
 ## 1.9.2
 
 ### Patch Changes

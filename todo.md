@@ -6,9 +6,9 @@
 
 ## 新组件
 
-- modal
 - Tabs
 - Image
+- Space
 
 ## 已有组件
 
@@ -58,6 +58,10 @@
 - 参数补全（floating-ui 中间件相关）
 - 移动端禁用 hover 触发
 - autoUpdate
+
+### Rating
+
+- 键盘事件，a11y 支持
 
 # 构建流程
 

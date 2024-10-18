@@ -1,0 +1,16 @@
+<b-button>Hide</b-button>
+<b-tooltip>
+  <span>Hover me!</span>
+</b-tooltip>
+
+<script>
+  let visible = false;
+  const btn = document.querySelector('b-button');
+  const tooltip = document.querySelector('b-tooltip');
+
+  btn.addEventListener('click', () => {
+    visible = !visible;
+    tooltip.content = visible ? 'This is a tooltip.' : '';
+    btn.textContent = visible ? 'Hide' : 'Show';
+  });
+</script>
