@@ -16,7 +16,11 @@ export default function BasicUsage() {
         <Radio value="right">页标在右</Radio>
       </RadioGroup>
       <div>
-        <Tabs position={pos}>
+        <Tabs
+          position={pos}
+          onHide={(e) => console.log('pre', e.detail.name)}
+          onShow={(e) => console.log('cur', e.detail.name)}
+        >
           <TabItem slot="nav" panel="1">
             Tab1
           </TabItem>
