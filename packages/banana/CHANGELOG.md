@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.21.0-next.1
+
+### Patch Changes
+
+- add custom event in react env
+
 ## 1.21.0-next.0
 
 ### Minor Changes

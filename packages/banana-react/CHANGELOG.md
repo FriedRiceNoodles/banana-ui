@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.21.0-next.1
+
+### Patch Changes
+
+- add custom event in react env
+- Updated dependencies
+  - @banana-ui/banana@1.21.0-next.1
+
 ## 1.21.0-next.0
 
 ### Minor Changes
