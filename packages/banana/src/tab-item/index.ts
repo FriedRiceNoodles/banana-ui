@@ -29,8 +29,6 @@ export default class BTabItem extends LitElement {
       <div
         part="base"
         class=${classMap({ 'tab-item': true, 'tab-item--active': this.active, 'tab-item--disabled': this.disabled })}
-        aria-selected=${this.active}
-        aria-disabled=${this.disabled}
       >
         <slot></slot>
       </div>
