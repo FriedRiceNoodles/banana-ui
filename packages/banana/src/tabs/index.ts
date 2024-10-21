@@ -168,14 +168,14 @@ export default class BTabs extends LitElement {
                 ${this.type === 'line'
                   ? html`<div part="active-tab-underlined" class="tabs__underlined"></div>`
                   : nothing}
-                <slot name="nav"></slot>
+                <slot name="nav" @slotchange=${this.syncTabsAndPanels}></slot>
               </div>
             </div>
 
             <slot name="right-extra-render"></slot>
           </div>
         </div>
-        <slot name="body"></slot>
+        <slot name="body" @slotchange=${this.syncTabsAndPanels}></slot>
       </div>
     `;
   }
