@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.21.0-next.2
+
+### Patch Changes
+
+- slot change with component sync
+- Updated dependencies
+  - @banana-ui/banana@1.21.0-next.2
+
 ## 1.21.0-next.1
 
 ### Patch Changes
