@@ -19,10 +19,12 @@ group: 组件
 
 ## 属性 - Attributes & Properties
 
-| 属性   | 说明                  | 类型      | 默认值 |
-| ------ | --------------------- | --------- | ------ |
-| open   | 遮罩层是否可见        | `boolean` | false  |
-| zIndex | 设置遮罩层的`z-index` | `number`  | 999    |
+| 属性                                                        | 说明                      | 类型      | 默认值 |
+| ----------------------------------------------------------- | ------------------------- | --------- | ------ |
+| open                                                        | 遮罩层是否可见            | `boolean` | false  |
+| zIndex                                                      | 设置遮罩层的`z-index`     | `number`  | 999    |
+| noCloseWhenMaskClicked <br/> (no-close-when-mask-clicked)   | 点击遮罩层不触发关闭事件  | `boolean` | false  |
+| noCloseWhenEscPressed <br/> (no-close-when-esc-key-pressed) | 按下`Esc`键不触发关闭事件 | `boolean` | false  |
 
 ## 方法 - Methods
 

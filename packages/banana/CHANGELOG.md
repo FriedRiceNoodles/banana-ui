@@ -4,7 +4,7 @@
 
 ### Patch Changes
 
-- slot change with component sync
+- ba14a43: Make the closing behavior of the overlay controllable.
 
 ## 1.21.0-next.1
 
