@@ -1,5 +1,11 @@
 # banana-ui
 
+## 1.21.0-next.2
+
+### Patch Changes
+
+- ba14a43: Make the closing behavior of the overlay controllable.
+
 ## 1.21.0-next.1
 
 ### Patch Changes

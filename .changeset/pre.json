@@ -6,5 +6,5 @@
     "@banana/banana-cli": "0.2.0",
     "@banana-ui/react": "1.20.1"
   },
-  "changesets": ["friendly-spies-add"]
+  "changesets": ["odd-lizards-search"]
 }
