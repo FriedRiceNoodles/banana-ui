@@ -1,5 +1,13 @@
 # @banana/banana-react
 
+## 1.21.0-next.3
+
+### Patch Changes
+
+- ba14a43: Make the closing behavior of the overlay controllable.
+- Updated dependencies [ba14a43]
+  - @banana-ui/banana@1.21.0-next.3
+
 ## 1.21.0-next.2
 
 ### Patch Changes
