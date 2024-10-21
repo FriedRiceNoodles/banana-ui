@@ -11,6 +11,14 @@ export default class BOverlay extends LitElement {
   @property({ type: Number })
   zIndex = 999;
 
+  // If no-close-when-mask-clicked is true, the overlay will not dispatch a close event when the mask is clicked.
+  @property({ type: Boolean, attribute: 'no-close-when-mask-clicked' })
+  noCloseWhenMaskClicked = false;
+
+  // If no-close-when-esc-key-pressed is true, the overlay will not dispatch a close event when the esc key is pressed.
+  @property({ type: Boolean, attribute: 'no-close-when-esc-key-pressed' })
+  noCloseWhenEscKeyPressed = false;
+
   static styles: CSSResultGroup = styles;
 
   // A style element to set the overflow of body to hidden.
@@ -56,10 +64,16 @@ export default class BOverlay extends LitElement {
 
   // Use arrow function to bind 'this' on BOverlay class.
   private _handleEscape = (e: KeyboardEvent) => {
-    if (e.key === 'Escape') {
-      void this._handleMaskClose();
+    if (e.key === 'Escape' && !this.noCloseWhenEscKeyPressed) {
+      this._handleMaskClose();
     }
   };
+
+  private _handleMaskClick() {
+    if (!this.noCloseWhenMaskClicked) {
+      this._handleMaskClose();
+    }
+  }
 
   private _handleMaskClose() {
     this.dispatchEvent(new CustomEvent('close'));
@@ -78,7 +92,7 @@ export default class BOverlay extends LitElement {
       <div class="overlay__container" part="container">
         <slot></slot>
       </div>
-      <div class="overlay__mask" @click="${this._handleMaskClose}"></div>
+      <div class="overlay__mask" @click="${this._handleMaskClick}"></div>
     `;
   }
 }

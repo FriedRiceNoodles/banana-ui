@@ -1,7 +1,7 @@
-import { fixture, html, expect } from '@open-wc/testing';
-import BOverlay from '.';
-import sinon from 'sinon';
+import { expect, fixture, html } from '@open-wc/testing';
 import { sendKeys } from '@web/test-runner-commands';
+import sinon from 'sinon';
+import BOverlay from '.';
 
 describe('b-overlay', () => {
   it('when provided no parameters', async () => {
@@ -103,6 +103,22 @@ describe('b-overlay', () => {
     const spy = sinon.spy();
     element.addEventListener('close', spy);
     element.shadowRoot?.querySelector('div')?.dispatchEvent(new Event('click'));
+    expect(spy.called).to.equal(false);
+  });
+
+  it('should not emit the close event when click on mask and noCloseWhenMaskClicked is true', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open no-close-when-mask-clicked></b-overlay> `);
+    const spy = sinon.spy();
+    element.addEventListener('close', spy);
+    element.shadowRoot?.querySelector('.overlay__mask')?.dispatchEvent(new Event('click'));
+    expect(spy.called).to.equal(false);
+  });
+
+  it('should not emit the close event when press escape and noCloseWhenEscKeyPressed is true', async () => {
+    const element = await fixture<BOverlay>(html` <b-overlay open no-close-when-esc-key-pressed></b-overlay> `);
+    const spy = sinon.spy();
+    element.addEventListener('close', spy);
+    await sendKeys({ down: 'Escape' });
     expect(spy.called).to.equal(false);
   });
 });

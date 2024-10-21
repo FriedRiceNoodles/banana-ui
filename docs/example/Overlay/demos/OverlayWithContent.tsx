@@ -3,7 +3,7 @@
  */
 
 import { Button, Overlay } from '@banana-ui/react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 export default function OverlayWithContent() {
   const [visiable, setVisiable] = useState(false);
