@@ -1,5 +1,12 @@
 # banana-ui
 
+## 1.21.0-next.3
+
+### Patch Changes
+
+- ba14a43: Make the closing behavior of the overlay controllable.
+- tab slot add slot-change event
+
 ## 1.21.0-next.2
 
 ### Patch Changes
