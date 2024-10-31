@@ -1,5 +1,15 @@
 # @banana/banana-react
 
+## 1.21.0-next.3
+
+### Patch Changes
+
+- ba14a43: Make the closing behavior of the overlay controllable.
+- tab slot add slot-change event
+- Updated dependencies [ba14a43]
+- Updated dependencies
+  - @banana-ui/banana@1.21.0-next.3
+
 ## 1.21.0-next.2
 
 ### Patch Changes
