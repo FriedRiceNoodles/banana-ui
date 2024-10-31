@@ -145,12 +145,14 @@ export default class BCollapse extends LitElement {
         class=${classMap({
           collapse: true,
           'collapse--open': !this.disabled && this.open,
-          'collapse--disabled': this.disabled,
         })}
       >
         <div
           part="header"
-          class="collapse__header"
+          class=${classMap({
+            collapse__header: true,
+            'collapse--disabled': this.disabled,
+          })}
           @click="${this._onHeaderClick}"
           @keydown="${this._onHeaderKeyDown}"
           role="button"
