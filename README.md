@@ -46,14 +46,14 @@ Banana 最大的特点是它是一个基于 Web Components 的组件库，这意
 
 ## 寻求帮助 & 参与贡献
 
-欢迎任何形式的提问和贡献，你可以在 [Issues 区](https://github.sheincorp.cn/FriedRiceNoodles/banana-ui/issues) 上提出问题或寻求帮助。
+欢迎任何形式的提问和贡献，你可以在 [Issues 区](https://github.com/FriedRiceNoodles/banana-ui/issues) 上提出问题或寻求帮助。
 如果你想参与贡献，希望可以先查看 [贡献指南](/docs/guide/contributing.md)。
 
 ## Q & A
 
 ### 我可以把它用于生产环境吗？
 
-可以。Banana UI 已经在一些项目中使用。但是请注意，它仍然处于早期阶段，可能会有一些问题。如果你在使用过程中遇到了问题，欢迎在 [Issues 区](https://github.sheincorp.cn/FriedRiceNoodles/banana-ui/issues) 上提出问题或寻求帮助。
+可以。Banana UI 已经在一些项目中使用。但是请注意，它仍然处于早期阶段，可能会有一些问题。如果你在使用过程中遇到了问题，欢迎在 [Issues 区](https://github.com/FriedRiceNoodles/banana-ui/issues) 上提出问题或寻求帮助。
 
 > 作者注：我目前在一个跨境电商公司工作，公司最大的 C 端项目以及它的一些内部系统都在使用 Banana UI。
 
